@@ -10,14 +10,17 @@ draft: false
 tags: [HTTP, '计算机网络', '网络安全']
 ---
 
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200802144736235.png)
 
-本文翻译自 [Lydia Hallie](https://dev.to/lydiahallie) 小姐姐写的 [✋🏼🔥 CS Visualized: CORS](https://dev.to/lydiahallie/cs-visualized-cors-5b8h?utm_campaign=React%2BNative%2BNow&utm_medium=web&utm_source=React_Native_Now_69#cs-cors)，她用了大量的动图去解释 CORS 这个概念，国内还没有人翻译本文，所以我在原文的理解上翻译了本文并修改了一些错误，希望能帮到大家。
+本文翻译自 [Lydia Hallie](https://dev.to/lydiahallie) 小姐姐写的 [✋🏼🔥 CS Visualized: CORS](https://dev.to/lydiahallie/cs-visualized-cors-5b8h?utm_campaign=React%2BNative%2BNow&utm_medium=web&utm_source=React_Native_Now_69#cs-cors)，她用了大量的动图去解释 CORS 这个概念，国内还没有人翻译本文，所以我在原文的理解上翻译并修改了一些错误，希望能帮到大家。
 
 <!--truncate-->
 
 觉得翻译的不错一定要**点赞哦**，谢谢你，这对我真的很重要！ 🌟
 
-> 注：原文的动图均为 keynote 制作
+:::tip 看前提示
+原文的动图均为 **keynote** 制作
+:::
 
 <br/>
 <br/>
@@ -29,8 +32,9 @@ tags: [HTTP, '计算机网络', '网络安全']
 ![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/qyeikeonofi8dfl0jz2t.gif)
 
 
-
-> ⚠️：这里原作者有个笔误，把 `https://api.mywebsite.com` 误写为 `https://www.mywebsite.com` 了，图中也有这个错误，读者要注意一下不要被误导
+:::caution 错误提示
+这里原作者有个笔误，把 `https://api.mywebsite.com` 误写为 `https://www.mywebsite.com` 了，图中也有这个错误，读者要注意一下不要被误导
+:::
 
 从结果上看表现非常完美，我们向服务器发送请求，服务器返回了我们需要的 JSON 数据，前端也正常的渲染出了结果。
 
@@ -226,8 +230,9 @@ Access-Control-Request-Headers: Content-Type
 
 ![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/py19auar8xhs933ilmsc.gif)
 
-> ⚠️：上图预检响应漏了 `Access-Control-Allow-Headers: Content-Type `
-
+:::caution 错误提示
+上图预检响应漏了 `Access-Control-Allow-Headers: Content-Type `
+:::
 
 
 4️⃣ 如果预检响应检测通过，浏览器会将实际请求发送到服务器，然后服务器返回我们需要的资源。

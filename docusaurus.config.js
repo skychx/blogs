@@ -53,55 +53,51 @@ module.exports = {
         },
       ],
     },
-    // footer: {
-    //   style: 'dark',
-    //   links: [
-    //     {
-    //       title: 'Docs',
-    //       items: [
-    //         {
-    //           label: 'Style Guide',
-    //           to: 'docs/',
-    //         },
-    //         {
-    //           label: 'Second Doc',
-    //           to: 'docs/doc2/',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       title: 'Community',
-    //       items: [
-    //         {
-    //           label: 'Stack Overflow',
-    //           href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-    //         },
-    //         {
-    //           label: 'Discord',
-    //           href: 'https://discordapp.com/invite/docusaurus',
-    //         },
-    //         {
-    //           label: 'Twitter',
-    //           href: 'https://twitter.com/docusaurus',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       title: 'More',
-    //       items: [
-    //         {
-    //           label: 'Blog',
-    //           to: 'blog',
-    //         },
-    //         {
-    //           label: 'GitHub',
-    //           href: 'https://github.com/facebook/docusaurus',
-    //         },
-    //       ],
-    //     },
-    //   ],
-    //   copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
-    // },
+    footer: {
+      style: 'light',
+      links: [
+        {
+          title: '🧭 项目导航',
+          items: [
+            {
+              label: '博客 tags',
+              to: 'tags/',
+            },
+            {
+              label: 'web scraper 零行代码写爬虫',
+              to: 'https://www.cnblogs.com/web-scraper/',
+            },
+          ],
+        },
+        {
+          title: '🌐 社交账号',
+          items: [
+            {
+              label: '掘金',
+              to: 'https://juejin.im/user/43636193770071',
+            },
+            {
+              label: 'segmentfault',
+              to: 'https://segmentfault.com/u/skychx',
+            },
+            {
+              label: '知乎',
+              to: 'https://www.zhihu.com/people/skychx',
+            },
+          ],
+        },
+        {
+          title: '👨‍💻 交流',
+          items: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/skychx',
+            },
+          ],
+        },
+      ],
+      copyright: `Copyright © ${new Date().getFullYear()} 超级码力. 微信公众号@卤蛋实验室`,
+    },
   },
   presets: [
     [

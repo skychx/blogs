@@ -65,3 +65,8 @@ header h2.blogPostTitle_1mse {
 div.row div.docItemCol_src-theme-DocItem- {
   max-width: 70%;
 }
+
+div.docItemCol_src-theme-DocItem- img {
+  display: block;
+  margin: 0 auto;
+}

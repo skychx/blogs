@@ -7,7 +7,7 @@ author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 本文谈到的 React Native 性能优化，还没到修改 React Native 源码那种地步，所以通用性很强，对大部分 RN 开发者来说都用得着。一、减少 re-render 二、减轻渲染压力 三、图片优化那些事 四、对象创建调用分离 五、动画性能优化 六、长列表性能优化 七、React Native 性能优化用到的工具 八、推荐阅读
 draft: false
-tags: [react native, '性能优化']
+tags: [react native, '性能优化', 跨端开发]
 ---
 
 
@@ -27,10 +27,9 @@ tags: [react native, '性能优化']
 本文的内容，一部分是 React/RN/Android/iOS 官方推荐的优化建议，一部分是啃源码发现的优化点，还有一部分是可以解决一些性能瓶颈的优秀的开源框架。**本文总结的内容你很少在网络上看到，所以看完后一定会有所收获。**如果觉得写的不错，请不要吝啬你的赞，把这篇 1w 多字的文章分享出去，让更多的人看到。
 
 
-
+:::tip 看前提醒
 看文章前要明确一点，一些优化建议并不是对所有团队都适用的。有的团队把 React Native 当增强版网页使用，有的团队用 React Native 实现非核心功能，有的团队把 React Native 当核心架构，不同的定位需要不同的选型。对于这些场景，我在文中也会提一下，具体使用还需要各位开发者定夺。
-
-<br/>
+:::
 
 ## 目录：
 
@@ -44,9 +43,6 @@ tags: [react native, '性能优化']
 - 八、推荐阅读
 
 
-
-
-<br/>
 ## 一、减少 re-render
 
 因为 React Native 也是 React 生态系统的一份子，所以很多 React 的优化技巧可以用到这里，所以文章刚开始先从大家最熟悉的地方开始。

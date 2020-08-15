@@ -7,7 +7,7 @@ author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
 description: React Native 跳转到 APP 推送页面并获取推送状态
 draft: false
-tags: [react native]
+tags: [react native, 跨端开发]
 ---
 
 产品为了提高推送送达率，提了一个需求：**在 APP 推送关闭的情况下显示一个小 TIP，点击 TIP 跳转到 APP 消息设置界面**。
@@ -186,6 +186,8 @@ function getSystemNoticeStatus() {
 首先 **iOS** 适配，我们直接跳转到该应用的设置首页，就是下图：
 
 <img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/eLjepK.jpg" width="50%" height="50%" />
+
+<br />
 
 这个开发比较简单，直接在 React Native 中引用 `Linking.openURL('app-settings:')` 就行；
 

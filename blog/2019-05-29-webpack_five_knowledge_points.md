@@ -10,6 +10,7 @@ draft: false
 tags: [webpack, '前端工程化']
 ---
 
+![image-20200518210532171](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200518210532171.png)
 
 今天我主要分享的是一些 webpack 中的**易混淆知识点，也是面试的常见内容**。我把这些分散在文档和教程里的内容总结起来，目前看是**全网独一份**，大家可以**加个收藏**，方便以后检索和学习。
 
@@ -25,7 +26,8 @@ tags: [webpack, '前端工程化']
 
 <br/>
 
-::: tip
+
+:::tip 友情提示
 友情提示：本文章不是入门教程，不会费大量笔墨去描写 webpack 的基础配置，请读者配合教程[源代码](https://github.com/skychx/webpack_learn/tree/master/confuse)食用。
 :::
 

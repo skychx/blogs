@@ -111,8 +111,9 @@ URI 的编码规则也很简单，先把非限定范围的字符转为 16 进制
 
 经过测试我们可以看出**表单提交的内容中，空格都是转为加号的**，这种编码类型就是 `application/x-www-form-urlencoded`，在 [WHATWG 规范](https://url.spec.whatwg.org/#urlencoded-serializing)里是这样定义的：
 
-![image-20200524185912590](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200524185912590.png)
+<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200524185912590.png" width="50%" height="50%" />
 
+<br />
 
 
 到这里基本上就破案了，`URLSearchParams` 做 encode 的时候，就按这个规范来的。我找到了 `URLSearchParams` 的 [Polyfill 代码](https://github.com/WebReflection/url-search-params/blob/814161e99f1dd4453f3c1dc594bc73da2bd61838/build/url-search-params.node.js#L88)，里面就做了 `%20` 到  `+` 的映射：
