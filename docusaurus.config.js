@@ -9,7 +9,7 @@ module.exports = {
   projectName: '超级码力', // Usually your repo name.
   themeConfig: {
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: 'dark',
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
@@ -23,9 +23,9 @@ module.exports = {
       darkTheme: require('prism-react-renderer/themes/dracula'),
     },
     algolia: {
-      apiKey: '123',
-      indexName: 'docusaurus-2',
-      algoliaOptions: {},
+      apiKey: '84e7e5d1edaa85e79c4902b37f862a50',
+      indexName: 'supercodepower',
+      searchParameters: {},
     },
     navbar: {
       title: '超级码力',
@@ -103,14 +103,14 @@ module.exports = {
     [
       '@docusaurus/preset-classic',
       {
-        docs: {
-          // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: 'doc1',
-          // routeBasePath: '/',
-          sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',
-        },
+        // docs: {
+        //   // It is recommended to set document id as docs home page (`docs/` path).
+        //   homePageId: 'doc1',
+        //   // routeBasePath: '/',
+        //   sidebarPath: require.resolve('./sidebars.js'),
+        //   // Please change this to your repo.
+        //   editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',
+        // },
         blog: {
           showReadingTime: true,
           path: './blog',
