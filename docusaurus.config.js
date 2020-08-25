@@ -31,15 +31,15 @@ module.exports = {
       title: '超级码力',
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/logo.jpeg',
       },
       items: [
-        // {
-        //   to: 'docs/',
-        //   activeBasePath: 'docs',
-        //   label: 'Docs',
-        //   position: 'left',
-        // },
+        {
+          to: 'docs/react-native-upgrade/index',
+          activeBasePath: 'docs',
+          label: 'RN 升级指南',
+          position: 'left',
+        },
         {
           href: 'https://www.cnblogs.com/web-scraper/',
           label: '零代码写爬虫',
@@ -64,6 +64,10 @@ module.exports = {
               to: 'tags/',
             },
             {
+              label: 'React Native 升级指南',
+              to: 'docs/react-native-upgrade/index',
+            },
+            {
               label: 'web scraper 零行代码写爬虫',
               to: 'https://www.cnblogs.com/web-scraper/',
             },
@@ -73,17 +77,21 @@ module.exports = {
           title: '🌐 社交账号',
           items: [
             {
-              label: '掘金',
+              label: '掘金：卤蛋实验室',
               to: 'https://juejin.im/user/43636193770071',
             },
             {
-              label: 'segmentfault',
-              to: 'https://segmentfault.com/u/skychx',
+              label: '公众号：卤蛋实验室',
+              to: 'https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/20190709220018.png',
             },
             {
-              label: '知乎',
-              to: 'https://www.zhihu.com/people/skychx',
+              label: 'segmentfault：卤代烃',
+              to: 'https://segmentfault.com/u/skychx',
             },
+            // {
+            //   label: '知乎',
+            //   to: 'https://www.zhihu.com/people/skychx',
+            // },
           ],
         },
         {
@@ -105,7 +113,7 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: 'toc',
+          homePageId: 'blogsTOC',
           // routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
