@@ -23,7 +23,18 @@ React Native 作为一款跨端框架，有一个最让人头疼的问题，那�
 本文假定 React Native 升级的主导者是**前端**同学，比较熟悉 javaScript 为主的一套前端构建流程。如果有条件，升级时强烈建议拉上                iOS 和 Android 开发，对于一些琐碎的升级细节，**当面沟通远比搜索引擎高效**。
 
 
+
+> 提示：因为每次修改和新增内容都会隐藏文章重新审核，建议阅读博客原文获得最佳阅读体验
+
+👉 [阅读博客原文](https://supercodepower.com/docs/react-native-upgrade/index)
+
+觉得文章对你有用的话一定要记得**点赞**哦 🌟，谢谢你，这对我来说真的很重要！
+
 <!--truncate-->
+
+<br />
+
+
 
 
 ## 一、磨刀不误砍柴工
@@ -34,10 +45,10 @@ React Native 作为一款跨端框架，有一个最让人头疼的问题，那�
 
 详细介绍各端构建工具前，我们抛开各种技术细节，从整个项目的生命周期出发，看看大部分产品是怎么做技术规划的：
 
-- 产品早期：架构都比较简单，整个项目拿个**配置文件**做配置就好了，配置文件越简单越好，xml、json 就被拿出来用了
-- 产品发展期：需要配置的地方变多了，这时候**多加几个配置项多加几个参数**，虽然有些繁琐，但静态的配置文件还够用
-- 产品成熟期：人员扩增代码膨胀，静态的配置文件完全不够用了，为了达到动态配置的目的，往往会引入一门**脚本语言**或自创一套 **DSL** 来管理相关配置
-- ~~产品晚期：一把火烧了另起炉灶（记得删掉）~~
+- **产品早期**：架构都比较简单，整个项目拿个**配置文件**做配置就好了，配置文件越简单越好，xml、json 就被拿出来用了
+- **产品发展期**：需要配置的地方变多了，这时候**多加几个配置项多加几个参数**，虽然有些繁琐，但静态的配置文件还够用
+- **产品成熟期**：人员扩增代码膨胀，静态的配置文件完全不够用了，为了达到动态配置的目的，往往会引入一门**脚本语言**或自创一套 **DSL** 来管理相关配置
+- ~~**产品晚期**：一把火烧了另起炉灶（记得删掉）~~
 
 
 
@@ -46,6 +57,10 @@ React Native 作为一款跨端框架，有一个最让人头疼的问题，那�
 
 
 收一收澎湃的情绪，牢记上面的指导经验，我们下面开始讨论技术细节。
+
+
+
+<br />
 
 
 
@@ -63,6 +78,10 @@ React Native 作为一款跨端框架，有一个最让人头疼的问题，那�
 上面只是列出了几个主流配置，不出意外的话，现在你的项目里已经有 5 个**配置文件**了，在 JavaScript 这个前端万能**脚本语言**的粘合下，这些配置文件还可以**互相引用互相耦合**，复杂度搞成这样，开发体验还没有 iOS Android 的一半好。
 
 如果你认为我只是单纯的批评前端那你就理解错了，我想表达的是，这么复杂的配置都能搞定，iOS Android 的项目配置还不是**手到擒来**？
+
+
+
+<br />
 
 
 
@@ -118,6 +137,10 @@ CocoaPods 的学习资料可以参考下文，不够的话自行搜索即可：
 
 
 
+<br />
+
+
+
 ### 3.【Android】项目配置
 
 Android 的项目配置主要是由 **gradle** 文件控制的，gradle 文件又由 **Groovy** 这门 JVM 系的脚本语言书写。到这里思路就很明显了，我们只要了解一些 Groovy 的语法和 gradle 的写法，就能读懂和修改 Android 的配置文件了。在这里我推荐一些相关教程，读完后就会有个大致的了解：
@@ -142,11 +165,21 @@ Android 的项目配置主要是由 **gradle** 文件控制的，gradle 文件�
 
 
 
+<br />
+
+
+
 ### 4.RN 官方升级助手
 
 React Native 官方在 2019 年 7 月 0.60 大版本更新时，推出了 [Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 这个 Diff 小工具。通过这个工具我们可以方便的看出版本更新时各个配置脚本的改动，非常的方便。
 
 ![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/ob8sym.jpg)
+
+
+
+<br />
+
+
 
 ## 二、升级流程
 
@@ -165,6 +198,10 @@ RN 版本升级时，我的升级流程一般是这样的：
 在更新过程中，个人建议 git commit 操作要尽量原子化，方便后续复盘和回滚，**小心驶得万年船**。
 
 在我实际升级中，因为 React Native 0.59 到 0.60 有非常大的变动，并且业务较为复杂，升级 0.60 花了两个星期的时间：iOS 一周，Android 一周；0.61 和 0.62 的升级就比较简单了，大概一两个小时就可以升级好。
+
+
+
+<br />
 
 
 
@@ -189,6 +226,10 @@ RN 版本升级时，我的升级流程一般是这样的：
 
 
 
+<br />
+
+
+
 ### 1.React Native
 
 JavaScript 这里相对来说好升级一些，毕竟是前端程序员的主场。根据 Diff 差异升级版本号后，还需要注意以下几点：
@@ -206,6 +247,10 @@ JavaScript 这里相对来说好升级一些，毕竟是前端程序员的主场
 #### 2⃣️ SwipeableFlatList 移除
 
 SwipeableFlatList 是 React Native 在 0.5X 某个版本提供的**侧滑删除列表组件**，虽然一直没有官方文档中放出来，但是社区上已经有很多人在使用了。可能对这个组件的实现不太满意，官方在 0.60 里删除了这个组件。为了不让项目报错，我们可能需要把 SwipeableFlatList 相关的源码拿出来自己手动维护一下，有人把相关代码提出来维护了一个 npm 包——[react-native-swipeable-lists](https://github.com/nicastelo/react-native-swipeable-lists)，大家可以引入暂时过度一下。
+
+
+
+<br />
 
 
 
@@ -372,6 +417,10 @@ xcodebuild archive -workspace 项目名称.xcworkspace
 
 
 
+<br />
+
+
+
 ### 3.Android
 
 0.60 的 Android 更新主要是 3 点：
@@ -510,6 +559,10 @@ dependencies {
 
 
 
+<br />
+
+
+
 ## 四、React Native 0.61 升级
 
 React Native 0.61 最主要的更新就是 **Fast Refresh** 的引入了，这个功能大大提升了开发体验。
@@ -571,6 +624,10 @@ import { Dimensions } from 'react-native';
 0.61 的 Android 升级也比较简单，升级了 Gradle 版本，修改了 Hermes 的引用路径，跟着  [Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.60.6&to=0.61.5) 的 Diff 依次修改就可。
 
 
+
+
+
+<br />
 
 
 
@@ -663,6 +720,24 @@ Cocoapods 在这个版本里也有些改动，除去 Flipper 相关的 pod，改
 如果要在项目中集成 **Flipper**，根据  [Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.61.5&to=0.62.2) 进行集成就好，难度不是很大。
 
 
+
+<br />
+
+
+
+## 后记
+
+上面就是 React Native 版本升级指南的内容了，本升级教程会持续更新，为了获得最佳体验可以查看阅读[博客原文](https://supercodepower.com/docs/react-native-upgrade/index)。
+
+觉得文章对你有用的话一定要记得**点赞**哦 🌟，谢谢你，这对我来说真的很重要！
+
+<br />
+
+更多优秀文章推荐：
+
+- [React Native 性能优化指南](https://juejin.im/post/5e1676e16fb9a04847095b12)从渲染层的角度分析了 RN 性能优化的 6 个点，并以图文形式讲解了 FlatList 的实现原理
+- 一篇介绍了 [webpack 中最易混淆的 5 个知识点](https://juejin.im/post/5cede821f265da1bbd4b5630)，掘金快 800 赞了，一文讲清楚 Webpack 中那些**长得像却意义不同的概念**
+- 一篇详细介绍了 [webpack dll 是个什么东西](https://juejin.im/post/5d8aac8fe51d4578477a6699)，并且给出了 2 条最佳实践，**摆脱繁琐的 dll 配置**
 
 
 

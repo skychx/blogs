@@ -1,6 +1,6 @@
 ---
 id: react_native_jump_setting_page
-title: React Native 跳转到 APP 推送页面并获取推送状态
+title: 📣 React Native 跳转到 APP 推送页面并获取推送状态
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx

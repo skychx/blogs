@@ -37,12 +37,12 @@ module.exports = {
         {
           to: 'docs/react-native-upgrade/index',
           activeBasePath: 'docs',
-          label: 'RN 升级指南',
+          label: '🔝 RN 升级指南',
           position: 'left',
         },
         {
           href: 'https://www.cnblogs.com/web-scraper/',
-          label: '零代码写爬虫',
+          label: '🕷️ 零代码写爬虫',
           position: 'left',
         },
         {
@@ -101,6 +101,10 @@ module.exports = {
               label: 'GitHub',
               href: 'https://github.com/skychx',
             },
+            {
+              label: '微信',
+              href: 'https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/IMG_6752.JPG'
+            }
           ],
         },
       ],

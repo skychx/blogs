@@ -1,6 +1,6 @@
 ---
 id: HTTP_CORS_visualized
-title: 15 张精美动图全面讲解 CORS
+title: 🌐 15 张精美动图全面讲解 CORS
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
