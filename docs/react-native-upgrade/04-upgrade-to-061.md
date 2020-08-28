@@ -54,6 +54,16 @@ import Dimensions from 'Dimensions';
 import { Dimensions } from 'react-native';
 ```
 
+### 3️⃣ Android 真机 debug 环境下 onPress 事件不能响应
+
+React Native 版本更新的时候，**解决一部分 BUG 的同时一定会引入一些新的 BUG**。
+
+0.61 版本就引入了一个新 BUG：Android 真机用 chrome 浏览器 debug 时，`Touchable*` 系列组件的 `onPress` 事件无发响应。
+
+这个问题 GitHub 上已经有人反馈过了（[issues 27008](https://github.com/facebook/react-native/issues/27008)），有人认为是电脑环境和 Android 手机环境的时间不一致导致，两者的时间差导致点击事件中断。
+
+[解决办法](https://github.com/facebook/react-native/issues/27008#issuecomment-592048282)比较 Hack，方法是关闭 Android 手机的时间自动同步功能，然后重启手机并重新安装应用。测试下来此方法的确可行，在此记录一下助有缘人避坑。
+
 <br />
 
 ## 2.iOS

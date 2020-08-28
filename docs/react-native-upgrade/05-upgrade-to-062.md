@@ -45,6 +45,16 @@ import './before';
 上面两步**必须严格执行**，不然的话会有红屏报错。
 
 
+
+### 3️⃣ iOS TextInput 输入汉字时文字抖动
+
+React Native 版本更新的时候，**解决一部分 BUG 的同时一定会引入一些新的 BUG**。
+
+0.62 版本就引入了一个新 BUG：iOS TextInput 输入汉字时文字抖动，具体表现可以看这个 [issues](https://github.com/facebook/react-native/issues/28488)。
+
+这个 BUG 在 0.63 已经得到解决了，相关的 commit 是这个：[Fixes TextInput shaking when typing Chinese](https://github.com/facebook/react-native/commit/9cdc19a93669b37c0518bd32263e156ffc9193c7)，大家可以手动添加一下这个修复，或者直接升级到 0.63，都可以解决问题。
+
+
 <br />
 
 
