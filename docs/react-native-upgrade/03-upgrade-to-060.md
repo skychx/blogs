@@ -245,7 +245,7 @@ Autolinking 功能集成前先试试运行 `react-native unlink`，看看能不�
 
 1.检查 `android/settings.gradle`，删除旧的 `include` 配置，加入下面新的代码：
 
-```java {3,4,6}
+```diff
 rootProject.name = '你的项目'
 
 - include ':react-native-svg'
@@ -259,7 +259,7 @@ include ':app'
 
 2.检查 `android/app/build.gradle`，删除旧的配置，文件的最后一行加入一行配置：
 
-```java {2,5}
+```diff
 dependencies {
 -   implementation project(':react-native-svg')
 }
@@ -271,7 +271,7 @@ dependencies {
 
 3.检查 `MainApplication.java`，删除旧的引用：
 
-```java {1-6,8-11}
+```diff
 - @Override
 - protected List<ReactPackage> getPackages() {
 -   return Arrays.<ReactPackage>asList(
@@ -289,7 +289,7 @@ dependencies {
 
 值得注意的是，我们业务中很有可能会自己封装一些 Native Module，经过上面的修改后，导入 Native Module 的方式也要做相应的修改，这里可以参考官方文档 [Android Register the Module](https://reactnative.dev/docs/native-modules-android#register-the-module)：
 
-```java {1,6}
+```diff
 + import com.your-app-name.CustomToastPackage; // <-- Add this line with your package name.
 
 protected List<ReactPackage> getPackages() {
@@ -316,7 +316,7 @@ Hermes 的相关特性不是本文重点，所以就不多介绍了。
 
 Android 想要使用 Hermes 的话，必须得使用版本号大于 0.60.4 的 React Native，并且要对 `android/app/build.gradle` 做一些修改：
 
-```java {2-4,7-8,11-15,17-23}
+```diff
 project.ext.react = [
 -  entryFile: "index.js"
 +  entryFile: "index.js",
