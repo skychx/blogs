@@ -1,6 +1,6 @@
 ---
 id: use-charles
-title: 🍶 为什么你的 Charles 抓不了包？
+title: 🍶 为什么你的 Charles 会抓包失败？
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
@@ -10,23 +10,23 @@ draft: false
 tags: [react native, 跨端开发, '前端工程化']
 ---
 
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cover.jpg)
 
-
-作为一名 Web 开发工程师，天天都会和网络打交道。Charles作为一款网络抓包工具，几乎成了 Web 开发的标配。
+作为一名 Web 开发工程师，天天都会和网络打交道。Charles 作为一款网络抓包工具，几乎成了 Web 开发的标配。
 
 本文是我**深度使用 Charles 后总结而成**，不同于其它介绍 Charles 的文章，这篇文章不会详细介绍 Charles 的各个功能（例如 remote 和 rewrite），而是专注于分析一个问题：**什么情况下 Charles 会抓包失败？**
 
-为了解决这个问题，我会从 Charles 的原理分析，并且结合 Android/iOS 的官方政策，一一分析 Charles 抓包中的那些失效问题。看完后如果你觉得有用，**一定**要记得给我**点赞 🌟**，谢谢你，这对我真的很重要！
+为了解决这个问题，我会从 Charles 的原理分析，并且结合 Android/iOS 的官方政策，一一分析 Charles 抓包中的那些失效问题。看完后如果你觉得有用，**一定要记得给我点赞 🌟**，谢谢你，这对我真的很重要！
 
 
 
 ## 一、Charles 抓包原理
 
-市面上绝大多数的抓包软件，背后的原理都是中间人攻击（Man-in-the-middle attack，缩写：MITM）。
+市面上绝大多数的抓包软件，背后的原理都是**中间人攻击（Man-in-the-middle attack，缩写：MITM）**。
 
 维基百科是这样定义 MITM 的：
 
-> 中间人攻击在密码学和计算机安全领域中是指攻击者与通讯的两端分别建立独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。
+> 中间人攻击在密码学和计算机安全领域中是指攻击者与通讯的两端分别建立独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，**但事实上整个会话都被攻击者完全控制。**
 
 上面的定义写的很清晰，我结合 Charles 画了一个图，结合箭头方向就能看懂 HTTP Packets 的流向：
 
@@ -34,25 +34,23 @@ tags: [react native, 跨端开发, '前端工程化']
 
 
 
-只看理论有些干，我们可以用个实例看一下 Charles 内部的工作情况。我在浏览器上访问 `cdn.staticfile.org` 的一个 HTTP 资源，具体的网络报文我用 Wireshark 抓了一下：
+只看理论有些干，我们可以用个实例看一下 Charles 内部的工作情况。我在电脑浏览器上访问 `cdn.staticfile.org` 的一个 HTTP 资源，具体的网络报文我用 Wireshark 抓了一下：
 
-![CharlesProxy](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/CharlesProxy.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/CharlesProxy.jpg)
 
 
 
 结合 Wireshark 的抓包报文和 Charles 的网络分析，我们可以看出这个 HTTP 请求的报文流向：
 
-1. 浏览器（Client）从端口号 `56075` 发起一个请求，请求发送到本地 Charles 监听的 `8888` 端口（MITM Server），这个连接直接在本机进行
+1. 浏览器（**Client**）从端口号 `56075` 发起一个请求，请求发送到本地 Charles 监听的 `8888` 端口（**MITM Server**），这个连接直接在本机进行
 
-2. Charles 从端口号 `56076` （MITM Client）发起一个请求，因为这个网络包要入公网，所以 IP 为 `192.168.31.44`（我的电脑 IP 地址，下节会介绍）； `cdn.staticfile.org` （Server）的 IP 为 `111.63.183.223`，因为是 HTTP 请求，所以端口号为 `80`
+2. 收到浏览器的请求后，Charles 再从端口号 `56076` （**MITM Client**）发起一个新的请求，因为这个网络包要入公网，所以 IP 为 `192.168.31.44`（我的电脑 IP 地址，下节会介绍）； `cdn.staticfile.org` （**Server**）的 IP 为 `111.63.183.223`，因为是 HTTP 请求，所以端口号为 `80`
 
 3. `111.63.183.223:80` 返回一个 HTTP 响应到 Charles 的代理客户端 `192.168.31.44:56076`
 
-4. Charles 内部做了一些处理（Capture & Analysis），然后把响应报文通过 `8888` 端口发送到 `127.0.0.1:56075`，到这里浏览器就收到了响应
+4. Charles 内部做了一些处理（**Capture & Analysis**），然后把响应报文通过 `8888` 端口发送到 `127.0.0.1:56075`，到这里浏览器就收到了响应
 
 在第二步和第三步中，报文经过了 Charles，Charles 这时就可以对报文进行一些加工，例如 Remote 重定向，Rewrite，缓存报文并可视化等操作。
-
-
 
 
 
@@ -62,35 +60,35 @@ tags: [react native, 跨端开发, '前端工程化']
 
 为了文章的连续性，这里我会对 Charles 的抓包代理配置进行简单的说明。如果你对这里很熟悉可以选择跳过，不太熟悉可以把文章收藏方便后续检索查阅。
 
-
+<br />
 
 开始配置前我们先回顾一下基础的网络知识，网络数据如果想从 A 传输到 B，想确定一个连接就必须确定 5 个关键信息：`源 IP 地址`，`源端口`，`传输层协议`，`目的 IP 地址`和`目的端口`。这 5 个关键信息又叫`五元组`，一个五元组就可以确定一个连接。
 
-![five](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/five.jpg)
+![五元组](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/five.jpg)
 
-如果用 Charles 抓包，我们就要对照分析一下代理链接的五元组：
+如果用 Charles 抓包，我们就要对照分析一下 Client 和 MITM Server 间代理链接的五元组：
 
-- `源 IP 地址`：被抓包应用的 IP 地址，一般为本机 IP，无法修改
+- `源 IP 地址`：被抓包应用的 IP 地址，一般为设备 IP，一般不做修改
 - `源端口`：被抓包应用的端口号，一般为操作系统分配，无法修改
 - `传输层协议`：Charles 目前主要代理的是 HTTP 协议，一般为 TCP
-- `目的 IP 地址`：Charles 的 IP 地址，一般为本机 IP，无法修改
+- `目的 IP 地址`：Charles 的 IP 地址，一般为电脑本机 IP，一般不做修改
 - `目的端口`：Charles 的代理端口，默认为 8888，**可以修改**
 
 > ⚠️ 注：上述分析中只考虑了一般情况，如果你真的想改也可以改，但这种 hack 行为不在本文考虑范围内
 
 从上面的分析我们可以看出，想要打通五元组，我们主要要关注两个点：**目的 IP 地址**和**目的端口**。
 
-
+<br />
 
 我们先分析一下**目的 IP 地址**。因为 Charles 安装在电脑上，所以 Charles 的 IP 就是电脑的 IP。如果你是 Mac 电脑，可以按住 `option` 键再用鼠标点击菜单栏的 Wi-Fi 图标，得到电脑 IP 地址。也可以访问 **系统偏好设置 -> 网络** 得到 IP 地址。这里我的 IP 地址是 `192.168.31.44`，后面会用到。
 
-![localIP](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/localIP.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/localIP.jpg)
 
 
 
-Charles 的代理端口号可以从 **Charles -> Proxy -> Proxy Setttings** 进行查看和更改。端口默认是 8888，一般不建议修改。
+Charles 的代理端口号可以从 **Charles -> Proxy -> Proxy Setttings** 进行查看和更改。端口默认是 `8888`，一般不建议修改。
 
-![ProxyPort](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/ProxyPort.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/ProxyPort.jpg)
 
 
 
@@ -106,17 +104,17 @@ Charles 的代理端口号可以从 **Charles -> Proxy -> Proxy Setttings** 进�
 
 因为本机代理默认是关闭的，我们也可以在 `Proxy Setttings` 中点击 `macOS`，勾选 `Enable macOS proxy on lounch`，这样每次打开 Charles 就会默认打开代理了。
 
-![OpenCharlesProxy](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/OpenCharlesProxy.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/OpenCharlesProxy.jpg)
 
 
 
 #### 2.iOS 代理配置
 
-想要抓 iOS 的网络包，只需要把 iOS 的网络包转发到代理 IP 和 代理端口就行。
+想要抓 iOS 的网络包，只需要把 iOS 的网络包转发到代理 IP 和代理端口就行。
 
 配置前我们要保证手机和电脑在同一个局域网里（一般手机电脑连同一个 Wi-Fi 就行），然后打开 iOS 的 **设置 -> 无线局域网**，进入已连接的 Wi-Fi 的设置页面，滑动到最底部选择配置代理，然后手动配置代理。
 
-![iOSOpenProxy](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/iOSOpenProxy.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/iOSOpenProxy.jpg)
 
 **服务器**要输入的就是前面得到的 Charles IP 地址，案例里是 `192.168.31.44`；**端口**是前面的 Charles 代理端口，一般为 `8888`。
 
@@ -126,23 +124,29 @@ Charles 的代理端口号可以从 **Charles -> Proxy -> Proxy Setttings** 进�
 
 Android 的代理配置其实和 iOS 差不多，但是 Android 厂家众多，操作步骤不像 iOS 那么统一，一一覆盖也没有太大的意义，所以我只做个简单的步骤演示：
 
-![AndroidOpenProxy](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/AndroidOpenProxy.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/AndroidOpenProxy.jpg)
 
 
 
 ### HTTPS 代理配置
 
-HTTPS 本质上就是 HTTP 协议 + TLS 协议，从建立连接的角度看，主要是在 TCP 三次握手之后又加入了 TLS 握手。
+HTTPS 本质上就是 HTTP 协议 + TLS 协议，从建立连接的角度看，主要是在 TCP 三次握手之后又加入了四次 TLS 握手，如下图所示，TLS 握手过程中会校验加密用的公钥证书，所以我们就要手动安装并信任 Charles 的证书，以达到抓取 HTTPS Packets 的目的。
+
+![TLS 1.2](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/TLS12.jpg)
 
 
 
-TLS 的加入，加强了网络的安全性的同时，也增加了抓包的复杂度，下一节我会详细解释，这里先做个步骤演示。
+TLS 的加入，加强了网络的安全性的同时，也增加了抓包的复杂度，下一节我会详细解释，这里先做个证书安装的步骤演示。
+
+> ⚠️ 注：证书安装前要确保 HTTP 代理已经配置完毕
+
+
 
 #### 1.电脑端安装证书
 
 电脑端安装证书是最简单的。首先点击 **Charles -> Help -> SSL Proxying -> Install Charles Root Certificate** 在电脑端安装证书，然后点击刚刚安装的证书，手动信任全部权限，最后输入密码保存修改就可。
 
-![MacInstallCA](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MacInstallCA.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MacInstallCA.jpg)
 
 
 
@@ -150,17 +154,19 @@ TLS 的加入，加强了网络的安全性的同时，也增加了抓包的复�
 
 iOS 安装证书相对来说复杂一些。首先点击 **Charles -> Help -> SSL Proxying -> Install Charles Root Certificate on a Mobile Derive**，这时候会跳出一个弹窗，然后我们根据提示在手机端访问 `chls.pro/ssl`，下载安装 Charles CA 证书。
 
-![iOSInstallCA](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/iOSInstallCA.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/iOSInstallCA.jpg)
 
 安装好后还要手动开启权限。先要到 **通用 -> 描述文件与设备管理 -> 信任** 里安装刚刚下载的证书，然后到 **通用 -> 关于本机 -> 证书信任设置 -> 针对根证书启用完全信任** 里手动信任证书，这两个同意后 iOS 就安装证书成功了。
 
-![iOSTrustCA](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/iOSTrustCA.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/iOSTrustCA.jpg)
 
 
 
 #### 3.Android 安装证书
 
-Android 安装证书的步骤不但麻烦，作用还不大。首先点击 **Charles -> Help -> SSL Proxying -> Save Charles Root Certificate**，把证书文件以 `*.cer` 格式保存。
+Android 安装证书的步骤不但麻烦，作用还不大。
+
+首先点击 **Charles -> Help -> SSL Proxying -> Save Charles Root Certificate**，把证书文件以 `*.cer` 格式保存。
 
 > ⚠️ 注：Charles 保存证书文件时，有两种格式可选：`.pem` 和 `.cer`。前者是一种证书容器格式，一般是对证书进行 base64 编码；后者一般是二进制格式的证书，Android 系统对二进制格式的证书兼容性更好一些，所以我们选择 `.cer` 文件。
 
@@ -178,9 +184,9 @@ Android 安装证书的步骤不但麻烦，作用还不大。首先点击 **Cha
 
 作为一名程序员，为了顺畅的访问 GitHub 等网站，我们总会用些“辅助工具”。这些工具一般会自动开启 HTTP/HTTPS 代理从而抢占端口，导致 Charles 代理失败。
 
-解决这个问题也很简单，**Charles 抓包前，把电脑和手机的辅助工具都关掉**，这样就不会有代理冲突的问题了。我们可以查看电脑的 Wi-Fi 代理界面，开启 Charles 抓包前只要保证下面的选项都没被勾选就好了。
+解决这个问题也很简单，**Charles 抓包前，把电脑和手机的辅助工具都关掉**，这样就不会有代理冲突的问题了。我们可以查看电脑的 Wi-Fi 代理界面，开启 Charles 抓包前要保证下面的选项都没被勾选就好了。
 
-![MacProxySetting](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MacProxySetting.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MacProxySetting.jpg)
 
 肯定也有人想过我们本地挂两个代理，报文先经过工具，然后经过 Charles 抓包，最后传输到客户端。首先这种方案是可行的，但是实际用下来会非常的卡，延迟也很高，所以并不建议这样使用。
 
@@ -229,7 +235,7 @@ Android 安装证书的步骤不但麻烦，作用还不大。首先点击 **Cha
 
 其实 Charles 有一个很不起眼的功能，那就是它的 UI 界面**右下角会展示 Charles 正在开启的功能**，如果你怀疑你的 Charles 哪里做了接口限制，你就扫一眼右下角开启的功能，然后依次检查就可。
 
-![charlesRightBottom](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/charlesRightBottom.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/charlesRightBottom.jpg)
 
 
 
@@ -239,7 +245,7 @@ Android 安装证书的步骤不但麻烦，作用还不大。首先点击 **Cha
 
 我们先看一张图，这个是 Android 的证书信任页面：
 
-![AndroidCA](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/AndroidCA.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/AndroidCA.jpg)
 
 从上图可以看出，Android 系统把证书信任分为两大块：
 
@@ -260,11 +266,11 @@ Android 安装证书的步骤不但麻烦，作用还不大。首先点击 **Cha
 
 **1.ROOT**
 
-直接 ROOT Android 手机，把 Charles 证书放到系统证书里
+直接 ROOT Android 手机，把 Charles 证书放到系统证书里，实现证书洗白
 
 **2.准备一个低于 Android 7.0 的手机**
 
-Android 7.0 是 2016 年的系统，按照手机两年一换代一年一更新的速度算，这种手机很难找到了
+Android 7.0 是 2016 年的系统，按照 Android 手机两年一换代一年一更新的速度算，这种手机很难找到了
 
 **3.准备一个 targetSdkVersion < 24 的 APP 安装包**
 
@@ -303,17 +309,23 @@ Android 有个 `res/xml/network_security_config.xml` 文件，意如其名，这
 
 ### 5.证书固定（Certificate Pinning）
 
-**证书固定（Certificate Pinning）**是指客户端内置了服务端真正的公钥证书。在 HTTPS 请求时，服务端发给客户端的公钥证书必须和客户端内置的公钥证书一致才能请求成功。一般对安全比较重视的公司会采取这种操作。
+**证书固定（Certificate Pinning）** 是指客户端内置了服务端真正的公钥证书。
+
+在 HTTPS 请求时，服务端发给客户端的公钥证书必须和客户端内置的公钥证书一致才能请求成功。一般对安全比较重视的公司会采取这种操作。
 
 在这种情况下，利用 Charles 抓包时，Charles 的公钥证书和客户端的公钥证书不一样，伪造的请求就会被驳回，我们就抓包失败了。那么这种情况怎么解决？
 
-和前面介绍的一样，路其实还是有两条，一条是 Hack 之路，刷机 ROOT，借助工具移除 APP 中固定的公钥证书；另一条是正路，你拥有这个 APP 的开发权限，那么一般你也就拥有了公钥证书和随之配套的私钥，我们可以把证书和私钥导入到 Charles 中，解决证书固定引起的困扰。
+和前面介绍的一样，路其实还是有两条：
+
+- 一条是 Hack 之路，刷机 ROOT，借助工具移除 APP 中固定的公钥证书；
+
+- 另一条是正路，你拥有这个 APP 的开发权限，那么一般你也就拥有了公钥证书和随之配套的私钥，我们可以把证书和私钥导入到 Charles 中，解决证书固定引起的困扰。
 
 Charles 导入公钥证书和私钥比较简单，点击 **Charles -> Proxy -> SSL Proxying Setting -> Root Certificate**，然后导入 `.pem` 或 `p12` 文件即可。
 
 > ⚠️ 注：`.p12` 是一种文件格式，同时包含证书和密钥
 
-![TLSPinning](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/TLSPinning.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/TLSPinning.jpg)
 
 
 
@@ -321,15 +333,21 @@ Charles 导入公钥证书和私钥比较简单，点击 **Charles -> Proxy -> S
 
 在绝大部分的情况下，TLS 都是客户端认证服务端的真实性的，但是在一些非常注重安全的场景下（例如匿名社交），部分 APP 会开启 TLS 的双向验证，也就是说**服务端也要验证客户端的真实性**。
 
-在这种情况，客户端必然内置了一套公钥证书和私钥。相对于服务端，APP 有很大的砸壳风险，所以公钥证书和私钥一般都是极其隐蔽的，比如说写到 `.so` 里，隐藏在一个混淆的妈都不认识的随机数算法函数里，从而增大破译难度。
+在这种情况，客户端**必然**内置了一套公钥证书和私钥。相对于服务端，APP 有很大的砸壳风险，所以公钥证书和私钥一般都是极其隐蔽的，比如说写到 `.so` 里，隐藏在一个混淆的妈都不认识的随机数算法函数里，从而增大破译难度。
 
 我不是安全专家对这个研究的不深，平常工作也没遇到这么刁难的问题。从功能面板看，Charles 应该也支持这种极限场景的抓包，但是个人没有具体实践过，大家可以尝试一下。
 
-![TLSDouble](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/TLSDouble.jpg)
+![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/TLSDouble.jpg)
 
 
 
-## 四、感谢大家
+## 四、总结
+
+Charles 抓包是一个很常见的职业技能，如果深入研究，你会发现它涉及到网络连接的五元组、报文转发的代理服务、密码学里的 MITM 和公钥证书知识。综合来看，只有掌握这些较为底层的基础知识，面对工作中各种奇奇怪怪得问题时，才能游刃有余的应对。
+
+
+
+## 五、感谢大家
 
 如果大家觉得这篇文章不错，请一定不要忘记点赞 🌟 支持作者，谢谢你，这对我真的很重要！
 
@@ -341,7 +359,7 @@ Charles 导入公钥证书和私钥比较简单，点击 **Charles -> Proxy -> S
 
 
 
-## 五、推荐阅读
+## 六、推荐阅读
 
 本人之前写过一些计算机网络相关的博文，横跨多个坑点，欢迎大家围观点赞：
 
@@ -349,12 +367,3 @@ Charles 导入公钥证书和私钥比较简单，点击 **Charles -> Proxy -> S
 - [HTTP 冷知识 | X-Forwarded-For 拿到的就是真实 IP 吗？](https://juejin.im/post/6844904174132396045)
 - [HTTP 冷知识 | HTTP 请求中，空格应该被编码为 %20 还是 + ？](https://juejin.im/post/6844904178267979783)
 - [HTTP 的这几个坑你都踩过吗？](https://juejin.im/post/6844904170550460423)
-
-
-
-
-
-
-
-
-
