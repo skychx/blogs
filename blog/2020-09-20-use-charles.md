@@ -5,9 +5,9 @@ author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
-description: React Native 作为一款跨端框架，有一个最让人头疼的问题，那就是版本更新。尤其是遇到大版本更新，JavaScript、iOS 和 Android 三端的配置构建文件都有非常大的变动，有时候三者的配置文件又互相耦合在一起，往往牵一发而动全身。
+description: 本文是我深度使用 Charles 后总结而成，不同于其它介绍 Charles 的文章，这篇文章不会详细介绍 Charles 的各个功能，而是专注于分析一个问题：什么情况下 Charles 会抓包失败？
 draft: false
-tags: [react native, 跨端开发, '前端工程化']
+tags: [HTTP, '计算机网络', '网络安全', '工具']
 ---
 
 ![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cover.jpg)
@@ -16,8 +16,9 @@ tags: [react native, 跨端开发, '前端工程化']
 
 本文是我**深度使用 Charles 后总结而成**，不同于其它介绍 Charles 的文章，这篇文章不会详细介绍 Charles 的各个功能（例如 remote 和 rewrite），而是专注于分析一个问题：**什么情况下 Charles 会抓包失败？**
 
-为了解决这个问题，我会从 Charles 的原理分析，并且结合 Android/iOS 的官方政策，一一分析 Charles 抓包中的那些失效问题。看完后如果你觉得有用，**一定要记得给我点赞 🌟**，谢谢你，这对我真的很重要！
+<!--truncate-->
 
+为了解决这个问题，我会从 Charles 的原理分析，并且结合 Android/iOS 的官方政策，一一分析 Charles 抓包中的那些失效问题。
 
 
 ## 一、Charles 抓包原理
@@ -74,7 +75,9 @@ tags: [react native, 跨端开发, '前端工程化']
 - `目的 IP 地址`：Charles 的 IP 地址，一般为电脑本机 IP，一般不做修改
 - `目的端口`：Charles 的代理端口，默认为 8888，**可以修改**
 
-> ⚠️ 注：上述分析中只考虑了一般情况，如果你真的想改也可以改，但这种 hack 行为不在本文考虑范围内
+:::caution  注意
+上述分析中只考虑了一般情况，如果你真的想改也可以改，但这种 hack 行为不在本文考虑范围内
+:::
 
 从上面的分析我们可以看出，想要打通五元组，我们主要要关注两个点：**目的 IP 地址**和**目的端口**。
 
@@ -138,8 +141,9 @@ HTTPS 本质上就是 HTTP 协议 + TLS 协议，从建立连接的角度看，�
 
 TLS 的加入，加强了网络的安全性的同时，也增加了抓包的复杂度，下一节我会详细解释，这里先做个证书安装的步骤演示。
 
-> ⚠️ 注：证书安装前要确保 HTTP 代理已经配置完毕
-
+:::caution  注意
+证书安装前要确保 HTTP 代理已经配置完毕
+:::
 
 
 #### 1.电脑端安装证书
@@ -168,7 +172,11 @@ Android 安装证书的步骤不但麻烦，作用还不大。
 
 首先点击 **Charles -> Help -> SSL Proxying -> Save Charles Root Certificate**，把证书文件以 `*.cer` 格式保存。
 
-> ⚠️ 注：Charles 保存证书文件时，有两种格式可选：`.pem` 和 `.cer`。前者是一种证书容器格式，一般是对证书进行 base64 编码；后者一般是二进制格式的证书，Android 系统对二进制格式的证书兼容性更好一些，所以我们选择 `.cer` 文件。
+:::info 补充说明
+Charles 保存证书文件时，有两种格式可选：`.pem` 和 `.cer`。前者是一种证书容器格式，一般是对证书进行 **base64** 编码；后者一般是**二进制格式**的证书。
+
+Android 系统对二进制格式的证书兼容性更好一些，所以我们选择 `.cer` 文件。
+:::info
 
 保存好文件后，我们再用 USB 或着其它方式把 CA 证书导入到 Android 内，最后点击证书安装就可。
 
@@ -209,7 +217,9 @@ Android 安装证书的步骤不但麻烦，作用还不大。
 - **wss**（WebSocket Secure，TLS 加密的 WebSocket）
 - **SOCKS**
 
-> ⚠️ 注：**Charles 不支持 HTTP/3**，但是大部分开启 HTTP/3 的网站都做了降级处理。例如用 Chrome 正常访问 Google 时，走的协议是 HTTP/3，连接 Charles 代理后，协议会降级到 HTTP/2
+:::info 补充说明
+**Charles 不支持 HTTP/3**，但是大部分开启 HTTP/3 的网站都做了降级处理。例如用 Chrome 正常访问 Google 时，走的协议是 HTTP/3，连接 Charles 代理后，协议会降级到 HTTP/2
+:::
 
 上面列出的几个协议，其实已经覆盖日常业务开发 90% 的应用场景了，若想抓取其他协议的报文，还是老老实实用 Wireshark 吧。
 
@@ -323,7 +333,9 @@ Android 有个 `res/xml/network_security_config.xml` 文件，意如其名，这
 
 Charles 导入公钥证书和私钥比较简单，点击 **Charles -> Proxy -> SSL Proxying Setting -> Root Certificate**，然后导入 `.pem` 或 `p12` 文件即可。
 
-> ⚠️ 注：`.p12` 是一种文件格式，同时包含证书和密钥
+:::info 补充说明
+`.p12` 是一种文件格式，同时包含证书和密钥
+:::info 补充说明
 
 ![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/TLSPinning.jpg)
 
@@ -347,23 +359,22 @@ Charles 抓包是一个很常见的职业技能，如果深入研究，你会发
 
 
 
-## 五、感谢大家
-
-如果大家觉得这篇文章不错，请一定不要忘记点赞 🌟 支持作者，谢谢你，这对我真的很重要！
-
-欢迎大家关注公众号「**卤蛋实验室**」，写一些不注水的原创干货。
-
-欢迎关注我的个人网站：[supercodepower.com](https://supercodepower.com/)，因为各大平台修改文章都会重新审核，个人博客修改更新更方便一些。
-
-
-
-
-
-## 六、推荐阅读
+## 五、推荐阅读
 
 本人之前写过一些计算机网络相关的博文，横跨多个坑点，欢迎大家围观点赞：
 
 - [15 张精美动图全面讲解 CORS](https://juejin.im/post/6856556746706518024) 🔥🔥🔥
-- [HTTP 冷知识 | X-Forwarded-For 拿到的就是真实 IP 吗？](https://juejin.im/post/6844904174132396045)
-- [HTTP 冷知识 | HTTP 请求中，空格应该被编码为 %20 还是 + ？](https://juejin.im/post/6844904178267979783)
-- [HTTP 的这几个坑你都踩过吗？](https://juejin.im/post/6844904170550460423)
+- [🌐 HTTP 规范中的那些暗坑](https://supercodepower.com/HTTP_unpopular_knowledge/)
+
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+:::note 一个小尾巴
+欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+:::
