@@ -1,3 +1,6 @@
+const remarkMath = require("remark-math");
+const rehypeKatex = require("rehype-katex");
+
 module.exports = {
   title: '超级码力：微信公众号@卤蛋实验室',
   tagline: '微信公众号@卤蛋实验室',
@@ -7,6 +10,12 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'skychx', // Usually your GitHub org/user name.
   projectName: '超级码力', // Usually your repo name.
+  stylesheets: [
+    {
+      href: './src/css/katex.min.css', // Latex CSS
+      type: 'text/css',
+    },
+  ],
   themeConfig: {
     colorMode: {
       defaultMode: 'dark',
@@ -88,10 +97,10 @@ module.exports = {
               label: 'segmentfault：卤代烃',
               to: 'https://segmentfault.com/u/skychx',
             },
-            // {
-            //   label: '知乎',
-            //   to: 'https://www.zhihu.com/people/skychx',
-            // },
+            {
+              label: '知乎',
+              to: 'https://www.zhihu.com/people/egglabs',
+            },
           ],
         },
         {
@@ -120,6 +129,8 @@ module.exports = {
           homePageId: 'blogsTOC',
           // routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
           // Please change this to your repo.
           // editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',
         },
@@ -131,6 +142,8 @@ module.exports = {
             type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} 超级码力`,
           },
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
