@@ -12,7 +12,7 @@ module.exports = {
   projectName: '超级码力', // Usually your repo name.
   stylesheets: [
     {
-      href: './src/css/katex.min.css', // Latex CSS
+      href: '/katex/katex.min.css', // Latex CSS
       type: 'text/css',
     },
   ],
