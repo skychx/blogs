@@ -1,5 +1,5 @@
 ---
-id: webpack_five_knowledge_points
+slug: webpack_five_knowledge_points
 title: 📦 webpack 中那些最易混淆的 5 个知识点
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室

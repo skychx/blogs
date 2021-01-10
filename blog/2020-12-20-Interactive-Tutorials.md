@@ -1,5 +1,5 @@
 ---
-id: Interactive-Tutorials
+slug: Interactive-Tutorials
 title: 📎 从回形针的互动视频谈谈交互教程的发展
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室

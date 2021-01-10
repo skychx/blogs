@@ -1,5 +1,5 @@
 ---
-id: web-scraper-learn
+slug: web-scraper-learn
 title: 🕷️ Web Scraper——轻量数据爬取利器
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室

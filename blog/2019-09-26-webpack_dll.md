@@ -1,5 +1,5 @@
 ---
-id: webpack_dll
+slug: webpack_dll
 title: 📦 辛辛苦苦学会的 webpack dll 配置，可能已经过时了
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室

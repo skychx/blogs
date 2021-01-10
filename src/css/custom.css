@@ -15,6 +15,8 @@
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
+
+  /* --ifm-container-width: 1400px; */
 }
 
 .docusaurus-highlight-code-line {
@@ -66,7 +68,19 @@ div.row div.docItemCol_src-theme-DocItem- {
   max-width: 70%;
 }
 
-div.docItemCol_src-theme-DocItem- img {
+div.container img {
   display: block;
   margin: 0 auto;
+}
+
+.blog-wrapper {
+  --ifm-container-width: 1400px;
+}
+
+.blog-wrapper .col--2 {
+  --ifm-col-width: calc(3 / 12 * 100%) !important;
+}
+
+.blog-wrapper .col--8 {
+  --ifm-col-width: calc(6 / 12 * 100%) !important;
 }

@@ -1,5 +1,5 @@
 ---
-id: use-charles
+slug: use-charles
 title: 🍶 为什么你的 Charles 会抓包失败？
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室

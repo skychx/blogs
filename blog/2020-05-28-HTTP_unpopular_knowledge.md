@@ -1,5 +1,5 @@
 ---
-id: HTTP_unpopular_knowledge
+slug: HTTP_unpopular_knowledge
 title: 🌐 HTTP 规范中的那些暗坑
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室

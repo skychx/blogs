@@ -1,5 +1,5 @@
 ---
-id: houyi-caijiqi
+slug: houyi-caijiqi
 title: 🦀️ 后羿采集器——最良心的爬虫软件
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室

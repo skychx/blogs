@@ -1,5 +1,5 @@
 ---
-id: react_native_performance_optimization_guides
+slug: react_native_performance_optimization_guides
 title: 🧭 React Native 性能优化指南
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室

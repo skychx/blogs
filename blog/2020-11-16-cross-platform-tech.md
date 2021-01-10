@@ -1,5 +1,5 @@
 ---
-id: cross-platform-tech
+slug: cross-platform-tech
 title: 🎯【深入解析】跨端框架的核心技术到底是什么？
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室

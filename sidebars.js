@@ -1,6 +1,6 @@
 module.exports = {
   someSidebar: {
-    博客目录: ['blogsTOC'],
+    // 博客目录: ['blogsTOC'],
   },
   'react-native-upgrade': {
     'React Native 升级指南': [

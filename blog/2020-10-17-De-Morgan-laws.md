@@ -1,5 +1,5 @@
 ---
-id: De-Morgan-laws
+slug: De-Morgan-laws
 title: 🔢【程序中的数学】利用德摩根定律简化布尔运算
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室

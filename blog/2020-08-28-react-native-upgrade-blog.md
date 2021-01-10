@@ -1,5 +1,5 @@
 ---
-id: react-native-upgrade-blog
+slug: react-native-upgrade-blog
 title: 🧭 React Native 版本升级指南
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室

@@ -1,5 +1,5 @@
 ---
-id: HTTP_CORS_Vary
+slug: HTTP_CORS_Vary
 title: 🌐 Vary + CORS，两大云厂商都在上面栽了跟头
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室

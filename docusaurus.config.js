@@ -37,7 +37,8 @@ module.exports = {
       searchParameters: {},
     },
     navbar: {
-      title: '超级码力',
+      title: '卤蛋实验室',
+      hideOnScroll: true,
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.jpeg',
@@ -126,7 +127,6 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: 'blogsTOC',
           // routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           remarkPlugins: [remarkMath],
@@ -135,6 +135,7 @@ module.exports = {
           // editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',
         },
         blog: {
+          blogSidebarTitle: '近期文章',
           showReadingTime: true,
           path: './blog',
           routeBasePath: '/',
