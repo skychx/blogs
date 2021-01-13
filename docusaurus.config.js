@@ -45,8 +45,14 @@ module.exports = {
       },
       items: [
         {
+          to: 'docs/toys/home',
+          activeBasePath: 'docs/toys',
+          label: '🧸 造轮子学原理',
+          position: 'left',
+        },
+        {
           to: 'docs/react-native-upgrade/index',
-          activeBasePath: 'docs',
+          activeBasePath: 'docs/react-native-upgrade',
           label: '🔝 RN 升级指南',
           position: 'left',
         },

@@ -16,7 +16,9 @@
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
 
-  /* --ifm-container-width: 1400px; */
+  /* 行内代码重写样式 */
+  --ifm-code-color: #d14;
+  --ifm-code-background: rgba(208, 187, 193, 0.2);
 }
 
 .docusaurus-highlight-code-line {
