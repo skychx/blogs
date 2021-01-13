@@ -16,9 +16,9 @@ keywords:
 
 <br />
 
-本文主要（90%）参考[ssloy](https://github.com/ssloy)大神的[tinyrenderer](https://github.com/ssloy/tinyrenderer)教程，零依赖实现一个软渲染器，通过这个教程可以实现一个简易版本的 `OpenGL2.0`（rendering pipeline 只支持 `Vertex Shader` 和 `Fragment Shader` 两种自定义 Shader 类型），了解 `OpenGL` 这类图形学 API 在底层是如何工作的。
+本文主要（90%）参考 [ssloy](https://github.com/ssloy) 大神的 [tinyrenderer](https://github.com/ssloy/tinyrenderer) 教程，零依赖实现一个软渲染器，通过这个教程可以实现一个简易版本的 `OpenGL2.0`（rendering pipeline 只支持 `Vertex Shader` 和 `Fragment Shader` 两种自定义 Shader 类型），了解 `OpenGL` 这类图形学 API 在底层是如何工作的。
 
-我自己造的轮子是 [**toyRenderer**](https://github.com/skychx/toyRenderer)，在 tinyrenderer 的基础上加入了大量的注释并按自己的理解优化了部分代码（不排除有反向优化），如果大家对 tinyrenderer 感兴趣，可以参考一下我的实现，**点个 star** 🌟 就更好不过了～
+我自己造的轮子是 [**toyRenderer**](https://github.com/skychx/toyRenderer)，在 tinyrenderer 的基础上加入了大量的注释并按自己的理解优化了部分代码（不排除有反向优化），如果大家对 tinyrenderer 感兴趣，可以参考一下我的实现和我现在写的这个教程，**点个 star** 🌟 就更好不过了～
 
 本专栏的目录结构和 [tinyrenderer](https://github.com/ssloy/tinyrenderer) 保持一致，方便大家对比阅读。
 
@@ -40,7 +40,7 @@ keywords:
 
 #### 1.2 微积分
 
-微积分其实只有少量的涉及，[原教程](https://github.com/ssloy/tinyrenderer/wiki/Lesson-6bis-tangent-space-normal-mapping)里有一点点梯度的内容，个人感觉影响不大。
+微积分其实只有少量的涉及，[原教程](https://github.com/ssloy/tinyrenderer/wiki/Lesson-6bis-tangent-space-normal-mapping)里有一点点梯度的内容，个人感觉对整体学习进度影响不大。
 
 #### 1.3 线性代数
 
@@ -70,7 +70,7 @@ keywords:
 
 如果跟着这门课学下来，其实课下作业就会完成一个小的软渲染器，但由于我是后期才加入学习的，所以作业也没有跟着做，经过搜索发现 [tinyrenderer](https://github.com/ssloy/tinyrenderer) 这个教程推荐的人最多，所以最后参照这个教程实现了自己的软渲染器。
 
-闫老师的是视频教程，大家可以配合他的 PPT 学习。如果习惯看书，我这里推荐两本，一本是大名鼎鼎的虎书《Fundamentals of Computer Graphics 4th Edition》，另一本是《Real Time Rendering 4th》，都非常经典非常有名。
+闫老师的是视频教程，大家可以配合他的 PPT 学习。如果习惯看书，我这里推荐两本，一本是大名鼎鼎的虎书《Fundamentals of Computer Graphics 4th Edition》，另一本是《Real Time Rendering 4th》，都是非常经典非常有名的书籍。
 
 ![Graphics Books](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rendering_book.jpg)
 
