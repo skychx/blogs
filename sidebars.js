@@ -16,6 +16,7 @@ module.exports = {
       items: [
         'toy-renderer/index',
         'toy-renderer/day1-env-setup',
+        'toy-renderer/day2-draw-line',
       ],
     },
   ],
