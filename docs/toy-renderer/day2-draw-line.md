@@ -302,7 +302,7 @@ void line(Screen &s,
 
 
 
-这样我们就实现了斜率在 $[0, 1]$ 区间的高效算法。也就是说，现在我们可以绘制 1/8 个象限的直线了。剩下范围的直线，可以通过交换  xy 等方式实现绘制。具体的实现都是些脏活累活，就不摆出来了，感兴趣的可以去 GitHub 上看代码的完整实现。
+这样我们就实现了斜率在 $[0, 1]$ 区间的高效算法。也就是说，现在我们可以绘制 1/8 个象限的直线了。剩下范围的直线，可以通过交换  xy 等方式实现绘制。具体的实现都是些脏活累活，就不摆出来了，感兴趣的可以去 GitHub 上看代码的[完整实现](https://github.com/skychx/toyRenderer/blob/d31afbe91a140b95cef735776d13bca2dd7a5567/tinyrenderer/main.cpp#L20)。
 
 ![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/e2ZFEU.gif)
 
