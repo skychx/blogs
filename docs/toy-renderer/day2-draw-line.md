@@ -1,6 +1,6 @@
 ---
 id: day2-draw-line
-title: day1：环境搭建
+title: day2：画一条线
 sidebar_label: day2：画一条线
 description: 环境搭建
 keywords:
@@ -15,6 +15,7 @@ keywords:
 
 本文主要讲解直线绘制算法的推导和思路（莫担心，只涉及到一点点的中学数学知识），最后会给出代码实现，大家放心的看下去就好。
 
+> 本文源码 👉：[toyRenderer-day02-line-drawing-algorithm](https://github.com/skychx/toyRenderer/tree/day02-line-drawing-algorithm)
 
 
 ## 1.DDA 直线算法
