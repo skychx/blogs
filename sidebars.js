@@ -17,7 +17,7 @@ module.exports = {
         'toy-renderer/index',
         'toy-renderer/day1-env-setup',
         'toy-renderer/day2-draw-line',
-        'toy-renderer/day3-draw-triangle',
+        // 'toy-renderer/day3-draw-triangle',
       ],
     },
   ],
