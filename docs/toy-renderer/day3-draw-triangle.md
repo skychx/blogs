@@ -153,8 +153,11 @@ void drawSingleTriangle() {
 
 ![day03_cross_product_triangle](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day03_cross_product_triangle.jpg)
 
+<br />
 
+> 触不及防的安利：大家可以看我头像关注🛰️号「卤蛋实验室」，后台回复「图形学」获取经典教材《虎书4》和《Real Time Rendering 4》
 
+![后台回复「图形学」领取经典教材](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rendering_book.jpg)
 
 
 ## 3.利用三角形重心坐标画三角形
