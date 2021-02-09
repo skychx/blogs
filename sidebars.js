@@ -1,3 +1,10 @@
+/*
+ * @Author: chenhao25
+ * @Date: 2020-08-05 21:27:29
+ * @LastEditors: chenhao25
+ * @LastEditTime: 2021-02-09 09:11:53
+ * @FilePath: /blogs/sidebars.js
+ */
 module.exports = {
   'react-native-upgrade': [
     'react-native-upgrade/index',
@@ -18,6 +25,7 @@ module.exports = {
         'toy-renderer/day1-env-setup',
         'toy-renderer/day2-draw-line',
         'toy-renderer/day3-draw-triangle',
+        'toy-renderer/day4-Z-buffering',
       ],
     },
   ],
