@@ -58,9 +58,13 @@ if(!((A && B) || C)) {
 
 - 在**命题逻辑**里，可以这样表示：
 
-$$\neg (P\lor Q)\iff (\neg P)\land (\neg Q)$$
+$$
+\neg (P\lor Q)\iff (\neg P)\land (\neg Q)
+$$
 
-$$\neg (P\land Q)\iff (\neg P)\lor (\neg Q)$$
+$$
+\neg (P\land Q)\iff (\neg P)\lor (\neg Q)
+$$
 
 其中 $\neg$ 表示逻辑非运算符（NOT, `!`），$\lor$ 表示逻辑或运算符（OR, `||`），$\land$ 表示逻辑与运算符（AND, `&&`）
 
@@ -68,9 +72,13 @@ $$\neg (P\land Q)\iff (\neg P)\lor (\neg Q)$$
 
 - 在**集合**里可以这样表示：
 
-$$\overline {A\cup B} = \overline {A} \cap \overline {B}$$
+$$
+\overline {A\cup B} = \overline {A} \cap \overline {B}
+$$
 
-$$\overline {A\cap B} = \overline {A} \cup \overline {B}$$
+$$
+\overline {A\cap B} = \overline {A} \cup \overline {B}
+$$
 
 其中 A 和 B 表示集合，集合上的横线表示取补集，$\cap$ 表示取交集，$\cup$ 表示取并集。
 
@@ -78,9 +86,13 @@ $$\overline {A\cap B} = \overline {A} \cup \overline {B}$$
 
 - 在**布尔代数**里可以这样表示：
 
-$$\overline {(x \cdot y)} = \overline {x} + \overline {y}$$
+$$
+\overline {(x \cdot y)} = \overline {x} + \overline {y}
+$$
 
-$$\overline {(x+y)} = \overline {x} \cdot \overline {y}$$
+$$
+\overline {(x+y)} = \overline {x} \cdot \overline {y}
+$$
 
 其中 $\cdot$ 表示布尔积（AND），$+$ 表示布尔和（OR），上划线表示补（NOT）。
 

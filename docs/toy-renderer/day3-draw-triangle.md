@@ -61,7 +61,9 @@ keywords:
 
 综上所述，我们可以对向量叉乘做一个严谨的定义：
 
-$${\displaystyle \mathbf {a} \times \mathbf {b} =\|\mathbf {a} \|\|\mathbf {b} \|\sin(\theta )\ \mathbf {n} }$$
+$$
+{\displaystyle \mathbf {a} \times \mathbf {b} =\|\mathbf {a} \|\|\mathbf {b} \|\sin(\theta )\ \mathbf {n} }
+$$
 
 其中 $\theta$ 表示 $\mathbf {a}$  和 $\mathbf {b}$  在它们所定义的平面上的夹角（$0^{\circ }\leq \theta \leq 180^{\circ}$）。${\displaystyle \|\mathbf {a} \|}$ 和 $\displaystyle \|\mathbf {b} \|$ 是向量 $\mathbf {a}$ 和 $\mathbf {b}$ 的模长，而 $\mathbf{n}$ 则是一个与 $\mathbf {a}$ 、$\mathbf {b}$ 所构成的平面垂直的单位向量，方向由右手定则决定。
 
@@ -170,15 +172,21 @@ void drawSingleTriangle() {
 
 我们暂时只考虑二维平面的三角形。对于一个三角形 $\Delta ABC$ 来说，假设平面内有一个点 $P$，很显然，$\overrightarrow{A P}$，$\overrightarrow{A B}$，$\overrightarrow{A C}$ 向量都是线性相关的，也就是说，可以用下式表示 $\overrightarrow{A P}$：
 
-$$\overrightarrow{A P}=u \overrightarrow{A B}+v \overrightarrow{A C}$$
+$$
+\overrightarrow{A P}=u \overrightarrow{A B}+v \overrightarrow{A C}
+$$
 
 我们把这个三角形放在一个笛卡尔坐标系下，我们就可以这样表示：
 
-$$A-P=u(A-B)+v(A-C)$$
+$$
+A-P=u(A-B)+v(A-C)
+$$
 
 把位置挪一下，合并同类项后，$P$ 点的位置可以表示为下式：
 
-$$P=(1-u-v) A+u B+v C$$
+$$
+P=(1-u-v) A+u B+v C
+$$
 
 <br />
 
@@ -192,21 +200,29 @@ $$P=(1-u-v) A+u B+v C$$
 
 再对第一个式子做一下变形，可以得到下式：
 
-$$u \overrightarrow{A B}+v \overrightarrow{A C}+\overrightarrow{P A}=0$$
+$$
+u \overrightarrow{A B}+v \overrightarrow{A C}+\overrightarrow{P A}=0
+$$
 
 <br />
 
 因为三角形位于笛卡尔坐标系内，我们可以把上面的式子沿 $x$ 和 $y$ 轴拆分为两个式子，他们和上式是等价的：
 
-$$\left\{\begin{array}{l}u \overrightarrow{A B}_{x}+v \overrightarrow{A C}_{x}+\overrightarrow{P A}_{x}=0 \\ u \overrightarrow{A B}_{y}+v \overrightarrow{A C}_{y}+\overrightarrow{P A}_{y}=0\end{array}\right.$$
+$$
+\left\{\begin{array}{l}u \overrightarrow{A B}_{x}+v \overrightarrow{A C}_{x}+\overrightarrow{P A}_{x}=0 \\ u \overrightarrow{A B}_{y}+v \overrightarrow{A C}_{y}+\overrightarrow{P A}_{y}=0\end{array}\right.
+$$
 
 <br />
 
 观察这个式子，我们可以转换为矩阵乘法的形式：
 
-$$\left[\begin{array}{lll}u & v & 1\end{array}\right]\left[\begin{array}{l}\overrightarrow{A B}_{x} \\ \overrightarrow{A C}_{x} \\ \overrightarrow{P A}_{x}\end{array}\right]=0$$
+$$
+\left[\begin{array}{lll}u & v & 1\end{array}\right]\left[\begin{array}{l}\overrightarrow{A B}_{x} \\ \overrightarrow{A C}_{x} \\ \overrightarrow{P A}_{x}\end{array}\right]=0
+$$
 
-$$\left[\begin{array}{lll}u & v & 1\end{array}\right]\left[\begin{array}{l}\overrightarrow{A B}_{y} \\ \overrightarrow{A C}_{y} \\ \overrightarrow{P A}_{y}\end{array}\right]=0$$
+$$
+\left[\begin{array}{lll}u & v & 1\end{array}\right]\left[\begin{array}{l}\overrightarrow{A B}_{y} \\ \overrightarrow{A C}_{y} \\ \overrightarrow{P A}_{y}\end{array}\right]=0
+$$
 
 <br />
 
@@ -224,11 +240,15 @@ $$\left[\begin{array}{lll}u & v & 1\end{array}\right]\left[\begin{array}{l}\over
 
 根据向量的叉乘公式：
 
-$$\mathbf{u} \times \mathbf{v}=\left|\begin{array}{cc}u_{2} & u_{3} \\ v_{2} & v_{3}\end{array}\right| \mathbf{i}-\left|\begin{array}{cc}u_{1} & u_{3} \\ v_{1} & v_{3}\end{array}\right| \mathbf{j}+\left|\begin{array}{cc}u_{1} & u_{2} \\ v_{1} & v_{2}\end{array}\right| \mathbf{k}$$
+$$
+\mathbf{u} \times \mathbf{v}=\left|\begin{array}{cc}u_{2} & u_{3} \\ v_{2} & v_{3}\end{array}\right| \mathbf{i}-\left|\begin{array}{cc}u_{1} & u_{3} \\ v_{1} & v_{3}\end{array}\right| \mathbf{j}+\left|\begin{array}{cc}u_{1} & u_{2} \\ v_{1} & v_{2}\end{array}\right| \mathbf{k}
+$$
 
 $g$ 向量可以表示为这样的行列式：
 
-$$\left|\begin{array}{ll}\overrightarrow{A B}_{x} & \overrightarrow{A C}_{x} \\ \overrightarrow{A B}_{y} & \overrightarrow{A C}_{y}\end{array}\right|$$
+$$
+\left|\begin{array}{ll}\overrightarrow{A B}_{x} & \overrightarrow{A C}_{x} \\ \overrightarrow{A B}_{y} & \overrightarrow{A C}_{y}\end{array}\right|
+$$
 
 如果这时候的叉乘结果为 0，把这个行列式**从列向量的视角看**，就相当于 $\overrightarrow{A B}$  和 $\overrightarrow{A C}$ 向量叉乘结果为 0，也就是说 $\overrightarrow{A B}$ 和 $\overrightarrow{A C}$ 向量共线。这时候三角形 $\Delta ABC$ 就**退化为一条线段**。
 

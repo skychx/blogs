@@ -165,11 +165,17 @@ cat RGBY.jpg text.txt > RGBY_text.jpg
 
 从真值表可以很容易推出下面的运算法则：
 
-$$A \oplus 0=A$$
+$$
+A \oplus 0=A
+$$
 
-$$A \oplus A=0$$
+$$
+A \oplus A=0
+$$
 
-$$(A \oplus B) \oplus C=A \oplus(B \oplus C)$$
+$$
+(A \oplus B) \oplus C=A \oplus(B \oplus C)
+$$
 
 <br />
 

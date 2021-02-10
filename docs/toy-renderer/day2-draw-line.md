@@ -24,7 +24,9 @@ keywords:
 
 我们先来回顾一下中学的几何知识，如何在二维平面内表示一条直线？最常见的就是**斜截式**了：
 
-$$y = kx + b$$
+$$
+y = kx + b
+$$
 
 其中斜率是 $k$，直线在 $y$ 轴上的截距是 $b$。
 
@@ -34,11 +36,15 @@ $$y = kx + b$$
 
 这时候用**两点式**表示一根直线是最方便的：
 
-$$\frac{x-x_{1}}{x_{2}-x_{1}}=\frac{y-y_{1}}{y_{2}-y_{1}}$$
+$$
+\frac{x-x_{1}}{x_{2}-x_{1}}=\frac{y-y_{1}}{y_{2}-y_{1}}
+$$
 
 把上面的式子稍作变形，可以把 $x$ 和 $y$ 用参数 $\lambda$ 表示：
 
-$$\left.\begin{array}{l}x=\lambda\left(x_{2}-x_{1}\right)+x_{1} \\ y=\lambda\left(y_{2}-y_{1}\right)+y_{1}\end{array}\right\} 0 \leq \lambda \leq 1$$
+$$
+\left.\begin{array}{l}x=\lambda\left(x_{2}-x_{1}\right)+x_{1} \\ y=\lambda\left(y_{2}-y_{1}\right)+y_{1}\end{array}\right\} 0 \leq \lambda \leq 1
+$$
 
 这时候我们只要取不同的 $\lambda$，就可以得出对应的 x 和 y。
 
@@ -230,11 +236,15 @@ $
 
 首先对于不等式 $\epsilon + k < 0.5$，我们给它不等号左右两边同时乘以 **2 倍的 $\Delta x$**，这样就可以同时消除斜率除法和常量 0.5 带来的浮点运算:
 
-$$\epsilon + \Delta y / \Delta x < 0.5$$
+$$
+\epsilon + \Delta y / \Delta x < 0.5
+$$
 
-$$2 \epsilon \Delta x + 2 \Delta y <\Delta x$$
+$$
+2 \epsilon \Delta x + 2 \Delta y <\Delta x
+$$
 
-然后用 $\epsilon^{\prime}$ 表示 $\epsilon\Delta x$，上式可以转换为 $$2(\epsilon^{\prime} + \Delta y)< \Delta x$$
+然后用 $\epsilon^{\prime}$ 表示 $\epsilon\Delta x$，上式可以转换为 $2(\epsilon^{\prime} + \Delta y)< \Delta x$
 
 
 
