@@ -69,7 +69,7 @@ iOS 项目主要有两个点：**project.pbxproj** 和 **CocoaPods**。这两块
 
 - [iOS 开发 Xcode 中的 project.pbxproj -- 深入剖析](https://blog.csdn.net/kuangdacaikuang/article/details/52987132)：介绍了 `project.pbxproj` 文件的一些特点
 
-- [Xcode 工程文件 project.pbxproj 小结](Xcode工程文件project.pbxproj小结)：看完后会对 XCode 配置和 `project.pbxproj` 文件的对应关系有着更深刻的了解
+- [Xcode 工程文件 project.pbxproj 小结](https://www.jianshu.com/p/e82ec6a56fc2)：看完后会对 XCode 配置和 `project.pbxproj` 文件的对应关系有着更深刻的了解
 - [Xcode - Target , PROJECT 区别](https://www.jianshu.com/p/e304247ede59)：介绍了 Xcode 中各个配置项是什么意思
 - [XCode Build 过程](https://wiki.jikexueyuan.com/project/objc/Build-tool/6-1.html)
 

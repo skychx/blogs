@@ -758,7 +758,7 @@ eval-source-map 会以 eval() 函数打包运行模块，不产生独立的 map 
 
 ### 5.5 常用配置：
 
-上面的几个例子都是演示，结合[官网推荐]([https://webpack.docschina.org/configuration/devtool/#%E5%AF%B9%E4%BA%8E%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83](https://webpack.docschina.org/configuration/devtool/#对于开发环境))和实际经验，常用的配置其实是这几个：
+上面的几个例子都是演示，结合[官网推荐](https://webpack.docschina.org/configuration/devtool/#%E5%AF%B9%E4%BA%8E%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83)和实际经验，常用的配置其实是这几个：
 
 
 
