@@ -7,25 +7,24 @@ author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 从 React Native 的启动到页面的第一次渲染完成，结合 React Native 的源码和 1.0 的新架构，一一分析 React Native 的启动性能优化之路
 draft: false
-tags: []
+tags: [react native, 跨端开发, 性能优化]
 ---
 
 Web 开发有一个经典问题：「**浏览器中从输入 URL 到页面渲染的这个过程中都发生了什么？**」
 
 据我考据这个问题起码有**十年**历史了。在日新月异学不动的前端圈子里，这个问题能一直被问，就是因为因为它是个非常好的问题，涉及非常多的知识点，平时做一些性能优化，都可以从这个问题出发，分析性能瓶颈，然后对症下药进行优化。
 
-不过今天我们不谈 Web 的性能优化，只是借助刚刚的那个那个经典问题的分析思路，**从 React Native 的启动到页面的第一次渲染完成，结合 React Native 的源码和 1.0 的新架构，一一分析 React Native 的启动性能优化之路**。
+不过今天我们不谈 Web 的性能优化，只是借助刚刚的那个那个经典问题的分析思路，**从 React Native 的启动到页面的第一次渲染完成，结合 React Native 的源码和 1.0 的新架构，探索 React Native 的启动性能优化之路**。
 
 
 <!--truncate-->
 
 
-> **阅读提醒**：
-> 
-> 1.文章中的源码内容为 RN 0.64 版本
-> 
-> 2.源码分析内容涉及 `Objective-C`、`Java`、`C++`、`JavaScript` 四门语言，我尽量讲得通俗易懂一些，若实在不理解可以直接看结论
+:::note 阅读提醒
+1.文章中的源码内容为 RN 0.64 版本
 
+2.源码分析内容涉及 `Objective-C`、`Java`、`C++`、`JavaScript` 四门语言，我尽量讲得通俗易懂一些，若实在不理解可以直接看结论
+:::
 
 
 ## 0.React Native 启动流程
@@ -48,14 +47,17 @@ React Native 作为一个 Web 前端友好的混合开发框架，启动时可�
 
 最后 JS Thread 把计算好的布局信息发送到 Native 端，计算 Shadow Tree，最后由 UI Thread 进行布局和渲染。
 
-> 关于渲染部分的性能优化可以见我之前写的[《React Native 性能优化指南》](https://supercodepower.com/react_native_performance_optimization_guides)，我从**渲染**、**图片**、**动画**、**长列表**等方向介绍了 RN 渲染优化的常见套路，感兴趣的读者可以前往查看，我这里就不多介绍了。
+:::note
+关于渲染部分的性能优化可以见我之前写的[《React Native 性能优化指南》](https://supercodepower.com/react_native_performance_optimization_guides)，我从**渲染**、**图片**、**动画**、**长列表**等方向介绍了 RN 渲染优化的常见套路，感兴趣的读者可以前往查看，我这里就不多介绍了。
+:::
 
 上面的几个步骤，我画了一张图，下面我以这张图为目录，从左向右介绍各个步骤的优化方向：
 
 ![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rn_start_all.jpg)
 
-> **提示**：React Native 初始化时，有可能多个任务**并行执行**，所以上图只能表示 React Native 初始化的大致流程，并不和实际代码的执行时序一一对应。
-
+:::note 提示
+React Native 初始化时，有可能多个任务**并行执行**，所以上图只能表示 React Native 初始化的大致流程，并不和实际代码的执行时序一一对应。
+:::
 
 
 ## 1.升级 React Native
@@ -405,7 +407,8 @@ public class ReactDelegate {
 
 ### 优化建议
 
-对于 React Native 为主体的应用，APP 启动后就要立马初始化 RN 容器，基本上没有什么优化思路；但是 Native 为主的混合开发 APP 却有招：
+对于 React Native 为主体的应用，APP 启动后就要立马初始化 RN 容器，这时候可以加一个启动屏（splash screen
+），等 React Native 初始化后再隐藏启动屏；以 Native 为主的混合开发 APP，我们可以尝试以下思路：
 
 **既然初始化耗时最长，我们在正式进入 React Native 容器前提前初始化不就好了？**
 
