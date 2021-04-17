@@ -7,12 +7,29 @@
  */
 module.exports = {
   'react-native-upgrade': [
-    'react-native-upgrade/index',
-    'react-native-upgrade/preparatory-work',
-    'react-native-upgrade/workflow',
-    'react-native-upgrade/to-060',
-    'react-native-upgrade/to-061',
-    'react-native-upgrade/to-062',
+    {
+      type: 'category',
+      collapsed: false,
+      label: 'React Native 升级指南',
+      items: [
+        'react-native-upgrade/index',
+        'react-native-upgrade/preparatory-work',
+        'react-native-upgrade/workflow',
+        'react-native-upgrade/to-060',
+        'react-native-upgrade/to-061',
+        'react-native-upgrade/to-062',
+      ],
+    },
+    {
+      type: 'category',
+      collapsed: false,
+      label: 'React Native 性能优化',
+      items: [
+        'react-native-performance/native',
+        'react-native-performance/js',
+        'react-native-performance/render',
+      ],
+    },
   ],
   'cs-toys': [
     'toys/home',
@@ -31,7 +48,7 @@ module.exports = {
     {
       type: 'category',
       collapsed: false,
-      label: 'TS 实现数据结构',
+      label: 'TypeScript 数据结构',
       items: [
         'toy-data-structures/index',
         'toy-data-structures/01-Array-and-LinkedList',

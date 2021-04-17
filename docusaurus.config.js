@@ -53,7 +53,7 @@ module.exports = {
         {
           to: 'docs/react-native-upgrade/index',
           activeBasePath: 'docs/react-native-upgrade',
-          label: '🔝 RN 升级指南',
+          label: '⚛️ React Native 进阶',
           position: 'left',
         },
         {
