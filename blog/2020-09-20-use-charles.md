@@ -323,11 +323,11 @@ Android 有个 `res/xml/network_security_config.xml` 文件，意如其名，这
 
 在 HTTPS 请求时，服务端发给客户端的公钥证书必须和客户端内置的公钥证书一致才能请求成功。一般对安全比较重视的公司会采取这种操作。
 
-想要了解更多关于 Certificate Pinning 的内容，可以参考下列文章：
-
-- [证书锁定SSL Pinning简介及用途](https://www.infinisign.com/faq/what-is-ssl-pinning)
-- [Android SSL证书设置和锁定(SSL/TLS Pinning)](https://www.infinisign.com/faq/android-ssl-pinning)
-- [IOS SSL证书设置和锁定(SSL/TLS Pinning)三种方式](https://www.infinisign.com/faq/ios-ssl-pinning-three-method)
+> 想要了解更多关于 Certificate Pinning 的内容，可以参考下列文章：
+> 
+> - [证书锁定SSL Pinning简介及用途](https://www.infinisign.com/faq/what-is-ssl-pinning)
+> - [Android SSL证书设置和锁定(SSL/TLS Pinning)](https://www.infinisign.com/faq/android-ssl-pinning)
+> - [IOS SSL证书设置和锁定(SSL/TLS Pinning)三种方式](https://www.infinisign.com/faq/ios-ssl-pinning-three-method)
 
 
 在这种情况下，利用 Charles 抓包时，Charles 的公钥证书和客户端的公钥证书不一样，伪造的请求就会被驳回，我们就抓包失败了。那么这种情况怎么解决？

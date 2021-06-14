@@ -120,3 +120,8 @@ div.container h1 {
 }
 
 
+
+/* 重写 code 样式 */
+.admonition-info code {
+  background-color:rgba(246, 242, 243, 1)
+}
