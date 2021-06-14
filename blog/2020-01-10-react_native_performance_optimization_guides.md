@@ -90,11 +90,6 @@ class Button extends React.Component {
 在此我想提醒的是，**shouldComponentUpdate 是强业务逻辑相关的**，如果使用这个 API，你必须考虑和此组件相关的所有 props 和 state，如果有遗漏，就有可能出现数据和视图不统一的情况。所以使用的时候一定非常小心。
 
 
-
-在此我想提醒的是，**shouldComponentUpdate 是强业务逻辑相关的，如果使用这个 API，你必须考虑和此组件相关的所有 props 和 state，如果有遗漏，就有可能出现数据和视图不统一的情况**。所以使用的时候一定非常小心。
-
-
-
 ### 2⃣️ React.memo
 
 **📄 文档：**https://react.docschina.org/docs/react-api.html#reactmemo
@@ -222,7 +217,7 @@ render() {
 
 
 
-如果我们翻一翻 React Native 的源码，就会发现 React Native Android UI 布局前，会对只有布局属性的 View（[LAYOUT_ONLY_PROPS 源码](https://github.com/facebook/react-native/blob/c2c4b43dfe098342a6958a20f6a1d841f7526e48/ReactAndroid/src/main/java/com/facebook/react/uimanager/ViewProps.java#L185)）进行过滤，这样可以减少 View 节点和嵌套，对碎片化的 Android 更加友好。
+如果我们翻一翻 React Native 的源码，就会发现 React Native Android UI 布局前，会对只有布局属性的 View（[LAYOUT_ONLY_PROPS 源码](https://github.com/facebook/react-native/blob/c2c4b43dfe098342a6958a20f6a1d841f7526e48/ReactAndroid/src/main/java/com/facebook/react/uimanager/ViewProps.java#L185)）进行过滤，**这样可以减少 View 节点和嵌套**，对碎片化的 Android 更加友好。
 
 
 
@@ -368,7 +363,7 @@ React Native 的 `Image` 图片组件，如果只是作为普通的图片展示�
 
 基础的 `png`/`jpg`/`base64`/`gif` 格式，支持良好。不过要注意的是，想要 Android 加载的 `gif` 图片动起来，要在 `build.gradle` 里面加一些依赖，具体内容可以看这个 [🔗 链接](https://facebook.github.io/react-native/docs/image#gif-and-webp-support-on-android)。
 
-如果要加载 webp 格式的图片，就有些问题了。作为 Google 推出的一种图片格式，Android 自然是支持的，但是 iOS 就不支持了，需要我们安装一些第三方插件。
+如果要加载 webp 格式的图片，就有些问题了。作为 Google 推出的一种图片格式，Android 自然是支持的，但是 iOS 就不支持了，需要我们安装一些第三方插件。社区上有个[react-native-webp-format](https://github.com/Aleksefo/react-native-webp-format)，可以扩展 react native 的 webp 能力。
 
 
 
@@ -440,7 +435,7 @@ iOS 可以通过 source 参数里的 cache 字段控制缓存，属性也是非�
 
 在多图加载的场景里，经过实践，iOS 不管怎么折腾，表现都比较好，但是 Android 就容易出幺蛾子。下面我们就详细说说 Android 端如何优化图片。
 
-在一些场景里，Android 会内存爆涨，帧率直接降为个位数。这种场景往往是小尺寸 Image 容器加载了特别大的图片，比如说 100x100 的容器加载 1000x1000 的图片，内存爆炸的原因就是上面说的原因。
+在一些场景里，Android 会内存爆涨，帧率直接降为个位数。这种场景往往是小尺寸 Image 容器加载了特别大的图片，比如说 100x100 的容器加载 1000x1000 的图片，内存爆炸的原因就是上面说的原因（后序补充：0.6X 之后貌似修复了这个问题）。
 
 
 
@@ -460,7 +455,7 @@ iOS 可以通过 source 参数里的 cache 字段控制缓存，属性也是非�
 
 ### 2⃣️ 优先使用 32 位色彩深度的图片
 
-**📄 色彩深度 wiki**：https://github.com/DylanVann/react-native-fast-image/blob/master/README.md
+**📄 色彩深度 wiki**：https://www.wikiwand.com/zh-hans/%E8%89%B2%E5%BD%A9%E6%B7%B1%E5%BA%A6
 
 
 
@@ -513,7 +508,7 @@ React Native 开发时，布局使用的单位是 pt，和 px 存在一个倍数
 
 ### 4⃣️ 使用 react-native-fast-image
 
-**📄 react-native-fast-image 文档**：https://github.com/DylanVann/react-native-fast-image/blob/master/README.md
+**📄 react-native-fast-image 文档**：https://github.com/DylanVann/react-native-fast-image
 
 
 
@@ -537,7 +532,7 @@ React Native 开发时，布局使用的单位是 pt，和 px 存在一个倍数
 
 WebP 的优势不用我多说，同样的视觉效果，图片体积会明显减少。而且可以显著减小 CodePush 热更新包的体积（热更新包里，图片占用 90% 以上的体积）。
 
-虽然 WebP 在前端解压耗时可能会多一点点，但是考虑到传输体积缩小会缩短网络下载时间，整体的收益还是不错的。
+虽然 WebP 在前端解压耗时可能会多一点点，但是考虑到传输体积缩小会缩短网络下载时间，整体的收益还是为正的。
 
 
 
@@ -767,7 +762,11 @@ render() {
 
 
 
-### 1⃣️ 开启 `useNativeDrive: true`
+### 1⃣️ 开启 `useNativeDriver: true`
+
+:::info 更新提示
+React Native 0.62 之后，`useNativeDriver` 的默认值由 `false` 改为 `true`
+:::
 
 **📄 文档**：https://facebook.github.io/react-native/docs/animations#using-the-native-driver
 
@@ -962,12 +961,12 @@ export default class App extends React.Component {
     return (
       <View style={{flex: 1}}>
         <FlatList
-					data={data}
+          data={data}
           renderItem={this.renderItem}
           initialNumToRender={3} // 首批渲染的元素数量
           windowSize={3} // 渲染区域高度
           removeClippedSubviews={Platform.OS === 'android'} // 是否裁剪子视图
-					maxToRenderPerBatch={10} // 增量渲染最大数量
+          maxToRenderPerBatch={10} // 增量渲染最大数量
           updateCellsBatchingPeriod={50} // 增量渲染时间间隔
           debug // 开启 debug 模式
         />
@@ -1083,19 +1082,19 @@ VirtualizedList 的数据不是一下子全部渲染的，而是分批次渲染�
 
 #### 2.Use simple components & Use light components
 
-使用简单组件，核心就是减少逻辑判断和嵌套，优化方式可以参考「**二、减轻渲染压力**」的内容。
+使用简单组件，核心就是减少逻辑判断和嵌套，优化方式可以参考「[二、减轻渲染压力](https://supercodepower.com/react_native_performance_optimization_guides#%E4%BA%8C%E3%80%81%E5%87%8F%E8%BD%BB%E6%B8%B2%E6%9F%93%E5%8E%8B%E5%8A%9B)」的内容。
 
 
 
 #### 3.Use shouldComponentUpdate
 
-参考「**一、re-render**」的内容。
+参考「[一、re-render](https://supercodepower.com/react_native_performance_optimization_guides#%E4%B8%80%E3%80%81%E5%87%8F%E5%B0%91-re-render)」的内容。
 
 
 
 #### 4.Use cached optimized images
 
-参考「**三、图片优化那些事**」的内容。
+参考「[三、图片优化那些事](https://supercodepower.com/react_native_performance_optimization_guides#%E4%B8%89%E3%80%81%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B)」的内容。
 
 
 
@@ -1107,7 +1106,7 @@ VirtualizedList 的数据不是一下子全部渲染的，而是分批次渲染�
 
 #### 6.Avoid anonymous function on renderItem
 
-renderItem 避免使用匿名函数，参考「**四、对象创建调用分离**」的内容。
+renderItem 避免使用匿名函数，参考「[四、对象创建调用分离](https://supercodepower.com/react_native_performance_optimization_guides#%E5%9B%9B%E3%80%81%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E8%B0%83%E7%94%A8%E5%88%86%E7%A6%BB)」的内容。
 
 
 
@@ -1170,11 +1169,12 @@ Android 开发者选项有不少东西可看，比如说 GPU 渲染分析和动�
 全文参考近 50 个链接，全放文末太占篇幅了，所以我都分散在文章各处了，我以 **emoji 表情🔗**标记的方式进行提示，大家有疑惑的地方可以去原文查看。
 
 
+### RN 性能优化系列目录：
 
-在此我还要推荐一下我以前写的关于 Webpack 的文章，两篇都是**全网独创**：
+- [🎨 React Native 性能优化——Render 篇](https://supercodepower.com/react_native_performance_optimization_guides)
+- [⚡️ React Native 启动速度优化——Native 篇](https://supercodepower.com/react-native-performance-native)
+- [⚡️ React Native 启动速度优化——JS 篇](https://supercodepower.com/react-native-performance-js)
 
-- 一篇介绍了 [webpack 中最易混淆的 5 个知识点](https://juejin.im/post/5cede821f265da1bbd4b5630)，掘金 700 赞，一问讲清楚那些**长得像却意义不同的概念**
-- 一篇详细介绍了 [webpack dll 是个什么东西](https://juejin.im/post/5d8aac8fe51d4578477a6699)，并且给出了 2 条最佳实践，**摆脱繁琐的 dll 配置**
 
 
 

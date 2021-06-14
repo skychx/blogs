@@ -43,11 +43,11 @@ React Native 作为一个 Web 前端友好的混合开发框架，启动时可�
 容器初始化后，舞台就交给了 JavaScript，流程可以细分为 2 个部分：
 
 - JavaScript 代码的加载、解析和执行
-- JS Component 的构建
+- React 的调度与运行（例如 Fiber 的构建）
 
 最后 JS Thread 把计算好的布局信息发送到 Native 端，计算 Shadow Tree，最后由 UI Thread 进行布局和渲染。
 
-:::note
+:::note 文章指路
 关于渲染部分的性能优化可以见我之前写的[《React Native 性能优化指南》](https://supercodepower.com/react_native_performance_optimization_guides)，我从**渲染**、**图片**、**动画**、**长列表**等方向介绍了 RN 渲染优化的常见套路，感兴趣的读者可以前往查看，我这里就不多介绍了。
 :::
 
@@ -571,7 +571,7 @@ iOS 的 Native Modules 有 3 块儿内容，大头是中间的 `_initializeModul
 
 
 
-结合前面的源码分析，我们可以看出 React Native iOS 容器初始化的时候，会**初始化所有的 Native Modules**，若 `Native Modules` 比较多，就会影响 Android RN 容器的启动时间。
+结合前面的源码分析，我们可以看出 React Native iOS 容器初始化的时候，会**初始化所有的 Native Modules**，若 `Native Modules` 比较多，就会影响 iOS RN 容器的启动时间。
 
 
 
@@ -812,6 +812,12 @@ TurboModules 的调用路径大概是这样的：
 ## 总结
 
 本文主要从 **Native** 的角度出发，从源码分析 React Native **现有架构**的启动流程，总结了几个 Native 层的性能优化点；最后又简单介绍了一下React Native 的**新架构**。下一篇文章我会讲解如何从 **JavaScript** 入手，优化 React Native 的启动速度。
+
+### RN 性能优化系列目录：
+
+- [🎨 React Native 性能优化——Render 篇](https://supercodepower.com/react_native_performance_optimization_guides)
+- [⚡️ React Native 启动速度优化——Native 篇](https://supercodepower.com/react-native-performance-native)
+- [⚡️ React Native 启动速度优化——JS 篇](https://supercodepower.com/react-native-performance-js)
 
 
 

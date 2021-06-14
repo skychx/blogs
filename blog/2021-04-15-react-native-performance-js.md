@@ -264,7 +264,7 @@ const App = (props) => {
 };
 ```
 
-上面的写法，被 `Metro` 编译后，**相当于**编译成下面的样子：
+上面的写法，被 `Metro` 编译后，**相当于**编译成下面的样子（文件顶层导入转化为使用位置处导入）：
 
 ```javascript
 const App = (props) => {
@@ -528,7 +528,7 @@ npx react-native bundle --platform android --config metro.business.config.js --d
 
 分包只是第一步，想要展示完整正确的 RN 界面，还需要做到「合」，这个「合」就是指在 Native 端实现多 bundle 的加载。
 
-common.bundle 的加载比较容易，直接在 RN 容器初始化的时候加载就好了。容器初始化的流程上一节我已经详细介绍了，这里就不多言了。这时候问题就转换为 `business.bundle` 的加载问题。
+`common.bundle` 的加载比较容易，直接在 RN 容器初始化的时候加载就好了。容器初始化的流程上一节我已经详细介绍了，这里就不多言了。这时候问题就转换为 `business.bundle` 的加载问题。
 
 React Native 不像浏览器的多 bundle 加载，直接动态生成一个 `<script />` 标签插入 HTML 中就可以实现动态加载了。我们需要结合具体的 RN 容器实现来实现 `business.bundle` 加载的需求。这时候我们需要关注两个点：
 
@@ -616,19 +616,17 @@ MessageQueue.spy(true);
 从图片里可以看出 JS 加载完毕后有大量和 UI 相关的 `UIManager.createView()`  `UIManager.setChildren()` 通讯，结合上面的耗时总结，我们对应着就有几条解决方案：
 
 - 通过一定的布局技巧降低 UI 嵌套层级，降低 UI 视图的复杂度
-
 - 减少 re-render，直接在 JS 侧截断重绘流程，减少 bridge 通讯的频率和数据量
-
 - 如果是 React Native 为主架构的 APP，首屏可以直接替换为 Native View，直接脱离 RN 的渲染流程
 
 上面的这些技巧我都在旧文[《React Native 性能优化指南》](https://supercodepower.com/react_native_performance_optimization_guides)里做了详细的解释，这里就不多解释了。
 
 
-### Fraic
+### Fabric
 
-从上面的我们可以看出，React Native 的渲染需要在 Bridge 上传递大量的 JSON 数据，在 React Native 初始化时，数据量过大会阻塞 bridge，拖慢我们的启动和渲染速度。React Native 新架构中的 Fraic 就能解决这一问题，JS 和 Native UI 不再是异步的通讯，可以实现直接的调用，可以大大加速渲染性能。
+从上面的我们可以看出，React Native 的渲染需要在 Bridge 上传递大量的 JSON 数据，在 React Native 初始化时，数据量过大会阻塞 bridge，拖慢我们的启动和渲染速度。React Native 新架构中的 Fabric 就能解决这一问题，JS 和 Native UI 不再是异步的通讯，可以实现直接的调用，可以大大加速渲染性能。
 
-Fraic 可以说是 RN 新架构里最让人期待的了，想了解更多内容，可以去[官方 issues ](https://github.com/react-native-community/discussions-and-proposals/issues/4)区围观。
+Fabric 可以说是 RN 新架构里最让人期待的了，想了解更多内容，可以去[官方 issues 区: React Native Fabric (UI-Layer Re-architecture) ](https://github.com/react-native-community/discussions-and-proposals/issues/4)围观。
 
 
 
@@ -636,13 +634,14 @@ Fraic 可以说是 RN 新架构里最让人期待的了，想了解更多内容�
 
 本文主要从 **JavaScript** 的角度出发，分析了 Hermes 引擎的特点和作用，并总结分析了 JSBundle 的各种优化手段，再结合网络和渲染优化，全方位提升 React Native 应用的启动速度。
 
+### RN 性能优化系列目录：
+
+- [🎨 React Native 性能优化——Render 篇](https://supercodepower.com/react_native_performance_optimization_guides)
+- [⚡️ React Native 启动速度优化——Native 篇](https://supercodepower.com/react-native-performance-native)
+- [⚡️ React Native 启动速度优化——JS 篇](https://supercodepower.com/react-native-performance-js)
 
 
 ## 参考
-
-[⚡️ React Native 启动速度优化——Native 篇（内含源码分析）](https://supercodepower.com/react-native-performance-native)
-
-[🎨 React Native 性能优化指南——渲染篇](https://supercodepower.com/react_native_performance_optimization_guides)
 
 [🤔 移动端 JS 引擎哪家强？](https://supercodepower.com/mobile-javascript-engines)
 
