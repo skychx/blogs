@@ -11,7 +11,7 @@ keywords:
 
 > 代码链接：https://github.com/skychx/Toy-Data-Structures/blob/main/15-HashTable/ToyHashTable.ts
 
-其实 JavaScript 中的 Object、Map、Set、WeekMap 和 WeekSet 底层都是 HashTable。
+JavaScript 中的 Object 慢属性底层为 HashTable。
 
 ### API:
 
