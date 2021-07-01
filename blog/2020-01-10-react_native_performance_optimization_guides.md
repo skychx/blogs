@@ -55,7 +55,7 @@ tags: [react native, '性能优化', 跨端开发]
 
 ### 1⃣️ shouldComponentUpdate
 
-**📄 文档**：https://react.docschina.org/docs/optimizing-performance.html#shouldcomponentupdate-in-actionsx
+**📄 文档:** https://react.docschina.org/docs/optimizing-performance.html#shouldcomponentupdate-in-actionsx
 
 
 
@@ -92,7 +92,7 @@ class Button extends React.Component {
 
 ### 2⃣️ React.memo
 
-**📄 文档：**https://react.docschina.org/docs/react-api.html#reactmemo
+**📄 文档:** https://react.docschina.org/docs/react-api.html#reactmemo
 
 
 
@@ -133,7 +133,7 @@ export default React.memo(MyComponent, areEqual);
 
 ### 3⃣️ React.PureComponent
 
-**📄 文档：**https://react.docschina.org/docs/react-api.html#reactpurecomponent
+**📄 文档:** https://react.docschina.org/docs/react-api.html#reactpurecomponent
 
 
 
@@ -163,6 +163,21 @@ class PureComponentButton extends React.PureComponent {
 
 在这个问题上仁者见仁智者见智，在不影响功能的前提下，主要是看团队选型，只要提前约定好，其实在日常开发中工作量都是差不多的（毕竟不是每个页面都有必要进行性能优化）。
 
+### 4⃣️ React.useMemo 和 React.useCallback
+
+**📄 文档:** https://zh-hans.reactjs.org/docs/hooks-reference.html#usememo
+
+React16 发布后，React 团队主推函数式组件和 hooks，其中官方提供的 `useMemo` 和 `useCallback` 都可以细粒地进行性能优化。具体的使用可以直接看官方文档。
+
+### 5⃣️ 有技巧的使用 redux
+
+假设一个 RN 项目使用 redux 管理全局状态，当从 0 开始开发一个新的页面时，因为前期项目比较简单逻辑比较少，我们往往会在整个 Page 上包一层 `react-redux`，然后把 redux 的数据传进去，这样做在前期是没有问题的。
+
+但是随着项目的迭代，这个页面的逻辑一定会越来越复杂，引用的组件和依赖的 `redux` 状态也会越来越多。这样就会导致一个问题：随便一个依赖的 `redux` 子状态改动，都会引起**整个 Page 页面**的 `re-render`，即使依赖这个状态的组件只占整个页面的一小部分。
+
+这种情况其实很好优化，那就是不要用 `react-redux` 包装整个 Page 页面，而是用 `react-redux` 包装直接依赖 redux 数据的组件，这样就能把组件重绘带来的性能影响控制到最小。
+
+![有技巧的使用 redux](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/per-react-redux.png)
 
 
 <br/>
