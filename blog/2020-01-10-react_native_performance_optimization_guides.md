@@ -671,13 +671,18 @@ render(){
 
 
 
-### 3⃣️ StyleSheet.create 替代 StyleSheet.flatten
+### ~~3⃣️ StyleSheet.create 替代 StyleSheet.flatten~~
+
+:::warning
+现如今的 StyleSheet.create 并不会提供任何性能优化，它会把传入的样式原样返回，详情可见[源码](https://github.com/facebook/react-native/blob/1465c8f3874cdee8c325ab4a4916fda0b3e43bdb/Libraries/StyleSheet/StyleSheet.js#L359-L372)和[文档更新](https://github.com/facebook/react-native-website/pull/629/files)，所以本条优化建议无效。
+:::
+
 
 **📄 文档**：https://reactnative.cn/docs/stylesheet/
 
 
 
-`StyleSheet.create` 这个函数，会把传入的 Object 转为优化后的 StyleID，在内存占用和 Bridge 通信上会有些优化。
+~~`StyleSheet.create` 这个函数，会把传入的 Object 转为优化后的 StyleID，在内存占用和 Bridge 通信上会有些优化。~~
 
 ```javascript
 const styles = StyleSheet.create({
@@ -691,9 +696,9 @@ console.log(styles.item) // 打印出的是一个整数 ID
 
 
 
-在业务开发时，我们经常会抽出一些公用 UI 组件，然后传入不同的参数，让 UI 组件展示不一样的样式。
+~~在业务开发时，我们经常会抽出一些公用 UI 组件，然后传入不同的参数，让 UI 组件展示不一样的样式。~~
 
-为了 UI 样式的灵活性，我们一般会使用 `StyleSheet.flatten`，把通过 props 传入自定义样式和默认样式合并为一个样式对象：
+~~为了 UI 样式的灵活性，我们一般会使用 `StyleSheet.flatten`，把通过 props 传入自定义样式和默认样式合并为一个样式对象：~~
 
 ```javascript
 const styles = StyleSheet.create({
@@ -707,11 +712,11 @@ StyleSheet.flatten([styles.item, props.style]) // <= 合并默认样式和自定
 
 
 
-这样做的好处就是可以灵活的控制样式，问题就是使用这个方法时，会[🔗 递归遍历](https://github.com/facebook/react-native/blob/aee88b6843/Libraries/StyleSheet/flattenStyle.js)已经转换为 StyleID 的样式对象，然后**生成一个新的样式对象**。这样就会破坏 `StyleSheet.create` 之前的优化，可能会引起一定的性能负担。
+~~这样做的好处就是可以灵活的控制样式，问题就是使用这个方法时，会[🔗 递归遍历](https://github.com/facebook/react-native/blob/aee88b6843/Libraries/StyleSheet/flattenStyle.js)已经转换为 StyleID 的样式对象，然后**生成一个新的样式对象**。这样就会破坏 `StyleSheet.create` 之前的优化，可能会引起一定的性能负担。~~
 
 
 
-当然本节不是说不能用 `StyleSheet.flatten`，**通用性和高性能不能同时兼得**，根据不同的业务场景采取不同的方案才是正解。
+~~当然本节不是说不能用 `StyleSheet.flatten`，**通用性和高性能不能同时兼得**，根据不同的业务场景采取不同的方案才是正解。~~
 
 
 

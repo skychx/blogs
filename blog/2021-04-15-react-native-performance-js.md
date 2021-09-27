@@ -648,3 +648,24 @@ Fabric 可以说是 RN 新架构里最让人期待的了，想了解更多内容
 [招商证券 react-native 热更新优化实践](https://juejin.cn/post/6844904184542822408)
 
 [React Native中如何实现拆包？](https://time.geekbang.org/dailylesson/detail/100056862)
+
+
+----
+
+个人微信：**egg_labs**
+
+<p>
+<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+</p>
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+:::note 一个小尾巴
+欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+:::
