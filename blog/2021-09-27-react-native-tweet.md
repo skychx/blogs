@@ -38,7 +38,7 @@ React Native 开发时，如果只是写些简单的页面，基本上按着[官
 
 `Text` 组件是很常用的属性，有几个小点需要开发者注意一下：
 
-- Android 上存在**吞字现象**，现象是部分机型上最后一个字符不显示，原因不明。目前的折衷方案是文字的最后一行多加一个空格 or 零宽字符
+- Android 上存在**吞字现象**，现象是部分机型上最后一个字符不显示，原因不明。目前的折衷方案是文字的最后一行多加一个空格 or 零宽字符，或者直接强制修改字体 family
 - Android 有个属性叫 `includeFontPadding`，设置为 false 后可以减少文字上下的 padding（这个 padding 是为角标字符预留的，例如 H₂O、2ⁿᵈ），这样可以更好的实现上下垂直居中对齐
 - 实现文字的居中对齐时，最好用一个 `View` 嵌套一个 `Text` 标签，然后给 `View` 设置一些 flex 属性控制 `Text` 居中对齐。Web 开发中经常使用 lineheight 属性实现单行文字的垂直居中对齐，这种实现方式本来就是权宜之计，在 RN 上行不太通。**最佳实践还是利用 flex 属性实现居中对齐**
 - **字体的配置**相对来说比较麻烦，有个不错的教程 [Ultimate guide to use custom fonts in react native](https://mehrankhandev.medium.com/ultimate-guide-to-use-custom-fonts-in-react-native-77fcdf859cf4) 可以参考一下
@@ -51,7 +51,6 @@ React Native 开发时，如果只是写些简单的页面，基本上按着[官
 
 - iOS/Android 的**默认样式**差距比较大，不做封装的话会写非常多的平台相关代码
 - `placeholder` 的文字比较长时，若出现换行现象，没有 API 去控制它的行高
-
 - 若一个页面出现多个 `TextInput` 组件时，需要用 `ScrollView` 组件包裹，才能实现不同 `TextInput` 组件焦点切换的功能
 
 
@@ -62,7 +61,7 @@ Image 组件在表现上我个人认为非常优秀了，但在一些细节上�
 
 - 没有 CSS 那么多的滤镜属性，只支持模糊效果，不过个人基本没遇到过图像滤镜需求
 - 加载网络图片时，**必须指定图片宽高**，若不设置尺寸默认为 0
-- Android 上图片尺寸**非常**大时（貌似是 5000px？），图片会直接加载不出来，不过这种场景很少很少，基本都会瓦片图分步加载，要不然大图会引起 OOM 的
+- Android 上图片尺寸**非常**大时（貌似是 2048x2048？），图片会直接加载不出来，不过这种场景很少很少，基本都会瓦片图分步加载，要不然大图会引起 OOM 的
 - iOS/Android 对 webp 的支持也不是开箱即用的，需要分别配置：
   - iOS 使用 `SDImageWebPCoder` 提供支持
   - Android 使用 `fresco` 提供支持
@@ -189,7 +188,7 @@ blur 效果要用到 [@react-native-community/blur](https://github.com/Kureev/re
 阴影可以用 RN 提供的 [`Shadow Props`](https://reactnative.dev/docs/shadow-props)，但是它是分平台的：
 
 - iOS 提供了 `shadowColor`、`shadowOffset`、`shadowOpacity` 和 `shadowRadius` 四个属性，和 CSS 的 box-shadow 属性完全对标，可以满足绝大多数的场景
-- Android 只提供了 `shadowColor` 和 [`elevation`](https://reactnative.dev/docs/view-style-props#elevation-android) 两个属性，而且从严格意义上来说，`elevation` 其实是「仰角」的意思，是 Android 官方提供的属性，模拟现实中的从上向下的光照引起的阴影变化。虽然理论一套一套的，但是在现实开发中就会发现，`elevation` 搞出来的阴影非常丑，和 iOS 比起来完全是天壤之别。个人一般建议使用渐变替代阴影。
+- Android 只提供了 `shadowColor` 和 [`elevation`](https://reactnative.dev/docs/view-style-props#elevation-android) 两个属性，而且从严格意义上来说，`elevation` 其实是「仰角」的意思，是 Android 官方提供的属性，模拟现实中的从上向下的光照引起的阴影变化。虽然理论一套一套的，但是在现实开发中就会发现，`elevation` 搞出来的阴影非常丑，和 iOS 比起来完全是天壤之别。社区上比较好的替代方案是 [react-native-drop-shadow](https://github.com/hoanglam10499/react-native-drop-shadow)，本质是利用位图模拟阴影
 
 
 
