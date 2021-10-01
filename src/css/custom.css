@@ -76,6 +76,10 @@ html[data-theme='dark'] .header-github-link:before {
 }
 
 /* 重写 blog 列表页标题样式 */
+header h2.blogPostTitle_node_modules-\@docusaurus-theme-classic-lib-next-theme-BlogPostItem-styles-module {
+  font-size: 2.5rem;
+}
+
 header h2.blogPostTitle_3-lP {
   font-size: 2.5rem;
 }
@@ -84,7 +88,7 @@ header h2.blogPostTitle_1mse {
   font-size: 2.5rem;
 }
 
-header h2.blogPostTitle_node_modules-\@docusaurus-theme-classic-lib-next-theme-BlogPostItem-styles-module {
+header h2.blogPostTitle_GeHD {
   font-size: 2.5rem;
 }
 
