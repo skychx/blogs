@@ -1,6 +1,6 @@
 ---
 slug: react-native-tweet
-title: 📝 没 2 年 React Native 开发经验，你都遇不到这些坑
+title: 🤯 没 2 年 React Native 开发经验，你都遇不到这些坑
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx

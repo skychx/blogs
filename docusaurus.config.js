@@ -2,7 +2,7 @@ const remarkMath = require("remark-math");
 const rehypeKatex = require("rehype-katex");
 
 module.exports = {
-  title: '超级码力：微信公众号@卤蛋实验室',
+  title: '微信公众号@卤蛋实验室',
   tagline: '微信公众号@卤蛋实验室',
   url: 'https://supercodepower.com',
   onBrokenLinks: 'log', // build 过程中遇到可能无法访问的网站时打印提示
@@ -38,7 +38,7 @@ module.exports = {
     },
     navbar: {
       title: '卤蛋实验室',
-      hideOnScroll: true,
+      hideOnScroll: false,
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.jpeg',
@@ -142,6 +142,7 @@ module.exports = {
         },
         blog: {
           blogSidebarTitle: '近期文章',
+          blogSidebarCount: 10,
           showReadingTime: true,
           path: './blog',
           routeBasePath: '/',
@@ -158,4 +159,8 @@ module.exports = {
       },
     ],
   ],
+  i18n: {
+    defaultLocale: 'zh-Hans',
+    locales: ['zh-Hans'],
+  },
 };

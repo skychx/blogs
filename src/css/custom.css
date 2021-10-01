@@ -84,14 +84,18 @@ header h2.blogPostTitle_1mse {
   font-size: 2.5rem;
 }
 
-/* 重写 blog 详情页页文章宽度 */
-div.row div.docItemCol_src-theme-DocItem- {
-  max-width: 70%;
+header h2.blogPostTitle_node_modules-\@docusaurus-theme-classic-lib-next-theme-BlogPostItem-styles-module {
+  font-size: 2.5rem;
 }
 
-div.container img {
-  display: block;
-  margin: 0 auto;
+/* 重写 blog 标题样式 */
+div.container h1 {
+  font-size: 2.5rem;
+}
+
+/* 重写 blog 详情页页文章宽度 */
+/* div.row div.docItemCol_src-theme-DocItem- {
+  max-width: 70%;
 }
 
 div.container h1 {
@@ -117,8 +121,20 @@ div.container h1 {
     margin-left: 0;
     max-width: var(--ifm-col-width);
   }
+} */
+
+/* 图片居中对齐 */
+div.container img {
+  display: block;
+  margin: 0 auto;
 }
 
+/* 表格居中对齐 */
+div.container table {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 
 /* 重写 code 样式 */
