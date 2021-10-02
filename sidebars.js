@@ -25,9 +25,21 @@ module.exports = {
       collapsed: false,
       label: 'React Native 性能优化',
       items: [
-        'react-native-performance/native',
-        'react-native-performance/js',
-        'react-native-performance/render',
+        {
+          type: 'link',
+          label: 'RN 初始化——Native 篇',
+          href: '../../react-native-performance-native',
+        },
+        {
+          type: 'link',
+          label: 'RN 初始化——JS 篇',
+          href: '../../react-native-performance-js',
+        },
+        {
+          type: 'link',
+          label: 'RN 运行时——Render 篇',
+          href: '../../react_native_performance_optimization_guides',
+        },
       ],
     },
   ],
