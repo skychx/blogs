@@ -19,7 +19,7 @@ const GitalkComment = () => {
                 proxy: 'https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token',
             })
 
-            // console.warn('GitalkComment', window.document.title, window.location.pathname)
+            console.warn('GitalkComment', window.document.title, window.location.pathname)
 
             gitalk.render('gitalk-container')
         }, 300);
