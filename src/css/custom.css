@@ -146,6 +146,7 @@ div.container h1 {
 div.container img {
   display: block;
   margin: 0 auto;
+  border-radius: 4.5px;
 }
 
 /* 表格居中对齐 */
