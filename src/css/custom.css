@@ -23,6 +23,13 @@
   /* 行内代码重写样式 */
   --ifm-code-color: #d14;
   --ifm-code-background: rgba(208, 187, 193, 0.2);
+
+  /* 评论样式 */
+  --color-border: #eee;
+  --color-background-sidebar: #fafafa;
+  --color-background-faded: #f2f2f2;
+  --color-text: #333;
+  --opacity: 0.7;
 }
 
 :root[data-theme="dark"] {
@@ -33,6 +40,13 @@
   --ifm-color-primary-light: #7dbbec;
   --ifm-color-primary-lighter: #8bc2ee;
   --ifm-color-primary-lightest: #b6d9f4;
+
+  /* 评论样式 */
+  --color-border: #333;
+  --color-background-sidebar: rgb(34, 34, 34);
+  --color-background-faded: #111;
+  --color-text: #aaa;
+  --opacity: 0.7;
 }
 
 .docusaurus-highlight-code-line {
@@ -145,3 +159,78 @@ div.container table {
 .admonition-info code {
   background-color:rgba(246, 242, 243, 1)
 }
+
+/* 评论支持 dark 模式 start */
+/* .gt-container {
+  margin: 2rem auto 0;
+  color: var(--color-text);
+  fill: var(--color-text);
+} */
+html[data-theme='dark'] #gitalk-container * {
+  border-color: var(--color-border);
+}
+html[data-theme='dark'] .gt-container .gt-btn {
+  background-color: hsl(210, 70%, 40%);
+}
+html[data-theme='dark'] .gt-container .gt-btn:hover {
+  background-color: hsl(210, 70%, 35%);
+}
+html[data-theme='dark'] .gt-container .gt-header-textarea,
+html[data-theme='dark'] .gt-container .gt-popup,
+html[data-theme='dark'] .gt-container .gt-comment-content,
+html[data-theme='dark'] .gt-container .gt-comment-admin .gt-comment-content,
+html[data-theme='dark'] .gt-container .gt-header-preview {
+  background-color: var(--color-background-sidebar);
+  color: var(--color-text);
+}
+html[data-theme='dark'] .gt-container .gt-btn-preview {
+  background-color: var(--color-background-sidebar);
+}
+html[data-theme='dark'] .gt-container .gt-header-textarea:hover,
+html[data-theme='dark'] .gt-container .gt-header-textarea:focus,
+html[data-theme='dark'] .gt-container .gt-btn-preview:hover {
+  background-color: var(--color-background-faded);
+}
+html[data-theme='dark'] .gt-container a.is--active,
+html[data-theme='dark'] .gt-container a.is--active:hover {
+  color: var(--color-text);
+}
+html[data-theme='dark'] .gt-container .gt-comment-body {
+  color: var(--color-text) !important;
+}
+html[data-theme='dark'] .gt-container .gt-comment-content:hover {
+  box-shadow: none;
+}
+/* 图片 */
+html[data-theme='dark'] .gt-container .gt-comment-body img {
+  opacity: var(--opacity);
+  transition: opacity 0.3s;
+}
+/* 代码块 */
+html[data-theme='dark'] .markdown-body .highlight pre,
+.markdown-body pre {
+  opacity: var(--opacity);
+}
+/* 行内代码 */
+html[data-theme='dark'] .markdown-body code {
+  border-color: #565656 !important;
+}
+/* 头像 */
+html[data-theme='dark'] .gt-comment-avatar {
+  opacity: var(--opacity);
+  transition: opacity 0.3s;
+}
+html[data-theme='dark'] .gt-comment-avatar:hover {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+/* GitHub 头像 */
+html[data-theme='dark'] .gt-ico-github {
+  fill: rgb(170, 170, 170);
+}
+/* 表格 */
+html[data-theme='dark'] .gt-container .gt-comment-body table {
+  opacity: var(--opacity);
+  transition: opacity 0.3s;
+}
+/* 评论支持 dark 模式 end */
