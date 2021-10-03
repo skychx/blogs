@@ -21,8 +21,8 @@
   --ifm-code-font-size: 95%;
 
   /* 行内代码重写样式 */
-  --ifm-code-color: #d14;
-  --ifm-code-background: rgba(208, 187, 193, 0.2);
+  /* --ifm-code-color: #d14; */
+  /* --ifm-code-background: rgba(208, 187, 193, 0.2); */
 
   /* 评论样式 */
   --color-border: #eee;
@@ -56,6 +56,8 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
+
+
 /* dark 模式样式重写 */
 html[data-theme=dark] .docusaurus-highlight-code-line {
   background-color: rgba(0,0,0,.3)
@@ -65,9 +67,8 @@ html[data-theme=dark] {
   --ifm-code-color: #f5f6f7;
 }
 
-/* 重写评论样式 */
-#comment-system .utterances {
-  max-width: 100%;
+html[data-theme=dark] div.container img {
+  opacity: 0.618;
 }
 
 /* github 图标 */
@@ -154,18 +155,19 @@ div.container table {
   margin-right: auto;
 }
 
-
-/* 重写 code 样式 */
-.admonition-info code {
-  background-color:rgba(246, 242, 243, 1)
+/* 行内代码 */
+html[data-theme='light'] div.container code {
+  color: #d14;
+  background-color: rgba(208, 187, 193, 0.2);
 }
 
+
 /* 评论支持 dark 模式 start */
-/* .gt-container {
+.gt-container {
   margin: 2rem auto 0;
   color: var(--color-text);
   fill: var(--color-text);
-} */
+}
 html[data-theme='dark'] #gitalk-container * {
   border-color: var(--color-border);
 }
@@ -223,10 +225,6 @@ html[data-theme='dark'] .gt-comment-avatar {
 html[data-theme='dark'] .gt-comment-avatar:hover {
   opacity: 1;
   transition: opacity 0.3s;
-}
-/* GitHub 头像 */
-html[data-theme='dark'] .gt-ico-github {
-  fill: rgb(170, 170, 170);
 }
 /* 表格 */
 html[data-theme='dark'] .gt-container .gt-comment-body table {
