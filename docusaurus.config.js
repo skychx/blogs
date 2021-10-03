@@ -30,6 +30,8 @@ module.exports = {
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/dracula'),
+      // https://prismjs.com/#supported-languages
+      additionalLanguages: ['java', 'rust', 'kotlin', 'swift'],
     },
     algolia: {
       apiKey: '84e7e5d1edaa85e79c4902b37f862a50',
