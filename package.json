@@ -12,8 +12,8 @@
     "publish": "cd build/ && tcb hosting deploy ./ -e blog-15bc3a"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-beta.6",
-    "@docusaurus/preset-classic": "^2.0.0-beta.6",
+    "@docusaurus/core": "2.0.0-beta.6",
+    "@docusaurus/preset-classic": "2.0.0-beta.6",
     "@mdx-js/react": "^1.6.21",
     "clsx": "^1.1.1",
     "gitalk": "^1.7.2",
