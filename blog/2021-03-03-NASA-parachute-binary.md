@@ -4,7 +4,7 @@ title: 🪂 理科生的浪漫：NASA 毅力号降落伞上的二进制信息
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 2021 年 2 月 18 号，NASA 「毅力号」火星车顺利着陆火星，随后 NASA 发布了「毅力号」降落过程中的高清视频
 draft: false
 tags: []
@@ -22,19 +22,19 @@ tags: []
 
 在视频的第 15 秒，「毅力号」展开了降落伞，仔细观察的话，大家就可以发现这个降落伞的涂装还是不太一样的，既不是纯色的背景，也没有印什么 LOGO，反而遍布着不规则的**橙白色条纹**：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/ee38-kkmphpt0194074.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/ee38-kkmphpt0194074.png)
 
 
 
 这个视频放出来 6 个小时后，NASA 工程师 [Adam Steltzner](https://twitter.com/steltzner) 就发推表示，就有人破译了降落伞上的隐藏的信息。
 
-![1871614777337_.pic_hd](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/1871614777337_.pic_hd.jpg)
+![1871614777337_.pic_hd](https://image-1255652541.file.myqcloud.com/uPic/1871614777337_.pic_hd.jpg)
 
 
 
 我们也不卖关子了，直接说结论。其实降落伞上编码的形式很简单：**白色表示 0，橙色表示 1，每 7 个条纹表示一组数据**：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-03-03_21-19-45.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-03-03_21-19-45.jpg)
 
 比如说上图最外侧的条纹，用二进制数据表示就是 `0 0 1 0 1 1 1`。
 
@@ -42,13 +42,13 @@ tags: []
 
 比如说 `0 0 0 0 0 0 1` 表示的是字母 `A`，`0 0 0 0 0 1 0` 表示的是字母 `B`，以此类推表 26 个字母就都可以表示出来了。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-03-03_21-29-47.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-03-03_21-29-47.jpg)
 
 
 
 编码格式找出来后，破译就很简单了，我们从内到外顺时针解码，就可以得出一句话——「**Dare Mighty Things**」。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-03-03_21-20-44.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-03-03_21-20-44.jpg)
 
 
 
@@ -68,7 +68,7 @@ tags: []
 
 把破译图和视频原图重合一下，就是下面这张 MASA MARS 官网的图片：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/25646_PIA24431-decoder-ring-1200.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/25646_PIA24431-decoder-ring-1200.jpg)
 
 
 
@@ -89,7 +89,7 @@ tags: []
 个人微信：**egg_labs**
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
 </p>
 
 <br />

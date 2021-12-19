@@ -4,7 +4,7 @@ title: ⚡️ React Native 启动速度优化——JS 篇
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 从 React Native 的启动到页面的第一次渲染完成，结合 React Native 的源码和 1.0 的新架构，一一分析 React Native 的启动性能优化之路
 draft: false
 tags: [react native, 跨端开发, 性能优化]
@@ -18,7 +18,7 @@ tags: [react native, 跨端开发, 性能优化]
 
 ## 1.JSEngine
 
-![rn_start_jsEngine](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rn_start_jsEngine.jpg)
+![rn_start_jsEngine](https://image-1255652541.file.myqcloud.com/uPic/rn_start_jsEngine.jpg)
 
 ### Hermes
 
@@ -26,7 +26,7 @@ Hermes 是 FaceBook 2019 年中旬开源的一款 JS 引擎，从 [release](http
 
 Hermes **支持直接加载字节码**，也就是说，`Babel`、`Minify`、`Parse` 和 `Compile` 这些流程全部都在开发者电脑上完成，直接下发字节码让 Hermes 运行就行，这样做可以**省去 JSEngine 解析编译 JavaScript 的流程**，JS 代码的加载速度将会大大加快，启动速度也会有非常大的提升。
 
-![Hermes](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Hermes.gif)
+![Hermes](https://image-1255652541.file.myqcloud.com/uPic/Hermes.gif)
 
 更多关于 Hermes 的特性，大家可以看我的旧文[《移动端 JS 引擎哪家强》](https://supercodepower.com/mobile-javascript-engines#3hermes)这篇文章，我做了更为详细的特性说明与数据对比，这里就不多说了。
 
@@ -34,7 +34,7 @@ Hermes **支持直接加载字节码**，也就是说，`Babel`、`Minify`、`Pa
 
 ## 2.JS Bundle
 
-![rn_start_jsBundle](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rn_start_jsBundle.jpg)
+![rn_start_jsBundle](https://image-1255652541.file.myqcloud.com/uPic/rn_start_jsBundle.jpg)
 
 前面的优化其实都是 Native 层的优化，从这里开始就进入 Web 前端最熟悉的领域了。
 
@@ -52,7 +52,7 @@ Hermes **支持直接加载字节码**，也就是说，`Babel`、`Minify`、`Pa
 
 Metro 打包 JS 时，会把 ESM 模块转为 CommonJS 模块，这就导致现在比较火的依赖于 ESM 的 Tree Shaking 完全不起作用，而且根据[官方回复](https://github.com/facebook/metro/issues/227#issuecomment-583358386)，Metro 未来也不会支持 Tree Shaking ：
 
-![（Tree Shaking 太 low 了，我们做了个更酷的 Hermes）](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-04-05_10-36-13.jpg)
+![（Tree Shaking 太 low 了，我们做了个更酷的 Hermes）](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-04-05_10-36-13.jpg)
 
 因为这个原因，我们减小 bundle 体积主要是三个方向：
 
@@ -68,7 +68,7 @@ Metro 打包 JS 时，会把 ESM 模块转为 CommonJS 模块，这就导致现�
 
 优化 bundle 文件前，一定要知道 bundle 里有些什么，最好的方式就是用可视化的方式把所有的依赖包列出来。web 开发中，可以借助 Webpack 的 `webpack-bundle-analyzer` 插件查看 bundle 的依赖大小分布，React Native 也有类似的工具，可以借助 [`react-native-bundle-visualizer`](https://github.com/IjzerenHein/react-native-bundle-visualizer) 查看依赖关系：
 
-![Xnip2021-04-15_20-36-59](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-04-15_20-36-59.jpg)
+![Xnip2021-04-15_20-36-59](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-04-15_20-36-59.jpg)
 
 使用非常简单，按照文档安装分析就可。
 
@@ -276,7 +276,7 @@ const App = (props) => {
 
 实际编译后的代码其实长这个样子：
 
-![rn_start_inlineRequire](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rn_start_inlineRequire.jpg)
+![rn_start_inlineRequire](https://image-1255652541.file.myqcloud.com/uPic/rn_start_inlineRequire.jpg)
 
 上图红线中的 `r()` 函数，其实是 RN 自己封装的 `require()` 函数，可以看出 Metro 自动把顶层的 import 移动到使用的位置。
 
@@ -304,7 +304,7 @@ const App = (props) => {
 
 Metro 编译转换后的代码，对应的 import **还是处于函数顶层**：
 
-![rn_start_require](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rn_start_require.jpg)
+![rn_start_require](https://image-1255652541.file.myqcloud.com/uPic/rn_start_require.jpg)
 
 这个需要特别注意一下，社区也有相关的文章，呼吁大家不要用 `export default` 这个语法，感兴趣的可以了解一下：
 
@@ -453,9 +453,9 @@ npx react-native bundle --platform android --config metro.common.config.js --dev
 
 通过以上命令的打包，我们可以看到 moduleId 都转换为了相对路径，并且 `idList.txt` 也记录了所有的 moduleId：
 
-![common.android.bundle](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-04-15_22-20-28.jpg)
+![common.android.bundle](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-04-15_22-20-28.jpg)
 
-![idList.js](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-04-15_22-20-49.jpg)
+![idList.js](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-04-15_22-20-49.jpg)
 
 <br />
 
@@ -518,7 +518,7 @@ npx react-native bundle --platform android --config metro.business.config.js --d
 
 最后的打包结果只有 11 行（不分包的话得 398 行），可以看出分包的收益非常大。
 
-![business.android.bundle](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-04-15_22-34-24.jpg)
+![business.android.bundle](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-04-15_22-34-24.jpg)
 
 当然使用相对路径作为 moduleId 打包时，不可避免的会导致包体积变大，我们可以使用 md5 计算一下相对路径，然后取前几位作为最后的 moduleId；或者还是采用递增 id，只不过使用更复杂的映射算法来保证 moduleId 的唯一性和稳定性。这部分的内容其实属于非常经典的 **Map key 设计问题**，感兴趣的读者可以了解学习一下相关的算法理论知识。
 
@@ -573,7 +573,7 @@ catalyst.loadScriptFromFile(fileName, fileName, false);
 
 ## 3.Network
 
-![rn_start_network](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rn_start_network.jpg)
+![rn_start_network](https://image-1255652541.file.myqcloud.com/uPic/rn_start_network.jpg)
 
 我们一般会在 React Component 的 `componentDidMount()` 执行后请求网络，从服务器获取数据，然后再改变 Component 的 state 进行数据的渲染。
 
@@ -592,7 +592,7 @@ catalyst.loadScriptFromFile(fileName, fileName, false);
 
 ## 4.Render
 
-![rn_start_render](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rn_start_render.jpg)
+![rn_start_render](https://image-1255652541.file.myqcloud.com/uPic/rn_start_render.jpg)
 
 **渲染这里的耗时，基本上和首屏页面的 UI 复杂度成正相关**。可以通过渲染流程查看哪里会出现耗时：
 
@@ -611,7 +611,7 @@ import MessageQueue from 'react-native/Libraries/BatchedBridge/MessageQueue'
 MessageQueue.spy(true);
 ```
 
-![rn_start_MessageQueue](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rn_start_MessageQueue.jpg)
+![rn_start_MessageQueue](https://image-1255652541.file.myqcloud.com/uPic/rn_start_MessageQueue.jpg)
 
 从图片里可以看出 JS 加载完毕后有大量和 UI 相关的 `UIManager.createView()`  `UIManager.setChildren()` 通讯，结合上面的耗时总结，我们对应着就有几条解决方案：
 
@@ -655,7 +655,7 @@ Fabric 可以说是 RN 新架构里最让人期待的了，想了解更多内容
 个人微信：**egg_labs**
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
 </p>
 
 <br />

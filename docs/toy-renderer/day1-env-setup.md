@@ -25,19 +25,19 @@ keywords:
 
 1.Xcode 创建 `C++` 项目非常简单，启动 XCode 后点击 `Create a new Xcode project`，创建一个新项目
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-01-12_23-14-30.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-01-12_23-14-30.png)
 
 <br />
 
 2.在跳出的弹框里选择 `Command Line Tool`，然后点击 `Next`
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-01-12_23-15-18.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-01-12_23-15-18.png)
 
 <br />
 
 3.在新的弹窗里填写好 `Product Name`，`Language` 选择 `C++`，然后点击 `Next`
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-01-13_22-20-29.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-01-13_22-20-29.png)
 
 <br />
 
@@ -53,7 +53,7 @@ keywords:
 
 然后在弹窗里勾选 `Using custom working directory`，并选择项目文件所在路径就可：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-01-12_23-23-44.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-01-12_23-23-44.png)
 
 ### 3.把源代码拖进去
 
@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
 
 点击 Xcode 左上角三角形的 build 按钮，如果编译成功并在 `output` 这个文件夹下生成一张名为 `lesson00.tga` 的图片，就说明环境配置成功了！
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/reddot.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/reddot.png)
 
 <br />
 

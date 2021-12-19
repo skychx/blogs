@@ -109,7 +109,7 @@ void line(
 
 这个算法其实还有一点儿问题，就是绘制斜率大于 1 的直线时，绘制出的直线会**断掉**。比如说从 (0, 0) 点绘制到 (2, 4) 点，按照上面的算法只会绘制两个点，但是我们期望的是右图那样，起码各个像素要连接起来：
 
-![不连续的线 vs 连续的线](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/toyrenderer_day1_line.jpg)
+![不连续的线 vs 连续的线](https://image-1255652541.file.myqcloud.com/uPic/toyrenderer_day1_line.jpg)
 
 解决方法也很简单，绘制这种比较「陡峭」的直线时（斜率绝对值大于 1），以 y 的变化为基准，而不是以 x，这样就可以避免上面直线不连续情况。
 
@@ -147,7 +147,7 @@ void line(
 
 然后我们用这个算法测试一下不同起点不同斜率的直线，看效果运行良好：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-01-18_21-48-36.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-01-18_21-48-36.png)
 
 
 
@@ -191,7 +191,7 @@ void line(
 
 我们再把思路完善一下，把每次取舍时的误差考虑进去：
 
-![day2_Bresenham_line](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day2_Bresenham_line.jpg)
+![day2_Bresenham_line](https://image-1255652541.file.myqcloud.com/uPic/day2_Bresenham_line.jpg)
 
 如上图所示，实际上绘制的点的位置是 $(x, y)$，理论上点位置是 $(x,\ y + \epsilon)$。
 
@@ -315,7 +315,7 @@ void line(Screen &s,
 
 这样我们就实现了斜率在 $[0, 1]$ 区间的高效算法。也就是说，现在我们可以绘制 1/8 个象限的直线了。剩下范围的直线，可以通过交换  xy 等方式实现绘制。具体的实现都是些脏活累活，就不摆出来了，感兴趣的可以去 GitHub 上看代码的[完整实现](https://github.com/skychx/toyRenderer/blob/d31afbe91a140b95cef735776d13bca2dd7a5567/tinyrenderer/main.cpp#L20)。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/e2ZFEU.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/e2ZFEU.gif)
 
 
 
@@ -361,7 +361,7 @@ for (int i = 0; i < model->nfaces(); i++) {
 
 
 
-![toyrenderer_day02_obj](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/toyrenderer_day02_obj.jpg)
+![toyrenderer_day02_obj](https://image-1255652541.file.myqcloud.com/uPic/toyrenderer_day02_obj.jpg)
 
 
 

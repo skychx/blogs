@@ -4,7 +4,7 @@ title: 🔢【程序中的数学】利用德摩根定律简化布尔运算
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 今天说说德摩根定律在编程中的实践，题目看的很吓人，其实只要有一点点的高中数学知识就能看懂，而且这部分知识掌握后可以很快的运用到项目中，投资收益比非常高
 draft: false
 tags: [程序中的数学, 离散数学, 算法]
@@ -34,10 +34,10 @@ if(!((A && B) || C)) {
 
 看了这段代码，我人都傻了，从里向外一层一层梳理逻辑时，我的大脑活动是这样的：
 
-<!-- ![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/LRAxP8g.jpg) -->
+<!-- ![](https://image-1255652541.file.myqcloud.com/uPic/LRAxP8g.jpg) -->
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/LRAxP8g.jpg" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/LRAxP8g.jpg" width="40%" referrerpolicy="no-referrer" />
 </p>
 
 
@@ -128,7 +128,7 @@ $$
 
 我们也可以用 [Venn 图](https://en.wikipedia.org/wiki/Venn_diagrams)对 $\overline {A\cap B} = \overline {A} \cup \overline {B}$ 做个可视化验证：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/ABBA.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/ABBA.png)
 
 
 
@@ -187,10 +187,10 @@ $$
 也可以加我的微信 **egg_labs**，欢迎大家来撩。
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
 </p>
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/OAFePh.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/OAFePh.jpg)
 
 
 

@@ -36,7 +36,7 @@ keywords:
 
 我想大家这时候已经有思路了，就是**一行一行地扫描像素**，把两个边界点之间的像素全部涂满上色就可以了。
 
-![day03_scanLineDrawTriangle](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day03_scanLineDrawTriangle.jpg)
+![day03_scanLineDrawTriangle](https://image-1255652541.file.myqcloud.com/uPic/day03_scanLineDrawTriangle.jpg)
 
 这个方法肯定是可以的，但是实现不是很优雅，也不是业内的主流实现方式。因为基于行扫描的算法不是本文的重点，所以详细的推导和代码实现就不提供了，感兴趣的同学可以自己尝试实现一下。
 
@@ -55,7 +55,7 @@ keywords:
 
 既然叉乘产生的是一个新向量，那么它肯定有个方向，我们一般用右手定则来判断：将右手食指指向 $\mathbf {a}$ 的方向、中指指向 $\mathbf {b}$ 的方向，则此时拇指的方向即为 $\mathbf {a} \times \mathbf {b}$ 的方向。
 
-![Right_hand_rule_cross_product.svg](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Right_hand_rule_cross_product.svg.png)
+![Right_hand_rule_cross_product.svg](https://image-1255652541.file.myqcloud.com/uPic/Right_hand_rule_cross_product.svg.png)
 
 
 
@@ -81,7 +81,7 @@ $$
 
 例如下面这里例子，对于三角形 $\Delta ABC$ 来说，把三条边看作 $\overrightarrow{A B}$、 $\overrightarrow{B C}$、 $\overrightarrow{C A}$ 三条首尾相连的向量，平面内有一个点 $P$，我们通过向量叉乘来判断相对位置：
 
-![day03_cross_product](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day03_cross_product.jpg)
+![day03_cross_product](https://image-1255652541.file.myqcloud.com/uPic/day03_cross_product.jpg)
 
 - $\overrightarrow{A B} \times \overrightarrow{A P}$，值为**正**，故 $P$ 在 $AB$ **左侧**
 - $\overrightarrow{B C} \times \overrightarrow{B P}$，值为**正**，故 $P$ 在 $BC$ **左侧**
@@ -153,13 +153,13 @@ void drawSingleTriangle() {
 
 看输出图像，我们已经成功绘制了一个三角形：
 
-![day03_cross_product_triangle](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day03_cross_product_triangle.jpg)
+![day03_cross_product_triangle](https://image-1255652541.file.myqcloud.com/uPic/day03_cross_product_triangle.jpg)
 
 <br />
 
 > 触不及防的安利：大家可以看我头像关注🛰️号「卤蛋实验室」，后台回复「图形学」获取经典教材《虎书4》和《Real Time Rendering 4》
 
-![后台回复「图形学」领取经典教材](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rendering_book.jpg)
+![后台回复「图形学」领取经典教材](https://image-1255652541.file.myqcloud.com/uPic/rendering_book.jpg)
 
 
 ## 3.利用三角形重心坐标画三角形
@@ -282,7 +282,7 @@ Vec3f barycentric(Vec2i *pts, Vec2i P) {
 
 用上面的算法画个三角形验证一下，很完美：
 
-![day03_barycentric_triangle](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day03_barycentric_triangle.jpg)
+![day03_barycentric_triangle](https://image-1255652541.file.myqcloud.com/uPic/day03_barycentric_triangle.jpg)
 
 
 
@@ -308,7 +308,7 @@ triangle(screen_coords, frame, TGAColor(rand() % 255, rand() % 255, rand() % 255
 
 这个量级是很恐怖的，其中很多的运算都是不必要的，比如说下图，我们其实只要循环由三个顶点计算出的**红色包围盒里的像素**就可以了，不需要计算图片内的所有像素：
 
-![day03_bounding_box](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day03_bounding_box.jpg)
+![day03_bounding_box](https://image-1255652541.file.myqcloud.com/uPic/day03_bounding_box.jpg)
 
 <br />
 
@@ -339,7 +339,7 @@ for (int i = 0; i < 3; i++) {
 
 最后我们绘制出的结果就是这样的，看着还是有些酷炫的：
 
-![day03_rand_colors_model](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day03_rand_colors_model.jpg)
+![day03_rand_colors_model](https://image-1255652541.file.myqcloud.com/uPic/day03_rand_colors_model.jpg)
 
 
 
@@ -349,7 +349,7 @@ for (int i = 0; i < 3; i++) {
 
 我们在这里引入一个非常简单的光照模型，认为**单位面积上接收到的光，和平面法线与光照方向的余弦值成正比**：
 
-![day03_diffuse_reflection](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day03_diffuse_reflection.jpg)
+![day03_diffuse_reflection](https://image-1255652541.file.myqcloud.com/uPic/day03_diffuse_reflection.jpg)
 
 <br />
 
@@ -399,7 +399,7 @@ for (int i = 0; i < model->nfaces(); i++) {
 
 最后生成的图片就是这样的：
 
-![day03_light_model](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day03_light_model.jpg)
+![day03_light_model](https://image-1255652541.file.myqcloud.com/uPic/day03_light_model.jpg)
 
 <br />
 

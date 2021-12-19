@@ -4,7 +4,7 @@ title: 📦 辛辛苦苦学会的 webpack dll 配置，可能已经过时了
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 如果大家看过一些 webpack4 优化的文章，一定会出现 dll 动态链接库。它以配置之复杂让众多初学者记忆犹新。今天我会以一个学习者的角度去一步一步探讨 webpack dll 的配置，最后得出一个完美的解决方案。
 draft: false
 tags: [webpack, '前端工程化']
@@ -245,7 +245,7 @@ module.exports = {
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20190924233946.png)
+![](https://image-1255652541.file.myqcloud.com/images/20190924233946.png)
 
 > 白纸黑字，remove DLL option 3 个大字写的清清楚楚
 
@@ -255,7 +255,7 @@ module.exports = {
 
 原因是什么呢？在这个 [issue](https://github.com/vuejs/vue-cli/issues/1205) 里尤雨溪解释了去除的原因：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20190924233941.png)
+![](https://image-1255652541.file.myqcloud.com/images/20190924233941.png)
 
 
 
@@ -269,7 +269,7 @@ module.exports = {
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20190924233947.png)
+![](https://image-1255652541.file.myqcloud.com/images/20190924233947.png)
 
 
 
@@ -304,19 +304,19 @@ module.exports = {
 
 这个插件加速有多明显呢？我拿本文的试例代码测试了一下，下图是常规的打包时间，大概 900 ms：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20190924233943.png)
+![](https://image-1255652541.file.myqcloud.com/images/20190924233943.png)
 
 
 
 加入 dll 优化后，打包时间为 507 ms，缩短了 400 ms 左右：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20190924233944.png)
+![](https://image-1255652541.file.myqcloud.com/images/20190924233944.png)
 
 
 
 只使用 HardSourceWebpackPlugin，再次打包时间缩短到 253 ms：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20190924233942.png)
+![](https://image-1255652541.file.myqcloud.com/images/20190924233942.png)
 
 
 
@@ -324,7 +324,7 @@ module.exports = {
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/Xnip2019-09-22_23-46-29.png)
+![](https://image-1255652541.file.myqcloud.com/images/Xnip2019-09-22_23-46-29.png)
 
 
 

@@ -4,13 +4,13 @@ title: 🤔 移动端 JS 引擎哪家强？美国硅谷找......
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 🤔 移动端 JS 引擎哪家强？美国硅谷找......
 draft: false
 tags: [跨端开发, 虚拟机, React Native]
 ---
 
-![mobile_JSVM_Header](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/mobile_JSVM_Header.jpg)
+![mobile_JSVM_Header](https://image-1255652541.file.myqcloud.com/uPic/mobile_JSVM_Header.jpg)
 
 
 
@@ -43,7 +43,7 @@ JavaScript 作为世界上最热门的脚本语言，有着非常多的引擎实
 
 ### 1.JavaScriptCore
 
-![mobile_JSVM_JSC](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/mobile_JSVM_JSC.jpg)
+![mobile_JSVM_JSC](https://image-1255652541.file.myqcloud.com/uPic/mobile_JSVM_JSC.jpg)
 
 <br />
 
@@ -81,7 +81,7 @@ Apple 出于安全上的考虑，禁止了第三方 APP 使用 JSC 时开启 JIT
 
 ### 2.V8
 
-![mobile_JSVM_V8](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/mobile_JSVM_V8.jpg)
+![mobile_JSVM_V8](https://image-1255652541.file.myqcloud.com/uPic/mobile_JSVM_V8.jpg)
 
 <br />
 
@@ -101,7 +101,7 @@ V8 还有一个有意思的特性很少人提及，那就是——**堆快照（
 
 堆快照是什么原理呢？一般来说 JSVM 启动后，第一步往往是解析 JS 文件，这个还是比较耗时的，V8 支持预先生成 Heap snapshots，然后直接加载到堆内存中，快速的获得 JS 的初始化上下文。跨平台框架 [NativeScript](https://nativescript.org/) 就利用了这样的技术，可以让 JS 的加载速度提升 3 倍，技术细节可以看他们的[博文](https://nativescript.org/blog/improving-app-startup-time-on-android-with-webpack-v8-heap-snapshot/)。
 
-![V8_heap_snapshots](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/V8_heap_snapshots.jpg)
+![V8_heap_snapshots](https://image-1255652541.file.myqcloud.com/uPic/V8_heap_snapshots.jpg)
 
 
 
@@ -119,7 +119,7 @@ V8 **真机调试**也需要引入第三方库，Android 端社区上有人对 J
 
 ### 3.Hermes
 
-![mobile_JSVM_hermes](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/mobile_JSVM_hermes.jpg)
+![mobile_JSVM_hermes](https://image-1255652541.file.myqcloud.com/uPic/mobile_JSVM_hermes.jpg)
 
 <br />
 
@@ -141,7 +141,7 @@ Hermes 不支持 JIT 的主要原因有两个：加入 JIT 后，JS 引擎启动
 
 Hermes 最引人瞩目的就是支持生成字节码了，我在之前的博文[《🎯 跨端框架的核心技术到底是什么？》](https://supercodepower.com/cross-platform-tech#4react-native%EF%BC%9Ajs-engine--native-renderpipeline)也提到过，Hermes 加入 AOT 后，`Babel`、`Minify`、`Parse` 和 `Compile` 这些流程全部都在开发者电脑上完成，直接下发字节码让 Hermes 运行就行，我们直接用个 demo 演示一下。
 
-![Hermes](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Hermes.gif)
+![Hermes](https://image-1255652541.file.myqcloud.com/uPic/Hermes.gif)
 
 先写个 `test.js` 的文件，里面随便写点啥都行；然后编译一下 Hermes 的源码，编译过程直接按[文档](https://github.com/facebook/hermes/blob/master/doc/BuildingAndRunning.md)来就行，我这里就略过了。
 
@@ -159,7 +159,7 @@ hermes -emit-binary -out test.hbc test.js
 
 然后就会生成一份 `test.hbc` 字节码文件：
 
-![hermes_bytecode](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/hermes_bytecode.jpg)
+![hermes_bytecode](https://image-1255652541.file.myqcloud.com/uPic/hermes_bytecode.jpg)
 
 最后我们可以让 Hermes 直接加载运行 `test.hbc` 文件：
 
@@ -179,11 +179,11 @@ hermes test.hbc
 
 关于详细的 Hermes **性能测试**情况，网上有两篇文章写的比较好：一篇是 [React Native Memory profiling: JSC vs V8 vs Hermes](https://dev.to/anotherjsguy/react-native-memory-profiling-jsc-vs-v8-vs-hermes-1c76)，可以看到在 Android 设备上 Hermes 的表现还是很优异的，而 JSC 的表现非常拉垮：
 
-![JSCvsV8vsHermes](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/JSCvsV8vsHermes.png)
+![JSCvsV8vsHermes](https://image-1255652541.file.myqcloud.com/uPic/JSCvsV8vsHermes.png)
 
 另一篇是携程的文章：[携程对 RN 新一代 JS 引擎 Hermes 的调研](https://mp.weixin.qq.com/s/BOeuLoZjCdi61P_MhaJT0g)，可以看出 Hermes 综合成绩最高（JSC 还是一样的拉垮）：
 
-![JSVM_CPU_Performance](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/JSVM_CPU_Performance.png)
+![JSVM_CPU_Performance](https://image-1255652541.file.myqcloud.com/uPic/JSVM_CPU_Performance.png)
 
 <br />
 
@@ -203,7 +203,7 @@ hermes test.hbc
 
 ### 4.QuickJS
 
-![mobile_JSVM_quickjs](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/mobile_JSVM_quickjs.jpg)
+![mobile_JSVM_quickjs](https://image-1255652541.file.myqcloud.com/uPic/mobile_JSVM_quickjs.jpg)
 
 <br />
 
@@ -227,13 +227,13 @@ hermes test.hbc
 
 QuickJS **体积非常小**，只有几个 C 文件，没有乱七八糟的第三方依赖。但是他的功能又非常完善，**JS 语法支持**到 [ES2020](https://tc39.es/ecma262/)，[Test262](https://test262.report/browse/?date=2020-12-16) 的测试显示，QuickJS 的语法支持度比 V8 还要高。
 
-![test262](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/test262.jpg)
+![test262](https://image-1255652541.file.myqcloud.com/uPic/test262.jpg)
 
 <br />
 
 那么 QuickJS 的**性能**如何呢？QuickJS 官上有个[基准测试](https://bellard.org/quickjs/bench.html)，综合比较了多款 JS 引擎对同一测试用例的跑分情况。下面是测试结果：
 
-![JSVM_Benchmark](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/JSVM_%20Benchmark.jpg)
+![JSVM_Benchmark](https://image-1255652541.file.myqcloud.com/uPic/JSVM_%20Benchmark.jpg)
 
 结合上面的表格和个人的一些测试，可以简单的得出一些结论：
 
@@ -365,7 +365,7 @@ int main(int argc, char **argv)
 个人微信：**egg_labs**
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
 </p>
 
 <br />

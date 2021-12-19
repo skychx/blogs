@@ -4,7 +4,7 @@ title: 📎 从回形针的互动视频谈谈交互教程的发展
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 从回形针互动视频展开，谈谈交互教程的发展
 draft: false
 tags: [可视化, 交互]
@@ -20,7 +20,7 @@ tags: [可视化, 交互]
 
 
 
-![基本操作——识别数字](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/jbcz.gif)
+![基本操作——识别数字](https://image-1255652541.file.myqcloud.com/uPic/jbcz.gif)
 
 
 
@@ -52,7 +52,7 @@ tags: [可视化, 交互]
 
 比如说十几年前 Flash 是网页实现交互的主流方案，互动教程也是基于 Flash 实现的。比如说斯坦福大学的[这个网页](http://graphics.stanford.edu/courses/cs178-10/applets/gaussian.html)，可以通过 Flash 的实时交互学习**透镜公式**：
 
-![gaussian](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/gaussian.gif)
+![gaussian](https://image-1255652541.file.myqcloud.com/uPic/gaussian.gif)
 
 
 
@@ -62,25 +62,25 @@ tags: [可视化, 交互]
 
 比如说线性代数教程 [immersive linear algebra](http://immersivemath.com/ila/index.html) 就用了 **canvas** 技术实现交互操作：
 
-![immersive linear algebra](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/linear.gif)
+![immersive linear algebra](https://image-1255652541.file.myqcloud.com/uPic/linear.gif)
 
 
 
 **SVG** 相关的互动教程也有一些，比如 [NN-SVG](http://alexlenail.me/NN-SVG/index.html) 这个项目就利用 SVG 实现了 FCNN 的可视化：
 
-![FCNN](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/FCNN.gif)
+![FCNN](https://image-1255652541.file.myqcloud.com/uPic/FCNN.gif)
 
 
 
 **WebGL** 的交互教学视频也有一些，比如你想学 shaders 怎么写，完全可以借助 [the book of shaders](https://thebookofshaders.com/) 这个互动教程网站，直接修改案例源码，实时反馈自己的学习成果：
 
-![shaders](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/shaders.gif)
+![shaders](https://image-1255652541.file.myqcloud.com/uPic/shaders.gif)
 
 
 
 我在 2018 年看过一个基于 WebGL 实现手写数字识别的交互教程——[TensorSpace LeNet](https://tensorspace.org/html/playground/lenet_zh.html)，当时的感觉就非常惊艳，我想回形针的这个体验课对这个教程也有一些借鉴：
 
-![TensorSpace](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/TensorSpace.gif)
+![TensorSpace](https://image-1255652541.file.myqcloud.com/uPic/TensorSpace.gif)
 
 
 
@@ -121,11 +121,11 @@ tags: [可视化, 交互]
 也可以加我的微信 **egg_labs**，欢迎大家来撩。
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
 </p>
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/OAFePh.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/OAFePh.jpg)
 
 
 

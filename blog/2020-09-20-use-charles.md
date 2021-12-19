@@ -4,13 +4,13 @@ title: 🍶 为什么你的 Charles 会抓包失败？
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 本文是我深度使用 Charles 后总结而成，不同于其它介绍 Charles 的文章，这篇文章不会详细介绍 Charles 的各个功能，而是专注于分析一个问题：什么情况下 Charles 会抓包失败？
 draft: false
 tags: [HTTP, '计算机网络', '网络安全', '工具']
 ---
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cover.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/cover.jpg)
 
 作为一名 Web 开发工程师，天天都会和网络打交道。Charles 作为一款网络抓包工具，几乎成了 Web 开发的标配。
 
@@ -31,13 +31,13 @@ tags: [HTTP, '计算机网络', '网络安全', '工具']
 
 上面的定义写的很清晰，我结合 Charles 画了一个图，结合箭头方向就能看懂 HTTP Packets 的流向：
 
-![MITM](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MITM.jpg)
+![MITM](https://image-1255652541.file.myqcloud.com/uPic/MITM.jpg)
 
 
 
 只看理论有些干，我们可以用个实例看一下 Charles 内部的工作情况。我在电脑浏览器上访问 `cdn.staticfile.org` 的一个 HTTP 资源，具体的网络报文我用 Wireshark 抓了一下：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/CharlesProxy.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/CharlesProxy.jpg)
 
 
 
@@ -65,7 +65,7 @@ tags: [HTTP, '计算机网络', '网络安全', '工具']
 
 开始配置前我们先回顾一下基础的网络知识，网络数据如果想从 A 传输到 B，想确定一个连接就必须确定 5 个关键信息：`源 IP 地址`，`源端口`，`传输层协议`，`目的 IP 地址`和`目的端口`。这 5 个关键信息又叫`五元组`，一个五元组就可以确定一个连接。
 
-![五元组](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/five.jpg)
+![五元组](https://image-1255652541.file.myqcloud.com/uPic/five.jpg)
 
 如果用 Charles 抓包，我们就要对照分析一下 Client 和 MITM Server 间代理链接的五元组：
 
@@ -85,13 +85,13 @@ tags: [HTTP, '计算机网络', '网络安全', '工具']
 
 我们先分析一下**目的 IP 地址**。因为 Charles 安装在电脑上，所以 Charles 的 IP 就是电脑的 IP。如果你是 Mac 电脑，可以按住 `option` 键再用鼠标点击菜单栏的 Wi-Fi 图标，得到电脑 IP 地址。也可以访问 **系统偏好设置 -> 网络** 得到 IP 地址。这里我的 IP 地址是 `192.168.31.44`，后面会用到。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/localIP.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/localIP.jpg)
 
 
 
 Charles 的代理端口号可以从 **Charles -> Proxy -> Proxy Setttings** 进行查看和更改。端口默认是 `8888`，一般不建议修改。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/ProxyPort.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/ProxyPort.jpg)
 
 
 
@@ -107,7 +107,7 @@ Charles 的代理端口号可以从 **Charles -> Proxy -> Proxy Setttings** 进�
 
 因为本机代理默认是关闭的，我们也可以在 `Proxy Setttings` 中点击 `macOS`，勾选 `Enable macOS proxy on lounch`，这样每次打开 Charles 就会默认打开代理了。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/OpenCharlesProxy.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/OpenCharlesProxy.jpg)
 
 
 
@@ -117,7 +117,7 @@ Charles 的代理端口号可以从 **Charles -> Proxy -> Proxy Setttings** 进�
 
 配置前我们要保证手机和电脑在同一个局域网里（一般手机电脑连同一个 Wi-Fi 就行），然后打开 iOS 的 **设置 -> 无线局域网**，进入已连接的 Wi-Fi 的设置页面，滑动到最底部选择配置代理，然后手动配置代理。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/iOSOpenProxy.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/iOSOpenProxy.jpg)
 
 **服务器**要输入的就是前面得到的 Charles IP 地址，案例里是 `192.168.31.44`；**端口**是前面的 Charles 代理端口，一般为 `8888`。
 
@@ -127,7 +127,7 @@ Charles 的代理端口号可以从 **Charles -> Proxy -> Proxy Setttings** 进�
 
 Android 的代理配置其实和 iOS 差不多，但是 Android 厂家众多，操作步骤不像 iOS 那么统一，一一覆盖也没有太大的意义，所以我只做个简单的步骤演示：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/AndroidOpenProxy.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/AndroidOpenProxy.jpg)
 
 
 
@@ -135,7 +135,7 @@ Android 的代理配置其实和 iOS 差不多，但是 Android 厂家众多，�
 
 HTTPS 本质上就是 HTTP 协议 + TLS 协议，从建立连接的角度看，主要是在 TCP 三次握手之后又加入了四次 TLS 握手，如下图所示，TLS 握手过程中会校验加密用的公钥证书，所以我们就要手动安装并信任 Charles 的证书，以达到抓取 HTTPS Packets 的目的。
 
-![TLS 1.2](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/TLS12.jpg)
+![TLS 1.2](https://image-1255652541.file.myqcloud.com/uPic/TLS12.jpg)
 
 
 
@@ -150,7 +150,7 @@ TLS 的加入，加强了网络的安全性的同时，也增加了抓包的复�
 
 电脑端安装证书是最简单的。首先点击 **Charles -> Help -> SSL Proxying -> Install Charles Root Certificate** 在电脑端安装证书，然后点击刚刚安装的证书，手动信任全部权限，最后输入密码保存修改就可。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MacInstallCA.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/MacInstallCA.jpg)
 
 
 
@@ -158,11 +158,11 @@ TLS 的加入，加强了网络的安全性的同时，也增加了抓包的复�
 
 iOS 安装证书相对来说复杂一些。首先点击 **Charles -> Help -> SSL Proxying -> Install Charles Root Certificate on a Mobile Derive**，这时候会跳出一个弹窗，然后我们根据提示在手机端访问 `chls.pro/ssl`，下载安装 Charles CA 证书。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/iOSInstallCA.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/iOSInstallCA.jpg)
 
 安装好后还要手动开启权限。先要到 **通用 -> 描述文件与设备管理 -> 信任** 里安装刚刚下载的证书，然后到 **通用 -> 关于本机 -> 证书信任设置 -> 针对根证书启用完全信任** 里手动信任证书，这两个同意后 iOS 就安装证书成功了。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/iOSTrustCA.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/iOSTrustCA.jpg)
 
 
 
@@ -194,7 +194,7 @@ Android 系统对二进制格式的证书兼容性更好一些，所以我们选
 
 解决这个问题也很简单，**Charles 抓包前，把电脑和手机的辅助工具都关掉**，这样就不会有代理冲突的问题了。我们可以查看电脑的 Wi-Fi 代理界面，开启 Charles 抓包前要保证下面的选项都没被勾选就好了。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MacProxySetting.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/MacProxySetting.jpg)
 
 肯定也有人想过我们本地挂两个代理，报文先经过工具，然后经过 Charles 抓包，最后传输到客户端。首先这种方案是可行的，但是实际用下来会非常的卡，延迟也很高，所以并不建议这样使用。
 
@@ -245,7 +245,7 @@ Android 系统对二进制格式的证书兼容性更好一些，所以我们选
 
 其实 Charles 有一个很不起眼的功能，那就是它的 UI 界面**右下角会展示 Charles 正在开启的功能**，如果你怀疑你的 Charles 哪里做了接口限制，你就扫一眼右下角开启的功能，然后依次检查就可。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/charlesRightBottom.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/charlesRightBottom.jpg)
 
 
 
@@ -255,7 +255,7 @@ Android 系统对二进制格式的证书兼容性更好一些，所以我们选
 
 我们先看一张图，这个是 Android 的证书信任页面：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/AndroidCA.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/AndroidCA.jpg)
 
 从上图可以看出，Android 系统把证书信任分为两大块：
 
@@ -344,7 +344,7 @@ Charles 导入公钥证书和私钥比较简单，点击 **Charles -> Proxy -> S
 `.p12` 是一种文件格式，同时包含证书和密钥
 :::
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/TLSPinning.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/TLSPinning.jpg)
 
 
 ### 6.证书双向验证
@@ -355,7 +355,7 @@ Charles 导入公钥证书和私钥比较简单，点击 **Charles -> Proxy -> S
 
 我不是安全专家对这个研究的不深，平常工作也没遇到这么刁难的问题。从功能面板看，Charles 应该也支持这种极限场景的抓包，但是个人没有具体实践过，大家可以尝试一下。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/TLSDouble.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/TLSDouble.jpg)
 
 
 

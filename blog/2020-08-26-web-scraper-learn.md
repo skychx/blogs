@@ -4,13 +4,13 @@ title: 🕷️ Web Scraper——轻量数据爬取利器
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: Web Scraper 的优点就是对新手友好，在最初抓取数据时，把底层的编程知识和网页知识都屏蔽了，可以非常快的入门，只需要鼠标点选几下，几分钟就可以搭建一个自定义的爬虫。
 draft: false
 tags: [爬虫, 'web scraper']
 ---
 
-![image-20200517183119381](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200517183119381.png)
+![image-20200517183119381](https://image-1255652541.file.myqcloud.com/uPic/image-20200517183119381.png)
 
 <!--truncate-->
 
@@ -21,7 +21,7 @@ tags: [爬虫, 'web scraper']
 
 
 
-![图片 1](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/图片%201.png)
+![图片 1](https://image-1255652541.file.myqcloud.com/uPic/图片%201.png)
 
 
 
@@ -39,7 +39,7 @@ tags: [爬虫, 'web scraper']
 
 
 
-![image-20200517155544485](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200517155544485.png)
+![image-20200517155544485](https://image-1255652541.file.myqcloud.com/uPic/image-20200517155544485.png)
 
 
 
@@ -71,7 +71,7 @@ Web Scraper 作为一个 Chrome 插件，网络条件良好的用户可以直接
 
 
 
-![image-20200517171919628](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200517171919628.png)
+![image-20200517171919628](https://image-1255652541.file.myqcloud.com/uPic/image-20200517171919628.png)
 
 
 
@@ -109,7 +109,7 @@ Web Scraper 作为一个 Chrome 插件，网络条件良好的用户可以直接
 
 
 
-![taobao_filter](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/taobao_filter.png)
+![taobao_filter](https://image-1255652541.file.myqcloud.com/uPic/taobao_filter.png)
 
 
 
@@ -127,7 +127,7 @@ Web Scraper 作为一个 Chrome 插件，网络条件良好的用户可以直接
 
 
 
-![image-20200517172111386](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200517172111386.png)
+![image-20200517172111386](https://image-1255652541.file.myqcloud.com/uPic/image-20200517172111386.png)
 
 
 
@@ -135,7 +135,7 @@ Web Scraper 作为一个 Chrome 插件，网络条件良好的用户可以直接
 
 
 
-![img](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20190804162826.gif)
+![img](https://image-1255652541.file.myqcloud.com/images/20190804162826.gif)
 
 
 
@@ -151,7 +151,7 @@ Web Scraper 有一个选择器类型叫 `Element scroll down`，意如其名，�
 
 
 
-![img](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/Xnip2019-09-15_23-43-29.jpg)
+![img](https://image-1255652541.file.myqcloud.com/images/Xnip2019-09-15_23-43-29.jpg)
 
 
 
@@ -187,7 +187,7 @@ Web Scraper 也可以爬取这种类型的网页。相关的教程可见： [Web
 
 
 
-![image-20200517172451885](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200517172451885.png)
+![image-20200517172451885](https://image-1255652541.file.myqcloud.com/uPic/image-20200517172451885.png)
 
 
 
@@ -203,7 +203,7 @@ Web Scraper 也可以爬取这种类型的网页。相关的教程可见： [Web
 
 
 
-![image-20200517172540422](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200517172540422.png)
+![image-20200517172540422](https://image-1255652541.file.myqcloud.com/uPic/image-20200517172540422.png)
 
 
 
@@ -215,7 +215,7 @@ Web Scraper 也可以爬取这种类型的网页。相关的教程可见： [Web
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/carbon%20%283%29.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/carbon%20%283%29.png)
 
 
 
@@ -233,7 +233,7 @@ SItemap 是个什么东西？其实它就是我们操作 Web Scraper 后生成�
 
 
 
-![image-20200517174401847](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200517174401847.png)
+![image-20200517174401847](https://image-1255652541.file.myqcloud.com/uPic/image-20200517174401847.png)
 
 
 
@@ -284,7 +284,7 @@ Web Scraper 支持 **CouchDB** 数据库，配置成功后导出的数据就是�
 
 因为文章发在各大平台上，账号较多不能及时回复评论和私信，有问题可关注公众号 ——「卤蛋实验室」，关注上车防失联。
 
-![img](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20190709220018.png)
+![img](https://image-1255652541.file.myqcloud.com/images/20190709220018.png)
 
 
 

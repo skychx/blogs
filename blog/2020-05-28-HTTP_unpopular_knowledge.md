@@ -4,7 +4,7 @@ title: 🌐 HTTP 规范中的那些暗坑
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 虽然有诸多的优点，但是在协议定义时因为诸多的博弈和限制，还是隐藏了不少暗坑，让人一不小心就会陷入其中。本文总结了 HTTP 规范中常见的几个暗坑，希望大家开发中有意识的规避它们，提升开发体验。1.Referer 2.HTTP 请求中，空格应该被编码为 %20 还是 + ？3.X-Forwarded-For 拿到的就是真实 IP 吗？大部分 HTTP 字段的 value 分隔符是逗号「,」，Cookie 不属于 HTTP 标准，分隔符是分号「;」
 draft: false
 tags: [HTTP, '计算机网络']
@@ -62,7 +62,7 @@ fetch('/page', {
 
 开始讲解前先看个小测试，在浏览器里输入 `blank test`（ `blank` 和 `test` 间有个空格），我们看看浏览器如何处理的：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/spacetest.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/spacetest.gif)
 
 从动图可以看出浏览器把空格解析为一个加号「+」。
 
@@ -76,7 +76,7 @@ new URLSearchParams("q=blank test").toString() // "q=blank+test"
 
 
 
-![image-20200524184735653](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200524184735653.png)
+![image-20200524184735653](https://image-1255652541.file.myqcloud.com/uPic/image-20200524184735653.png)
 
 
 
@@ -95,7 +95,7 @@ URI 的编码规则也很简单，先把非限定范围的字符转为 16 进制
 
 空格这种不安全字符转为十六进制就是 0x20，前面再加上百分号 `%` 就是 `%20`：
 
-![image-20200524184601512](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200524184601512.png)
+![image-20200524184601512](https://image-1255652541.file.myqcloud.com/uPic/image-20200524184601512.png)
 
 所以这时候再看 `encodeURIComponent` 和 `encodeURI` 的编码结果，就是完全正确的。
 
@@ -105,13 +105,13 @@ URI 的编码规则也很简单，先把非限定范围的字符转为 16 进制
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/form.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/form.png)
 
 
 
 经过测试我们可以看出**表单提交的内容中，空格都是转为加号的**，这种编码类型就是 `application/x-www-form-urlencoded`，在 [WHATWG 规范](https://url.spec.whatwg.org/#urlencoded-serializing)里是这样定义的：
 
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200524185912590.png" width="50%" height="50%" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/image-20200524185912590.png" width="50%" height="50%" />
 
 <br />
 
@@ -177,7 +177,7 @@ replace = {
 
 
 
-![image-20200524154345598](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200524154345598.png)
+![image-20200524154345598](https://image-1255652541.file.myqcloud.com/uPic/image-20200524154345598.png)
 
 
 
@@ -313,7 +313,7 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
 
 **多个 cookie 之间是用分号「;」分隔的**，而不是逗号「,」。我随便扒了个网站的 cookie，可见是用分号分隔的，这里需要特别注意一下：
 
-![image-20200524175111667](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200524175111667.png)
+![image-20200524175111667](https://image-1255652541.file.myqcloud.com/uPic/image-20200524175111667.png)
 
 
 

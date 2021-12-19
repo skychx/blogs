@@ -23,7 +23,7 @@ keywords:
 
 在正式讲解 Z-buffering 问题之前，我们先来了解一下[画家算法](https://www.wikiwand.com/en/Painter%27s_algorithm)。这个算法的思想极其简单，我们可以结合下图简单分析一下：
 
-![day04_Painter's_algorithm](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day04_Painter's_algorithm.png)
+![day04_Painter's_algorithm](https://image-1255652541.file.myqcloud.com/uPic/day04_Painter's_algorithm.png)
 
 如果要画一个有山有草有树林的风景画，一个初学者画家可以按以下绘制顺序画画：
 
@@ -47,7 +47,7 @@ keywords:
 
 举个最简单的例子，下图中三个互相交错的三角形，**只**使用 `z-index` 是无法区分层级的，更不要说绘制了：
 
-![day04_three_triangles](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day04_three_triangles.png)
+![day04_three_triangles](https://image-1255652541.file.myqcloud.com/uPic/day04_three_triangles.png)
 
 > 注：[Newell 算法](https://www.wikiwand.com/en/Newell%27s_algorithm)可以解决多边形重叠导致排序困难的问题，感兴趣的同学可以自行查阅学习
 
@@ -60,7 +60,7 @@ keywords:
 
 Z-buffering 算法理解起来其实是非常直观的，我们这里借用《虎书 4》里的一张插图（可以关注🛰️号「卤蛋实验室」后台回复「图形学」领取本书）来讲解一下 Z-buffering 的工作原理。
 
-![day04_Z-buffering](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day04_z-buffer.jpg)
+![day04_Z-buffering](https://image-1255652541.file.myqcloud.com/uPic/day04_z-buffer.jpg)
 
 首先我们假设要在一个 `8*8` 的屏幕上渲染两个互相遮挡的三角形，我们在正式渲染前先开辟一块儿 `8*8` 的二维内存空间，这个空间的默认值均为 `-∞`。
 
@@ -146,12 +146,12 @@ for (P.x = boxmin.x; P.x <= boxmax.x; P.x++) {
 
 加入 Z-buffering 计算后，我们渲染的模型就完全正常了：
 
-![day04_model](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day04_model.jpg)
+![day04_model](https://image-1255652541.file.myqcloud.com/uPic/day04_model.jpg)
 
 
 相应的，如果把 Z-buffering 渲染为一张图，则是下面这样的：
 
-![day04_model_Z-buffering](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/day04_model_z-buffer.png)
+![day04_model_Z-buffering](https://image-1255652541.file.myqcloud.com/uPic/day04_model_z-buffer.png)
 
 <br />
 

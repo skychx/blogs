@@ -4,13 +4,13 @@ title: 🌐 15 张精美动图全面讲解 CORS
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 15 张精美动图全面讲解 CORS
 draft: false
 tags: [HTTP, '计算机网络', '网络安全']
 ---
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200802144736235.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/image-20200802144736235.png)
 
 本文翻译自 [Lydia Hallie](https://dev.to/lydiahallie) 小姐姐写的 [✋🏼🔥 CS Visualized: CORS](https://dev.to/lydiahallie/cs-visualized-cors-5b8h?utm_campaign=React%2BNative%2BNow&utm_medium=web&utm_source=React_Native_Now_69#cs-cors)，她用了大量的动图去解释 CORS 这个概念，国内还没有人翻译本文，所以我在原文的理解上翻译并修改了一些错误，希望能帮到大家。
 
@@ -29,7 +29,7 @@ tags: [HTTP, '计算机网络', '网络安全']
 
 假设我们正在访问 `https://api.mywebsite.com` 这个站点，点击按钮向  `https://api.mywebsite.com/users` 发送请求，获取网站上的一些用户信息：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/qyeikeonofi8dfl0jz2t.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/qyeikeonofi8dfl0jz2t.gif)
 
 
 :::caution 错误提示
@@ -42,7 +42,7 @@ tags: [HTTP, '计算机网络', '网络安全']
 
 下面我们换一个网站试试。用  `https://www.anotherwebsite.com` 这个网站向 `https://api.website.com/users` 发送请求：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/lxhuh29biuwhefs3k9d9.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/lxhuh29biuwhefs3k9d9.gif)
 
 问题来了，我们请求同样的接口网站，但是这次浏览器给我们抛出一个 Error。
 
@@ -58,7 +58,7 @@ tags: [HTTP, '计算机网络', '网络安全']
 
 比如说， `https://www.mywebsite.com` 请求  `https://www.mywebsite.com/page` 是完全没有问题的。但是当资源位于不同**协议**、**子域**或**端口**的站点时，这个请求就是跨域的。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/ibyoyo1yqta9cdvh0tbv.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/ibyoyo1yqta9cdvh0tbv.png)
 
 目前来看，同源策略会让三种行为受限：
 
@@ -74,13 +74,13 @@ tags: [HTTP, '计算机网络', '网络安全']
 
 登陆成功后，这个钓鱼网站还可以控制 iframe 的 DOM，通过一系列骚操作把你卡里的钱转走。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/50nmgrnkf6pb6gphno06.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/50nmgrnkf6pb6gphno06.gif)
 
 这是一个非常严重的安全漏洞，我们不希望自己在互联网的内容被随便访问，更不要说这种涉及到钱的网站了。
 
 同源策略可以帮助我们解决这个安全问题，这个策略确保我们只能访问同一站点的资源。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/8unei9l9enunbpr58o54.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/8unei9l9enunbpr58o54.gif)
 
 在这种情况下，`https://www.evilwebsite.com` 尝试跨站访问 `https://www.bank.com` 的资源，同源策略就会阻止这个操作，让钓鱼网站无法访问银行网站的数据。
 
@@ -94,7 +94,7 @@ tags: [HTTP, '计算机网络', '网络安全']
 
 出于安全原因，浏览器限制**从脚本内发起**的跨域 HTTP 请求。 例如 XHR 和 Fetch 就遵循同源策略。这意味着使用 API 的 Web 应用程序只能从加载应用程序的同一个域请求 HTTP 资源。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/0qe4yzasvrm7r0a76kui.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/0qe4yzasvrm7r0a76kui.gif)
 
 日常的业务开发中，我们会经常访问跨域资源，为了安全的请求跨域资源，浏览器使用一种称为 CORS 的机制。
 
@@ -111,7 +111,7 @@ GET https://api.website.com/users HTTP/1/1
 Origin: https://www.mywebsite.com // <- 浏览器自己加的
 ```
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/91qh9mo3q5lcl0ng4t0r.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/91qh9mo3q5lcl0ng4t0r.gif)
 
 
 
@@ -127,7 +127,7 @@ Origin: https://www.mywebsite.com // <- 浏览器自己加的
 
 1️⃣ 如果我们有服务器的开发权限，我们可以给 `https://www.mywebsite.com` 加上访问权限：将该域添加到 `Access-Control-Allow-Origin` 中。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/bpw6vwe6w5tm3cadqg7j.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/bpw6vwe6w5tm3cadqg7j.gif)
 
 这个响应头字段现在被添加到服务器发回给客户端的 response header 中。这个字段添加后，如果我们从 `https://www.mywebsite.com` 发送跨域请求，同源策略将不再限制 `https://api.mywebsite.com` 站点返回的资源。
 
@@ -142,7 +142,7 @@ Server: Apache
 {user: [{...}]}
 ```
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/akf0epavr00o2vo857lc.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/akf0epavr00o2vo857lc.gif)
 
 
 
@@ -150,7 +150,7 @@ Server: Apache
 
 在这个例子中，request 的 `Origin` 是 `https://www.mywebsite.com`，这和 response 中 `Access-Control-Allow-Origin` 的值是一样的：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/foathske6a5prjf02dyf.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/foathske6a5prjf02dyf.gif)
 
 3️⃣ 浏览器校验通过，前端成功地接收到跨域资源。
 
@@ -158,7 +158,7 @@ Server: Apache
 
 那么，当我们试图从一个没有在 `Access-Control-Allow-Origin` 中列出的网站跨域访问这些资源会发生什么呢？
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/lqtoobekf1h1d08lcl56.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/lqtoobekf1h1d08lcl56.gif)
 
 如上图所示，从 `https://www.anotherwebsite.com` 跨域访问 `https://api.mywebsite.com` 资源，浏览器抛出一个 CORS Error，经过上面的讲解，我们可以读懂这个报错信息了：
 
@@ -178,7 +178,7 @@ to the supplied origin.
 
 另一个常见的响应头字段是 `Access-Control-Allow-Methods`。其指明了跨域请求所允许使用的 HTTP 方法。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/yjjhg7yr3kjrh1nm44mo.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/yjjhg7yr3kjrh1nm44mo.gif)
 
 在上图的案例中，只有`GET`，`POST` 或 `PUT` 方法被允许跨域访问资源。其他 HTTP 方法，例如 `PATCH` 和 `DELETE` 都会被阻止。
 
@@ -213,7 +213,7 @@ Access-Control-Request-Method: PUT
 Access-Control-Request-Headers: Content-Type
 ```
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/pp30p7ej496f8bqta4he.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/pp30p7ej496f8bqta4he.gif)
 
 
 
@@ -228,7 +228,7 @@ Access-Control-Request-Headers: Content-Type
 
 3️⃣ 浏览器收到预检响应，并检查是否应允许发送实际请求。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/py19auar8xhs933ilmsc.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/py19auar8xhs933ilmsc.gif)
 
 :::caution 错误提示
 上图预检响应漏了 `Access-Control-Allow-Headers: Content-Type `
@@ -237,7 +237,7 @@ Access-Control-Request-Headers: Content-Type
 
 4️⃣ 如果预检响应检测通过，浏览器会将实际请求发送到服务器，然后服务器返回我们需要的资源。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/pfv1dcg77yjxbue5ryzf.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/pfv1dcg77yjxbue5ryzf.gif)
 
 
 
@@ -274,7 +274,7 @@ HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
 ```
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/vg3yo6qfqw12oh0f68yg.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/vg3yo6qfqw12oh0f68yg.gif)
 
 把上面的工作做好后，我们就可以在跨域请求中包含身份凭证信息了。
 

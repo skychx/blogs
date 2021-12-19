@@ -4,7 +4,7 @@ title: 🎨 React Native 性能优化指南——渲染篇
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 本文谈到的 React Native 性能优化，还没到修改 React Native 源码那种地步，所以通用性很强，对大部分 RN 开发者来说都用得着。一、减少 re-render 二、减轻渲染压力 三、图片优化那些事 四、对象创建调用分离 五、动画性能优化 六、长列表性能优化 七、React Native 性能优化用到的工具 八、推荐阅读
 draft: false
 tags: [react native, '性能优化', 跨端开发]
@@ -12,7 +12,7 @@ tags: [react native, '性能优化', 跨端开发]
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20200109010149.png)
+![](https://image-1255652541.file.myqcloud.com/images/20200109010149.png)
 
 
 
@@ -177,7 +177,7 @@ React16 发布后，React 团队主推函数式组件和 hooks，其中官方提
 
 这种情况其实很好优化，那就是不要用 `react-redux` 包装整个 Page 页面，而是用 `react-redux` 包装直接依赖 redux 数据的组件，这样就能把组件重绘带来的性能影响控制到最小。
 
-![有技巧的使用 redux](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/per-react-redux.png)
+![有技巧的使用 redux](https://image-1255652541.file.myqcloud.com/uPic/per-react-redux.png)
 
 
 <br/>
@@ -214,7 +214,7 @@ render() {
 
 用 `react-devtools` 查看 React 嵌套层级时如下所示：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20191226233200.png)
+![](https://image-1255652541.file.myqcloud.com/images/20191226233200.png)
 
 从上图中可以看出，React 组件和代码写的结构还是一一对应的。
 
@@ -224,7 +224,7 @@ render() {
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20191226233634.png)
+![](https://image-1255652541.file.myqcloud.com/images/20191226233634.png)
 
 
 
@@ -307,7 +307,7 @@ render() {
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20200105182318.png)
+![](https://image-1255652541.file.myqcloud.com/images/20200105182318.png)
 
 
 
@@ -430,7 +430,7 @@ iOS 可以通过 source 参数里的 cache 字段控制缓存，属性也是非�
 
 我们常说的 jpg png webp，都是原图压缩后的文件，利于磁盘存储和网络传播，但是在屏幕上展示出来时，就要恢复为原始尺寸了。
 
-![React Native 性能优化——图片内存优化](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20191216234550.png)
+![React Native 性能优化——图片内存优化](https://image-1255652541.file.myqcloud.com/images/20191216234550.png)
 
 比如说一张 100x100 的 jpg 图片，可能磁盘空间就几 kb，不考虑分辨率等问题，加载到内存里，就要占用 3.66 Mb。
 
@@ -761,7 +761,7 @@ render() {
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20191222161738.png)
+![](https://image-1255652541.file.myqcloud.com/images/20191222161738.png)
 
 
 
@@ -794,7 +794,7 @@ React Native 0.62 之后，`useNativeDriver` 的默认值由 `false` 改为 `tru
 
 JS Thread 和 UI Thread 之间是通过 JSON 字符串传递消息的。对于一些可预测的动画，比如说点击一个点赞按钮，就跳出一个点赞动画，这种行为完全可以预测的动画，我们可以使用 `useNativeDrive: true` 开启原生动画驱动。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20191222164337.png)
+![](https://image-1255652541.file.myqcloud.com/images/20191222164337.png)
 
 通过启用原生驱动，我们在启动动画前就把其所有配置信息都发送到原生端，利用原生代码在 UI 线程执行动画，而不用每一帧都在两端间来回沟通。如此一来，动画一开始就完全脱离了 JS 线程，因此此时即便 JS 线程被卡住，也不会影响到动画了。
 
@@ -832,7 +832,7 @@ Animated.timing(this.state.animatedValue, {
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20191222170401.gif)
+![](https://image-1255652541.file.myqcloud.com/images/20191222170401.gif)
 
 
 
@@ -888,13 +888,13 @@ InteractionManager.runAfterInteractions(() => {
 
 我们先看看 React Native 官方提供的手势动画，可以看到 JS Thread 有大量的计算，计算结果再异步传输到 UI Thread，稍微有些风吹草动，就会引起掉帧。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20191222174355.png)
+![](https://image-1255652541.file.myqcloud.com/images/20191222174355.png)
 
 
 
 如果使用 **react-native-gesture-handler**，手势捕捉和动画都是 UI Thread 进行的，脱离 JS Thread 计算和异步线程通信，流畅度自然大大提升：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20191222174928.png)
+![](https://image-1255652541.file.myqcloud.com/images/20191222174928.png)
 
 
 
@@ -916,7 +916,7 @@ BindingX 是阿里开源的一个框架，用来解决  `weex `和 `React Native
 
 当然，引入上面几个第三方库会肯定会带来一定的学习成本。对于复杂交互的页面，有的团队可能会采用原生组件来代替，比如说[🔗 美团外卖](https://mp.weixin.qq.com/s/9wv4uHg51EELU0yoIFQw8A)就会用原生组件去实现精细动画和强交互模块，所以具体使用还要看团队的技术储备和 APP 场景。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20191229205057.png)
+![](https://image-1255652541.file.myqcloud.com/images/20191229205057.png)
 
 
 <br/>
@@ -947,7 +947,7 @@ React Native 有好几个列表组件，先简单介绍一下：
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20200105203140.png)
+![](https://image-1255652541.file.myqcloud.com/images/20200105203140.png)
 
 
 
@@ -1006,7 +1006,7 @@ VirtualizedList 有个 **debug** 的配置项，开启后会在视图右侧显�
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20200105212114.png)
+![](https://image-1255652541.file.myqcloud.com/images/20200105212114.png)
 
 
 
@@ -1044,7 +1044,7 @@ VirtualizedList 有个 **debug** 的配置项，开启后会在视图右侧显�
 
 
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20200105214338.png)
+![](https://image-1255652541.file.myqcloud.com/images/20200105214338.png)
 
 
 
@@ -1156,7 +1156,7 @@ React Native 是跑在原生 APP 上的，布局查看不能用浏览器插件�
 
 iOS 开发 IDE，查看分析性能问题时可以用 **instruments** 和 **Profiler** 进行调试。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20200108234146.png)
+![](https://image-1255652541.file.myqcloud.com/images/20200108234146.png)
 
 
 
@@ -1170,7 +1170,7 @@ Android 开发 IDE，查看性能的话可以使用 **Android Profiler**，[🔗
 
 iOS 模拟器，它的 Debug 可以看一些分析内容。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20200107233550.png)
+![](https://image-1255652541.file.myqcloud.com/images/20200107233550.png)
 
 
 

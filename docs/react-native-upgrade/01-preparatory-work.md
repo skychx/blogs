@@ -61,7 +61,7 @@ iOS 项目主要有两个点：**project.pbxproj** 和 **CocoaPods**。这两块
 
 `project.pbxproj` 就是一个 iOS 项目的**配置文件**，从数据结构特点上有些像 JSON，年龄可以追溯到 NeXT，可读性基本为 0，每次 git 合并都是纯黑的噩梦。不信你瞅瞅下图，这是给人看的吗。
 
-![image-20200825202753481](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200825202753481.png)
+![image-20200825202753481](https://image-1255652541.file.myqcloud.com/uPic/image-20200825202753481.png)
 
 可读性这么差的东西能传下来，其实全靠 **XCode** 这个 IDE 给它续命。我们每次在 XCode 里修改的配置，例如 `Build Settings` 等选项，最后都会反映到 `project.pbxproj` 这个配置文件上，也算是一种另类 DSL 了。
 
@@ -131,7 +131,7 @@ Android 的项目配置主要是由 **gradle** 文件控制的，gradle 文件�
 
 React Native 官方在 2019 年 7 月 0.60 大版本更新时，推出了 [Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 这个 Diff 小工具。通过这个工具我们可以方便的看出版本更新时各个配置脚本的改动，非常的方便。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/ob8sym.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/ob8sym.jpg)
 
 
 <br />

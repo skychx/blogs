@@ -4,7 +4,7 @@ title: ⚡️ React Native 启动速度优化——Native 篇（内含源码分�
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 从 React Native 的启动到页面的第一次渲染完成，结合 React Native 的源码和 1.0 的新架构，一一分析 React Native 的启动性能优化之路
 draft: false
 tags: [react native, 跨端开发, 性能优化]
@@ -53,7 +53,7 @@ React Native 作为一个 Web 前端友好的混合开发框架，启动时可�
 
 上面的几个步骤，我画了一张图，下面我以这张图为目录，从左向右介绍各个步骤的优化方向：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rn_start_all.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/rn_start_all.jpg)
 
 :::note 提示
 React Native 初始化时，有可能多个任务**并行执行**，所以上图只能表示 React Native 初始化的大致流程，并不和实际代码的执行时序一一对应。
@@ -70,7 +70,7 @@ React Native 初始化时，有可能多个任务**并行执行**，所以上图
 
 ## 2.Native 容器初始化
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rn_start_native.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/rn_start_native.jpg)
 
 容器的初始化肯定是从 APP 的入口文件开始分析，下面我会**挑选一些关键代码**，梳理一下初始化的流程。
 
@@ -517,7 +517,7 @@ public ReactRootView getRootView(String componentName, String path, Bundle props
 
 ## 3.Native Modules 绑定
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rn_start_nativeModules.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/rn_start_nativeModules.jpg)
 
 
 
@@ -690,11 +690,11 @@ private void processPackage(
 
 React Native 新架构已经跳票快两年了，每次问进度，官方回复都是“别催了别催了在做了在做了”。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/79EL0.gif)
+![](https://image-1255652541.file.myqcloud.com/uPic/79EL0.gif)
 
 我个人去年期待了一整年，但是啥都没等到，所以 RN 啥时候更新到 1.0.0 版本，我已经不在乎了。虽然 RN 官方一直在鸽，但是不得不说他们的新架构还是有些东西的，市面上存在关于 RN 新架构的文章和视频我基本都看了一遍，所以个人对新架构还是有个整体的认知。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/new-diagram-full.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/new-diagram-full.jpg)
 
 因为新架构还没有正式放出，所以具体细节上肯定还存在一些差异，具体执行细节还是要等 React Native 官方为准。
 
@@ -706,7 +706,7 @@ JSI 的全名是 **JavaScript Interface**，一个用 C++ 写的框架，作用�
 
 JS 直接调用 Native 如何理解呢？我们举一个最简单的例子。在浏览器上调用 `setTimeout` `document.getElementById` 这类 API 的时候，其实就是在 JS 侧直接调用 Native Code，我们可以在浏览器控制台里验证一下：
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-04-04_17-39-14.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-04-04_17-39-14.jpg)
 
 比如说我执行了一条命令：
 
@@ -848,7 +848,7 @@ TurboModules 的调用路径大概是这样的：
 个人微信：**egg_labs**
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
 </p>
 
 <br />

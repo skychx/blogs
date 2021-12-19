@@ -4,7 +4,7 @@ title: 🎯【深入解析】跨端框架的核心技术到底是什么？
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 正式讨论「跨端开发」这个概念前，我们可以先思考一个问题：对大部分前端工作来说，前端主要干些啥？我个人认为，无论环境怎么变，前端基本上就是做三件事情：fetch data（数据获取）、manage state（状态管理）、render page（页面渲染）
 draft: false
 tags: [react native, 跨端开发]
@@ -22,7 +22,7 @@ tags: [react native, 跨端开发]
 
 我个人认为，无论环境怎么变，前端基本上就是做三件事情：
 
-![Fetch Data、Manage State、Render Page](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/FMR.jpg)
+![Fetch Data、Manage State、Render Page](https://image-1255652541.file.myqcloud.com/uPic/FMR.jpg)
 
 - fetch data（数据获取）
 - manage state（状态管理）
@@ -57,7 +57,7 @@ tags: [react native, 跨端开发]
 
 
 
-![虚拟机 渲染引擎](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/XX.jpg)
+![虚拟机 渲染引擎](https://image-1255652541.file.myqcloud.com/uPic/XX.jpg)
 
 经过上面的分析我们可以看出，前端的主要技术核心就两个：**虚拟机**和**渲染引擎**，这也意味着，**如果我们想要搞跨端开发，就必须得统一虚拟机和渲染引擎**。
 
@@ -71,7 +71,7 @@ tags: [react native, 跨端开发]
 
 ### 1.网页：JS Engine + WebKit
 
-![前端三剑客](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/HJC.png)
+![前端三剑客](https://image-1255652541.file.myqcloud.com/uPic/HJC.png)
 
 > 因为谷歌的 Blink 引擎 fork 自苹果的 WebKit，后文为了描述方便，统一用 WebKit 代替浏览器渲染引擎
 
@@ -107,7 +107,7 @@ JSBridge 只是解决了 Native 和 Web 的互相调用问题，如果我想借�
 
 ### 3.小程序：JS Engine + WebKit
 
-![各大小程序平台](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/ZWB.jpg)
+![各大小程序平台](https://image-1255652541.file.myqcloud.com/uPic/ZWB.jpg)
 
 小程序，国内的特色架构，本质上是微信成为流量黑洞后，想成为流量分发市场管理和分发自己的流量，所以这是个商业味道很重的框架。
 
@@ -117,7 +117,7 @@ JSBridge 只是解决了 Native 和 Web 的互相调用问题，如果我想借�
 
 ### 4.React Native：JS Engine + Native RenderPipeLine
 
-![React Native 和 Hermes](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/RH.jpg)
+![React Native 和 Hermes](https://image-1255652541.file.myqcloud.com/uPic/RH.jpg)
 
 React 2013 年发布，两年后 React Native 就发布了，前几种跨段方案基本都是基于浏览器技术的，RN 这个跨段方案的创新性在于它保留了 JS Engine，在渲染引擎这条路上，他没有自己造轮子，而是复用了现有的 Native 渲染管线。
 
@@ -155,7 +155,7 @@ vdom 作为一个纯对象，可以清晰的提炼出出布局的嵌套结构，
 
 Hermes 加入 AOT 后，`Babel`、`Minify`、`Parse` 和 `Compile` 这些流程全部都在开发者电脑上完成，直接下发字节码让 Hermes 运行就行。
 
-![Bytecode precompilation with Hermes](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Hermes.gif)
+![Bytecode precompilation with Hermes](https://image-1255652541.file.myqcloud.com/uPic/Hermes.gif)
 
 这样做的好处在于，可以大大缩短 JS 的编译时间，不信的话大家可以用 Chrome 分析几个大型网站，JS 的解析加载时间基本占时都是 50% 以上，部分重型网站可能占时 90%，这对桌面应用来说还好，对于电量和 CPU 都要弱上一线的移动平台来说，这些都是妥妥的性能杀手，Hermes 的加入可以大大改善这一情况。
 
@@ -165,7 +165,7 @@ Hermes 加入 AOT 后，`Babel`、`Minify`、`Parse` 和 `Compile` 这些流程�
 
 ### 5.Flutter: Dart VM + Flutter RnderPipeLine
 
-![Flutter 和 Dart](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/FD.jpg)
+![Flutter 和 Dart](https://image-1255652541.file.myqcloud.com/uPic/FD.jpg)
 
 Flutter 是最近比较火的一个跨端方案，也有不少人认为这是最终的跨端方案，毕竟桌面软件时代，最终胜出跨端方案就是 Qt，他们的共同特点就是自带了一套渲染引擎，可以抹平终端差异。
 
@@ -188,7 +188,7 @@ Flutter 的架构也是比较清晰的：
 
 社区里有一种声音，认为 Flutter 最大的败笔就是不能用 JavaScript 开发。这时候就会有人想，如果我们把 Web 技术和 Flutter 技术结合起来，用 JS Engine 对接世界上最大最活跃的 JS 社区，用 Flutter 渲染引擎对接高性能渲染体验，国安民乐，岂不美哉？
 
-![岂不美哉？](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/1CJjZG.jpg)
+![岂不美哉？](https://image-1255652541.file.myqcloud.com/uPic/1CJjZG.jpg)
 
 目前来说一些大厂还是做了一些探索，我看了一些分析和项目架构，感觉就是做了个低配版的 React Native，React Native 的现有架构有一个性能瓶颈就是跨语言调用成本比较高，而这些大厂的调用链路多达 4 步：`JS` -> `C++` -> `Dart` -> `C++`，更加丧心病狂，目前看无论是上手和推广都是没有直接用 RN or Flutter 方便。
 
@@ -219,7 +219,7 @@ Flutter 的架构也是比较清晰的：
 个人微信：egg_labs
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
 </p>
 
 <br />

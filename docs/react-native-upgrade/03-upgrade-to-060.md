@@ -121,7 +121,7 @@ end
 
 在 xcworkspace 里，首先有两个顶层文件夹，一个是你的 xcodeproj 项目，一个是 Pods 文件夹（左图）：前者包含着你的业务代码，后者管理者安装的第三方库文件。这时候需要手动把 `你的项目/Libraries` 目录下的 `*.xcodeproj` 文件手动删除（右图红框 ➊），因为他们已经存在于 Pods 文件夹里了（右图红框 ➋）。
 
-![iOS目录变化](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/iOS%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96.png)
+![iOS目录变化](https://image-1255652541.file.myqcloud.com/uPic/iOS%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96.png)
 
 
 
@@ -137,9 +137,9 @@ end
 
 当时这个变化卡了我一天，而且这个变化是在 `project.pbxproj` 中的，非常难以阅读就忽略掉了。后来通过新建一个 RN 新项目发现了问题。解决方法是删除原来的 Header Search Path 内容，手动把新的路径添加进去。
 
-![Xnip2020-08-23_14-50-59](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2020-08-23_14-50-59.png)
+![Xnip2020-08-23_14-50-59](https://image-1255652541.file.myqcloud.com/uPic/Xnip2020-08-23_14-50-59.png)
 
-![迁移后](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/RNDemo位置.png)
+![迁移后](https://image-1255652541.file.myqcloud.com/uPic/RNDemo位置.png)
 
 上面两步做完后可以尝试 build 一下项目，大概率你会发现还是 build 不起来。因为错误原因千奇百怪我也无法一一覆盖，这里还是问 Google 比较方便。
 
@@ -151,13 +151,13 @@ end
 
 问题出在哪里呢？原因是在原来的构建方式里，Libraries 下的 `React.xcodeproj` 有个 Start Packager 脚本，这个脚本会在项目 build 成功后自动启动一个 node 服务器：
 
-![原_StartPackager_位置](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/原_StartPackager_位置.png)
+![原_StartPackager_位置](https://image-1255652541.file.myqcloud.com/uPic/原_StartPackager_位置.png)
 
 
 
 迁移到 Pods 后，这个脚本就没有了，需要我们在主工程里手动添加一下。添加方式也很简单，我在下图也标注好了，点击项目文件夹，在 `TARGETS` 的 `Build Phases` 里点击 ➕，再点击 `New Run Script Phase` 新增一个脚本区域，然后把下面的代码填写进去：
 
-![新建StartPackager](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/新建StartPackager.png)
+![新建StartPackager](https://image-1255652541.file.myqcloud.com/uPic/新建StartPackager.png)
 
 ```bash
 export RCT_METRO_PORT="${RCT_METRO_PORT:=8081}"
@@ -304,7 +304,7 @@ protected List<ReactPackage> getPackages() {
 
 ### 3⃣️ Hermes 支持
 
-![N4e9rx](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/N4e9rx.png)
+![N4e9rx](https://image-1255652541.file.myqcloud.com/uPic/N4e9rx.png)
 
 [Hermes](https://hermesengine.dev/) 是一个 Facebook 开源的 Javascript 引擎，和现在的 JSC 相比，在包体积和启动速度上有所优化。社区上已经有很多介绍 Hermes 的文章了，我找了几篇比较好的，如果对 Hermes 感兴趣可以移步查看。
 

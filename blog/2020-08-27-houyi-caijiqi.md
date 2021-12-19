@@ -4,13 +4,13 @@ title: 🦀️ 后羿采集器——最良心的爬虫软件
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 2020 年如果让我推荐一款大众向的数据采集软件，那一定是后裔采集器了。和我之前推荐的 web scraper 相比，如果说 web scraper 是小而精的瑞士军刀，那后裔采集器就是大而全的重型武器，基本上可以解决所有的数据爬取问题。
 draft: false
 tags: [爬虫, 'web scraper']
 ---
 
-![houyiheader](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/houyiheader.png)
+![houyiheader](https://image-1255652541.file.myqcloud.com/uPic/houyiheader.png)
 
 
 
@@ -28,7 +28,7 @@ tags: [爬虫, 'web scraper']
 
 后羿采集器是一款桌面应用软件，支持三大操作系统：Linux、Windows 和 Mac，可以直接在官网上[免费下载](http://www.houyicaiji.com/?type=download)。
 
-![image-20200726123053850](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200726123053850.png)
+![image-20200726123053850](https://image-1255652541.file.myqcloud.com/uPic/image-20200726123053850.png)
 
 
 
@@ -38,7 +38,7 @@ tags: [爬虫, 'web scraper']
 
 后羿采集器把采集工作分为两种类型：**智能模式**和**流程图模式**。
 
-![image-20200726122953789](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200726122953789.png)
+![image-20200726122953789](https://image-1255652541.file.myqcloud.com/uPic/image-20200726122953789.png)
 
 [智能模式](http://www.houyicaiji.com/?type=post&pid=831)就是加载网页后，软件自动分析网页结构，智能识别网页内容，简化操作流程。这种模式比较适合简单的网页，经过我的测试，识别准确率还是挺高的。
 
@@ -56,7 +56,7 @@ tags: [爬虫, 'web scraper']
 
 后羿采集器就没有这个问题，它的[付费点](http://www.houyicaiji.com/?type=pricing)主要是体现在 IP 池和采集加速等高级功能上，不但导出数据不花钱，还支持 Excel、CSV、TXT、HTML 多种导出格式，并且支持直接导出到数据库，对于普通的用户来说完全够用了。
 
-![export](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/export.png)
+![export](https://image-1255652541.file.myqcloud.com/uPic/export.png)
 
 
 
@@ -68,7 +68,7 @@ tags: [爬虫, 'web scraper']
 
 后羿采集器的官网提供了两种教程，一种是[视频教程](http://www.houyicaiji.com/?type=videolist)，每个视频五分钟左右；一种是[图文教程](http://www.houyicaiji.com/?type=post&pid=2619)，手把手教学。看完这两类教程后还可以看看他们的[文档中心](http://www.houyicaiji.com/?type=tutorial)，写的也非常详细，基本覆盖了该软件的各个功能点。
 
-![image-20200726131724807](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200726131724807.png)
+![image-20200726131724807](https://image-1255652541.file.myqcloud.com/uPic/image-20200726131724807.png)
 
 
 
@@ -80,7 +80,7 @@ tags: [爬虫, 'web scraper']
 
 基本的数据抓取非常简单：我们只要点击「添加字段」那个按钮，就会出现一个选择魔棒，然后点选要抓取的数据，就能采集数据了：
 
-![select](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/select.gif)
+![select](https://image-1255652541.file.myqcloud.com/uPic/select.gif)
 
 
 
@@ -90,7 +90,7 @@ tags: [爬虫, 'web scraper']
 
 我在介绍 [web scraper](https://sspai.com/post/60572) 时曾把网页翻页分为 3 大类：**滚动加载**、**分页器加载**和**点击下一页加载**。
 
-![滚动加载 分页器加载 点击下一页加载](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200517172111386.png)
+![滚动加载 分页器加载 点击下一页加载](https://image-1255652541.file.myqcloud.com/uPic/image-20200517172111386.png)
 
 
 
@@ -98,7 +98,7 @@ tags: [爬虫, 'web scraper']
 
 不像 web scraper 的分页功能散落在各种选择器上，后羿采集器的分页配置集中在一个地方上，只要通过下拉选择，就可以轻松配置分页模式。相关的配置教程可见官网教程：[如何设置分页](http://www.houyicaiji.com/?type=post&pid=7489)。
 
-![image-20200726122737844](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200726122737844.png)
+![image-20200726122737844](https://image-1255652541.file.myqcloud.com/uPic/image-20200726122737844.png)
 
 
 
@@ -108,7 +108,7 @@ tags: [爬虫, 'web scraper']
 
 例如下图，我就利用了流程图模式里的点击组件模拟点击筛选按钮，非常方便。
 
-![genshuixue](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/genshuixue.gif)
+![genshuixue](https://image-1255652541.file.myqcloud.com/uPic/genshuixue.gif)
 
 
 
@@ -136,7 +136,7 @@ tags: [爬虫, 'web scraper']
 
 比如说下图这个流程图，就是模拟真人浏览微博时的行为去抓取相关数据。
 
-![image-20200726121556512](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200726121556512.png)
+![image-20200726121556512](https://image-1255652541.file.myqcloud.com/uPic/image-20200726121556512.png)
 
 
 
@@ -150,7 +150,7 @@ tags: [爬虫, 'web scraper']
 
 比如说某个网页里存在数据 A，但只有鼠标移到对应的文字上才会以弹窗的形式显示出来，这时候我们就可以自己写一个对应的选择器去筛选数据。
 
-![image-20200726144840886](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200726144840886.png)
+![image-20200726144840886](https://image-1255652541.file.myqcloud.com/uPic/image-20200726144840886.png)
 
 
 
@@ -214,7 +214,7 @@ Regex 就是正则表达式。我们也可以通过正则表达式去选择数�
 
 因为文章发在各大平台上，账号较多不能及时回复评论和私信，有问题可关注公众号 ——「卤蛋实验室」，（或 微信搜索egglabs）关注上车防失联。
 
-![img](https://image-1255652541.cos.ap-shanghai.myqcloud.com/images/20190709220018.png)
+![img](https://image-1255652541.file.myqcloud.com/images/20190709220018.png)
 
 
 

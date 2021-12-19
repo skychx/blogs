@@ -4,7 +4,7 @@ title: 🤯 没 2 年 React Native 开发经验，你都遇不到这些坑
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 没 2 年 React Native 开发经验，你都遇不到这些坑
 draft: false
 tags: [react native, 跨端开发]
@@ -266,7 +266,7 @@ Web 上基于 SVG 的图表库有很多，但是 RN 能用到的可能没有几�
 个人微信：**egg_labs**
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
 </p>
 
 <br />

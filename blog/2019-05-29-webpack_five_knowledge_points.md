@@ -4,13 +4,13 @@ title: 📦 webpack 中那些最易混淆的 5 个知识点
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: webpack 中，module，chunk 和 bundle 的区别是什么？filename 和 chunkFilename 的区别是什么？webpackPrefetch、webpackPreload 和 webpackChunkName 到底是干什么的？hash、chunkhash、contenthash 有什么不同？sourse-map 中 eval、cheap、inline 和 module 各是什么意思？
 draft: false
 tags: [webpack, '前端工程化']
 ---
 
-![image-20200518210532171](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200518210532171.png)
+![image-20200518210532171](https://image-1255652541.file.myqcloud.com/uPic/image-20200518210532171.png)
 
 今天我主要分享的是一些 webpack 中的**易混淆知识点，也是面试的常见内容**。我把这些分散在文档和教程里的内容总结起来，目前看是**全网独一份**，大家可以**加个收藏**，方便以后检索和学习。
 
@@ -146,7 +146,7 @@ webpack 的配置如下：
 
 感觉还有些绕？我做了一张图，你肯定一看就懂：
 
-![image-20200518210532171](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200518210532171.png)
+![image-20200518210532171](https://image-1255652541.file.myqcloud.com/uPic/image-20200518210532171.png)
 
 
 

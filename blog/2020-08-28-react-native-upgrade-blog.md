@@ -4,7 +4,7 @@ title: 🧭 React Native 版本升级指南
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: React Native 作为一款跨端框架，有一个最让人头疼的问题，那就是版本更新。尤其是遇到大版本更新，JavaScript、iOS 和 Android 三端的配置构建文件都有非常大的变动，有时候三者的配置文件又互相耦合在一起，往往牵一发而动全身。
 draft: false
 tags: [react native, 跨端开发, '前端工程化']

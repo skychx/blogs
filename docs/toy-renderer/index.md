@@ -48,7 +48,7 @@ keywords:
 
 如果你线性代数都忘的差不多了，这里我推荐 [3Blue1Brown](https://space.bilibili.com/88461692?spm_id_from=333.788.b_765f7570696e666f.2) 的教程——[**《线性代数的本质》**](https://www.bilibili.com/video/BV1ys411472E)，这是我见过**最好的线性代数入门教程了**。而且图形学里涉及的矩阵变换绝大部分都是三维空间的，基本上看完这门课就可以上手图形学的学习了。
 
-![3Blue1Brown——线性代数的本质](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-01-13_22-27-04.png)
+![3Blue1Brown——线性代数的本质](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-01-13_22-27-04.png)
 
 <br />
 
@@ -56,7 +56,7 @@ keywords:
 
 图形学入门课程我只推荐一个，[**闫令琪**](http://www.cs.ucsb.edu/~lingqi/)大神的[**《GAMES101-现代计算机图形学入门》**](https://www.bilibili.com/video/BV1X7411F744?from=search&seid=13888633704437789145)。
 
-![GAMES101-现代计算机图形学入门](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Xnip2021-01-13_22-29-02.png)
+![GAMES101-现代计算机图形学入门](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-01-13_22-29-02.png)
 
 闫令琪大神有多厉害我就不多介绍了，最关键的是 **GAMES101** 优点太多了：
 
@@ -66,13 +66,13 @@ keywords:
 
 学完这门课可以收获什么呢？比如说 ~~2077 的图形设置面板你都知道是啥意思了~~
 
-![2077 图形设置面板](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/IMG_7903(20210112-204751).jpeg)
+![2077 图形设置面板](https://image-1255652541.file.myqcloud.com/uPic/IMG_7903(20210112-204751).jpeg)
 
 如果跟着这门课学下来，其实课下作业就会完成一个小的软渲染器，但由于我是后期才加入学习的，所以作业也没有跟着做，经过搜索发现 [tinyrenderer](https://github.com/ssloy/tinyrenderer) 这个教程推荐的人最多，所以最后参照这个教程实现了自己的软渲染器。
 
 闫老师的是视频教程，大家可以配合他的 PPT 学习。如果习惯看书，我这里推荐两本，一本是大名鼎鼎的虎书《Fundamentals of Computer Graphics 4th Edition》，另一本是《Real Time Rendering 4th》，都是非常经典非常有名的书籍。
 
-![Graphics Books](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/rendering_book.jpg)
+![Graphics Books](https://image-1255652541.file.myqcloud.com/uPic/rendering_book.jpg)
 
 这两本书国内都没有引进，我这里有英文版的 PDF，大家可以关注我的公众号「**卤蛋实验室**」后回复「**图形学**」获取下载链接。
 

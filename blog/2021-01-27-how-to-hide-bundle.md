@@ -4,7 +4,7 @@ title: 🙈 如何隐藏你的热更新 bundle 文件？
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 如何隐藏热更新的 bundle 文件
 draft: false
 tags: [密码学, 网络安全, 计算机网络, React Native]
@@ -79,7 +79,7 @@ Apple 公司对 iPhone 生态有着非常严格的管控：App 上架必须走 A
 
 
 
-![香农一韦弗通信模型](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/shannon-weaver-model_orig.png)
+![香农一韦弗通信模型](https://image-1255652541.file.myqcloud.com/uPic/shannon-weaver-model_orig.png)
 
 <br />
 
@@ -110,13 +110,13 @@ Apple 公司对 iPhone 生态有着非常严格的管控：App 上架必须走 A
 
 首先我用图片编辑器生成一个 `2x2` 4 个像素大小的图片——`RGBY.jpg`。颜色我参考 Google logo 配了一下：
 
-![RGBY-image](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/RGBY-image.jpg)
+![RGBY-image](https://image-1255652541.file.myqcloud.com/uPic/RGBY-image.jpg)
 
 然后我们用二进制查看工具（我这里用的是 `Hex Fiend` 软件）查看这个图片的编码，因为图片只有 4 个像素，所以二进制数据也会比较小，注意观察这个文件的二进制数据，它是 `FF D8` 开头，`FF D9` 结尾的。
 
 图片查看器加载一张图片文件时就会做检测，如果是 `FF D8` 开头，就会认为这是一张 jpg 图片，然后就会进入 jpg 图片解码的分支，加载二进制数据遇到 `FF D9` 后，就会认为这个图片已经加载完毕，**后面的数据就不会再管了**。
 
-![RGBY-Binary-Code](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/RGBY-Binary-Code.jpg)
+![RGBY-Binary-Code](https://image-1255652541.file.myqcloud.com/uPic/RGBY-Binary-Code.jpg)
 
 <br />
 
@@ -130,11 +130,11 @@ cat RGBY.jpg text.txt > RGBY_text.jpg
 
 这时候用图片浏览器查看文件，可以看出文件还是正常预览的：
 
-![RGBY_text-image](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/RGBY_text-image.jpg)
+![RGBY_text-image](https://image-1255652541.file.myqcloud.com/uPic/RGBY_text-image.jpg)
 
 但是用二进制查看工具查看这张图片，就会发现他在末尾多了 11 个字节，正是 `text.txt` 里的内容—— `hello word` ：
 
-![RGBY_text-Binary-Code](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/RGBY_text-Binary-Code.jpg)
+![RGBY_text-Binary-Code](https://image-1255652541.file.myqcloud.com/uPic/RGBY_text-Binary-Code.jpg)
 
 这样我们就达到了隐写的目的。
 
@@ -253,7 +253,7 @@ $$
 
 我们平常使用 HTTPS 时，一般只做了单向认证，即**客户端认证服务端的真实性**。其实 HTTPS 支持双向认证的，即**支持服务端认证客户端的真实性**（具体流程可见下图 * 部分）。
 
-![TLS 1.2 握手流程图](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/TLS12.jpg)
+![TLS 1.2 握手流程图](https://image-1255652541.file.myqcloud.com/uPic/TLS12.jpg)
 
 一般来说开启 HTTPS 双向认证的 APP 都是那种安全性要求极高的 APP，比如说金融类 APP 和匿名社交类 APP。而且想要实现双向认证，就必须要在客户端内置一份公钥证书和私钥，但 APP 又有砸壳风险，所以还得想办法把这两个东西加密和隐写（都成俄罗斯套娃了）。
 
@@ -277,7 +277,7 @@ $$
 个人微信：**egg_labs**
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
 </p>
 
 <br />

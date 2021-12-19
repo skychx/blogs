@@ -110,7 +110,7 @@ module.exports = {
               label: '知乎',
               to: 'https://www.zhihu.com/people/egglabs',
             },
-          ],
+          ],image-1255652541.file.myqcloud.com
         },
         {
           title: '👨‍💻 交流',
@@ -131,7 +131,7 @@ module.exports = {
   },
   presets: [
     [
-      '@docusaurus/preset-classic',
+      '@docusaurus/preset-claimage-1255652541.file.myqcloud.com
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).

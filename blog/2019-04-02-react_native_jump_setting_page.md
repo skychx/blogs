@@ -4,7 +4,7 @@ title: 📣 React Native 跳转到 APP 推送页面并获取推送状态
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: React Native 跳转到 APP 推送页面并获取推送状态
 draft: false
 tags: [react native, 跨端开发]
@@ -181,11 +181,11 @@ function getSystemNoticeStatus() {
 跳转到 APP 设置界面也要考虑不同系统版本的兼容。比如说 iOS11+ 现在只允许跳转到系统设置首页/该应用的设置界面，Android 还要考虑不同厂商对 APP 设置页面的魔改，很是头疼。
 
 
-![左图是 iOS APP 设置主页面，右图是 iOS 推送设置子页面](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/vORoiK.jpg)
+![左图是 iOS APP 设置主页面，右图是 iOS 推送设置子页面](https://image-1255652541.file.myqcloud.com/uPic/vORoiK.jpg)
 
 首先 **iOS** 适配，我们直接跳转到该应用的设置首页，就是下图：
 
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/eLjepK.jpg" width="50%" height="50%" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/eLjepK.jpg" width="50%" height="50%" />
 
 <br />
 

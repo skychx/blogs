@@ -4,7 +4,7 @@ title: 🌐 Vary + CORS，两大云厂商都在上面栽了跟头
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: Vary + CORS，两大云厂商都在上面栽了跟头
 draft: true
 tags: [HTTP, '计算机网络', '网络安全']
@@ -37,7 +37,7 @@ tags: [HTTP, '计算机网络', '网络安全']
 
 [CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS) 这个概念很多网站都介绍过了，国外有个小姐姐 [Lydia Hallie](https://dev.to/lydiahallie) 写了一篇 [CS Visualized: CORS](https://dev.to/lydiahallie/cs-visualized-cors-5b8h?utm_campaign=React%2BNative%2BNow&utm_medium=web&utm_source=React_Native_Now_69#cs-cors) 来介绍这个概念，图文并茂写的非常好，推荐大家阅读一下，这里我就不展开讲了。
 
-![0qe4yzasvrm7r0a76kui](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/0qe4yzasvrm7r0a76kui.gif)
+![0qe4yzasvrm7r0a76kui](https://image-1255652541.file.myqcloud.com/uPic/0qe4yzasvrm7r0a76kui.gif)
 
 
 
@@ -79,7 +79,7 @@ CORS
 
 示意图如下：
 
-![image-20200527210341349](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/image-20200527210341349.png)
+![image-20200527210341349](https://image-1255652541.file.myqcloud.com/uPic/image-20200527210341349.png)
 
 
 
@@ -114,15 +114,15 @@ CORS
 
 这时候你就会发现，图片加载失败，还报了一个 **CORS 跨域错误**：
 
-![normal](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/normal.gif)
+![normal](https://image-1255652541.file.myqcloud.com/uPic/normal.gif)
 
-![corsError](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/corsError.png)
+![corsError](https://image-1255652541.file.myqcloud.com/uPic/corsError.png)
 
 
 
 如果把第一步写的那个 img 标签去掉，只留下 fetch 请求，这个跨域错误是不会报的：
 
-![singlefetch](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/singlefetch.gif)
+![singlefetch](https://image-1255652541.file.myqcloud.com/uPic/singlefetch.gif)
 
 是不是有些诡异？下面我们就来分析一下怎么回事。
 
