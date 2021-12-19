@@ -100,7 +100,7 @@ module.exports = {
             },
             {
               label: '公众号：卤蛋实验室',
-              to: 'https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/20190709220018.png',
+              to: 'https://image-1255652541.file.myqcloud.com/uPic/20190709220018.png',
             },
             {
               label: 'segmentfault：卤代烃',
@@ -110,7 +110,7 @@ module.exports = {
               label: '知乎',
               to: 'https://www.zhihu.com/people/egglabs',
             },
-          ],image-1255652541.file.myqcloud.com
+          ],
         },
         {
           title: '👨‍💻 交流',
@@ -121,7 +121,7 @@ module.exports = {
             },
             {
               label: '微信',
-              href: 'https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/IMG_6752.JPG'
+              href: 'https://image-1255652541.file.myqcloud.com/uPic/IMG_6752.JPG'
             }
           ],
         },
@@ -131,7 +131,7 @@ module.exports = {
   },
   presets: [
     [
-      '@docusaurus/preset-claimage-1255652541.file.myqcloud.com
+      '@docusaurus/preset-classic',
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
