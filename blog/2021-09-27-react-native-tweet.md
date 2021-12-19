@@ -266,7 +266,7 @@ Web 上基于 SVG 的图表库有很多，但是 RN 能用到的可能没有几�
 个人微信：**egg_labs**
 
 <p>
-<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" />
 </p>
 
 <br />

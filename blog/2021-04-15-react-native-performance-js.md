@@ -655,7 +655,7 @@ Fabric 可以说是 RN 新架构里最让人期待的了，想了解更多内容
 个人微信：**egg_labs**
 
 <p>
-<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" />
 </p>
 
 <br />

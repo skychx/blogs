@@ -37,7 +37,7 @@ if(!((A && B) || C)) {
 <!-- ![](https://image-1255652541.file.myqcloud.com/uPic/LRAxP8g.jpg) -->
 
 <p>
-<img src="https://image-1255652541.file.myqcloud.com/uPic/LRAxP8g.jpg" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/LRAxP8g.jpg" width="40%" />
 </p>
 
 
@@ -187,7 +187,7 @@ $$
 也可以加我的微信 **egg_labs**，欢迎大家来撩。
 
 <p>
-<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" />
 </p>
 
 ![](https://image-1255652541.file.myqcloud.com/uPic/OAFePh.jpg)

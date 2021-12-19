@@ -219,7 +219,7 @@ Flutter 的架构也是比较清晰的：
 个人微信：egg_labs
 
 <p>
-<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" />
 </p>
 
 <br />
