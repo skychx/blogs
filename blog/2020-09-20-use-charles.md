@@ -10,7 +10,7 @@ draft: false
 tags: [HTTP, '计算机网络', '网络安全', '工具']
 ---
 
-![](https://image-1255652541.file.myqcloud.com/uPic/cover.jpg)
+![为什么你的 Charles 会抓包失败-头图](https://image-1255652541.file.myqcloud.com/uPic/cover.jpg)
 
 作为一名 Web 开发工程师，天天都会和网络打交道。Charles 作为一款网络抓包工具，几乎成了 Web 开发的标配。
 
