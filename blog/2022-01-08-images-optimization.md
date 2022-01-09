@@ -6,7 +6,7 @@ author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: ⚡️ 我是如何把个人网站的图片服务资费降低 90% 的（优化效果这么明显是因为我从来没有优化过）
-draft: true
+draft: false
 tags: [性能优化]
 ---
 
