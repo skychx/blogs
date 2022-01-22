@@ -626,6 +626,10 @@ MessageQueue.spy(true);
 
 Fabric 可以说是 RN 新架构里最让人期待的了，想了解更多内容，可以去[官方 issues 区: React Native Fabric (UI-Layer Re-architecture) ](https://github.com/react-native-community/discussions-and-proposals/issues/4)围观。
 
+:::info 2022-01-19 更新
+React Native 的官网上新出了一个[架构专栏](https://reactnative.dev/docs/architecture-overview)，非常详细的介绍了 [Fabric 架构](https://reactnative.dev/docs/fabric-renderer)是如何运作的，感兴趣的人可以前往查看
+:::
+
 
 
 ## 总结

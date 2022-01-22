@@ -1182,7 +1182,13 @@ Android 开发者选项有不少东西可看，比如说 GPU 渲染分析和动�
 
 <br/>
 
-## 八、推荐阅读
+## 八、新架构之 Fabric
+
+:::info 2022-01-19 更新
+React Native 的官网上新出了一个[架构专栏](https://reactnative.dev/docs/architecture-overview)，非常详细的介绍了 [Fabric 架构](https://reactnative.dev/docs/fabric-renderer)是如何运作的，感兴趣的人可以前往查看
+:::
+
+## 九、推荐阅读
 
 【React Native 性能优化指南】到此就算写完了，文中内容可能有不严谨 or 错误的地方，请各位前端/iOS/Android 大佬多多指教。
 
