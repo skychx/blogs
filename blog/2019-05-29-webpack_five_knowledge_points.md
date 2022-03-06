@@ -136,7 +136,7 @@ webpack 的配置如下：
 
 我们运行一下 webpack，看一下打包的结果：
 
-![](http://ww3.sinaimg.cn/large/006tNc79ly1g3g9kn79ntj30o6060ab8.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3g9kn79ntj30o6060ab8.jpeg)
 
 
 
@@ -196,7 +196,7 @@ filename 是一个很常见的配置，就是对应于 `entry` 里面的输入�
 
 
 
-![](http://ww4.sinaimg.cn/large/006tNc79ly1g3evh2dfwjj30m4034q3e.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3evh2dfwjj30m4034q3e.jpeg)
 
 
 
@@ -253,7 +253,7 @@ btn.addEventListener('click', () => {
 
 这时候的打包结果如下：
 
-![](http://ww4.sinaimg.cn/large/006tNc79ly1g3ew6tebfqj30m6044t9c.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3ew6tebfqj30m6044t9c.jpeg)
 
 
 
@@ -291,7 +291,7 @@ btn.addEventListener('click', () => {
 
 
 
-![](http://ww1.sinaimg.cn/large/006tNc79ly1g3ewki4ycbj30mq044aap.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3ewki4ycbj30mq044aap.jpeg)
 
 
 
@@ -334,7 +334,7 @@ btn.addEventListener('click', () => {
 
 
 
-![](http://ww4.sinaimg.cn/large/006tNc79ly1g3ez57b6bfj30mo044js1.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3ez57b6bfj30mo044js1.jpeg)
 
 
 
@@ -359,7 +359,7 @@ async function getAsyncComponent() {
 
 这时候打包生成的文件是这样的：
 
-![](http://ww2.sinaimg.cn/large/006tNc79ly1g3eza2hnfvj30si03yq3r.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3eza2hnfvj30si03yq3r.jpeg)
 
 
 
@@ -379,7 +379,7 @@ async function getAsyncComponent() {
 
 在上面的懒加载代码里，我们是点击按钮时，才会触发异步加载 `lodash` 的动作，这时候会动态的生成一个 `script` 标签，加载到 `head` 头里：
 
-![](http://ww2.sinaimg.cn/large/006tNc79ly1g3f073l8ndj30v80aa770.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3f073l8ndj30v80aa770.jpeg)
 
 
 
@@ -397,7 +397,7 @@ const { default: _ } = await import(/* webpackChunkName: "lodash" */ /* webpackP
 
 就会以 `<link rel="prefetch" as="script">` 的形式预拉取 lodash 代码：
 
-![](http://ww1.sinaimg.cn/large/006tNc79ly1g3f0clldalj30tw0a2417.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3f0clldalj30tw0a2417.jpeg)
 
 
 
@@ -478,7 +478,7 @@ webpack 的核心配置如下（省略了一些 module 配置信息）：
 
 生成的文件名如下：
 
-![](http://ww4.sinaimg.cn/large/006tNc79ly1g3f1suvmekj30tk08otat.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3f1suvmekj30tk08otat.jpeg)
 
 
 
@@ -537,7 +537,7 @@ export function cube(x) {
 
 构建结果如下：
 
-![](http://ww1.sinaimg.cn/large/006tNc79ly1g3f23xxxo8j30ts050q4b.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3f23xxxo8j30ts050q4b.jpeg)
 
 
 
@@ -547,7 +547,7 @@ export function cube(x) {
 
 假设我又把 utils.js 里的 cube() 函数去掉，再打包：
 
-![](http://ww2.sinaimg.cn/large/006tNc79ly1g3f26rwpnqj30tc04ywfu.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3f26rwpnqj30tc04ywfu.jpeg)
 
 
 
@@ -591,11 +591,11 @@ contenthash 将根据资源内容创建出唯一 hash，也就是说文件内容
 
 我们对 index.js 文件做了 3  次修改（就是改了改 log 函数的输出内容，过于简单就先不写了），然后分别构建，结果截图如下：
 
-![](http://ww1.sinaimg.cn/large/006tNc79ly1g3f2ih0bqyj30tm050wfu.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3f2ih0bqyj30tm050wfu.jpeg)
 
-![](http://ww1.sinaimg.cn/large/006tNc79ly1g3f2ifrmbhj30te04yabg.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3f2ifrmbhj30te04yabg.jpeg)
 
-![](http://ww2.sinaimg.cn/large/006tNc79ly1g3f2ifm1v9j30t404ygmy.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3f2ifm1v9j30t404ygmy.jpeg)
 
 
 
@@ -626,7 +626,7 @@ sourse-map ，里面都有个 map 了，肯定是映射的意思。sourse-map �
 
 我们先从官网上看看 sourse-map 有多少种类型：
 
-![](http://ww4.sinaimg.cn/large/006tNc79ly1g3gv1pguatj30u20u0jzg.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3gv1pguatj30u20u0jzg.jpeg)
 
    
 
@@ -681,13 +681,13 @@ console.lg('hello source-map !') // log 写成 lg
 
 source-map 是最大而全的，会生成独立 map 文件：
 
-![](http://ww2.sinaimg.cn/large/006tNc79ly1g3gvxig4qsj30pm04s3zf.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3gvxig4qsj30pm04s3zf.jpeg)
 
 
 
 注意下图光标的位置，，source-map 会显示报错的**行列**信息：
 
-![](http://ww4.sinaimg.cn/large/006tNc79ly1g3gvxwshtqj30i201kaa6.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3gvxwshtqj30i201kaa6.jpeg)
 
 
 
@@ -697,7 +697,7 @@ source-map 是最大而全的，会生成独立 map 文件：
 
 cheap，就是廉价的意思，它不会产生列映射，相应的体积会小很多，我们和 sourse-map 的打包结果比一下，只有原来的 1/4 。
 
-![](http://ww1.sinaimg.cn/large/006tNc79ly1g3gwjzzvjyj30pm04wgmj.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3gwjzzvjyj30pm04wgmj.jpeg)
 
 
 
@@ -707,11 +707,11 @@ cheap，就是廉价的意思，它不会产生列映射，相应的体积会小
 
 eval-source-map 会以 eval() 函数打包运行模块，不产生独立的 map 文件，会显示报错的**行列**信息：
 
-![](http://ww2.sinaimg.cn/large/006tNc79ly1g3gw4w3acqj30no04ajs2.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3gw4w3acqj30no04ajs2.jpeg)
 
 
 
-![](http://ww4.sinaimg.cn/large/006tNc79ly1g3gvxwshtqj30i201kaa6.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3gvxwshtqj30i201kaa6.jpeg)
 
 
 
@@ -736,7 +736,7 @@ eval-source-map 会以 eval() 函数打包运行模块，不产生独立的 map 
 
 映射文件以 base64 格式编码，加在 bundle 文件最后，不产生独立的 map 文件。加入 map 文件后，我们可以明显的看到包体积变大了；
 
-![](http://ww1.sinaimg.cn/large/006tNc79ly1g3gwa1dyjmj30nm0423z5.jpg)
+![](https://image-1255652541.file.myqcloud.com/uPic/006tNc79ly1g3gwa1dyjmj30nm0423z5.jpeg)
 
 
 
