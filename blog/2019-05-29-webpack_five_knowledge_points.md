@@ -28,7 +28,7 @@ tags: [webpack, '前端工程化']
 
 
 :::tip 友情提示
-友情提示：本文章不是入门教程，不会费大量笔墨去描写 webpack 的基础配置，请读者配合教程[源代码](https://github.com/skychx/webpack_learn/tree/master/confuse)食用。
+友情提示：本文章不是入门教程，不会费大量笔墨去描写 webpack 的基础配置，请读者配合教程[源代码](https://github.com/skychx/blogDemoRepo/tree/master/apps/webpack-confuse)食用。
 :::
 
 <br/>

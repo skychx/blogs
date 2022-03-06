@@ -19,7 +19,7 @@ tags: [webpack, '前端工程化']
 
 
 :::tip 友情提示
-本文章不是入门教程，不会费大量笔墨去描写 webpack 的基础配置，请读者配合教程[源代码](https://github.com/skychx/webpack_learn/tree/master/optimization)食用。
+本文章不是入门教程，不会费大量笔墨去描写 webpack 的基础配置，请读者配合教程[源代码](https://github.com/skychx/blogDemoRepo/tree/master/apps/webpack-optimization)食用。
 :::
 
 
@@ -98,7 +98,7 @@ tags: [webpack, '前端工程化']
 
 
 
-下面的代码比较乱，因为我也没打算好好讲这些绕来绕去的配置，具体结构最好看我 github 上放出的示例[源代码](https://github.com/skychx/webpack_learn/tree/master/optimization)，**看不懂也没事，后面有更好的解决方案**。
+下面的代码比较乱，因为我也没打算好好讲这些绕来绕去的配置，具体结构最好看我 github 上放出的示例[源代码](https://github.com/skychx/blogDemoRepo/tree/master/apps/webpack-optimization)，**看不懂也没事，后面有更好的解决方案**。
 
 
 
