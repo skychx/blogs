@@ -71,6 +71,11 @@ html[data-theme=dark] div.container img {
   opacity: 0.618;
 }
 
+html[data-theme=dark] img.medium-zoom-image--opened {
+  opacity: 0.618;
+  border-radius: 4.5px;
+}
+
 /* github 图标 */
 .header-github-link:hover {
   opacity: 0.6;

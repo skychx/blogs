@@ -128,6 +128,17 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} 超级码力. 微信公众号@卤蛋实验室`,
     },
+    zoom: {
+      selector: '.markdown :not(em) > img',
+      config: {
+        // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+        background: {
+          light: 'rgb(255, 255, 255)',
+          dark: 'rgb(50, 50, 50)'
+        },
+        margin: 80,
+      }
+    }
   },
   presets: [
     [
@@ -165,4 +176,5 @@ module.exports = {
     defaultLocale: 'zh-Hans',
     locales: ['zh-Hans'],
   },
+  plugins: [require.resolve('docusaurus-plugin-image-zoom')],
 };
