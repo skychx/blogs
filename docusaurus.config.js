@@ -39,11 +39,11 @@ const config = {
       // https://prismjs.com/#supported-languages
       additionalLanguages: ["java", "rust", "kotlin", "swift"],
     },
-    // algolia: {
-    //   apiKey: "84e7e5d1edaa85e79c4902b37f862a50",
-    //   indexName: "supercodepower",
-    //   searchParameters: {},
-    // },
+    algolia: {
+      appId: "HX6GJ4R9GS",
+      apiKey: "f9d1b98d8ab9cb7849f621f379997243",
+      indexName: "supercodepower",
+    },
     navbar: {
       title: "卤蛋实验室",
       hideOnScroll: false,
