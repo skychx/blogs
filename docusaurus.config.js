@@ -1,24 +1,30 @@
-const remarkMath = require("remark-math");
-const rehypeKatex = require("rehype-katex");
+// @ts-check
+// Note: type annotations allow type checking and IDEs autocompletion
 
-module.exports = {
-  title: '微信公众号@卤蛋实验室',
-  tagline: '微信公众号@卤蛋实验室',
-  url: 'https://supercodepower.com',
-  onBrokenLinks: 'log', // build 过程中遇到可能无法访问的网站时打印提示
-  baseUrl: '/',
-  favicon: 'img/favicon.ico',
-  organizationName: 'skychx', // Usually your GitHub org/user name.
-  projectName: '超级码力', // Usually your repo name.
+const remarkMath = require("remark-math");
+
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+
+/** @type {import('@docusaurus/types').Config} */
+const config = {
+  title: "微信公众号@卤蛋实验室",
+  tagline: "微信公众号@卤蛋实验室",
+  url: "https://supercodepower.com",
+  onBrokenLinks: "log", // build 过程中遇到可能无法访问的网站时打印提示
+  baseUrl: "/",
+  favicon: "img/favicon.ico",
+  organizationName: "skychx", // Usually your GitHub org/user name.
+  projectName: "超级码力", // Usually your repo name.
   stylesheets: [
     {
-      href: '/katex/katex.min.css', // Latex CSS
-      type: 'text/css',
+      href: "/katex/katex.min.css", // Latex CSS
+      type: "text/css",
     },
   ],
   themeConfig: {
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: "light",
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
@@ -28,153 +34,165 @@ module.exports = {
     //     '⭐️ If you like Docusaurus, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/facebook/docusaurus">GitHub</a>! ⭐️',
     // },
     prism: {
-      theme: require('prism-react-renderer/themes/github'),
-      darkTheme: require('prism-react-renderer/themes/dracula'),
+      theme: lightCodeTheme,
+      darkTheme: darkCodeTheme,
       // https://prismjs.com/#supported-languages
-      additionalLanguages: ['java', 'rust', 'kotlin', 'swift'],
+      additionalLanguages: ["java", "rust", "kotlin", "swift"],
     },
-    algolia: {
-      apiKey: '84e7e5d1edaa85e79c4902b37f862a50',
-      indexName: 'supercodepower',
-      searchParameters: {},
-    },
+    // algolia: {
+    //   apiKey: "84e7e5d1edaa85e79c4902b37f862a50",
+    //   indexName: "supercodepower",
+    //   searchParameters: {},
+    // },
     navbar: {
-      title: '卤蛋实验室',
+      title: "卤蛋实验室",
       hideOnScroll: false,
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.jpeg',
+        alt: "My Site Logo",
+        src: "img/logo.jpeg",
       },
       items: [
         {
-          to: 'docs/toys/home',
-          activeBasePath: 'docs/toys',
-          label: '🧸 造轮子学原理',
-          position: 'left',
+          to: "docs/toys/home",
+          activeBasePath: "docs/toys",
+          label: "🧸 造轮子学原理",
+          position: "left",
         },
         {
-          to: 'docs/react-native-upgrade/index',
-          activeBasePath: 'docs/react-native-upgrade',
-          label: '⚛️ React Native 进阶',
-          position: 'left',
+          to: "docs/react-native-upgrade/index",
+          activeBasePath: "docs/react-native-upgrade",
+          label: "⚛️ React Native 进阶",
+          position: "left",
         },
         {
-          href: 'https://www.cnblogs.com/web-scraper/',
-          label: '🕷️ 零代码写爬虫',
-          position: 'left',
+          href: "https://www.cnblogs.com/web-scraper/",
+          label: "🕷️ 零代码写爬虫",
+          position: "left",
         },
         {
-          href: 'https://github.com/skychx',
-          className: 'header-github-link',
-          'aria-label': 'GitHub repository',
-          position: 'right',
+          href: "https://github.com/skychx",
+          className: "header-github-link",
+          "aria-label": "GitHub repository",
+          position: "right",
         },
       ],
     },
     footer: {
-      style: 'light',
+      style: "light",
       links: [
         {
-          title: '🧭 项目导航',
+          title: "🧭 项目导航",
           items: [
             {
-              label: '博客 tags',
-              to: 'tags/',
+              label: "博客 tags",
+              to: "tags/",
             },
             {
-              label: 'React Native 升级指南',
-              to: 'docs/react-native-upgrade/index',
+              label: "React Native 升级指南",
+              to: "docs/react-native-upgrade/index",
             },
             {
-              label: 'web scraper 零行代码写爬虫',
-              to: 'https://www.cnblogs.com/web-scraper/',
+              label: "web scraper 零行代码写爬虫",
+              to: "https://www.cnblogs.com/web-scraper/",
             },
           ],
         },
         {
-          title: '🌐 社交账号',
+          title: "🌐 社交账号",
           items: [
             {
-              label: '掘金：卤蛋实验室',
-              to: 'https://juejin.im/user/43636193770071',
+              label: "掘金：卤蛋实验室",
+              to: "https://juejin.im/user/43636193770071",
             },
             {
-              label: '公众号：卤蛋实验室',
-              to: 'https://image-1255652541.file.myqcloud.com/uPic/20190709220018.png',
+              label: "公众号：卤蛋实验室",
+              to: "https://image-1255652541.file.myqcloud.com/uPic/20190709220018.png",
             },
             {
-              label: 'segmentfault：卤代烃',
-              to: 'https://segmentfault.com/u/skychx',
+              label: "segmentfault：卤代烃",
+              to: "https://segmentfault.com/u/skychx",
             },
             {
-              label: '知乎',
-              to: 'https://www.zhihu.com/people/egglabs',
+              label: "知乎",
+              to: "https://www.zhihu.com/people/egglabs",
             },
           ],
         },
         {
-          title: '👨‍💻 交流',
+          title: "👨‍💻 交流",
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/skychx',
+              label: "GitHub",
+              href: "https://github.com/skychx",
             },
             {
-              label: '微信',
-              href: 'https://image-1255652541.file.myqcloud.com/uPic/IMG_6752.JPG'
-            }
+              label: "微信",
+              href: "https://image-1255652541.file.myqcloud.com/uPic/IMG_6752.JPG",
+            },
           ],
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} 超级码力. 微信公众号@卤蛋实验室`,
     },
     zoom: {
-      selector: '.markdown :not(em) > img',
+      selector: ".markdown :not(em) > img",
       config: {
         // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
         background: {
-          light: 'rgb(255, 255, 255)',
-          dark: 'rgb(50, 50, 50)'
+          light: "rgb(255, 255, 255)",
+          dark: "rgb(50, 50, 50)",
         },
         margin: 80,
-      }
-    }
+      },
+    },
   },
   presets: [
     [
-      '@docusaurus/preset-classic',
+      "@docusaurus/preset-classic",
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
           // routeBasePath: '/',
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve("./sidebars.js"),
           remarkPlugins: [remarkMath],
-          rehypePlugins: [rehypeKatex],
+          rehypePlugins: [],
           // Please change this to your repo.
           // editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',
         },
         blog: {
-          blogSidebarTitle: '近期文章',
+          blogSidebarTitle: "近期文章",
           blogSidebarCount: 10,
           showReadingTime: true,
-          path: './blog',
-          routeBasePath: '/',
+          path: "./blog",
+          routeBasePath: "/",
           feedOptions: {
-            type: 'all',
+            type: "all",
             copyright: `Copyright © ${new Date().getFullYear()} 超级码力`,
           },
           remarkPlugins: [remarkMath],
-          rehypePlugins: [rehypeKatex],
+          rehypePlugins: [],
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve("./src/css/custom.css"),
         },
       },
     ],
   ],
   i18n: {
-    defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans'],
+    defaultLocale: "zh-Hans",
+    locales: ["zh-Hans"],
   },
-  plugins: [require.resolve('docusaurus-plugin-image-zoom')],
+  plugins: [require.resolve("docusaurus-plugin-image-zoom")],
 };
+
+async function createConfig() {
+  const rehypeKatex = (await import("rehype-katex")).default;
+  // @ts-ignore
+  config.presets[0][1].docs.rehypePlugins.push(rehypeKatex);
+  // @ts-ignore
+  config.presets[0][1].blog.rehypePlugins.push(rehypeKatex);
+
+  return config;
+}
+
+module.exports = createConfig;
