@@ -53,6 +53,12 @@ const config = {
       },
       items: [
         {
+          to: "docs/learn/home",
+          activeBasePath: "docs/learn",
+          label: "📖 Courses & Books",
+          position: "left",
+        },
+        {
           to: "docs/toys/home",
           activeBasePath: "docs/toys",
           label: "🧸 造轮子学原理",

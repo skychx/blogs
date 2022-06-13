@@ -77,4 +77,23 @@ module.exports = {
       ],
     },
   ],
+  'learn': [
+    'learn/home',
+    {
+      type: 'category',
+      collapsed: false,
+      label: '技术课程',
+      items: [
+        'learn/course/graphics',
+      ],
+    },
+    {
+      type: 'category',
+      collapsed: false,
+      label: '技术书籍',
+      items: [
+        'learn/book/network',
+      ],
+    },
+  ]
 };
