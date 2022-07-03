@@ -41,8 +41,9 @@ const config = {
     },
     algolia: {
       appId: "HX6GJ4R9GS",
-      apiKey: "c96b0e58441e6b89c47e20dd3dff9723",
+      apiKey: "c44280a5e0935f35c65d72e8448d07ef",
       indexName: "supercodepower",
+      contextualSearch: false,
     },
     navbar: {
       title: "卤蛋实验室",
