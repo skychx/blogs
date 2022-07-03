@@ -41,7 +41,7 @@ const config = {
     },
     algolia: {
       appId: "HX6GJ4R9GS",
-      apiKey: "f9d1b98d8ab9cb7849f621f379997243",
+      apiKey: "c96b0e58441e6b89c47e20dd3dff9723",
       indexName: "supercodepower",
     },
     navbar: {
