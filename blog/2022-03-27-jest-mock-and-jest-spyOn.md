@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # 玩转 jest mock 功能
 
 ## 前言
