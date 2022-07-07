@@ -14,7 +14,7 @@ tags: [性能优化]
 
 
 
-最近在做 web 性能优化的工作，所以想集中学习了解一下相关的专题内容。这部分内容肯定要学习一手信息，所以找先找了 https://web.dev/，一个 Google 官方推出的一个面向 Web 开发者的网站，里面有非常多的教程和最佳实践，非常适合有性能优化诉求的开发者去浏览和学习。
+最近在做 web 性能优化的工作，所以想集中学习了解一下相关的专题内容。这部分内容肯定要学习一手信息，所以找先找了 [https://web.dev/](https://web.dev/)，一个 Google 官方推出的一个面向 Web 开发者的网站，里面有非常多的教程和最佳实践，非常适合有性能优化诉求的开发者去浏览和学习。
 
 
 
@@ -72,7 +72,7 @@ tags: [性能优化]
 
 渲染优化的文章主要集中到 13-15 年，最近几年很少说了，这个和历史发展潮流也差不多，13-15 年属于移动互联网高速发展时期，Native 开发还是如日中天，Web 在渲染性能上确实不如 Native，现如今随着内核的发展以及终端机性能的提升，渲染基本上已经不是性能瓶颈了，而且浏览器渲染模块对于 Web 开发者来说也很难去介入，所以内容较少也在情理之中。
 
-JS 优化内容也比较少，一是对于大部分场景来说开发者还没有到优化 JS 解决性能瓶颈，二是很多 JS 优化的内容都搬到 https://v8.dev/blog 了，所以只有几篇早期的文章；JS 框架层的优化最近有一些，例如和 nextjs，react 的合作之类的。
+JS 优化内容也比较少，一是对于大部分场景来说开发者还没有到优化 JS 解决性能瓶颈，二是很多 JS 优化的内容都搬到 [https://v8.dev/blog](https://v8.dev/blog) 了，所以只有几篇早期的文章；JS 框架层的优化最近有一些，例如和 nextjs，react 的合作之类的。
 
 图片视频字体的优化都属于资源优化，内容也不错，可以一起看看单项突破。
 
@@ -179,7 +179,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
   - https://www.npmjs.com/package/source-map-explorer
 - 2019-5-31: [What should you measure to improve performance?](https://web.dev/what-should-you-measure-to-improve-performance/)
 - 2019-5-29: [Are long JavaScript tasks delaying your Time to Interactive?](https://web.dev/i18n/en/long-tasks-devtools/)，TTI 的优化，要把大于 50ms 的长任务进行分块处理
-  - https://philipwalton.com/articles/idle-until-urgent/，对长任务的分解
+  - [https://philipwalton.com/articles/idle-until-urgent/](https://philipwalton.com/articles/idle-until-urgent/)，对长任务的分解
 - 2019-5-24: [Speed at scale: what's new in web performance?](https://web.dev/speed-at-scale/)
 - 2019-5-5: [How to report metrics and build a performance culture](https://web.dev/how-to-report-metrics/)
 - 2018-8-21: [Web Performance Made Easy - Google I/O 2018 edition](https://web.dev/web-performance-made-easy/)，网站优化指南
@@ -253,7 +253,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 - 2020-5-25: [WebSocketStream: integrating streams with the WebSocket API](https://web.dev/i18n/en/websocketstream/)
 - 2020-2-19: [How to set up Signed Exchanges using Web Packager](https://web.dev/signed-exchanges-webpackager/)
 - 2015-3-27: [Important Security Terminology](https://web.dev/intro-to-security-terminology/)，对 HTTPS 的介绍
-- https://www.susielu.com/data-viz/bundle-buddy，chunk 拆包的介绍
+- [https://www.susielu.com/data-viz/bundle-buddy](https://www.susielu.com/data-viz/bundle-buddy)，chunk 拆包的介绍
 - 2013-6-5: [Deep dive into the murky waters of script loading](https://web.dev/speed-script-loading/)，浏览器如何加载资源
   - 标准：https://html.spec.whatwg.org/multipage/scripting.html#script
   - https://hacks.mozilla.org/2009/06/defer/
@@ -300,7 +300,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 
 ### 图片
 
-- https://images.tooling.report/，查询各个 SaaS 服务对图片的优化
+- [https://images.tooling.report/](https://images.tooling.report/)，查询各个 SaaS 服务对图片的优化
 - [Building an adaptive favicon](https://web.dev/building-an-adaptive-favicon/)，用 svg 代替 ico 图标
 - [Building an effective Image Component](https://web.dev/image-component/)，利用一个 image 组件优化图片大小/宽高/优先级
 - 2021-6-7: [Using AVIF to compress images on your site](https://web.dev/compress-images-avif/)，介绍了 AVIF 图片格式
@@ -336,7 +336,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 - 2020-5-26: [More variable font options for the macOS system-ui font in Chromium 83](https://web.dev/more-variable-font-options-in-chromium-83/)，可变字体控制
 - 2020-5-18: [Prevent layout shifting and flashes of invisible text (FOIT) by preloading optional fonts](https://web.dev/i18n/en/preload-optional-fonts/)，介绍了 font-display: optional 在 chrome83 的改动，由原来的布局抖动模式变成加载前 或 100ms 前白屏显示了
   - 2018-4-23: [通过预加载 web 字体提高加载速度](https://web.dev/codelab-preload-web-fonts/)
-  - https://font-display.glitch.me/：介绍了 font-display 的行为模式
+  - [https://font-display.glitch.me/](https://font-display.glitch.me/)：介绍了 font-display 的行为模式
   - https://css-tricks.com/font-display-masses/
 
 
@@ -352,7 +352,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 - 2021-2-25: [Streams—The definitive guide](https://web.dev/streams/)，对浏览器中的 Streams API 的介绍
 - 2020-9-29: [Detached window memory leaks](https://web.dev/detached-window-memory-leaks/)，内存泄漏检测
 - 2020-8-20: [Choose the best build tool for your project with tooling.report](https://web.dev/introducing-tooling-report/)
-  - https://bundlers.tooling.report/，用来对比不同构建工具的特点/优点/缺点
+  - [https://bundlers.tooling.report/](https://bundlers.tooling.report/)，用来对比不同构建工具的特点/优点/缺点
 - 2020-5-26: [How CommonJS is making your bundles larger](https://web.dev/i18n/en/commonjs-larger-bundles/)。tree-shaking 的运用
   - [The Cost Of JavaScript In 2018](https://medium.com/@addyosmani/the-cost-of-javascript-in-2018-7d8950fbb5d4)
   - [The cost of JavaScript in 2019 · V8](https://v8.dev/blog/cost-of-javascript-2019)，有 JS bundle 大小的测量和考据
@@ -411,7 +411,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 - 2020-11-25: [Building a Stories component](https://web.dev/building-a-stories-component/)
 - 2020-5-14: [Responsive web design basics](https://web.dev/i18n/en/responsive-web-design-basics/)，响应式设计基础知识
 - 2019-8-31: [Icons and browser colors](https://web.dev/icons-and-browser-colors/)，定义浏览器的组件颜色
-- 2013-12-18: [HTML's New Template Tag](https://web.dev/webcomponents-template/#the-road-to-a-standard)，HTML <template> 标签
+- 2013-12-18: [HTML's New Template Tag](https://web.dev/webcomponents-template/#the-road-to-a-standard)，HTML &lt;template&gt; 标签
 
 
 
@@ -447,7 +447,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 - 2020-12-10: [Extending Workbox](https://web.dev/extending-workbox/)，Workbox 是一个用来处理 Service Worker 缓存的工具箱，这篇文章主要介绍了如何制定自定义的缓存方案
 - 2020-12-8: [Workers overview](https://web.dev/workers-overview/)
   - 介绍了 Web Worker 和 Service Worker
-    - Web Worker：主要是做复杂计算的，抽象库：https://github.com/GoogleChromeLabs/comlink，介绍：https://surma.dev/things/when-workers/
+    - Web Worker：主要是做复杂计算的，抽象库：[https://github.com/GoogleChromeLabs/comlink](https://github.com/GoogleChromeLabs/comlink)，介绍：[https://surma.dev/things/when-workers/](https://surma.dev/things/when-workers/)
     - Service Worker：主要是拦截网络请求的，抽象库：https://developer.chrome.com/docs/workbox/
   - [Imperative caching guide](https://web.dev/imperative-caching-guide/)：命令式单向缓存
   - [Broadcast updates to pages with service workers](https://web.dev/broadcast-updates-guide/)：广播式更新
@@ -461,7 +461,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 - 2020-4-27: [The Cache API: A quick guide](https://web.dev/cache-api-quick-guide/)，Cache API，用来控制网络缓存，尽管它被定义在 service worker 的标准中， 但是它不必一定要配合 service worker 使用
 - 2019-12-17: [Threading the web with module workers](https://web.dev/module-workers/)
 - 2019-6-4: [Service worker mindset](https://web.dev/service-worker-mindset/)
-  - https://serviceworkies.com/：一个学习 Service worker 的游戏网站
+  - [https://serviceworkies.com/](https://serviceworkies.com/)：一个学习 Service worker 的游戏网站
 - 2018-9-20: [Service worker registration](https://web.dev/service-workers-registration/)
 - 2018-2-27: [Measuring the Real-world Performance Impact of Service Workers](https://web.dev/service-worker-perf/)
 - 2015-10-1: [Service Workers in Production](https://web.dev/service-workers-iowa/)
@@ -511,9 +511,9 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 - 2021-1-25: [Human interface devices on the web: a few quick examples](https://web.dev/hid-examples/)
 - 2021-1-8: [Automating audits with AutoWebPerf](https://web.dev/autowebperf/)，性能测试工具
 - 2021-1-7: [Deprecating Excalidraw Electron in favor of the web version](https://web.dev/deprecating-excalidraw-electron/)
-  - https://youmightnotneedelectron.com/，也许不需要 electron 的原因：Web 提供了很多 API
-- 2020-9-3: [Introducing <model-viewer> 1.1](https://web.dev/introducing-model-viewer/)
-- 2020-8-21: [The <model-viewer> web component](https://web.dev/model-viewer/)
+  - [https://youmightnotneedelectron.com/](https://youmightnotneedelectron.com/)，也许不需要 electron 的原因：Web 提供了很多 API
+- 2020-9-3: [Introducing &lt;model-viewer&gt; 1.1](https://web.dev/introducing-model-viewer/)
+- 2020-8-21: [The &lt;model-viewer&gt; web component](https://web.dev/model-viewer/)
 - 2020-8-5: [Web on Android](https://web.dev/web-on-android/)，简单介绍了 Android 上的 WebView 架构
 - 2020-5-26: [ResizeObserver: it’s like document.onresize for elements](https://web.dev/i18n/en/resize-observer/)
 - 2020-4-27: [Storage for the web](https://web.dev/i18n/en/storage-for-the-web/)，介绍了几种 web storage 的不同
@@ -625,3 +625,25 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 - 2018-3-14: [Credential Management API Feature Detection Check-up](https://web.dev/webauthn-credential-management/)
 - 2013-10-29: [Getting started with Web Audio API](https://web.dev/webaudio-intro/)
 - 2013-10-29: [Getting started with Web Audio API](https://web.dev/customelements/)
+
+<br />
+
+----
+
+个人微信：**egg_labs**
+
+<p>
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" />
+</p>
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+:::note 一个小尾巴
+欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+:::
