@@ -7,12 +7,15 @@ author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 对 web.dev 所有的 blog 进行了整理和归档，方便后续回顾与总结
 draft: false
+date: 2022-08-06
 tags: [性能优化]
 ---
 
 ![web_dev_hero_image](https://image-1255652541.file.myqcloud.com/uPic/web_dev_hero_image.jpg)
 
-
+:::info 更新提示
+文章已于 2022-08-06 更新
+:::
 
 最近在做 web 性能优化的工作，所以想集中学习了解一下相关的专题内容。这部分内容肯定要学习一手信息，所以找先找了 [https://web.dev/](https://web.dev/)，一个 Google 官方推出的一个面向 Web 开发者的网站，里面有非常多的教程和最佳实践，非常适合有性能优化诉求的开发者去浏览和学习。
 
@@ -37,7 +40,7 @@ tags: [性能优化]
 
 ## 内容分类：
 
-截止到目前为止（2022-7-7），web.dev 一共发布了 631 篇 blog，从 blog 的内容和发布时间可以很明显的看出 google 官方的发力（营销）方向，比如说前几年在推 [PWA](https://web.dev/progressive-web-apps/)，这两年在推 [Web Vitals](https://web.dev/learn-web-vitals/)。纵观下来，Blog 的内容可以分为以下几类
+截止到文章更新时间为止（2022-8-6），web.dev 一共发布了 639 篇 blog，从 blog 的内容和发布时间可以很明显的看出 google 官方的发力（营销）方向，比如说前几年在推 [PWA](https://web.dev/progressive-web-apps/)，这两年在推 [Web Vitals](https://web.dev/learn-web-vitals/)。纵观下来，Blog 的内容可以分为以下几类
 
 - **性能指标**：例如 Web Vitals，FMP，TTI 这些概念和相对应的优化策略
 - **优化策略**：例如对网络的优化，对图片/字体/CSS/JS 的优化
@@ -62,7 +65,7 @@ tags: [性能优化]
 
 | 种类       | 篇数 | 时间跨度                              |
 | ---------- | ---- | ------------------------------------- |
-| 网络优化   | 46   | 主要为 2018 - 2022                    |
+| 网络优化   | 47   | 主要为 2018 - 2022                    |
 | 渲染       | 28   | 主要为 2013 - 2015，2018 做了相关修订 |
 | 图片优化   | 13   | 主要为 2019                           |
 | JS/JS 框架 | 15   | 主要为 2020 - 2021                    |
@@ -84,8 +87,8 @@ JS 优化内容也比较少，一是对于大部分场景来说开发者还没�
 
 | 种类             | 篇数 | 时间跨度           |
 | ---------------- | ---- | ------------------ |
-| CSS新特性/新属性 | 27   | 主要为 2019 - 2020 |
-| UI 组件/设计     | 12   | 主要为 2021        |
+| CSS新特性/新属性 | 28   | 主要为 2019 - 2020 |
+| UI 组件/设计     | 13   | 主要为 2021        |
 | 交互             | 15   | 2019 - 2021        |
 
 CSS 主要介绍的是一些 CSS新特性新属性，还有一些关于 CSS 的使用/优化文章。
@@ -191,6 +194,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 
 ### 网络
 
+- 2022-7-25: [How the BBC is rolling out HSTS for better security and performance.](https://web.dev/bbc-hsts/)，利用 HSLS 完成浏览器内的 HTTP to HTTPS 重定向跳转，性能更好安全更好
 - 2022-3-8: [Optimizing resource loading with Priority Hints](https://web.dev/priority-hints/)
   - `fetchpriority` 属性的运用，用来修改资源加载优先级，Chrome101 可用
   - 这里面有资源加载优先级的表格和说明：https://docs.google.com/document/d/1bCDuq9H1ih9iNjgzyAL0gpwNFiEP4TZS-YLRp_RuMlc/edit#heading=h.ua1godj1atee
@@ -368,7 +372,8 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 
 ### CSS
 
-- 2022-5-11: Grid [Bridging the gap](https://web.dev/bridging-the-gap/)
+- 2022-8-2: [Finer grained control over CSS transforms with individual transform properties](https://web.dev/css-individual-transform-properties/)，拆分设置 transform 属性
+- 2022-5-11: [Bridging the gap](https://web.dev/bridging-the-gap/)，Grid 布局
 - 2021-10-19: [Improved dark mode default styling with the color-scheme CSS property and the corresponding meta tag](https://web.dev/i18n/en/color-scheme/)
 - 2021-8-17: [Using CSS Module Scripts to import stylesheets](https://web.dev/css-module-scripts/)，Chrome 93 可用
 - 2021-6-9: [Building a color scheme](https://web.dev/building-a-color-scheme/)，通过 hsl() 和 calc() 构建可动态计算的颜色主题
@@ -400,6 +405,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 
 ### UI
 
+- 2022-8-1: [CSS border animations](https://web.dev/css-border-animations/)，CSS 设置边框动画的小技巧
 - 2021-12-18: [How Terra improved user engagement thanks to Dark Mode](https://web.dev/terra-dark-mode/)
 - 2021-5-26: [The new responsive: Web design in a component-driven world](https://web.dev/new-responsive)
 - 2021-4-20: [Building split text animations](https://web.dev/building-split-text-animations/)，文字动效

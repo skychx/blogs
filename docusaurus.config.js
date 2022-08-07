@@ -167,6 +167,7 @@ const config = {
           rehypePlugins: [],
           // Please change this to your repo.
           // editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',
+          showLastUpdateTime: true,
         },
         blog: {
           blogSidebarTitle: "近期文章",
@@ -191,7 +192,9 @@ const config = {
     defaultLocale: "zh-Hans",
     locales: ["zh-Hans"],
   },
-  plugins: [require.resolve("docusaurus-plugin-image-zoom")],
+  plugins: [
+    require.resolve("docusaurus-plugin-image-zoom"),
+  ],
 };
 
 async function createConfig() {
