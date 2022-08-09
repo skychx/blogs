@@ -44,7 +44,7 @@ iOS 和 Android 虽然都是一年更新一个大版本，但受益于生态的�
 
 说完 iOS 我们再谈谈 Android。因为两个操作系统的发展策略不同，再加上国内各大厂商的魔改，Android 从一开始就深陷碎片化的深渊，有 Android 开发经历的同学一定都深有感触。
 
-Android 系统本身碎片化，Android 系统自带的浏览器**更碎片化**。在 Android 早期，Android 版本和 Chrome 浏览器版本是有绑定关系的，那这个早期是有多早？那就是 `Android 4`，2014 年发布，绑定了 `Chrome 30`，因为数据不多，我这里就直接列出来：
+Android 系统本身碎片化，Android 系统自带的浏览器**更碎片化**。在 Android 早期，Android 版本和 Chrome 浏览器版本是有绑定关系的，那这个早期是有多早？那就是 `Android 4`，2014 年发布，绑定了 Chrome 早期几个版本，因为数据不多，我这里就直接列出来：
 
 ```javascript
 // https://github.com/zloirock/core-js/blob/master/packages/core-js-compat/src/mapping.mjs
@@ -92,13 +92,33 @@ https://juejin.cn/post/6844903564737789965#heading-8
 
 一些看起来非常酷炫的 web/javascript 能力，大家往往说支持度不好，事实真的如此吗？
 
-- Proxy
-- Web Worker
-- Service Worker
-- Wasm
-- WebGPU
+- Proxy：iOS10，Chrome49
 
-- Web Component
+- Class：iOS9，Chrome49
+- =>：iOS10，Chrome45
+- ...: iOS8，Chrome46
+- const: iOS11，Chrome49
+- let: iOS11，Chrome49
+- Async await: iOS11，Chrome55
+- Promise: iOS8，Chrome33
+
+
+
+- ES5: 2009.12
+- ES6: **2015.6**
+- iOS9: 2015.6、**iOS10: 2016.6**，**iOS11: 2017.6**
+- **Chrome49：2016-03-02**，**Chrome61：2017-09-05**
+
+
+
+从时间上看，2015.6 更新最大的 ES6 版本，时隔一年后 Safari、Chrome 语法就已经支持的差不多了；再隔一年后也就是 2017 年就可以说是完全支持了（也就是现代浏览器的划分界限）
+
+
+
+- Web Worker：iOS5，Chrome4
+- Service Worker：iOS11.3，Chrome45
+- Wasm：iOS11，Chrome57
+- WebGPU：均不支持
 
 
 
@@ -106,9 +126,10 @@ https://juejin.cn/post/6844903564737789965#heading-8
 
 会涉及到兼容性的一些开源项目
 
-- canisue
-- Browserslist
-- 
+- https://caniuse.com/
+- [Browserslist](https://github.com/browserslist/browserslist)：用到了 [caniuse-lite](https://github.com/browserslist/caniuse-lite)，数据集就是 [caniuse](https://github.com/Fyrd/caniuse)，只是裁剪了不必要的文案
+  - babel、eslint、autoprefixer、postcss、webpack 都是他的下游
+- mdn：https://github.com/mdn/browser-compat-data，最上游的数据依赖
 
 
 
