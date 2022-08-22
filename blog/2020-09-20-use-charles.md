@@ -7,10 +7,15 @@ author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 本文是我深度使用 Charles 后总结而成，不同于其它介绍 Charles 的文章，这篇文章不会详细介绍 Charles 的各个功能，而是专注于分析一个问题：什么情况下 Charles 会抓包失败？
 draft: false
+date: 2022-08-22
 tags: [HTTP, '计算机网络', '网络安全', '工具']
 ---
 
 ![为什么你的 Charles 会抓包失败-头图](https://image-1255652541.file.myqcloud.com/uPic/cover.jpg)
+
+:::info 更新提示
+文章已于 2022-08-22 更新
+:::
 
 作为一名 Web 开发工程师，天天都会和网络打交道。Charles 作为一款网络抓包工具，几乎成了 Web 开发的标配。
 
@@ -146,11 +151,25 @@ TLS 的加入，加强了网络的安全性的同时，也增加了抓包的复�
 :::
 
 
+#### 0.Charles 开启 SSL Proxying
+
+安装证书前需要先确保 Charles 开启了 SSL Proxying。点击 **Proxy -> SSL Proxying Settings...**，确保 `Enable SSL Proxying` 勾选上。
+
+下方的「**Include 面板**」可以写要进行 HTTPS 抓包的网址域名和端口号，如果为了省事，可以填写 `*:443`，也就是对所有 HTTPS 网站抓包的意思（当然这样做会对 Charles 有一定的解码压力，数据量大了后会引起一定的卡顿和内存占用，不过大部分情况下这样做就够用了）。
+
+
+<p>
+<img alt="Charles SSL Proxying Settings" src="https://image-1255652541.file.myqcloud.com/uPic/Xnip2022-08-22_23-02-29.jpg" width="60%" />
+</p>
+
+
 #### 1.电脑端安装证书
 
 电脑端安装证书是最简单的。首先点击 **Charles -> Help -> SSL Proxying -> Install Charles Root Certificate** 在电脑端安装证书，然后点击刚刚安装的证书，手动信任全部权限，最后输入密码保存修改就可。
 
 ![](https://image-1255652541.file.myqcloud.com/uPic/MacInstallCA.jpg)
+
+
 
 
 
@@ -161,6 +180,10 @@ iOS 安装证书相对来说复杂一些。首先点击 **Charles -> Help -> SSL
 ![](https://image-1255652541.file.myqcloud.com/uPic/iOSInstallCA.jpg)
 
 安装好后还要手动开启权限。先要到 **通用 -> 描述文件与设备管理 -> 信任** 里安装刚刚下载的证书，然后到 **通用 -> 关于本机 -> 证书信任设置 -> 针对根证书启用完全信任** 里手动信任证书，这两个同意后 iOS 就安装证书成功了。
+
+:::info 更新说明
+新版 iOS 15 「证书安装」入口发生改变：**通用 -> VPN与设备管理 -> 配置描述文件**
+:::
 
 ![](https://image-1255652541.file.myqcloud.com/uPic/iOSTrustCA.jpg)
 
@@ -192,11 +215,17 @@ Android 系统对二进制格式的证书兼容性更好一些，所以我们选
 
 作为一名程序员，为了顺畅的访问 GitHub 等网站，我们总会用些“辅助工具”。这些工具一般会自动开启 HTTP/HTTPS 代理从而抢占端口，导致 Charles 代理失败。
 
-解决这个问题也很简单，**Charles 抓包前，把电脑和手机的辅助工具都关掉**，这样就不会有代理冲突的问题了。我们可以查看电脑的 Wi-Fi 代理界面，开启 Charles 抓包前要保证下面的选项都没被勾选就好了。
+解决这个问题也很简单，**Charles 抓包前，把「电脑」和「手机」的辅助工具都关掉**，这样就不会有代理冲突的问题了。
+
+Mac 电脑可以查看它的 Wi-Fi 代理界面，开启 Charles 抓包前要保证下面的选项都没被勾选就好了。
 
 ![](https://image-1255652541.file.myqcloud.com/uPic/MacProxySetting.jpg)
 
-肯定也有人想过我们本地挂两个代理，报文先经过工具，然后经过 Charles 抓包，最后传输到客户端。首先这种方案是可行的，但是实际用下来会非常的卡，延迟也很高，所以并不建议这样使用。
+iOS 手机需要注意左上角的信号图标旁有没有 VPN 标识，若有则需要关闭；Android 手机系统多样就不做过多介绍了
+
+<br />
+
+PS：肯定也有人想过我们本地挂两个代理，报文先经过工具，然后经过 Charles 抓包，最后传输到客户端。首先这种方案是可行的，但是实际用下来会非常的卡，延迟也很高，所以并不建议这样使用。
 
 
 
@@ -264,11 +293,9 @@ Android 系统对二进制格式的证书兼容性更好一些，所以我们选
 
 我们自己安装的 Charles 证书都属于用户 CA 证书。除了证书的权限问题，Android 的不同版本对权限的处理规则也不一样：
 
-✅：**Android 7.0 以下**：信任用户 CA 证书，可以简单的理解为我们安装的证书直接获得 ROOT 权限
-
-✅：**Android 7.0 以上， targetSdkVersion < 24**：信任用户 CA 证书
-
-❌：**Android 7.0 以上， targetSdkVersion >= 24**：不信任用户 CA 证书
+- ✅：**Android 7.0 以下**，信任用户 CA 证书，可以简单的理解为我们安装的证书直接获得 ROOT 权限
+- ✅：**Android 7.0 以上， targetSdkVersion < 24**：信任用户 CA 证书
+- ❌：**Android 7.0 以上， targetSdkVersion >= 24**：不信任用户 CA 证书
 
 <br />
 
