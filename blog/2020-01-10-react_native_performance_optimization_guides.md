@@ -15,6 +15,8 @@ tags: [react native, '性能优化', 跨端开发]
 ![](https://image-1255652541.file.myqcloud.com/images/20200109010149.png)
 
 :::info 更新提示
+文章已于 2022-08-29 更新「图片」优化内容
+
 文章已于 2022-01-22 更新「Fabric」架构章节
 
 文章已于 2021-07-01 更新 Redux 优化内容
@@ -476,6 +478,12 @@ iOS 可以通过 source 参数里的 cache 字段控制缓存，属性也是非�
 
 ### 2⃣️ 优先使用 32 位色彩深度的图片
 
+:::caution 2022-08-29 更新
+此条优化并不是万能的！！！
+
+当初写这个主要是考虑到 `CPU -> GPU` 的通信问题，例如 32 位图片可以在 iOS 上节省一次 CPU 转换耗时。但是对于 99% 的项目而言，这样的优化用处不大。
+:::
+
 **📄 色彩深度 wiki**：https://www.wikiwand.com/zh-hans/%E8%89%B2%E5%BD%A9%E6%B7%B1%E5%BA%A6
 
 
@@ -491,7 +499,7 @@ iOS 可以通过 source 参数里的 cache 字段控制缓存，属性也是非�
 
 为啥推荐使用 32 bit 图片呢？直接原因有 2 个：
 
-1. **Android** 推荐使用 [🔗 ARGB_8888](https://developer.android.com/reference/android/graphics/Bitmap.Config#ARGB_8888) 格式的图片，因为这种图片显示效果更好
+1. **Android** 推荐使用 [🔗 ARGB_8888](https://developer.android.com/reference/android/graphics/Bitmap.Config#ARGB_8888) 格式的图片，因为这种图片显示效果更好（部分项目可能使用 [🔗 ARGB_4444](https://developer.android.com/reference/android/graphics/Bitmap.Config#ARGB_4444) 优化内存占用，但是此配置因图片显示质量问题已于 API level 29 弃用）
 2. **iOS** GPU 只支持加载 32 bit 的图片。如果是其他格式的（比如说 24 bit 的 jpg），会先在 CPU 里转为 32 bit，再传给 GPU
 
 
@@ -574,6 +582,15 @@ https://www.imagescloud.com/image.jpg/0/w/100/h/100/q/80
 
 这样子就可以把计算转移到服务端，减少前端的 CPU 占用，优化前端整体的性能。
 
+-----
+
+虽然把裁剪压力转移到服务端/CDN，但从整体考虑，我们还要重新考虑服务端的设计，这里可以参考「网易云音乐团队」的博文：[云音乐 iOS 端网络图片下载优化实践](https://zhuanlan.zhihu.com/p/559129705)，通过一系列的设计解决了以下问题：
+
+- URL 拼接的参数不同，导致无法命中缓存，这样会有重复下载的问题
+- 不同机型的UI尺寸大小可能不太一致，导致下载的片尺寸会不一样，机型种类越多，拼接的尺寸情况也越多，服务端需要重复裁剪
+- 质量参数由上层业务自行决定，会导致不同端没有约定好，下载到各式各样的图片
+
+这些优化最后整体上优化了 50% 的下载速度和节省了 10% 的 CDN 带宽，非常值得阅读。
 
 
 
@@ -1108,19 +1125,19 @@ VirtualizedList 的数据不是一下子全部渲染的，而是分批次渲染�
 
 #### 2.Use simple components & Use light components
 
-使用简单组件，核心就是减少逻辑判断和嵌套，优化方式可以参考「[二、减轻渲染压力](https://supercodepower.com/react_native_performance_optimization_guides#%E4%BA%8C%E3%80%81%E5%87%8F%E8%BD%BB%E6%B8%B2%E6%9F%93%E5%8E%8B%E5%8A%9B)」的内容。
+使用简单组件，核心就是减少逻辑判断和嵌套，优化方式可以参考「[二、减轻渲染压力](#%E4%BA%8C%E3%80%81%E5%87%8F%E8%BD%BB%E6%B8%B2%E6%9F%93%E5%8E%8B%E5%8A%9B)」的内容。
 
 
 
 #### 3.Use shouldComponentUpdate
 
-参考「[一、re-render](https://supercodepower.com/react_native_performance_optimization_guides#%E4%B8%80%E3%80%81%E5%87%8F%E5%B0%91-re-render)」的内容。
+参考「[一、re-render](#%E4%B8%80%E3%80%81%E5%87%8F%E5%B0%91-re-render)」的内容。
 
 
 
 #### 4.Use cached optimized images
 
-参考「[三、图片优化那些事](https://supercodepower.com/react_native_performance_optimization_guides#%E4%B8%89%E3%80%81%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B)」的内容。
+参考「[三、图片优化那些事](#%E4%B8%89%E3%80%81%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B)」的内容。
 
 
 
@@ -1132,7 +1149,7 @@ VirtualizedList 的数据不是一下子全部渲染的，而是分批次渲染�
 
 #### 6.Avoid anonymous function on renderItem
 
-renderItem 避免使用匿名函数，参考「[四、对象创建调用分离](https://supercodepower.com/react_native_performance_optimization_guides#%E5%9B%9B%E3%80%81%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E8%B0%83%E7%94%A8%E5%88%86%E7%A6%BB)」的内容。
+renderItem 避免使用匿名函数，参考「[四、对象创建调用分离](#%E5%9B%9B%E3%80%81%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E8%B0%83%E7%94%A8%E5%88%86%E7%A6%BB)」的内容。
 
 
 
