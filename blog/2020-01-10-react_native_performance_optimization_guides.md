@@ -1125,19 +1125,19 @@ VirtualizedList 的数据不是一下子全部渲染的，而是分批次渲染�
 
 #### 2.Use simple components & Use light components
 
-使用简单组件，核心就是减少逻辑判断和嵌套，优化方式可以参考「[二、减轻渲染压力](#%E4%BA%8C%E3%80%81%E5%87%8F%E8%BD%BB%E6%B8%B2%E6%9F%93%E5%8E%8B%E5%8A%9B)」的内容。
+使用简单组件，核心就是减少逻辑判断和嵌套，优化方式可以参考「[二、减轻渲染压力](#二减轻渲染压力)」的内容。
 
 
 
 #### 3.Use shouldComponentUpdate
 
-参考「[一、re-render](#%E4%B8%80%E3%80%81%E5%87%8F%E5%B0%91-re-render)」的内容。
+参考「[一、减少 re-render](#一减少-re-render)」的内容。
 
 
 
 #### 4.Use cached optimized images
 
-参考「[三、图片优化那些事](#%E4%B8%89%E3%80%81%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E9%82%A3%E4%BA%9B%E4%BA%8B)」的内容。
+参考「[三、图片优化那些事](#三图片优化那些事)」的内容。
 
 
 
@@ -1149,7 +1149,7 @@ VirtualizedList 的数据不是一下子全部渲染的，而是分批次渲染�
 
 #### 6.Avoid anonymous function on renderItem
 
-renderItem 避免使用匿名函数，参考「[四、对象创建调用分离](#%E5%9B%9B%E3%80%81%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E8%B0%83%E7%94%A8%E5%88%86%E7%A6%BB)」的内容。
+renderItem 避免使用匿名函数，参考「[四、对象创建调用分离](#四对象创建调用分离)」的内容。
 
 
 
