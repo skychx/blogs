@@ -146,6 +146,13 @@ div.container img {
   border-radius: 4.5px;
 }
 
+/* 视频居中对齐 */
+div.container video {
+  display: block;
+  margin: 0 auto;
+  border-radius: 4.5px;
+}
+
 /* 表格居中对齐 */
 div.container table {
   display: table;

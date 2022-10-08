@@ -10,11 +10,11 @@ draft: false
 tags: [Android]
 ---
 
-![MIUI_hero_image](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MIUI_hero_image.jpg)
+![MIUI_hero_image](https://image-1255652541.file.myqcloud.com/uPic/MIUI_hero_image.jpg)
 
 
 
-这段时间需要给长辈置换一下手机，在有限的预算内，经过多次比较发现还是小米的硬件配置更好一些，最后也是下单了小米。
+最新需要给长辈置换一下手机，在有限的预算内，经过多次比较发现还是小米的硬件配置更好一些，最后也是下单了小米。
 
 在 2022 年，Android 系统对手机权限的进一步限制，一些过往的卡顿问题都得到了一定的解决。但是在国内的定制版 Android 机上，和原生 Android 系统还是多了一些特色的东西：
 
@@ -24,37 +24,37 @@ tags: [Android]
 
 上面的三个问题中，前两个可以通过一定的努力解决大部分，第三个大家都没得选只能硬抗。本文就是聚焦于「关闭 MIUI 无处不在的广告」这个话题的。
 
+<!--truncate-->
 
+:::note
+虽然 MIUI 一直有 ADUI 的称呼，但是个人身处这个行业也能表示理解：
 
-> 虽然 MIUI 一直有 ADUI 的称呼，但是个人身处这个行业也能表示理解：
->
-> 小米把硬件上的利润压到了最低，赚不到钱就要从其他路子上想办法，只能不停的“**加点儿广告怎么了**”
-
+小米把硬件上的利润压到了最低，赚不到钱就要从其他路子上想办法，只能不停的“**加点儿广告怎么了**”
+:::
 
 
 
 
 废话不多说，我们直接开始。
 
-> 本文成文于 2022.09，使用的是 `MIUI 13.0.4` 版本，随着时间的推移，其它版本 MIUI 可能有操作不一致的情况，这点需要读者注意。
+:::info
+本文成文于 2022.10.08，使用的是 `MIUI 13.0.4` 版本，随着时间的推移，其它版本 MIUI 可能有操作不一致的情况，这点需要读者注意。
+:::
 
 
 
-##一、通过常规手段关闭广告推送
+## 一、通过常规手段关闭广告推送
 
 ### 1.1 关闭系统广告
 
 MIUI 的许多内置应用（例如 天气、万年历、音乐）和系统级页面（例如桌面文件夹）上都会推送一些贴片广告，诱导用户观看和点击。
 
-可能用户反馈过于激烈，2019 年年末某个版本更新中，新增了「一键关闭系统广告」的功能，这个开关也很好找，我们直接进入「设置」，然后在搜索框里输入「系统广告」，然后点击进入新页面，把「系统工具广告」这个开关关上即可。
+可能用户反馈过于激烈，2019 年年末某个版本更新中，新增了「一键关闭系统广告」的功能。这个开关也很好找，我们直接进入「设置」，然后在搜索框里输入「系统广告」，然后点击进入新页面，把「系统工具广告」这个开关关上即可。
 
 我们可以通过「查看涉及应用列表」查看涉及的 APP，然后去相关 APP 里查看是否去掉广告，如果部分广告还没有去除，我们还可以参考这篇文章：[当我们谈论系统广告的时候，还有哪个国内定制 UI 是无辜的？](https://mp.weixin.qq.com/s/hfwqsLczEp2Z7AtpYl62bg)，手动关闭广告。
 
-![MIUI_system_ad](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MIUI_system_ad.png)
+![MIUI_system_ad](https://image-1255652541.file.myqcloud.com/uPic/MIUI_system_ad.png)
 
-
-
-----
 
 这时候其实已经关闭大部分的系统广告了，但是有些内置应用还是有不少关不了的广告，下面我举例说明一下。
 
@@ -62,15 +62,15 @@ MIUI 的许多内置应用（例如 天气、万年历、音乐）和系统级�
 
 **小米浏览器**主页会推送很多新闻，经常会引起首页卡顿和不必要的误触。这时候我们可以进入「浏览器设置」->「主页设置」，选择「简洁版」，然后再把「宫格位推送」开关关掉；退回到浏览器主页后，再点击右上角，按需求要把「快捷网址」和「全网热榜」关掉，最后就能得到一个干净的主页。
 
-![MIUI_browser](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MIUI_browser.png)
+![MIUI_browser](https://image-1255652541.file.myqcloud.com/uPic/MIUI_browser.png)
 
-
+<br />
 
 **小米视频**里面有取消不掉的金币任务，诱导你去安装 APP。实际上在某音某手的存在下，其它的视频 APP 都是没必要的。所以我们可以通过「小米视频设置」->「其它」，关闭「在线服务」，这样它就只会老老实实的播放本地的视频，不会加那么多乱七八糟的视频流信息了。
 
-![MIUI_video](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MIUI_video.png)
+![MIUI_video](https://image-1255652541.file.myqcloud.com/uPic/MIUI_video.png)
 
-
+<br />
 
 **小米音乐**有两个服务模式，一个是「QQ 音乐模式」，一个是「小米音乐模式」，用户可以二选一。
 
@@ -78,7 +78,7 @@ MIUI 的许多内置应用（例如 天气、万年历、音乐）和系统级�
 
 「小米音乐模式」也有在线听音乐的功能，但是和小米视频一样，也有关不掉的广告。所幸它也有关闭「在线内容服务」的能力，如果没有在线听音乐需求（或有别的选择），可以关闭在线服务，让它只用于本地音频播放。
 
-![MIUI_audio](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MIUI_audio.png)
+![MIUI_audio](https://image-1255652541.file.myqcloud.com/uPic/MIUI_audio.png)
 
 
 
@@ -98,7 +98,7 @@ MIUI 的许多内置应用（例如 天气、万年历、音乐）和系统级�
 - **关闭全局搜索**：进入「设置」，搜索「桌面」，进入新页面后关闭「桌面搜索框」开关
 - **关闭负一屏**：进入「设置」，搜索「桌面」，进入新页面后关闭「智能助理」开关
 
-![MIUI_desktop](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/MIUI_desktop.png)
+![MIUI_desktop](https://image-1255652541.file.myqcloud.com/uPic/MIUI_desktop.png)
 
 
 
@@ -124,7 +124,7 @@ MIUI 的许多内置应用（例如 天气、万年历、音乐）和系统级�
 
 如果是这么想的那就大错特错了，首先安装包看着那么小，实际上只是障眼法，这些极速版 APP 基本都会在启动后把少的体积一兆不差的下载回来。那极速版到底是个啥？
 
-极速版这个名字及其有误导性，我认为改成「赚钱版」更直白一些。极速版应用已开始就是抄的「趣头条」，专注于下沉市场，拿**刷手机看广告随手赚钱**的噱头吸引一部分用户使用 APP，增加 APP 的覆盖率和每日活跃度。所以说这些 APP 不但不极速，还多了很多广告，直接和本文「去广告」的目的相冲突，所以这些 APP 都是不能安装的。
+极速版这个名字及其有误导性，我认为改成「**网赚版**」更直白一些。极速版应用已开始就是抄的「趣头条」，专注于下沉市场，拿**刷手机看广告随手赚钱**的噱头吸引一部分用户使用 APP，增加 APP 的覆盖率和每日活跃度。所以说这些 APP 不但不极速，还多了很多广告，直接和本文「去广告」的目的相冲突，所以这些 APP 都是不能安装的。
 
 
 
@@ -159,7 +159,9 @@ Android 的权限等级，可以简单的分为 3 个部分：
 
 确保安装好 ADB 后，就可以利用命令行工具卸载内置 APP 了。
 
-> 小米预装的 APP 可以看这个列表：[MIUI 预装软件列表（含系统组件）](https://miuiver.com/wp-content/uploads/miui-pre-installed-software.html)，可以对照着删除
+:::info
+小米预装的 APP 可以看这个列表：[MIUI 预装软件列表（含系统组件）](https://miuiver.com/wp-content/uploads/miui-pre-installed-software.html)，可以对照着删除
+:::
 
 
 
@@ -269,12 +271,11 @@ com.miui.voicetrigger（语音唤醒）
 
 >  李跳跳 apk 下载 -> [网盘，密码 1233](https://wwe.lanzouw.com/b01v0g3wj?w1)
 
-截止到成文为止（2022-09-28），跳广告的版本是「派大星 2.0.1」版本，下载后根据引导安装即可。个人建议直接开成后台常驻，避免系统误杀。
+截止到成文为止（2022-10-08），跳广告的版本是「派大星 2.0.1」版本，下载后根据引导安装即可。个人建议直接开成后台常驻，避免系统误杀。
 
 安装后的效果可见视频（原长 5s 的广告直接跳过了）：
 
-<video width='200px' loop="loop" autoplay src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/litiaotiao.mp4"></video>
-
+<video width='200px' loop="loop" autoPlay src="https://image-1255652541.file.myqcloud.com/uPic/litiaotiao.mp4"></video>
 
 
 ### 4.2 李跳跳 with `auto.js`
@@ -283,13 +284,19 @@ com.miui.voicetrigger（语音唤醒）
 
 看完后如果要获取控件 id 和 bounds（进阶文中均有解释），可以通过一个 APP——**auto.js** 来获取，然后可以参考这篇文章：[利用autojs获取控件信息 ](https://juejin.cn/post/7146224911030157320) 获取相关控件信息并录入到李跳跳 APP 内，保存成功就生效了。
 
-> auto.js apk 下载 -> [网盘，密码 1233](https://wwp.lanzoub.com/iDDrL06ak7dc)
-
+:::info
+auto.js apk 下载 -> [网盘，密码 1233](https://wwp.lanzoub.com/iDDrL06ak7dc)
+:::
 
 
 ## 五、总结
 
-一顿折腾下来，我觉得 Android 真是成于开放也败于开放。过于松散的权限系统让很多 APP 肆无忌惮，也给了各个厂商魔改加广告的能力，这让 Android 生态一直摆脱不了「卡顿」二字；但是另一方面 Android 的可玩性也非常高，像李跳跳这种非常方便的自动化跳广告软件在 iOS 上是绝对搞不出来的。最后还是希望 Android 向好的方向发展，给普通人带来更好的用户体验。
+一顿折腾下来，我觉得 Android 真是**成于开放也败于开放**:
+
+- 过于松散的权限系统让很多 APP 肆无忌惮，也给了各个厂商魔改加广告的能力，这让 Android 生态一直摆脱不了「卡顿」二字
+- 但是另一方面 Android 的可玩性也非常高，像李跳跳这种非常方便的自动化跳广告软件在 iOS 上是绝对搞不出来的
+
+最后还是希望 Android 向好的方向发展，给普通人带来更好的用户体验。
 
 <br />
 <br />
@@ -307,7 +314,7 @@ com.miui.voicetrigger（语音唤醒）
 <br />
 
 <p>
-<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerpolicy="no-referrer" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" referrerPolicy="no-referrer" />
 </p>
 
 
