@@ -14,6 +14,9 @@ import { HeroImage } from '../src/components/heroImage';
 
 <HeroImage name="fontend-target-hero-image.jpg" w={383} h={202} />
 
+:::info 更新提示
+文章已于 2022-10-10 更新
+:::
 
 
 对于大部分开发者来说，版本兼容是一件存在感很低的事情，因为它在绝大部分情况下都是一行配置，在一些前端工具链（例如 Babel、CoreJS，Autoprefixer 等工具）的帮助下适配到目标浏览器，只会在一些大的 break change 事件（例如 Vue3 必须在支持 Proxy 的现代浏览器下才能运行）下才会关注这件不起眼的事情。
@@ -71,7 +74,7 @@ ChromeToAndroid: [
 
 Google 的想法初衷是好的，借助于 Google 商店，解耦更利于浏览器的版本迭代。但是在国内多厂商魔改和一些网络问题上，极有可能发生这样的事情：对于一台 `Android 5` 手机，理论上用户可以安装 `Chrome 36` - `Chrome 95` **任意一个版本**！
 
-所以和 iOS 对比起来，Android 因为他的开放性带来严重的碎片化问题：Android 版本多样，Chrome 版本多样，还有各种魔改内核，对于开发者来说适配起来真的苦不堪言。
+所以和 iOS 对比起来，Android 因为他的开放性带来严重的碎片化问题：Android 版本多样，Chrome 版本多样，还有各种魔改内核（可见本文 [5.Adaptation Suggestions](#5adaptation-suggestions) 章节），对于开发者来说适配起来真的苦不堪言。
 
 
 
@@ -179,23 +182,23 @@ Google 的想法初衷是好的，借助于 Google 商店，解耦更利于浏�
 
 从 App Store/Android 应用商店/浏览器 UA 上看，我们可以得处以下结论（截止到 2022-10-08）：
 
-- **微信**：最低支持到 `iOS 12`、`Android 5`、内置浏览器版本为 `Chrome 86`
-- **抖音**：最低支持到 `iOS 10`、`Android 5`、内置浏览器版本为 `Chrome 75`
+- **微信**：最低支持到 `iOS 12`、`Android 5`、内置浏览器版本为 `Chromium 86`
+- **抖音**：最低支持到 `iOS 10`、`Android 5`、内置浏览器版本为 `Chromium 75`
 - ......
 
-
+<br />
 
 国内还有一大特色，就是各种定制款的浏览器，这里我总结了各个山头的浏览器内核版本（截止到 2022-10-08，主要通过 UA 判断）：
 
-- **字节系**：核心产品有抖音，今日头条，番茄小说等 APP，内核版本主要为 `Chrome 75` 和 `Chrome 88`
-- **阿里系**：核心产品有 UC 浏览器，夸克浏览器等 APP，内核版本主要为 `Chrome 78`
-- **腾讯系**：核心产品为 [X5 浏览器](https://x5.tencent.com/docs/version_list.html)，集成在各个腾讯系 APP 里，同时提供了 [腾讯浏览服务](https://x5.tencent.com/)，第三方 APP 可以自由接入。内核版本主要为 `Chrome 77` 和 `Chrome 89`
-- **微信系**：微信之前的浏览器为 X5 浏览器，后为了和[小程序的浏览器内核](https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/env.html)同构，[2020-05-28](https://developers.weixin.qq.com/community/develop/doc/00082a34e0cfb801b06aab44e50000?_at=1665187527259) 后从 X5 迁移到 XWeb，内核版本主要为 `Chrome 78` 和 `Chrome 86`
-- **百度系**：核心产品有手机百度，内核版本主要为 `Chrome 97`
-- **360 系**：核心产品有 360 浏览器，内核版本主要为 `Chrome 81`
+- **字节系**：核心产品有抖音，今日头条，番茄小说等 APP，内核版本主要为 `Chromium 75` 和 `Chromium 88`
+- **阿里系**：核心产品有 UC 浏览器，夸克浏览器等 APP，内核版本主要为 `Chromium 78`
+- **腾讯系**：核心产品为 [X5 浏览器](https://x5.tencent.com/docs/version_list.html)，集成在各个腾讯系 APP 里，同时提供了 [腾讯浏览服务](https://x5.tencent.com/)，第三方 APP 可以自由接入。内核版本主要为 `Chromium 77` 和 `Chromium 89`
+- **微信系**：微信之前的浏览器为 X5 浏览器，后为了和[小程序的浏览器内核](https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/env.html)同构，[2020-05-28](https://developers.weixin.qq.com/community/develop/doc/00082a34e0cfb801b06aab44e50000?_at=1665187527259) 后从 X5 迁移到 XWeb，内核版本主要为 `Chromium 78` 和 `Chromium 86`
+- **百度系**：核心产品有手机百度，内核版本主要为 `Chromium 97`
+- **360 系**：核心产品有 360 浏览器，内核版本主要为 `Chromium 81`
 - **外来系**：主要为 Google Chrome 浏览器和微软 Edge 浏览器，这两个浏览器基本是就是内核事实标准，一般是最新的两个版本
 
-从以上内容可以看出，目前国内的主流内核分布为 `±77` 和  `±88`，相比目前最新的 `106` 版本，落后 2-3 年。
+从以上内容可以看出，目前国内的主流内核分布为 `±77` 和  `±88`，相比目前最新（2020-10）的 `106` 版本，落后 2-3 年。
 
 
 
@@ -209,6 +212,9 @@ Google 的想法初衷是好的，借助于 Google 商店，解耦更利于浏�
 
 场景如此之多就要依赖于用户版本数据统计了。一般中大厂都有比较完善的数据监控中台，直接拉一份数据就能获取大致情况，基建不完善的小公司也可以单独开个接口记录数据，收集一个月做个去重统计也能得到相关数据。拿到数据后再结合业务场景做些**取舍**，基本上就可以拿到最低适配了。
 
+:::info 案例提醒
+这部分内容建议阅读 GitHub 的博文：[How we think about browsers](https://github.blog/2022-06-10-how-we-think-about-browsers/) ，他们详细统计了 GitHub 的浏览器版本分布情况，最终更改了编译配置，直接输出 ES2019 的 JS 代码，减少了 polyfill 和语法转换带来的体积膨胀和性能损耗问题。
+:::
 
 
 **第三个建议结合前端框架和 Chrome 版本做兼容。**

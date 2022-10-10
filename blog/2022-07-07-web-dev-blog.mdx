@@ -17,7 +17,7 @@ import { HeroImage } from '../src/components/heroImage';
 
 
 :::info 更新提示
-文章已于 2022-08-06 更新
+文章已于 2022-10-10 更新
 :::
 
 最近在做 web 性能优化的工作，所以想集中学习了解一下相关的专题内容。这部分内容肯定要学习一手信息，所以找先找了 [https://web.dev/](https://web.dev/)，一个 Google 官方推出的一个面向 Web 开发者的网站，里面有非常多的教程和最佳实践，非常适合有性能优化诉求的开发者去浏览和学习。
@@ -27,13 +27,13 @@ import { HeroImage } from '../src/components/heroImage';
 网站的核心部分分为 4 类：
 
 - [Learn](https://web.dev/learn/)：体系化的教程，例如性能优化和 PWA
-- [Measure](https://web.dev/measure/)：就是一个在线版本的 Lighthouse，和 Chrome DevTools 的 Performance 功能一致
+- [Measure](https://web.dev/measure/)：就是一个在线版本的 Lighthouse，和 Chrome DevTools 的 Lighthouse 功能一致
 - [Case Study](https://web.dev/tags/case-study/)：优化案例（商业互吹），内容一般为采用 X 优化带来数据 Y 的提升最终带来 Z 的商业增长
 - [Blog](https://web.dev/blog/)：内容较杂，优化教程/API 解读/优化案例等等都有涉及
 
 
 
-从上面的结构可以看出，**Lean/Measure/CaseStudy** 这三个章节内容都是比较体系化的，但是 Blog 内容却没有一个很好的分类。以我的阅读经验，Blog 里有一些非常好的文章，所以我很好奇 Blog 章节里有多少好东西可供挖掘，于是上个月的时候花了一些时间，**把所有的 Blog 读了一遍**，并以自己的认知对内容做了分析和总结，以便自己后续回顾与搜索。
+从上面的结构可以看出，**Lean/Measure/CaseStudy** 这三个章节内容都是比较体系化的，但是 Blog 内容却没有一个很好的分类。以我的阅读经验，Blog 里有一些非常好的文章，所以我很好奇 Blog 章节里有多少好东西可供挖掘，于是花了几个月的时间，**把所有的 Blog 读了一遍**，并以自己的认知对内容做了分析和总结，以便自己后续回顾与搜索。
 
 
 
@@ -43,7 +43,7 @@ import { HeroImage } from '../src/components/heroImage';
 
 ## 内容分类：
 
-截止到文章更新时间为止（2022-8-6），web.dev 一共发布了 639 篇 blog，从 blog 的内容和发布时间可以很明显的看出 google 官方的发力（营销）方向，比如说前几年在推 [PWA](https://web.dev/progressive-web-apps/)，这两年在推 [Web Vitals](https://web.dev/learn-web-vitals/)。纵观下来，Blog 的内容可以分为以下几类
+截止到文章更新时间为止（2022-10-10），web.dev 一共发布了 657 篇 blog，从 blog 的内容和发布时间可以很明显的看出 google 官方的发力（营销）方向，比如说前几年在推 [PWA](https://web.dev/progressive-web-apps/)，这两年在推 [Web Vitals](https://web.dev/learn-web-vitals/)。纵观下来，Blog 的内容可以分为以下几类
 
 - **性能指标**：例如 Web Vitals，FMP，TTI 这些概念和相对应的优化策略
 - **优化策略**：例如对网络的优化，对图片/字体/CSS/JS 的优化
@@ -58,7 +58,7 @@ import { HeroImage } from '../src/components/heroImage';
 
 | 种类               | 篇数 | 时间跨度           |
 | ------------------ | ---- | ------------------ |
-| 性能指标/优化/监控 | 34   | 主要为 2018 - 2022 |
+| 性能指标/优化/监控 | 35   | 主要为 2018 - 2022 |
 
 性能指标绝对是 Google/Chrome 这两年首推的内容了，从 2018 年到 2022，4 年的时间里就推出了 34 篇文章，最近两年的商业案例也基本都是「优化 Web Vitals 指标带来商业收益的」的套路。文章整体的质量都不错，从原因到解决方案到具体用例都有涉及。
 
@@ -71,7 +71,7 @@ import { HeroImage } from '../src/components/heroImage';
 | 网络优化   | 47   | 主要为 2018 - 2022                    |
 | 渲染       | 28   | 主要为 2013 - 2015，2018 做了相关修订 |
 | 图片优化   | 13   | 主要为 2019                           |
-| JS/JS 框架 | 15   | 主要为 2020 - 2021                    |
+| JS/JS 框架 | 16   | 主要为 2020 - 2021                    |
 | font       | 8    | 2020 - 2021                           |
 
 从文章比例上就可以看出，Web 非常关注网络资源的优化，这是 Web 的优点也是 Web 的痛点，JS 运行的再快也扛不住一次网络异常，所以网络优化的内容非常多。
@@ -91,8 +91,8 @@ JS 优化内容也比较少，一是对于大部分场景来说开发者还没�
 | 种类             | 篇数 | 时间跨度           |
 | ---------------- | ---- | ------------------ |
 | CSS新特性/新属性 | 28   | 主要为 2019 - 2020 |
-| UI 组件/设计     | 13   | 主要为 2021        |
-| 交互             | 15   | 2019 - 2021        |
+| UI 组件/设计     | 18   | 主要为 2022 - 2021 |
+| 交互             | 16   | 2019 - 2021        |
 
 CSS 主要介绍的是一些 CSS新特性新属性，还有一些关于 CSS 的使用/优化文章。
 
@@ -113,7 +113,7 @@ UI 是最近有些 blog 写了些 UI 组件，感觉内容也可以学习一下�
 | WebGL/WebGPU              | 6    | 2012               |
 | WebXR                     | 10   | 2017、2020         |
 | Wasm                      | 8    | 2018 - 2021        |
-| Web Component             | 13   | 2016、2017         |
+| Web Component             | 14   | 2016、2017         |
 
 PWA 在前几年 Google 一直在推，但在国内其实一直不温不火的，大公司都有自己的 Hybrid H5 方案，小公司基本都去做小程序开发了；国外看似好一些，但做的最好的 twitter PWA，但我深度体验一年后，发现和 Native 应用比差距还是很大，这已经算全世界做的最好的 PWA APP 了，由此可见 PWA 推广道路之艰辛。不过 PWA 还是有很多值得学习参考的知识点的，还是有必要学习一下的。
 
@@ -139,7 +139,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 
 | 种类                   | 篇数 | 时间跨度         |
 | ---------------------- | ---- | ---------------- |
-| 提案/实验性功能/新 API | 42   | 主要为 2019-2022 |
+| 提案/实验性功能/新 API | 43   | 主要为 2019-2022 |
 
 这部分内容对于普通开发者来说其实不是很必要。一是提案/实验性功能/新 API都比较新，有兼容性问题，一般很难在项目中落地；二是在现实场景里，基本上很少有需求需要用到 Web 的 File API/Bluetooth API 等功能，一般这些场景都是遇到再看，所以这部分内容其实只要知道有就可以，要用到再看细节也不迟。
 
@@ -153,7 +153,8 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 
 ### Web Vitals
 
-- 2022-5-16: [How do modern frameworks perform on the new INP metric](https://web.dev/inp-in-frameworks/#how-are-aurora-and-frameworks-addressing-inp-issues)
+- 2022-8-15: [Why is CrUX data different from my RUM data?](https://web.dev/crux-and-rum-differences/)，主要是介绍了 CrUX 和 RUM 因为统计手段的不同带来的数据差异
+- 2022-5-16: [How do modern frameworks perform on the new INP metric](https://web.dev/inp-in-frameworks/#how-are-aurora-and-frameworks-addressing-inp-issues)，新的 INP 性能指标的文章介绍
 - 2022-5-11: [How SPA architectures affect Core Web Vitals](https://web.dev/vitals-spa-faq/)
 - 2022-1-18: [Core Web Vitals workflows with Google tools](https://web.dev/i18n/en/vitals-tools/) 介绍了可以测量 Core Web Vitals 的一些通用工具
 - 2021-8-17: [Why lab and field data can be different (and what to do about it)](https://web.dev/lab-and-field-data-differences/)
@@ -350,6 +351,11 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 
 ### JS/框架
 
+- 2022-10-3: [Optimize long tasks](https://web.dev/optimize-long-tasks/)，优化 long tasks（50ms 以上的 task 就是 long task）
+  - 利用 setTimeout/postMessage/requestIdleCallback 手动推迟代码运行
+  - 利用 async await 和 setTimeout 搞一个 yieldToMain 函数封装任务队列执行，还可以封装 isInputPending 事件监测
+  - 新的 [postTask](https://caniuse.com/mdn-api_scheduler_posttask) 调度 API 使用
+  - 可以同步看腾讯文档的优化：[异步分片计算在腾讯文档的实践](https://zhuanlan.zhihu.com/p/570318956)
 - 2022-5-18: [Perform efficient per-video-frame operations on video with requestVideoFrameCallback()](https://web.dev/requestvideoframecallback-rvfc/)
 - 2021-6-28: [Resource inlining in JavaScript frameworks](https://web.dev/aurora-resource-inlining/)
   - 内联首屏/关键 css，减少一次网络请求
@@ -405,9 +411,13 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 - 2014-9-17: [Getting Started with CSS Shapes](https://web.dev/shapes-getting-started/)
 - 2012-5-25: [Understanding CSS filter effects](https://web.dev/understanding-css/)
 
-
 ### UI
 
+- 2022-10-6: [Building a floating action button (FAB) component](https://web.dev/building-a-fab-component/)，创建一个浮动按钮，样子就是 Android [Material UI](https://material.io/components/buttons-floating-action-button) 中右下角的浮动加号按钮
+- 2022-9-22: [Speedy CSS Tip! Animated Loader](https://web.dev/speedy-css-tip-animated-loader/)，纯 CSS 画了一个经典 loading 菊花图
+- 2022-9-7: [Building the main navigation for a website](https://web.dev/website-navigation/)，导航组件的设计
+- 2022-8-24: [Creative list styling](https://web.dev/creative-list-styling/)，列表样式
+- 2022-8-24: [Building a crooked grid illusion](https://web.dev/building-a-crooked-grid-illusion/)
 - 2022-8-1: [CSS border animations](https://web.dev/css-border-animations/)，CSS 设置边框动画的小技巧
 - 2021-12-18: [How Terra improved user engagement thanks to Dark Mode](https://web.dev/terra-dark-mode/)
 - 2021-5-26: [The new responsive: Web design in a component-driven world](https://web.dev/new-responsive)
@@ -426,6 +436,10 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 
 ### 交互
 
+- 2022-9-22: [Testing Web Design Color Contrast](https://web.dev/testing-web-design-color-contrast/)，对于颜色可访问性的探索，介绍了 3 个不错的工具
+  - [Pika](https://github.com/superhighfives/pika)：一个 MacOS 的检测工具，SwiftUI 写的，源码有学习价值
+  - [VisBug](https://visbug.web.app/)
+  - [Chrome DevTools](https://developer.chrome.com/docs/devtools/)
 - 2022-2-16: [prefers-reduced-motion: Sometimes less movement is more](https://web.dev/prefers-reduced-motion/)，查询用户偏好，显示/关闭网页动画
 - [2021 Scroll Survey Report](https://web.dev/2021-scroll-survey-report/)，一篇介绍滚动交互的报告
 - 2021-5-29: [Read files in JavaScript](https://web.dev/i18n/en/read-files/)
@@ -573,6 +587,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 
 ### Web Component
 
+- 2022-8-17: [How Nordhealth uses Custom Properties in Web Components](https://web.dev/custom-properties-web-components/)，Web Components 的使用案例介绍
 - 2022-2-23: [Constructable Stylesheets](https://web.dev/constructable-stylesheets/)
 - 2019-6-18: [Web components: the secret ingredient helping power the web](https://web.dev/web-components-io-2019/)
 - 2018-9-20: [Building components](https://web.dev/web-components/)
@@ -592,6 +607,7 @@ Web Worker/Service Worker 加起来也有 22 篇文章，Web Worker 主要用来
 
 ### 提案/实验性功能/新 API
 
+- 2022-9-2: [Is it :modal?](https://web.dev/is-it-modal/)，新的浏览器原生提供的 modal 组件，Chrome105，Safari 15.6 支持
 - 2022-7-1: [TransformStream is now supported cross-browser](https://web.dev/transformstream/)
 - 2022-6-15: [Let installed web applications be file handlers](https://web.dev/file-handling/)，file API
 - 2022-6-2: [The File System Access API: simplifying access to local files](https://web.dev/file-system-access/)
