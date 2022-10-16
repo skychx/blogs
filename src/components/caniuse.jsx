@@ -21,7 +21,7 @@ const iconStyle = (img) => ({
   display: 'inline-block',
   width: '24px',
   height: '24px',
-  backgroundImage: `url(${img})`,
+  backgroundImage: `url(/img/caniuse/${img})`,
 })
 
 
@@ -29,19 +29,19 @@ export const CanIUse = (props) => {
   return (
     <div style={wrap}>
       <span style={item}>
-        <span style={iconStyle('/img/caniuse/chrome.svg')}></span>
+        <span style={iconStyle('chrome.svg')}></span>
         <span style={text}>{props.chrome}</span>
       </span>
       <span style={item}>
-        <span style={iconStyle('/img/caniuse/firefox.svg')}></span>
+        <span style={iconStyle('firefox.svg')}></span>
         <span style={text}>{props.firefox}</span>
       </span>
       <span style={item}>
-        <span style={iconStyle('/img/caniuse/edge.svg')}></span>
+        <span style={iconStyle('edge.svg')}></span>
         <span style={text}>{props.edge}</span>
       </span>
       <span style={item}>
-        <span style={iconStyle('/img/caniuse/safari.png')}></span>
+        <span style={iconStyle('safari.png')}></span>
         <span style={text}>{props.safari}</span>
       </span>
     </div>
