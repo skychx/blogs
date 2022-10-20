@@ -19,6 +19,7 @@
     "@docusaurus/theme-common": "2.0.0-beta.21",
     "@docusaurus/types": "2.0.0-beta.21",
     "@mdx-js/react": "^1.6.21",
+    "book-cover-3d": "^1.1.2",
     "clsx": "^1.1.1",
     "docusaurus-plugin-image-zoom": "^0.1.1",
     "gitalk": "^1.7.2",

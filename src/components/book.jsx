@@ -1,12 +1,18 @@
 import React, { memo } from "react";
+import { BookCover } from 'book-cover-3d'
 
 import styles from './book.module.css';
 
 export const Book = memo((props) => {
   // console.log('props', props)
+  const referrer = props.referrer ? 'origin' : 'no-referrer';
   return (
     <div className={styles.item}>
-      <img src={props.img} referrerPolicy="no-referrer" alt={props.name} style={{ objectFit: 'cover'}} />
+      <div className={styles.bookWrap}>
+        <BookCover width={135} height={200} >
+          <img src={props.img} referrerPolicy={referrer} alt={props.name} style={{ objectFit: 'cover'}} />
+        </BookCover>
+      </div>
       <div>
         <h3 className={styles.title}><a href={props.link}>{props.name}</a></h3>
         <div><b>个人评分：</b>{props.rate}</div>

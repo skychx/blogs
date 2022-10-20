@@ -68,11 +68,11 @@ html[data-theme=dark] {
 }
 
 html[data-theme=dark] div.container img {
-  opacity: 0.618;
+  filter: brightness(0.7);
 }
 
 html[data-theme=dark] img.medium-zoom-image--opened {
-  opacity: 0.618;
+  filter: brightness(0.8);
   border-radius: 4.5px;
 }
 

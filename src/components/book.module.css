@@ -2,6 +2,7 @@
   display: flex;
   flex: 1;
   padding: 12px;
+  padding-left: 16px;
   border: 1px solid var(--ifm-breadcrumb-item-background-active);
   border-radius: 8px;
   margin-bottom: 16px;
@@ -12,19 +13,21 @@
   align-items: center;
 }
 
+.bookWrap {
+  margin-right: 22px;
+  margin-top: 8px;
+}
+
 .item img {
   width: 135px;
   min-width: 135px;
   height: 200px;
-  margin: 0 !important;
-  margin-right: 16px !important;
   object-fit: cover;
 }
 
 .title {
   font-size: 24px;
   margin-bottom: 2px;
-  margin-top: -4px;
 }
 
 .icon {
@@ -40,10 +43,12 @@
 @media (max-width: 600px) {
   .item {
     flex-direction: column;
+    padding-left: 12px;
   }
 
-  .item img {
-    margin: 0 auto 12px !important;
+  .bookWrap {
+    margin-right: 0px;
+    margin-bottom: 20px;
   }
 
   .title {
