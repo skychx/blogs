@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-import { BookCover } from 'book-cover-3d'
 
 import styles from './book.module.css';
 
@@ -9,9 +8,11 @@ export const Book = memo((props) => {
   return (
     <div className={styles.item}>
       <div className={styles.bookWrap}>
-        <BookCover width={135} height={200} >
-          <img src={props.img} referrerPolicy={referrer} alt={props.name} style={{ objectFit: 'cover'}} />
-        </BookCover>
+        <div className={styles['book-container']}>
+        <div className={styles.book}>
+          <img onClick={(e)=>{e.stopPropagation()}} src={props.img} referrerPolicy={referrer} alt={props.name} style={{ objectFit: 'cover'}} />
+        </div>
+      </div>
       </div>
       <div>
         <h3 className={styles.title}><a href={props.link}>{props.name}</a></h3>
@@ -41,14 +42,6 @@ const Label = (props) => {
     </a>
   )
 };
-
-const bookImg = {
-  width: '135px',
-  minWidth: '135px',
-  height: '200px',
-  margin: 0,
-  marginRight: '16px',
-}
 
 const icon = (img) => ({
   backgroundImage: `url(/img/ebook/${img}.png)`,
