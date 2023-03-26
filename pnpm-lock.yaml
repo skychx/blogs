@@ -7,7 +7,7 @@ specifiers:
   '@docusaurus/preset-classic': 2.4.0
   '@docusaurus/theme-common': 2.4.0
   '@docusaurus/types': 2.4.0
-  '@mdx-js/react': ^1.6.21
+  '@mdx-js/react': ^1.6.22
   clsx: ^1.1.1
   docusaurus-plugin-image-zoom: ^0.1.1
   gitalk: 1.8.0
@@ -2107,7 +2107,7 @@ packages:
     peerDependencies:
       react: '*'
     dependencies:
-      '@types/react': 18.0.12
+      '@types/react': 18.0.29
       prop-types: 15.8.1
       react: 17.0.2
     dev: false
@@ -2850,6 +2850,14 @@ packages:
       csstype: 3.1.0
     dev: false
 
+  /@types/react/18.0.29:
+    resolution: {integrity: sha512-wXHktgUABxplw1+UnljseDq4+uztQyp2tlWZRIxHlpchsCFqiYkvaDS8JR7eKOQm8wziTH/el5qL7D6gYNkYcw==}
+    dependencies:
+      '@types/prop-types': 15.7.5
+      '@types/scheduler': 0.16.3
+      csstype: 3.1.1
+    dev: false
+
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
@@ -2868,6 +2876,10 @@ packages:
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
+    dev: false
+
+  /@types/scheduler/0.16.3:
+    resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
     dev: false
 
   /@types/serve-index/1.9.1:
@@ -3218,7 +3230,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.5
-      caniuse-lite: 1.0.30001469
+      caniuse-lite: 1.0.30001470
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -3234,7 +3246,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.20.4
-      caniuse-lite: 1.0.30001352
+      caniuse-lite: 1.0.30001470
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -3455,7 +3467,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001352
+      caniuse-lite: 1.0.30001470
       electron-to-chromium: 1.4.152
       escalade: 3.1.1
       node-releases: 2.0.5
@@ -3467,7 +3479,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001469
+      caniuse-lite: 1.0.30001470
       electron-to-chromium: 1.4.340
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
@@ -3540,17 +3552,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.21.5
-      caniuse-lite: 1.0.30001469
+      caniuse-lite: 1.0.30001470
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: false
 
-  /caniuse-lite/1.0.30001352:
-    resolution: {integrity: sha512-GUgH8w6YergqPQDGWhJGt8GDRnY0L/iJVQcU3eJ46GYf52R8tk0Wxp0PymuFVZboJYXGiCqwozAYZNRjVj6IcA==}
-    dev: false
-
-  /caniuse-lite/1.0.30001469:
-    resolution: {integrity: sha512-Rcp7221ScNqQPP3W+lVOYDyjdR6dC+neEQCttoNr5bAyz54AboB4iwpnWgyi8P4YUsPybVzT4LgWiBbI3drL4g==}
+  /caniuse-lite/1.0.30001470:
+    resolution: {integrity: sha512-065uNwY6QtHCBOExzbV6m236DDhYCCtPmQUCoQtwkVqzud8v5QPidoMr6CoMkC2nfp6nksjttqWQRRh75LqUmA==}
     dev: false
 
   /ccount/1.1.0:
@@ -4127,6 +4135,10 @@ packages:
 
   /csstype/3.1.0:
     resolution: {integrity: sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==}
+    dev: false
+
+  /csstype/3.1.1:
+    resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
     dev: false
 
   /date-fns/2.16.1:

@@ -79,6 +79,10 @@ const config = {
           position: "left",
         },
         {
+          type: "localeDropdown",
+          position: "right",
+        },
+        {
           href: "https://github.com/skychx",
           className: "header-github-link",
           "aria-label": "GitHub repository",
@@ -190,11 +194,9 @@ const config = {
   ],
   i18n: {
     defaultLocale: "zh-Hans",
-    locales: ["zh-Hans"],
+    locales: ["zh-Hans", "en"],
   },
-  plugins: [
-    require.resolve("docusaurus-plugin-image-zoom"),
-  ],
+  plugins: [require.resolve("docusaurus-plugin-image-zoom")],
 };
 
 async function createConfig() {
