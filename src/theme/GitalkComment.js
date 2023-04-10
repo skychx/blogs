@@ -6,6 +6,14 @@ const GitalkComment = () => {
     useEffect(() => {
         // 不做延时的话，title 会取到上一个页面的 title
         const timer = setTimeout(() => {
+            if (
+              window.location.pathname === "/" ||
+              window.location.pathname === "/en/" ||
+              window.location.pathname.includes("/tags/")
+            ) {
+              return;
+            }
+
             const gitalk = new Gitalk({
                 clientID: '277d6847c52327f535a3',
                 clientSecret: 'a5f7d7c615b5179dbdbd72954eda5563f9cd4b44',
