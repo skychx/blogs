@@ -19,7 +19,7 @@ Recently, while working on a project, I used SVG to display some images in order
 
 | Actual display | Expected display |
 | ------- | ------ |
-| ![svg_lose_font](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/svg_lose_font.png) |![svg_with_font](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/svg_with_font.png) | 
+| ![svg_lose_font](https://image-1255652541.file.myqcloud.com/uPic/svg_lose_font.png) |![svg_with_font](https://image-1255652541.file.myqcloud.com/uPic/svg_with_font.png) | 
 
 
 When problems arise, I need to solve them. First, let's check the code to see if I can identify the issue.
@@ -130,7 +130,7 @@ In their [blog post: Making SVG Easier to Use and the Reason We Built Nano](http
 
 With font rasterization, in addition to the issue I mentioned earlier, there is another problem where the font cannot be optimized by the operating system/browser specifically for the font, especially on low-resolution screens. This can lead to font clarity issues, and the most obvious feeling is that the font appears fuzzy:
 
-![broken-fonts](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/broken-fonts.png)
+![broken-fonts](https://image-1255652541.file.myqcloud.com/uPic/broken-fonts.png)
 
 <br />
 
@@ -142,7 +142,7 @@ For example, if you only use the "skychx" 6 characters of the Inter font, it wil
 
 Here is a demo provided by them:
 
-![teams-nano](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/teams-nano.svg)
+![teams-nano](https://image-1255652541.file.myqcloud.com/uPic/teams-nano.svg)
 
 The table below provides a detailed comparison of the file size for the same resource image using different solutions:
 
