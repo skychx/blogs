@@ -4,7 +4,7 @@ title: 🖼️ 如何解决 SVG 图片中字体失效的问题
 author: 卤代烃
 author_title: 微信公众号@卤蛋实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 如何解决 SVG image 中字体失效的问题
 tags: [Web, SVG]
 ---
@@ -19,7 +19,7 @@ tags: [Web, SVG]
 
 | 实际显示 | 预期展示 |
 | ------- | ------ |
-| ![svg_lose_font](https://image-1255652541.file.myqcloud.com/uPic/svg_lose_font.png) |![svg_with_font](https://image-1255652541.file.myqcloud.com/uPic/svg_with_font.png) | 
+| ![svg_lose_font](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/svg_lose_font.png) |![svg_with_font](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/svg_with_font.png) | 
 
 
 出现问题就要解决问题，首先排查一下代码。
@@ -104,7 +104,7 @@ https://stackoverflow.com/questions/30466610/svg-doesnt-use-font-when-inside-htm
 
 > Markup languages like HTML (and SVG itself) can reference SVG as an image with the <img\> tag (HTML namespace) or <image\> tag (HTML or SVG namespace).
 >
-> If an SVG file is fetched as image, then certain requirements apply to this document:
+> If an SVG cos.ap-shanghai is fetched as image, then certain requirements apply to this document:
 >
 > **Fonts shouldn't be loaded as well**.
 
@@ -136,7 +136,7 @@ https://stackoverflow.com/questions/30466610/svg-doesnt-use-font-when-inside-htm
 
 使用 font rasterization 方案后，除了我之前说的问题，还有一个问题是在低分辨率的屏幕上，无法使用操作系统/浏览器专门对字体做的优化，这会导致字体清晰度出问题，最直观的感受就是字体会发虚：
 
-![broken-fonts](https://image-1255652541.file.myqcloud.com/uPic/broken-fonts.png)
+![broken-fonts](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/broken-fonts.png)
 
 <br />
 
@@ -148,7 +148,7 @@ nano 会先分析 svg 文件中使用的 文字/字体/字重，然后会对字�
 
 下面是它们的一个测试 demo：
 
-![teams-nano](https://image-1255652541.file.myqcloud.com/uPic/teams-nano.svg)
+![teams-nano](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/teams-nano.svg)
 
 下面的表格详细对比了对于同一张资源图，各个方案的文件体积：
 

@@ -11,7 +11,6 @@ tags: [性能优化, 性能监控]
 ---
 
 
-
 [`web-vitals`](https://github.com/GoogleChrome/web-vitals) 是 Google 官方推出的一款体积非常小的 library，对很多常见的性能数据做了封装处理（例如 FCP/LCP/CLS 等等），并对用户暴露了简单又统一的 API，大大简化了操作门槛。
 
 

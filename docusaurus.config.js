@@ -145,7 +145,7 @@ const config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} 超级码力. 微信公众号@卤蛋实验室`,
+      copyright: `<a href="https://beian.miit.gov.cn/" id="beian" target="_blank">晋ICP备19004813号-2</a>`,
     },
     zoom: {
       selector: ".markdown :not(em) > img",
@@ -197,6 +197,7 @@ const config = {
     locales: ["zh-Hans", "en"],
   },
   plugins: [require.resolve("docusaurus-plugin-image-zoom")],
+  clientModules: [require.resolve("./src/js/index.js")],
 };
 
 async function createConfig() {
