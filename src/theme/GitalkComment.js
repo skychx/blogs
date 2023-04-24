@@ -38,6 +38,8 @@ const GitalkComment = () => {
         }
     }, []);
 
+    return null;
+
     return <div id="gitalk-container"></div>;
 }
 
