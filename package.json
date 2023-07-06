@@ -9,7 +9,8 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "publish": "npm run build && cd build/ && tcb hosting deploy ./ -e blog-15bc3a"
+    "publish": "npm run build && cd build/ && npx tcb hosting deploy ./ -e blog-15bc3a",
+    "login": "npx cloudbase login"
   },
   "dependencies": {
     "@docusaurus/core": "2.4.0",
@@ -27,7 +28,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rehype-katex": "^6.0.2",
-    "remark-math": "^3.0.1"
+    "remark-math": "^3.0.1",
+    "@cloudbase/cli": "2.2.10"
   },
   "browserslist": {
     "production": [
