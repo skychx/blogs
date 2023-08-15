@@ -2,7 +2,7 @@
 slug: svg-img-use-font
 title: 🖼️ 如何解决 SVG 图片中字体失效的问题
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 如何解决 SVG image 中字体失效的问题
