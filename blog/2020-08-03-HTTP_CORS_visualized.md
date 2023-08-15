@@ -2,7 +2,7 @@
 slug: HTTP_CORS_visualized
 title: 🌐 15 张精美动图全面讲解 CORS
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 15 张精美动图全面讲解 CORS
@@ -307,7 +307,7 @@ CORS Error 一定程度上会让前端开发很头疼，但是遵循它的相关
 <br />
 
 :::note 一个小尾巴
-欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
 :::
 
 

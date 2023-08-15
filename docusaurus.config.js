@@ -8,8 +8,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "微信公众号@卤蛋实验室",
-  tagline: "微信公众号@卤蛋实验室",
+  title: "微信公众号@卤代烃实验室",
+  tagline: "微信公众号@卤代烃实验室",
   url: "https://supercodepower.com",
   onBrokenLinks: "log", // build 过程中遇到可能无法访问的网站时打印提示
   baseUrl: "/",
@@ -46,7 +46,7 @@ const config = {
       contextualSearch: false,
     },
     navbar: {
-      title: "卤蛋实验室",
+      title: "卤代烃实验室",
       hideOnScroll: false,
       logo: {
         alt: "My Site Logo",
@@ -114,11 +114,11 @@ const config = {
           title: "🌐 社交账号",
           items: [
             {
-              label: "掘金：卤蛋实验室",
+              label: "掘金：卤代烃实验室",
               to: "https://juejin.im/user/43636193770071",
             },
             {
-              label: "公众号：卤蛋实验室",
+              label: "公众号：卤代烃实验室",
               to: "https://image-1255652541.file.myqcloud.com/uPic/20190709220018.png",
             },
             {

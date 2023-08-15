@@ -2,7 +2,7 @@
 slug: images-optimization
 title: ⚡️ 我是如何把个人网站的图片服务资费降低 90% 的
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: ⚡️ 我是如何把个人网站的图片服务资费降低 90% 的（优化效果这么明显是因为我从来没有优化过）
@@ -154,5 +154,5 @@ CDN 服务开启后，最大的收益就是加载速度直接**降低一个数�
 <br />
 
 :::note 一个小尾巴
-欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
 :::

@@ -2,7 +2,7 @@
 slug: cross-platform-tech
 title: 🎯【深入解析】跨端框架的核心技术到底是什么？
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 正式讨论「跨端开发」这个概念前，我们可以先思考一个问题：对大部分前端工作来说，前端主要干些啥？我个人认为，无论环境怎么变，前端基本上就是做三件事情：fetch data（数据获取）、manage state（状态管理）、render page（页面渲染）
@@ -231,7 +231,7 @@ Flutter 的架构也是比较清晰的：
 <br />
 
 :::note 一个小尾巴
-欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
 :::
 
 

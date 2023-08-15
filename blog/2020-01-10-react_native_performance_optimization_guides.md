@@ -2,7 +2,7 @@
 slug: react_native_performance_optimization_guides
 title: 🎨 React Native 性能优化指南——渲染篇
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 本文谈到的 React Native 性能优化，还没到修改 React Native 源码那种地步，所以通用性很强，对大部分 RN 开发者来说都用得着。一、减少 re-render 二、减轻渲染压力 三、图片优化那些事 四、对象创建调用分离 五、动画性能优化 六、长列表性能优化 七、React Native 性能优化用到的工具 八、推荐阅读
@@ -1236,6 +1236,6 @@ React Native 的官网上新出了一个[架构专栏](https://reactnative.dev/d
 <br />
 
 :::note 一个小尾巴
-欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
 :::
 

@@ -2,7 +2,7 @@
 slug: React-Native-Update-Guide
 title: Vary + CORS，两大云厂商都在上面栽了跟头
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: Vary + CORS，两大云厂商都在上面栽了跟头
@@ -749,7 +749,7 @@ Cocoapods 在这个版本里也有些改动，除去 Flipper 相关的 pod，改
 <br />
 
 :::note 一个小尾巴
-欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
 :::
 
 

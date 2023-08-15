@@ -2,7 +2,7 @@
 slug: webpack_dll
 title: 📦 辛辛苦苦学会的 webpack dll 配置，可能已经过时了
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 如果大家看过一些 webpack4 优化的文章，一定会出现 dll 动态链接库。它以配置之复杂让众多初学者记忆犹新。今天我会以一个学习者的角度去一步一步探讨 webpack dll 的配置，最后得出一个完美的解决方案。
@@ -371,7 +371,7 @@ module.exports = {
 <br />
 
 :::note 一个小尾巴
-欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
 :::
 
 

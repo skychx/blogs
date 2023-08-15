@@ -2,7 +2,7 @@
 slug: webpack_five_knowledge_points
 title: 📦 webpack 中那些最易混淆的 5 个知识点
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: webpack 中，module，chunk 和 bundle 的区别是什么？filename 和 chunkFilename 的区别是什么？webpackPrefetch、webpackPreload 和 webpackChunkName 到底是干什么的？hash、chunkhash、contenthash 有什么不同？sourse-map 中 eval、cheap、inline 和 module 各是什么意思？
@@ -805,7 +805,7 @@ eval-source-map 会以 eval() 函数打包运行模块，不产生独立的 map 
 <br />
 
 :::note 一个小尾巴
-欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
 :::
 
 

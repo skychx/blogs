@@ -2,7 +2,7 @@
 slug: HTTP_unpopular_knowledge
 title: 🌐 HTTP 规范中的那些暗坑
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 虽然有诸多的优点，但是在协议定义时因为诸多的博弈和限制，还是隐藏了不少暗坑，让人一不小心就会陷入其中。本文总结了 HTTP 规范中常见的几个暗坑，希望大家开发中有意识的规避它们，提升开发体验。1.Referer 2.HTTP 请求中，空格应该被编码为 %20 还是 + ？3.X-Forwarded-For 拿到的就是真实 IP 吗？大部分 HTTP 字段的 value 分隔符是逗号「,」，Cookie 不属于 HTTP 标准，分隔符是分号「;」
@@ -347,5 +347,5 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
 <br />
 
 :::note 一个小尾巴
-欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
 :::

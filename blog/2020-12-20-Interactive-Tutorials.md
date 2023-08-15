@@ -2,7 +2,7 @@
 slug: Interactive-Tutorials
 title: 📎 从回形针的互动视频谈谈交互教程的发展
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 从回形针互动视频展开，谈谈交互教程的发展
@@ -116,7 +116,7 @@ tags: [可视化, 交互]
 
 
 
-欢迎大家关注我的微信公众号：**卤蛋实验室**，目前专注前端技术，对图形学也有一些微小研究。
+欢迎大家关注我的微信公众号：**卤代烃实验室**，目前专注前端技术，对图形学也有一些微小研究。
 
 也可以加我的微信 **egg_labs**，欢迎大家来撩。
 

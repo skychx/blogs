@@ -2,7 +2,7 @@
 slug: react_native_jump_setting_page
 title: 📣 React Native 跳转到 APP 推送页面并获取推送状态
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: React Native 跳转到 APP 推送页面并获取推送状态
@@ -281,5 +281,5 @@ export function openSystemNoticeSetting() {
 <br />
 
 :::note 一个小尾巴
-欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
 :::

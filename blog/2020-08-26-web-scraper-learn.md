@@ -2,7 +2,7 @@
 slug: web-scraper-learn
 title: 🕷️ Web Scraper——轻量数据爬取利器
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: Web Scraper 的优点就是对新手友好，在最初抓取数据时，把底层的编程知识和网页知识都屏蔽了，可以非常快的入门，只需要鼠标点选几下，几分钟就可以搭建一个自定义的爬虫。
@@ -282,7 +282,7 @@ Web Scraper 支持 **CouchDB** 数据库，配置成功后导出的数据就是�
 
 
 
-因为文章发在各大平台上，账号较多不能及时回复评论和私信，有问题可关注公众号 ——「卤蛋实验室」，关注上车防失联。
+因为文章发在各大平台上，账号较多不能及时回复评论和私信，有问题可关注公众号 ——「卤代烃实验室」，关注上车防失联。
 
 ![img](https://image-1255652541.file.myqcloud.com/images/20190709220018.png)
 
@@ -298,5 +298,5 @@ Web Scraper 支持 **CouchDB** 数据库，配置成功后导出的数据就是�
 <br />
 
 :::note 一个小尾巴
-欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
 :::

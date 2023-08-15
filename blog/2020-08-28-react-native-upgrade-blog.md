@@ -2,7 +2,7 @@
 slug: react-native-upgrade-blog
 title: 🧭 React Native 版本升级指南
 author: 卤代烃
-author_title: 微信公众号@卤蛋实验室
+author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: React Native 作为一款跨端框架，有一个最让人头疼的问题，那就是版本更新。尤其是遇到大版本更新，JavaScript、iOS 和 Android 三端的配置构建文件都有非常大的变动，有时候三者的配置文件又互相耦合在一起，往往牵一发而动全身。
@@ -28,5 +28,5 @@ React Native 作为一款跨端框架，有一个最让人头疼的问题，那�
 <br />
 
 :::note 一个小尾巴
-欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
 :::

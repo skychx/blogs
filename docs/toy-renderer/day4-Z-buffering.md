@@ -58,7 +58,7 @@ keywords:
 
 [Z-buffering](https://www.wikiwand.com/en/Z-bufferinging)，中文名又为「深度图」「深度缓冲」，它是通过记录比较**每个像素**的深度信息来解决层级问题。
 
-Z-buffering 算法理解起来其实是非常直观的，我们这里借用《虎书 4》里的一张插图（可以关注🛰️号「卤蛋实验室」后台回复「图形学」领取本书）来讲解一下 Z-buffering 的工作原理。
+Z-buffering 算法理解起来其实是非常直观的，我们这里借用《虎书 4》里的一张插图（可以关注🛰️号「卤代烃实验室」后台回复「图形学」领取本书）来讲解一下 Z-buffering 的工作原理。
 
 ![day04_Z-buffering](https://image-1255652541.file.myqcloud.com/uPic/day04_z-buffer.jpg)
 
@@ -169,7 +169,7 @@ for (P.x = boxmin.x; P.x <= boxmax.x; P.x++) {
 <br />
 
 :::note 一个小尾巴
-欢迎关注公众号：**卤蛋实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
 :::
 
 
