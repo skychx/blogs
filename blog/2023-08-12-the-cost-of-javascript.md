@@ -4,7 +4,7 @@ title: ⚡️ The Cost Of JavaScript (2017 - 2023)
 author: 卤代烃
 author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/WechatIMG17.jpeg
+author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: The Cost Of JavaScript (2017 - 2023) | JavaScript 性能优化之旅
 tags: [性能优化]
 ---
@@ -30,7 +30,7 @@ import { HeroImage } from '../src/components/heroImage';
 
 ## The Cost Of JavaScript
 
-![the-cost-of-js](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/the-cost-of-js.webp)
+![the-cost-of-js](https://image-1255652541.file.myqcloud.com/uPic/the-cost-of-js.webp)
 
 今天的标题是 **The Cost Of JavaScript**，是作者 [Addy Osmani](https://addyosmani.com/) 的系列 Blog 主标题，到今年为止一共写了 4 篇，从 开发者/内核/框架 等角度探索如何优化 JS 执行成本。
 
@@ -61,7 +61,7 @@ Blog 链接：https://medium.com/dev-channel/the-cost-of-javascript-84009f51e99e
 
 这篇 Blog 有个案例非常有意思，就是对比同体积的 JS Script 和 Img 的解析时间。因为体积相同，所以对 network 来说耗时是一样的，但是一张 jpg 的解析和光栅化时间加起来不到 0.1s，对人眼来说基本上是没有感知的；但是 JS 代码的 Parse + Compile + evaluate 时间加起来是 3.5s，几十倍的差距，对比非常的明显。
 
-![img](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/1*PRVzNizF9jQ_QADF5lQHpA.png)
+![img](https://image-1255652541.file.myqcloud.com/uPic/1*PRVzNizF9jQ_QADF5lQHpA.png)
 
 
 
@@ -126,7 +126,7 @@ Chrome 基于这个优化背景，又做了一些优化，那就是流式编译�
 
 最后的实际效果就如下图，让后台编译线程等待时间大大降低，增强性能：
 
-![script-streaming](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/script-streaming.png)
+![script-streaming](https://image-1255652541.file.myqcloud.com/uPic/script-streaming.png)
 
 <br />
 
@@ -158,7 +158,7 @@ code caching 从大类上分其实是 disk caching 的一种，但是它缓存�
 
 不过 code caching 的命中条件会相对苛刻一些，同一个资源需要前 72h 命中两次，之后**第 3 次请求**才会命中 code caching，这部分更详细的知识建议直接看 V8 对 code caching 的系列 Blog。
 
-![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/code-caching@2x.png)
+![](https://image-1255652541.file.myqcloud.com/uPic/code-caching@2x.png)
 
 
 
@@ -207,7 +207,7 @@ Web 因为 JavaScript 提升了天花板，但开发者又需提升 UX 去减少
 
 ## Blog 推荐
 
-本篇文章主要推荐的就是 Addy Osmani 的个人网站 [addyosmani.com](addyosmani.com)，有意思的内容很多，大家可以挖掘一下；另一个有意思的内容就是 V8 的 Blog：[v8.dev/blog](v8.dev/blog)，别看国内那些被嚼了好几遍的性能优化文章了，直接看一手信息多好。
+本篇文章主要推荐的就是 Addy Osmani 的个人网站 [addyosmani.com](https://addyosmani.com)，有意思的内容很多，大家可以挖掘一下；另一个有意思的内容就是 V8 的 Blog：[v8.dev/blog](https://v8.dev/blog)，别看国内那些被嚼了好几遍的性能优化文章了，直接看一手信息多好。
 
 
 
