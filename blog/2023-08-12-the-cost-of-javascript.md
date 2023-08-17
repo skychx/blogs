@@ -55,11 +55,11 @@ Addy Osmani 何许人也？Google 工作 11 年，Chrome Developer Experience or
 
 Blog 链接：https://medium.com/dev-channel/the-cost-of-javascript-84009f51e99e
 
-这篇文章是 **The Cost Of JavaScript** 系列的第一篇文章，主要是抛出了一个概念，揭露 JavaScript 在浏览器上的 parse + compile + evaluate 成本还是很高的（这部分对于前端开发者来说最直观的就是 `long task`），开发者需要关心并优化这个耗时。
+这篇文章是 **The Cost Of JavaScript** 系列的第一篇文章，主要是抛出了一个概念，揭露 JavaScript 在浏览器上的 parse + compile + execution 成本还是很高的（这部分对于前端开发者来说最直观的就是 `long task`），开发者需要关心并优化这个耗时。
 
 
 
-这篇 Blog 有个案例非常有意思，就是对比同体积的 JS Script 和 Img 的解析时间。因为体积相同，所以对 network 来说耗时是一样的，但是一张 jpg 的解析和光栅化时间加起来不到 0.1s，对人眼来说基本上是没有感知的；但是 JS 代码的 Parse + Compile + evaluate 时间加起来是 3.5s，几十倍的差距，对比非常的明显。
+这篇 Blog 有个案例非常有意思，就是对比同体积的 JS Script 和 Img 的解析时间。因为体积相同，所以对 network 来说耗时是一样的，但是一张 jpg 的解析和光栅化时间加起来不到 0.1s，对人眼来说基本上是没有感知的；但是 JS 代码的 Parse + Compile + execution 时间加起来是 3.5s，几十倍的差距，对比非常的明显。
 
 ![img](https://image-1255652541.file.myqcloud.com/uPic/1*PRVzNizF9jQ_QADF5lQHpA.png)
 
@@ -110,7 +110,7 @@ Blog 链接：https://v8.dev/blog/cost-of-javascript-2019
 
 第一个优化是 `Script Streaming`，从功能上翻译（非直译）应该叫 “流式加载编译”。
 
-首先来些前置知识。出于 UI 系统的特性，UI 更新的逻辑都必须在 main thread（UI thread）上执行，也就是 script evaluate，但是前置的 parse + compile 可以多线程并行执行的。所以浏览器很早就有一种优化：对于标识了 `defer` or `async` 的 script 文件，浏览器都可以开启多线程编译能力，优化 UI thread 被阻塞的时间。
+首先来些前置知识。出于 UI 系统的特性，UI 更新的逻辑都必须在 main thread（UI thread）上执行，也就是 script execution，但是前置的 parse + compile 可以多线程并行执行的。所以浏览器很早就有一种优化：对于标识了 `defer` or `async` 的 script 文件，浏览器都可以开启多线程编译能力，优化 UI thread 被阻塞的时间。
 
 <br />
 
@@ -118,7 +118,7 @@ Chrome 基于这个优化背景，又做了一些优化，那就是流式编译�
 
 这个怎么理解呢，这个就有些像要从屋里把水接到院里：
 
-- 一开始就是在屋里接满一桶水，然后运到院里，而且你只有一个桶运水（JS 代码的 parse + compile + evaluate 都在 UI thread 执行）
+- 一开始就是在屋里接满一桶水，然后运到院里，而且你只有一个桶运水（JS 代码的 parse + compile + execution 都在 UI thread 执行）
 - 后来多买了几个桶，可以一次并行运水（基于多线程能力做 parse + compile，最后统一给 UI thread 消费）
 - 一桶一桶的接水，还要搬来搬去，太麻烦了，直接买了几根长水管，接好直接把水传到院子里（Chrome 做的优化，network streaming 直接对接 streaming parser，充分利用 CPU 时间）
 
@@ -152,7 +152,7 @@ const data = JSON.parse('{"foo":42,"bar":1337}'); // 🚀
 
 这部分内容说的是 Chrome 的 Code Caching。它本质上也是 cache 的一种，比如说我们最常接触到的缓存就是基于 HTTP Cache Head 的网络资源缓存，即 memory cache 和 disk cache，这两个缓存的主要是 http response，命中后可以节约网络请求的耗时。
 
-code caching 从大类上分其实是 disk caching 的一种，但是它缓存的不是 http response，**而是 javascript 文件 parse + compile 后的  bytecode**，所以如果命中 code caching，network + parse + compile 的时间就全省了，直接 evaluate 就行。
+code caching 从大类上分其实是 disk caching 的一种，但是它缓存的不是 http response，**而是 javascript 文件 parse + compile 后的  bytecode**，所以如果命中 code caching，network + parse + compile 的时间就全省了，直接 execution 就行。
 
 
 
