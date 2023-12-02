@@ -81,13 +81,13 @@ HTTP/2 的一个宣传点是多路复用（Multiplexing），也就是说一个 
 
 第一种思路，就是先传输 A，再传输 B，最后传输 C。但这和 HTTP/1.1 也太像了，**没有新意**，用户不会买单的。
 
-![FIFO_HTTP](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/FIFO_HTTP.png)
+![FIFO_HTTP](https://image-1255652541.file.myqcloud.com/uPic/FIFO_HTTP.png)
 
 <br />
 
 第二种思路，突出并发流式概念，我先传输 A 一些，再传输 B 一些，再传输 C 一些，主打一个风水轮流转（Round Robin 策略）。再加上**终端流式加载渲染**，用户体感渲染速度直接快了一半。
 
-![Fair_Round_Robin](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Fair_Round_Robin.png)
+![Fair_Round_Robin](https://image-1255652541.file.myqcloud.com/uPic/Fair_Round_Robin.png)
 
 
 
@@ -95,7 +95,7 @@ HTTP/2 的一个宣传点是多路复用（Multiplexing），也就是说一个 
 
 这时候我们再上上难度，比如说这个 A 是文章首图，B 和 C 是文章内的例图，那么对于性能指标和用户体验来说，A 快些加载肯定是更合适的，那么就要提高 A 的加载优先级，HTTP/2 这一个连接里，应该分配给 A 更多的带宽。
 
-![Unfair_Round_Robin](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Unfair_Round_Robin.png)
+![Unfair_Round_Robin](https://image-1255652541.file.myqcloud.com/uPic/Unfair_Round_Robin.png)
 
 <br />
 
@@ -105,7 +105,7 @@ HTTP/2 的一个宣传点是多路复用（Multiplexing），也就是说一个 
 
 由于存在调用顺序等问题，HTTP/2 先搞了个优先级**依赖树（dependency tree）**，根据资源之间的调度关系和构建一颗依赖树。例如一个 html 页面，里面加载了 css 和 js，还有一张 jpg。css 里面还加载了一张 png。那么根据这个依赖关系可以构建出这样一颗树：
 
-![Dependency_Tree](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Dependency_Tree.png)
+![Dependency_Tree](https://image-1255652541.file.myqcloud.com/uPic/Dependency_Tree.png)
 
 
 
@@ -125,7 +125,7 @@ HTTP/2 的一个宣传点是多路复用（Multiplexing），也就是说一个 
 
 所以为了应对这种场景，HTTP/2 大手一挥，又给每个节点划分了 **256** 个权重分级（weight），足够你慢慢分了。
 
-![HTTP_2_Weight](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/HTTP_2_Weight.png)
+![HTTP_2_Weight](https://image-1255652541.file.myqcloud.com/uPic/HTTP_2_Weight.png)
 
 <br />
 
@@ -135,7 +135,7 @@ HTTP/2 的一个宣传点是多路复用（Multiplexing），也就是说一个 
 
 最后，为了紧急情况，还提供了**独占式标志位（exclusive flag）**，设为 1 就可以不顾规则，全占带宽，突出一个霸道。
 
-![HTTP_2_Exclusive_Flag](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/HTTP_2_Exclusive_Flag.png)
+![HTTP_2_Exclusive_Flag](https://image-1255652541.file.myqcloud.com/uPic/HTTP_2_Exclusive_Flag.png)
 
 <br />
 
@@ -168,7 +168,7 @@ HTTP/2 已经落入规范并实施多年了，木已成舟，想改也改不动�
 
 那么对于一个请求来说，啥都不做，开局他新手属性是 3，不流式传输。对于 HTTP/3 的整体传输来说，流程是这样的：
 
-![HTTP_3_Prioritization](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/HTTP_3_Prioritization.png)
+![HTTP_3_Prioritization](https://image-1255652541.file.myqcloud.com/uPic/HTTP_3_Prioritization.png)
 
 - 先传输标志了 P0 级的资源，全传输完了再传输 P1 级的，直到全部传完
 - 同一级的资源，如果都是非增量传输的，那就按先来后到的规则，谁先来的谁先走（FIFO）
