@@ -6,9 +6,12 @@ author_title: Github@skychx
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: How to Locate the JS Code Injected into Hybrid Web Pages by Native
-draft: true
 tags: [debug, hybrid]
 ---
+
+import { HeroImage } from '../../../src/components/heroImage';
+
+<HeroImage name="find_inject_js_hero_image.jpg" w={1920} h={800} />
 
 A webpage can not only run on public browsers, but also on the WebView component within the APP. Since these Hybrid Web pages run in a relatively closed environment, the APP itself can inject some JS code into WebView, making targeted enhancements to the Web page (the most typical application is JSBridge, which provides a bridge for Web <--> Native communication).
 
