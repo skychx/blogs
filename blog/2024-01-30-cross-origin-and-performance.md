@@ -26,13 +26,13 @@ import { HeroImage } from '../src/components/heroImage';
 
 <br/>
 
-由于 Web 的开放特性，同样是糊页面，Web 前端工程师往往要和 CORS（跨域请求）做一些斗争，例如我之前遇到的一个 [《SVG 图片字体失效问题》](http://localhost:3000/svg-img-use-font) 就是 CORS 引起的。
+由于 Web 的开放特性，同样是糊页面，Web 前端工程师往往要和 CORS（跨域请求）做一些斗争，例如我之前遇到的一个 [《SVG 图片字体失效问题》](https://supercodepower.com/svg-img-use-font) 就是 CORS 引起的。
 
 
 <!--truncate-->
 
 :::info 提示
-> 对 CORS 不太了解的同学，可以看我之前翻译的这篇文章[《15 张精美动图全面讲解 CORS》](https://supercodepower.com/HTTP_CORS_visualized)，图文并茂，基本上可以对 CORS 有个大致的理解
+对 CORS 不太了解的同学，可以看我之前翻译的这篇文章[《15 张精美动图全面讲解 CORS》](https://supercodepower.com/HTTP_CORS_visualized)，图文并茂，基本上可以对 CORS 有个大致的理解
 :::
 
 
@@ -50,7 +50,7 @@ CORS 除了会带来一些**资源加载失败**的问题，它其实还会对�
 这部分内容建议看[《15 张精美动图全面讲解 CORS》](https://supercodepower.com/HTTP_CORS_visualized)，结合动图演示会有更好的理解
 :::
 
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/Flowchart_showing_Simple_and_Preflight_XHR.svg" alt="Simple and Preflight Fetch" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/Flowchart_showing_Simple_and_Preflight_XHR.svg" alt="Simple and Preflight Fetch" />
 
 这就导致网络请求会多一次 HTTP OPTIONS 请求（即 preflight request），可能会带来几十到几百毫秒的延迟，如果接口比较重要，可能会影响到首屏的加载时间。
 
@@ -58,7 +58,7 @@ CORS 除了会带来一些**资源加载失败**的问题，它其实还会对�
 
 ### 2.ResourceTiming API 数据丢失
 
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/timestamp-diagram.svg" alt="ResourceTiming" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/timestamp-diagram.svg" alt="ResourceTiming" />
 
 一个网络请求会经历 DNS 寻址 + TLS 连接 + TCP 连接 + HTTP 请求响应等多个阶段，这些请求细节的时间点位一般可以用 [ResourceTiming API](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/Resource_timing) 来获取：
 
@@ -70,7 +70,7 @@ performance.getEntriesByName('example.com/api')
 
 <br />
 
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cors-perfs-api.png" alt="cross_origin vs same_origin" width="50%" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/cors-perfs-api.png" alt="cross_origin vs same_origin" width="50%" />
 
 如上图所示，如果资源的 HTTP Response Header 中的 [Timing-Allow-Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Timing-Allow-Origin) 不存在或未包含该站点的域名，就只会显示 `startTime`/`fetchStart`/`responseEnd` 这个 3 个点位的真实数据（也就是只显示请求的 start 和 end，中间的细节全部不显示），其它点位全部显示 0。
 
@@ -137,11 +137,11 @@ h1 {
 
 但是吊诡的是，如果字体资源不跨域，你也得加 `corssorigin` 属性，否则缓存还是命中不了 😅：
 
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cors-perfs-font-preload-fail.png" alt="same-origin-font-preload-fail" width="60%" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/cors-perfs-font-preload-fail.png" alt="same-origin-font-preload-fail" width="60%" />
 
 
 
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cors-perfs-font-preload-success.png" alt="same-origin-font-preload-success" width="60%" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/cors-perfs-font-preload-success.png" alt="same-origin-font-preload-success" width="60%" />
 
 <br/>
 
