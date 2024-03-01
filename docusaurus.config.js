@@ -8,8 +8,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "微信公众号-卤代烃实验室",
-  tagline: "微信公众号-卤代烃实验室",
+  title: "卤代烃实验室",
+  tagline: "卤代烃实验室",
   url: "https://supercodepower.com",
   onBrokenLinks: "log", // build 过程中遇到可能无法访问的网站时打印提示
   baseUrl: "/",
