@@ -7,7 +7,7 @@ author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 如何隐藏热更新的 bundle 文件
 draft: false
-tags: [密码学, 网络安全, 计算机网络, React Native]
+tags: [密码学, 网络安全, network, React Native]
 ---
 
 

@@ -7,7 +7,7 @@ author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: Vary + CORS，两大云厂商都在上面栽了跟头
 draft: true
-tags: [HTTP, '计算机网络', '网络安全']
+tags: [HTTP, network, '网络安全']
 ---
 
 

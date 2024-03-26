@@ -1,12 +1,12 @@
 ---
-slug: cross-origin-and-performance
+slug: observe-browser-network
 title: ⚡️ [性能优化] 浏览器中观测 network 性能数据的 3 种方式
 author: 卤代烃
 author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: Chrome Devtools Network Timing Panel, Chrome Devtools Performance Panel Network, performance.getEntriesByType('resource'), 三种不同的观测方式异同
-tags: [性能优化]
+tags: [性能优化, network]
 ---
 
 import { HeroImage } from '../src/components/heroImage';
@@ -51,11 +51,16 @@ performance.getEntriesByType('resource');
 
 不过这个 API 在跨域场景下部分数据会归 0（[ResourceTiming API 数据丢失](https://supercodepower.com/cross-origin-and-performance#2resourcetiming-api-%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1)），这个还是需要注意一下。
 
+<br />
 
-### Network Panel -- Timing
 
-观察网络请求，Network Panel 肯定是最最常用的调试工具了。在性能这一块儿，主要是通过 Timing 面板来观察数据的：
+### Network Panel: Timing
 
+观察网络请求，Network Panel 肯定是最最常用的调试工具了。在性能数据细节这一块儿，主要是通过 Timing 面板来观察数据的：
+
+![devtools-network-panel-timing](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/devtools-network-panel-timing.jpg)
+
+<br />
 
 我先简单的介绍一下 Timing 面板各个字段的含义（其实这部分内容文档都有详细的介绍：[Timing Preview](https://developer.chrome.com/docs/devtools/network/reference#timing-preview)）
 
@@ -79,6 +84,8 @@ HTTP_Request = responseStart - requestStart
 HTTP_Response = responseEnd - responseStart
 ```
 
+<br />
+
 前面的 **Queueing** 和 **Stalled** 阶段是和浏览器高度相关的，这里面门道就比较多了。
 
 首先对于普通的开发者来说，你是无法通过 `ResourceTiming API` 直接得出相关耗时的，你只能通过下面的代码模拟出 Queueing + Stalled：
@@ -90,23 +97,36 @@ Queueing + Stalled = Math.min(domainLookupStart, connectStart, secureConnectionS
 那么 Queueing 和 Stalled 的分界点呢？这个点位 `ResourceTiming API` 并没有提供，在 Devtools 的源码里，这个点位为 issueTime，既 issueTime 存在且小于 startTime 的情况下会出现 Queueing。
 
 ```javascript
-// code
+// devtools-frontend/front_end/panels/network/RequestTimingView.ts
+
+// Queueing 场景，issueTime 小于 startTime
+if (issueTime < startTime) {
+  addRange(RequestTimeRangeNames.Queueing, issueTime, startTime);
+}
+
+// Blocking 就是 Stalled
+const blockingEnd = firstPositive([timing.dnsStart, timing.connectStart, timing.sendStart, responseReceived]) || 0;
+addOffsetRange(RequestTimeRangeNames.Blocking, 0, blockingEnd);
 ```
 
-这个点位是内核提供的，但是并没有暴露给上层 API，只有 Devtools 消费。所以资源性能调优时，可以把 Queueing 和 Stalled 放在一起看。如果这块儿耗时较长，可能的原因和解决方案可能如下：
+这个点位是内核提供的，但是并没有暴露给上层 API，只有 Devtools 消费。所以资源性能调优时，可以把 **Queueing** 和 **Stalled** 放在一起看。如果这块儿耗时较长，可能的原因和解决方案可能如下：
 
 - 如果是「HTTP/1.1 六个连接」限制，可以尝试升级到 HTTP/2，或者采用一些通用的资源手段
 - 如果是「资源请求优先级较低」导致的，可以尝试提升请求优先级
 - 如果是「主线程繁忙」导致异步请求被 delay，可以尝试优化主线程 longtask
-- 如果是「浏览器内部资源分配调度耗时」，这个一般解决不了，也很少见，死磕下去 ROI 其实很低的
+- 如果是「浏览器内部资源分配调度耗时」，这个一般解决不了，也很少见，死磕下去 ROI 很低的
 
+至于纯网络请求相关阶段的优化，市面上文章较多，就不展开说了，大家自行查阅即可。
 
+<br />
 
-### Performance Panel -- Network
+### Performance Panel: Network
 
 另一个可以观测 Network 细节的地方，就是 Performance Panel 的 Network Channel，可以看到当前页面的所有网络请求信息。
 
-图片里的 netwrk waterfall 是一种变异的箱形图，和统计学里的箱型图（box plot）概念不太一样，这里只是借了形，所以需要重新理解。
+![devtools-perfs-panel-network-channel](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/devtools-perfs-panel-network-channel.jpg)
+
+图片里的 netwrk waterfall 是一种变异的箱形图，和统计学里的箱型图（box plot）原始概念不一样，这里**只是借了形**，所以需要重新理解。
 
 首先简单的看一下颜色，这里颜色主要分为 5 类：
 
@@ -116,11 +136,11 @@ Queueing + Stalled = Math.min(domainLookupStart, connectStart, secureConnectionS
 - 绿色：表示 Media 资源，例如 图片/视频/字体
 - 灰色：其它请求，例如 fetch，xhr
 
-这个颜色和我们认知里的三剑客配色还是比较贴合的，基本上都能理解。
+<br />
 
 我们接下来分析一下形状：
 
-- 左边的细线：从 startTime 开始，到 RequstStart 的所有时间
+- 左边的细线：从 startTime 开始，到 requstStart 的所有时间
 - 浅色的箱：既 Request 耗时
 - 深色的箱：既 Response 耗时
 - 右边的细线：资源已经下载好了，但是主线程较忙来不及消费的等待时间
@@ -139,6 +159,7 @@ Right_Line // waiting to be used
 
 具体的优化手段和上面说的差不多，不过值得注意的是右侧的细线，这个一半都是主线程存在 longtask 阻塞了资源的消费，需要把重心放在 longtask 上。
 
+<br />
 
 ## 各方法异同
 

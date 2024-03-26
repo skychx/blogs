@@ -7,7 +7,7 @@ author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 15 张精美动图全面讲解 CORS
 draft: false
-tags: [HTTP, '计算机网络', '网络安全']
+tags: [HTTP, network, '网络安全']
 ---
 
 ![](https://image-1255652541.file.myqcloud.com/uPic/image-20200802144736235.png)
