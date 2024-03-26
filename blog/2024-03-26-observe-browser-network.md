@@ -11,7 +11,7 @@ tags: [性能优化, network]
 
 import { HeroImage } from '../src/components/heroImage';
 
-<HeroImage name="cross-origin-and-performance-hero-image.jpg" w={640} h={279} />
+<HeroImage name="observe-browser-network-hero-image.jpg" w={1280} h={854} />
 
 
 ## 前言
@@ -114,7 +114,7 @@ addOffsetRange(RequestTimeRangeNames.Blocking, 0, blockingEnd);
 - 如果是「HTTP/1.1 六个连接」限制，可以尝试升级到 HTTP/2，或者采用一些通用的资源手段
 - 如果是「资源请求优先级较低」导致的，可以尝试提升请求优先级
 - 如果是「主线程繁忙」导致异步请求被 delay，可以尝试优化主线程 longtask
-- 如果是「浏览器内部资源分配调度耗时」，这个一般解决不了，也很少见，死磕下去 ROI 很低的
+- 如果是「浏览器内部资源分配调度耗时」，一般为分配磁盘空间，读磁盘等内部操作，很难去参与优化
 
 至于纯网络请求相关阶段的优化，市面上文章较多，就不展开说了，大家自行查阅即可。
 
@@ -165,13 +165,18 @@ Right_Line // waiting to be used
 
 从上面可以看出，观测 network 性能数据的 3 种手段，存在不少共性，但是也各有差异。我做了一张图，基本上一眼就能看出异同：
 
+![chrome_devtool_network](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/chrome_devtool_network.png)
 
-> 本图未考虑 Service Worker 场景
 
+:::caution 注意
+- 本图未考虑 Redirect/Service Worker/HTTP Cache 场景
+- 本图未考虑 HTTP/3 和 TCP Fast Open 场景
+:::
 
+<br />
 
 ## 参考内容
 
 - [ResourceTiming API](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/Resource_timing#typical_resource_timing_metrics)
-- [Chrome Network Panel -- timing](https://developer.chrome.com/docs/devtools/network/reference#timing-preview)
-- [Chrome Performance Panel -- network](https://developer.chrome.com/docs/devtools/performance/reference#network)
+- [Chrome Network Panel: timing](https://developer.chrome.com/docs/devtools/network/reference#timing-preview)
+- [Chrome Performance Panel: network](https://developer.chrome.com/docs/devtools/performance/reference#network)
