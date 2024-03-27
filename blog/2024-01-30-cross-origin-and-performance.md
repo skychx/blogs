@@ -6,7 +6,7 @@ author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 浏览器跨域带来的一些性能问题
-tags: [性能优化]
+tags: [Web Performance]
 ---
 
 import { HeroImage } from '../src/components/heroImage';

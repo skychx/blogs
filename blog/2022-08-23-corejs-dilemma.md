@@ -1,6 +1,6 @@
 ---
 draft: true
-tags: [性能优化]
+tags: [Web Performance]
 ---
 
 corejs 还是太不起眼了。

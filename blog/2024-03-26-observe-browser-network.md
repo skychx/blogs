@@ -6,7 +6,7 @@ author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: Chrome Devtools Network Timing Panel, Chrome Devtools Performance Panel Network, performance.getEntriesByType('resource'), 三种不同的观测方式异同
-tags: [性能优化, network]
+tags: [Web Performance, network]
 ---
 
 import { HeroImage } from '../src/components/heroImage';

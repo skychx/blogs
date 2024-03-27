@@ -6,7 +6,7 @@ author_title: 微信公众号@卤代烃实验室
 author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: The Cost Of JavaScript (2017 - 2023) | JavaScript 性能优化之旅
-tags: [性能优化]
+tags: [Web Performance]
 ---
 
 

@@ -7,7 +7,7 @@ author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 浅谈 HTTP 优先级算法的演变：HTTP/1.1 没有，HTTP/2 过于复杂，HTTP/3 返璞归真
 draft: false
-tags: [性能优化, network]
+tags: [Web Performance, network]
 ---
 
 import { HeroImage } from '../src/components/heroImage';

@@ -7,7 +7,7 @@ author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: 如何解决 SVG image 中字体失效的问题
 draft: true
-tags: [性能优化]
+tags: [Web Performance]
 ---
 
 

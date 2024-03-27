@@ -7,7 +7,7 @@ author_url: https://github.com/skychx
 author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: web-vitals 源码解析
 draft: true
-tags: [性能优化, 性能监控]
+tags: [Web Performance, 性能监控]
 ---
 
 
