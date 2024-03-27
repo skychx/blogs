@@ -16,10 +16,10 @@ import { HeroImage } from '../src/components/heroImage';
 
 ## 前言
 
-:::caution 招聘信息
+:::info 📢 招聘
 正式开始文章前先插播一条招聘信息。
 
-**字节 Web Infra 团队最近开启新一轮招聘了**，如果你对 Web Framework/Runtime/Performance，或对编译构建/Rust/AI 感兴趣，可以来看看我们的岗位（具体岗位信息可以看这个招聘链接 👉 [字节跳动 Web Infra - Web Solutions 团队招人啦！](https://mp.weixin.qq.com/s/Zn6QDRI40vg1_mafAFE7mw)）
+**字节 Web Infra 团队最近开启新一轮招聘了**，如果你对 AI/Framework/Rust/Performance 感兴趣，可以来看看我们的岗位（具体岗位信息可以看这个招聘链接 👉 [字节跳动 Web Infra - Web Solutions 团队招人啦！](https://mp.weixin.qq.com/s/Zn6QDRI40vg1_mafAFE7mw)）
 
 简历可以发到我的邮箱 **skychx@hotmail.com**，我可以帮你内推岗位并跟进进度 🥳
 :::
@@ -30,11 +30,13 @@ import { HeroImage } from '../src/components/heroImage';
 
 <!--truncate-->
 
+<br />
+
 ## 常见观测手段
 
 ### ResourceTiming API
 
-如果想在 runtime 阶段获取当前页面的 network 性能数据，[ResourceTiming API](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/Resource_timing) 其实是唯一的选择了。
+如果想在 runtime 阶段获取当前页面的 network 性能数据，[ResourceTiming API](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/Resource_timing) 其实是唯一的选择了:
 
 ```javascript
 performance.getEntriesByType('resource');
@@ -58,7 +60,7 @@ performance.getEntriesByType('resource');
 
 观察网络请求，Network Panel 肯定是最最常用的调试工具了。在性能数据细节这一块儿，主要是通过 Timing 面板来观察数据的：
 
-![devtools-network-panel-timing](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/devtools-network-panel-timing.jpg)
+![devtools-network-panel-timing](https://image-1255652541.file.myqcloud.com/uPic/devtools-network-panel-timing.jpg)
 
 <br />
 
@@ -124,7 +126,7 @@ addOffsetRange(RequestTimeRangeNames.Blocking, 0, blockingEnd);
 
 另一个可以观测 Network 细节的地方，就是 Performance Panel 的 Network Channel，可以看到当前页面的所有网络请求信息。
 
-![devtools-perfs-panel-network-channel](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/devtools-perfs-panel-network-channel.jpg)
+![devtools-perfs-panel-network-channel](https://image-1255652541.file.myqcloud.com/uPic/devtools-perfs-panel-network-channel.jpg)
 
 图片里的 netwrk waterfall 是一种变异的箱形图，和统计学里的箱型图（box plot）原始概念不一样，这里**只是借了形**，所以需要重新理解。
 
@@ -165,13 +167,19 @@ Right_Line // waiting to be used
 
 从上面可以看出，观测 network 性能数据的 3 种手段，存在不少共性，但是也各有差异。我做了一张图，基本上一眼就能看出异同：
 
-![chrome_devtool_network](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/chrome_devtool_network.png)
+![chrome_devtool_network](https://image-1255652541.file.myqcloud.com/uPic/chrome_devtool_network.png)
 
 
 :::caution 注意
 - 本图未考虑 Redirect/Service Worker/HTTP Cache 场景
 - 本图未考虑 HTTP/3 和 TCP Fast Open 场景
 :::
+
+<br />
+
+## 总结
+
+在日常调优网络引起的性能时，只有充分理解和掌握相关的调试工具，才能快速准确的定位并解决问题。
 
 <br />
 
