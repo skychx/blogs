@@ -78,7 +78,7 @@ performance.getEntriesByName('example.com/api')
 <br/>
 
 
-### 3.LCP 大于 FCP
+### 3.LCP 小于 FCP
 
 先简单介绍一下这两个词的含义：
 
