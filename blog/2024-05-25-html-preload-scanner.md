@@ -9,19 +9,26 @@ description: 谈谈浏览器的性能优化方案 —— HTML Preload Scanner，
 tags: [Web Performance, network]
 ---
 
+import { HeroImage } from '../src/components/heroImage';
+
+<HeroImage name="html-preload-scanner-hero-image.jpg" w={1920} h={773} />
+
 大家好，我是专注于做性能优化的卤代烃。
 
-做网页相关的性能优化时，需要对浏览器的底层原理有一定的了解，这样才能更好的让页面走在 happy path 上。今天我们就了解一个很少被人所知的浏览器默认性能优化方案 —— `HTML Preload Scanner`，看看它是如何优化网络加载速度的。
+做网页相关的性能优化时，需要对浏览器的底层原理有一定的了解，这样才能更好的让页面走在 happy path 上。今天我们就了解一个很少被人所知的浏览器默认性能优化方案 —— `HTML Preload Scanner`，看看它是如何优化网络资源加载速度的。
+
+<!--truncate-->
+
+## 浏览器如何解析 CSS/JS 资源
 
 
-## 浏览器加载 CSS/JS 资源
-
-
-我们简单回顾一下浏览器是如何「加载 & 解析」 HTML/CSS/JS/Image 等主要资源的。
+我们简单回顾一下浏览器是如何「解析」 HTML/CSS/JS/Image 等主要资源的。
 
 HTML 作为网页入口，肯定是第一个下载的，下载后就会进入一行一行解析环节。解析到子资源的时候，就会存在这么几种经典情况：
 
-1.如果是 CSS 资源，就要停止 HTML 的解析和渲染，得等到 CSS 解析 & 执行完毕再解析渲染 HTML。
+
+
+**1.** 如果是 CSS 资源，就要停止 HTML 的解析和渲染，得等到 CSS 解析 & 执行完毕再解析渲染 HTML。
 
 为什么要这样做？假设加载一行 CSS 就渲染一次页面，如果我们有这样的 CSS 文件：
 
@@ -41,13 +48,13 @@ p {
 
 解析执行第一条 CSS 规则，立马渲染，所有的字体都改成了 12px；过了 100ms，解析执行到最后一条规则，立马渲染，所有字体变成 20px。
 
-先不说解析后就渲染的效率性能问题，这种 100ms 内字体变大变小的闪烁问题会带来极其糟糕的用户体验（这个官方说法叫 [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)）。
+先不说解析后就渲染的效率性能问题，这种 100ms 内字体变大变小的**闪烁问题**会带来极其糟糕的用户体验（这个官方说法叫 [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)）。
 
 浏览器为了一定程度内解决这个问题，采用的方案就是解析 CSS 资源时，停止 HTML 后面内容的解析和渲染，等这个 CSS 资源全部解析完毕后再一并渲染。
 
 <br />
 
-2.如果是没有加 async/defer 的 JS 资源，也得等 JS 解析 & 执行完毕后再解析渲染 HTML。
+**2.** 如果是没有加 async/defer 的 JS 资源，也得等 JS 解析 & 执行完毕后再解析渲染 HTML。
 
 这个思路和 CSS 类似，因为这种 JS 资源可能会操作 DOM，所以也得等待 JS 解析执行完毕，这也是为什么有条性能优化规则是「把 JS 文件放在 Body 最后面，防止阻塞渲染」。
 
@@ -68,16 +75,16 @@ p {
 - 一个是正式的，叫 `Primary HTML Parser`，会一行一行解析运行，遇到阻塞性资源就会停止 HTML 的解析，直至阻塞性资源加载运行完毕
 - 另一个叫 `HTML Preload Scanner`，会直接收集当前 HTML 里所有值得下载的子资源，然后**并行下载**它们
 
-![](https://web.dev/static/articles/preload-scanner/image/a-diagram-both-primary-6691f9f670812.svg)
+![Primary HTML Parser and HTML Preload Scanner](https://image-1255652541.file.myqcloud.com/uPic/a-diagram-both-primary-6691f9f670812.svg)
 
 
 两个 HTML Parser 互相配合，就能从底层上优化网页首屏性能，带来更好的用户体验。
 
 如何观测 `HTML Preload Scanner` 是否正常工作呢？目前各大浏览器并没有暴露此标识，作为 Web 开发者其实可以根据 Perfs 火焰图来判断。
 
-如果一个网页命中 Pre-Scan，那么一个典型特征是，JS/CSS/Img 等首屏子资源会在 HTML 请求结束后同时发起请求：
+如果一个网页命中 Pre-Scan，那么一个典型特征是，**JS/CSS/Img 等首屏子资源会在 HTML 请求结束后同时发起请求**：
 
-![]()
+![html-preload-scanner-pic](https://image-1255652541.file.myqcloud.com/uPic/html-preload-scanner.pic.jpg)
 
 如果火焰图有上面类似的特征，一般就是命中了。
 
@@ -85,7 +92,7 @@ p {
 
 ## 利用 Preload Scanner 提升性能
 
-因为 HTML Preload Scanner 是个浏览器默认的功能，所以不用考虑兼容性问题。但又因为它太基础太底层了，很多人不知道这个功能，所以很难去利用它做一些优化，本小结就提供一些优化建议，辅助大家使用。
+因为 `HTML Preload Scanner` 是个浏览器默认的功能，所以不用考虑兼容性问题。但又因为它太基础太底层了，很多人不知道这个功能，所以很难优化意识，本小结就提供一些优化建议，辅助大家使用。
 
 ### 少用 JS 动态加载脚本
 
@@ -174,7 +181,7 @@ if (seen_csp_meta_tag) {
 
 我本地做了几个测试，首先是一个没有任何 CSP 内容的网页，我们可以看到 Preload Scanner 是正常工作的：
 
-![]()
+![normal](https://image-1255652541.file.myqcloud.com/uPic/html-preload-scanner-normal.jpg)
 
 <br />
 
@@ -185,7 +192,8 @@ if (seen_csp_meta_tag) {
   <meta http-equiv="Content-Security-Policy" content="default-src 'self';">
 </head>
 ```
-![]()
+
+![html-csp-meta-tag](https://image-1255652541.file.myqcloud.com/uPic/html-preload-scanner-html-csp.jpg)
 
 <br />
 
@@ -194,7 +202,7 @@ if (seen_csp_meta_tag) {
 ```http
 Content-Security-Policy: default-src 'self'
 ```
-![]()
+![http-csp-header](https://image-1255652541.file.myqcloud.com/uPic/html-preload-scanner-http-csp.jpg)
 
 <br />
 

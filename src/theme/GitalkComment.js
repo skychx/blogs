@@ -29,7 +29,7 @@ const GitalkComment = () => {
 
             console.warn('GitalkComment', window.document.title, window.location.pathname)
 
-            // gitalk.render('gitalk-container')
+            gitalk.render('gitalk-container')
         }, 300);
 
 
