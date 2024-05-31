@@ -132,20 +132,20 @@ addOffsetRange(RequestTimeRangeNames.Blocking, 0, blockingEnd);
 
 首先简单的看一下颜色，这里颜色主要分为 5 类：
 
-- 蓝色：表示 HTML
-- 紫色：表示 CSS
-- 黄色：表示 JS
-- 绿色：表示 Media 资源，例如 图片/视频/字体
-- 灰色：其它请求，例如 fetch，xhr
+- **蓝色**：表示 HTML
+- **紫色**：表示 CSS
+- **黄色**：表示 JS
+- **绿色**：表示 Media 资源，例如 图片/视频/字体
+- **灰色**：其它请求，例如 fetch，xhr
 
 <br />
 
 我们接下来分析一下形状：
 
-- 左边的细线：从 startTime 开始，到 requstStart 的所有时间
-- 浅色的箱：既 Request 耗时
-- 深色的箱：既 Response 耗时
-- 右边的细线：资源已经下载好了，但是主线程较忙来不及消费的等待时间
+- **左边的细线**：从 startTime 开始，到 requstStart 的所有时间
+- **浅色的箱**：既 Request 耗时
+- **深色的箱**：既 Response 耗时
+- **右边的细线**：资源已经下载好了，但是主线程较忙来不及消费的等待时间
 
 这个用代码表示的化应该是这个：
 

@@ -9,7 +9,7 @@ description: 「Chrome Devtools Network Timing Panel」VS「Chrome Devtools Perf
 tags: [Web Performance, network]
 ---
 
-import { HeroImage } from '../src/components/heroImage';
+import { HeroImage } from '../../../src/components/heroImage';
 
 <HeroImage name="observe-browser-network-hero-image.jpg" w={1280} h={854} />
 
@@ -41,7 +41,7 @@ I won't explain this diagram too much. From my personal point of view, this API 
 - Browser-related points: Service Worker and HTTP Cache
 - Network-related points: DNS/TCP/TLS/HTTP, etc.
 
-However, this API will return 0 for some data in cross-domain scenarios ([ResourceTiming API data loss](https://supercodepower.com/cross-origin-and-performance#2resourcetiming-api-%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1)), which needs to be noted.
+However, this API will return 0 for some data in cross-domain scenarios ([ResourceTiming API data loss](https://supercodepower.com/en/cross-origin-and-performance#2-loss-of-resourcetiming-api-data)), which needs to be noted.
 
 <br />
 
@@ -113,7 +113,7 @@ As for the optimization of pure network request related stages, there are many a
 
 
 
-### ### Performance Panel: Network
+### Performance Panel: Network
 
 Another place to observe Network details is the Network Channel of the Performance Panel, where you can see all the network request information of the current page.
 
@@ -123,25 +123,25 @@ The network waterfall in the picture is a variant of the box plot, which is diff
 
 First, let's take a simple look at the colors, which are mainly divided into 5 categories:
 
-- Blue: Represents HTML
-- Purple: Represents CSS
-- Yellow: Represents JS
-- Green: Represents Media resources, such as images/videos/fonts
-- Gray: Other requests, such as fetch, xhr
+- **Blue**: Represents HTML
+- **Purple**: Represents CSS
+- **Yellow**: Represents JS
+- **Green**: Represents Media resources, such as images/videos/fonts
+- **Gray**: Other requests, such as fetch, xhr
 
 <br />
 
 Next, let's analyze the shape:
 
-- The thin line on the left: All the time from startTime to requestStart
-- Light-colored box: Represents Request time
-- Dark-colored box: Represents Response time
-- The thin line on the right: The resource has been downloaded, but the main thread is too busy to consume it, waiting time
+- **The thin line on the left**: All the time from startTime to requestStart
+- **Light-colored box**: Represents Request time
+- **Dark-colored box**: Represents Response time
+- **The thin line on the right**: The resource has been downloaded, but the main thread is too busy to consume it, waiting time
 
 This should be represented in code as follows:
 
 ```javascript
-// 右侧的点位为 ResourceTiming API 提供
+// The points on the right are provided by the ResourceTiming API
 Left_Line = requestStart - startTime // Queueing + Stalled + DNS + TCP + TLS
 Dark_Bar = responseStart - requestStart // Request
 Dark_Bar = responseEnd - responseStart // Response

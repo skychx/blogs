@@ -1,6 +1,6 @@
 ---
 slug: cross-origin-and-performance
-title: ⚡️ [Performance] Some performance issues brought by browser cross-domain
+title: ⚡️ [Performance] Performance issues brought by browser cross-domain
 author: skychx
 author_title: skychx blogs
 author_url: https://github.com/skychx
@@ -9,7 +9,7 @@ description: Some performance issues brought by browser cross-domain
 tags: [Web Performance]
 ---
 
-import { HeroImage } from '../src/components/heroImage';
+import { HeroImage } from '../../../src/components/heroImage';
 
 <HeroImage name="cross-origin-and-performance-hero-image.jpg" w={640} h={279} />
 
@@ -17,13 +17,13 @@ import { HeroImage } from '../src/components/heroImage';
 ## Preface
 
 
-Due to the open nature of the Web, web front-end engineers often have to struggle with CORS (Cross-Origin Resource Sharing), such as a [“SVG Image Font Failure Issue”](https://supercodepower.com/svg-img-use-font) I encountered before, which was caused by CORS.
+Due to the open nature of the Web, web front-end engineers often have to struggle with CORS (Cross-Origin Resource Sharing), such as a [“SVG Image Font Failure Issue”](https://supercodepower.com/en/svg-img-use-font) I encountered before, which was caused by CORS.
 
 
 <!--truncate-->
 
 :::info Tip
-For those who are not very familiar with CORS, you can read this article I translated before [“15 Beautiful Animated Images to Explain CORS in Detail”](https://supercodepower.com/HTTP_CORS_visualized). It is rich in pictures and texts, and you can basically have a general understanding of CORS.
+For those who are not very familiar with CORS, you can read this article I translated before [✋🏼🔥 CS Visualized: CORS](https://dev.to/lydiahallie/cs-visualized-cors-5b8h). It is rich in pictures and texts, and you can basically have a general understanding of CORS.
 :::
 
 
@@ -38,7 +38,7 @@ In addition to causing some **resource loading failures**, CORS can also interfe
 This is basically the most classic performance problem caused by cross-domain. Simply put, in **non**-[simple request](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#simple_requests) scenarios, the browser will first send a [pre-flight request](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests), asking the server what HTTP Header it supports, and then decide whether to initiate the real network request based on this whitelist.
 
 :::info Tip
-For this part of the content, it is recommended to read [“15 Beautiful Animated Images to Explain CORS in Detail”](https://supercodepower.com/HTTP_CORS_visualized). Understanding will be better with the demonstration of animated images.
+For this part of the content, it is recommended to read [✋🏼🔥 CS Visualized: CORS](https://dev.to/lydiahallie/cs-visualized-cors-5b8h). Understanding will be better with the demonstration of animated images.
 :::
 
 <img src="https://image-1255652541.file.myqcloud.com/uPic/Flowchart_showing_Simple_and_Preflight_XHR.svg" alt="Simple and Preflight Fetch" />
