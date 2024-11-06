@@ -12,7 +12,7 @@ tags: []
 
 
 
-<!-- truncate -->
+{/* comments */}
 
 
 

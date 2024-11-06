@@ -18,7 +18,7 @@ tags: [密码学, 网络安全, network, React Native]
 
 >  郑重声明：若有人按本文思路隐藏热更新数据导致应用拒审或下架，本人概不负责
 
-<!-- truncate -->
+{/* comments */}
 
 ## 一、商业利益
 

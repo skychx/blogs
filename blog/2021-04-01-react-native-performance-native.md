@@ -15,7 +15,7 @@ Web 开发有一个经典问题：「**浏览器中从输入 URL 到页面渲染
 不过今天我们不谈 Web 的性能优化，只是借助刚刚的那个那个经典问题的分析思路，**从 React Native 的启动到页面的第一次渲染完成，结合 React Native 的源码和 1.0 的新架构，探索 React Native 的启动性能优化之路**。
 
 
-<!-- truncate -->
+{/* comments */}
 
 
 :::note 阅读提醒

@@ -18,7 +18,7 @@ import { HeroImage } from '../../../src/components/heroImage';
 
 There are various ways to observe network performance data with the browser's Devtools tool, but these data are presented in different ways. This article is to interpret these performance data presentation methods and make a longitudinal comparison to help more people optimize the performance problems brought by the network.
 
-<!-- truncate -->
+{/* comments */}
 
 <br />
 

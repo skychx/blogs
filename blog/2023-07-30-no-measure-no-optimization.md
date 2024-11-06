@@ -12,7 +12,7 @@ tags: [Web Performance]
 
 今天的标题非常的翻译腔，动了这篇 blog 的念头时，脑子里下意识想到的标题就是 **No Measure, No Optimization**，直译不好听，ChatGPT 的建议也一般，反正领会精神即可。
 
-<!-- truncate -->
+{/* comments */}
 
 前两天和几个大佬讨论了一些性能优化问题，交流了很多 “一通优化猛如虎，性能收益万分五” 的案例，综合思索下，这篇 blog 就产生了。
 

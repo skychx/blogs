@@ -26,7 +26,7 @@ import { HeroImage } from '../src/components/heroImage';
 
 浏览器的 Devtools 工具有多种观测 network 性能数据的方式，但是这些数据的表现方式各有不同。本文就是解读一下这些性能数据的表现方式，并做纵向比较，帮助更多的人去优化网络带来的性能问题。
 
-<!-- truncate -->
+{/* comments */}
 
 <br />
 

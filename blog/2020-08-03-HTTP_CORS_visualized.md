@@ -12,7 +12,7 @@ tags: [HTTP, network, '网络安全']
 
 本文翻译自 [Lydia Hallie](https://dev.to/lydiahallie) 小姐姐写的 [✋🏼🔥 CS Visualized: CORS](https://dev.to/lydiahallie/cs-visualized-cors-5b8h?utm_campaign=React%2BNative%2BNow&utm_medium=web&utm_source=React_Native_Now_69#cs-cors)，她用了大量的动图去解释 CORS 这个概念，国内还没有人翻译本文，所以我在原文的理解上翻译并修改了一些错误，希望能帮到大家。
 
-<!-- truncate -->
+{/* comments */}
 
 觉得翻译的不错一定要**点赞哦**，谢谢你，这对我真的很重要！ 🌟
 

@@ -11,7 +11,7 @@ tags: [HTTP, network, '网络安全']
 
 今天继续给大家分享一个 HTTP 冷知识，讲讲 Vary 和跨域的那些事儿。
 
-<!-- truncate -->
+{/* comments */}
 
 前文也对日常开发中遇到的一些场景做了分析，比如说风控用的 `X-Forwarded-For` 和 `URI` 空格编码：
 
