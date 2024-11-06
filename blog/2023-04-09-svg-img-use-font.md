@@ -1,17 +1,15 @@
 ---
 slug: svg-img-use-font
 title: 🖼️ 如何解决 SVG 图片中字体失效的问题
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 如何解决 SVG image 中字体失效的问题
 tags: [Web, SVG]
 ---
 
 「**SVG 图片中字体失效**」的修复方案很简单，只想看答案翻到最后看结论就行。如果想看我的排查思路和具体原因可以从头开始阅读。
 
-<!--truncate-->
+<!-- truncate -->
 
 ## 起因
 
@@ -102,7 +100,7 @@ https://stackoverflow.com/questions/30466610/svg-doesnt-use-font-when-inside-htm
 
 这个回答只是给出了怎么办，但是并没有给出一手信息来源去解释「为什么」，再经过一些搜索，我找到了 W3C 的相关说明：[SVG Security - W3C Wiki](https://www.w3.org/wiki/SVG_Security)，里面说的很清楚：
 
-> Markup languages like HTML (and SVG itself) can reference SVG as an image with the <img\> tag (HTML namespace) or <image\> tag (HTML or SVG namespace).
+> Markup languages like HTML (and SVG itself) can reference SVG as an image with the `<img>` tag (HTML namespace) or `<image>` tag (HTML or SVG namespace).
 >
 > If an SVG file is fetched as image, then certain requirements apply to this document:
 >

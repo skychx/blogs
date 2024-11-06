@@ -1,10 +1,8 @@
 ---
 slug: HTTP_CORS_Vary
 title: 🌐 Vary + CORS，两大云厂商都在上面栽了跟头
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: Vary + CORS，两大云厂商都在上面栽了跟头
 draft: true
 tags: [HTTP, network, '网络安全']
@@ -13,7 +11,7 @@ tags: [HTTP, network, '网络安全']
 
 今天继续给大家分享一个 HTTP 冷知识，讲讲 Vary 和跨域的那些事儿。
 
-<!--truncate-->
+<!-- truncate -->
 
 前文也对日常开发中遇到的一些场景做了分析，比如说风控用的 `X-Forwarded-For` 和 `URI` 空格编码：
 

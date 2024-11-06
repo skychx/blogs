@@ -1,10 +1,8 @@
 ---
 slug: web-scraper-learn
 title: 🕷️ Web Scraper——轻量数据爬取利器
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: Web Scraper 的优点就是对新手友好，在最初抓取数据时，把底层的编程知识和网页知识都屏蔽了，可以非常快的入门，只需要鼠标点选几下，几分钟就可以搭建一个自定义的爬虫。
 draft: false
 tags: [爬虫, 'web scraper']
@@ -12,7 +10,7 @@ tags: [爬虫, 'web scraper']
 
 ![image-20200517183119381](https://image-1255652541.file.myqcloud.com/uPic/image-20200517183119381.png)
 
-<!--truncate-->
+<!-- truncate -->
 
 日常学习工作中，我们多多少少都会遇到一些数据爬取的需求，比如说写论文时要收集相关课题下的论文列表，运营活动时收集用户评价，竞品分析时收集友商数据。
 

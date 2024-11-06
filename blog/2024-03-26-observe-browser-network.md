@@ -1,10 +1,8 @@
 ---
 slug: observe-browser-network
 title: ⚡️ [性能优化] 浏览器中观测 network 性能数据的 3 种方式
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: Chrome Devtools Network Timing Panel, Chrome Devtools Performance Panel Network, performance.getEntriesByType('resource'), 三种不同的观测方式异同
 tags: [Web Performance, network]
 ---
@@ -28,7 +26,7 @@ import { HeroImage } from '../src/components/heroImage';
 
 浏览器的 Devtools 工具有多种观测 network 性能数据的方式，但是这些数据的表现方式各有不同。本文就是解读一下这些性能数据的表现方式，并做纵向比较，帮助更多的人去优化网络带来的性能问题。
 
-<!--truncate-->
+<!-- truncate -->
 
 <br />
 

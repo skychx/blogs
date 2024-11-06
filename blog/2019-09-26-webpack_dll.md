@@ -1,10 +1,8 @@
 ---
 slug: webpack_dll
 title: 📦 辛辛苦苦学会的 webpack dll 配置，可能已经过时了
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 如果大家看过一些 webpack4 优化的文章，一定会出现 dll 动态链接库。它以配置之复杂让众多初学者记忆犹新。今天我会以一个学习者的角度去一步一步探讨 webpack dll 的配置，最后得出一个完美的解决方案。
 draft: false
 tags: [webpack, '前端工程化']
@@ -15,7 +13,7 @@ tags: [webpack, '前端工程化']
 
 **本文的内容和大部分讲解 webpack4 优化文章的观点不一样**，如果有不同的见解，欢迎在评论区和我讨论。
 
-<!--truncate-->
+<!-- truncate -->
 
 
 :::tip 友情提示

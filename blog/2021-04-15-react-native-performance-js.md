@@ -1,10 +1,8 @@
 ---
 slug: react-native-performance-js
 title: ⚡️ React Native 启动速度优化——JS 篇
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 从 React Native 的启动到页面的第一次渲染完成，结合 React Native 的源码和 1.0 的新架构，一一分析 React Native 的启动性能优化之路
 draft: false
 tags: [react native, 跨端开发, 性能优化]
@@ -12,7 +10,7 @@ tags: [react native, 跨端开发, 性能优化]
 
 [上一篇文章](https://supercodepower.com/react-native-performance-native)主要从 Native 的角度分析了 React Native 的初始化流程，并从源码出发，总结了几个 React Native 容器初始化的优化点。本文主要从 JavaScript 入手，总结了一些 JS 侧的优化要点。
 
-<!--truncate-->
+<!-- truncate -->
 
 ## 1.JSEngine
 

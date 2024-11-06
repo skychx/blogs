@@ -17,7 +17,7 @@ Hello everyone, I am skychx, specializing in performance optimization.
 
 When doing web-related performance optimization, it is necessary to have a certain understanding of the underlying principles of the browser, so that the page can better walk on the happy path. Today, let's understand a browser default performance optimization scheme that is rarely known by people - `HTML Preload Scanner`, and see how it optimizes the loading speed of network resources.
 
-<!--truncate-->
+<!-- truncate -->
 
 ## How browsers parse CSS/JS resources
 

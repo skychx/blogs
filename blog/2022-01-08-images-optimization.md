@@ -1,10 +1,8 @@
 ---
 slug: images-optimization
 title: ⚡️ 我是如何把个人网站的图片服务资费降低 90% 的
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: ⚡️ 我是如何把个人网站的图片服务资费降低 90% 的（优化效果这么明显是因为我从来没有优化过）
 draft: false
 tags: [Web Performance]
@@ -12,7 +10,7 @@ tags: [Web Performance]
 
 2021 年一直没有怎么更文，2022 准备开个好头，所以先挑些简单的内容写一写，记录一下我是如何把个人站点的文件存储资费降低 **90%** 的。
 
-<!--truncate-->
+<!-- truncate -->
 
 
 ## 服务选择

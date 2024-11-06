@@ -1,10 +1,8 @@
 ---
 slug: cross-origin-and-performance
 title: ⚡️ [性能优化] 浏览器跨域带来的一些性能问题
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 浏览器跨域带来的一些性能问题
 tags: [Web Performance]
 ---
@@ -29,7 +27,7 @@ import { HeroImage } from '../src/components/heroImage';
 由于 Web 的开放特性，同样是糊页面，Web 前端工程师往往要和 CORS（跨域请求）做一些斗争，例如我之前遇到的一个 [《SVG 图片字体失效问题》](https://supercodepower.com/svg-img-use-font) 就是 CORS 引起的。
 
 
-<!--truncate-->
+<!-- truncate -->
 
 :::info 提示
 对 CORS 不太了解的同学，可以看我之前翻译的这篇文章[《15 张精美动图全面讲解 CORS》](https://supercodepower.com/HTTP_CORS_visualized)，图文并茂，基本上可以对 CORS 有个大致的理解

@@ -1,10 +1,8 @@
 ---
 slug: no-measure-no-optimization
 title: ⚡️ [性能优化] No Measure, No Optimization
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 如何解决 SVG image 中字体失效的问题
 draft: true
 tags: [Web Performance]
@@ -14,7 +12,7 @@ tags: [Web Performance]
 
 今天的标题非常的翻译腔，动了这篇 blog 的念头时，脑子里下意识想到的标题就是 **No Measure, No Optimization**，直译不好听，ChatGPT 的建议也一般，反正领会精神即可。
 
-<!--truncate-->
+<!-- truncate -->
 
 前两天和几个大佬讨论了一些性能优化问题，交流了很多 “一通优化猛如虎，性能收益万分五” 的案例，综合思索下，这篇 blog 就产生了。
 

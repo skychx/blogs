@@ -1,10 +1,8 @@
 ---
 slug: http-prioritization
 title: 🪢 [网络协议] 浅谈 HTTP 优先级算法的演进
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 浅谈 HTTP 优先级算法的演变：HTTP/1.1 没有，HTTP/2 过于复杂，HTTP/3 返璞归真
 draft: false
 tags: [Web Performance, network]
@@ -20,7 +18,7 @@ import { HeroImage } from '../../../src/components/heroImage';
 
 <br />
 
-<!--truncate-->
+<!-- truncate -->
 
 正式讲之前先列个时间线，这样的话对以下内容的理解会有个更直观的认识：
 

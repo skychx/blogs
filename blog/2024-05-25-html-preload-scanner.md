@@ -1,10 +1,7 @@
 ---
 slug: html-preload-scanner
 title: ⚡️ [性能优化] 浏览器是如何用 HTML Preload Scanner 偷偷优化资源下载的
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
 description: 谈谈浏览器的性能优化方案 —— HTML Preload Scanner，以及我们如何不破坏此优化
 tags: [Web Performance, network]
 ---
@@ -17,7 +14,7 @@ import { HeroImage } from '../src/components/heroImage';
 
 做网页相关的性能优化时，需要对浏览器的底层原理有一定的了解，这样才能更好的让页面走在 happy path 上。今天我们就了解一个很少被人所知的浏览器默认性能优化方案 —— `HTML Preload Scanner`，看看它是如何优化网络资源加载速度的。
 
-<!--truncate-->
+<!-- truncate -->
 
 ## 浏览器如何解析 CSS/JS 资源
 

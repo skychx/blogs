@@ -1,10 +1,8 @@
 ---
 slug: cross-platform-tech
 title: 🎯【深入解析】跨端框架的核心技术到底是什么？
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 正式讨论「跨端开发」这个概念前，我们可以先思考一个问题：对大部分前端工作来说，前端主要干些啥？我个人认为，无论环境怎么变，前端基本上就是做三件事情：fetch data（数据获取）、manage state（状态管理）、render page（页面渲染）
 draft: false
 tags: [react native, 跨端开发]
@@ -13,7 +11,7 @@ tags: [react native, 跨端开发]
 > 本文是我在学习多个平台 UI 框架后的一些感触，受精力和技术水平所限，文中定有不足之处，请各位大佬多多指教
 
 
-<!--truncate-->
+<!-- truncate -->
 
 
 ## 一、前端三板斧

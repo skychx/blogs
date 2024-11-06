@@ -1,10 +1,8 @@
 ---
 slug: the-cost-of-javascript
 title: ⚡️ The Cost Of JavaScript (2017 - 2023)
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: The Cost Of JavaScript (2017 - 2023) | JavaScript 性能优化之旅
 tags: [Web Performance]
 ---
@@ -24,7 +22,7 @@ import { HeroImage } from '../src/components/heroImage';
 那么如果真的遇到一些场景需要学习相关知识，或者就是单纯的个人感兴趣想了解一下原理和细节，最好的办法是什么呢？很简单，直接看**相关团队的 Blog 或核心开发人员的 Blog & 演讲**，这都是除去源码的第一手消息，水平比那些二道贩子不知道高到哪里去了。
 
 
-<!--truncate-->
+<!-- truncate -->
 
 <br />
 

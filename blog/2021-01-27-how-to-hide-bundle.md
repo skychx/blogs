@@ -1,10 +1,8 @@
 ---
 slug: how-to-hide-bundle
 title: 🙈 如何隐藏你的热更新 bundle 文件？
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 如何隐藏热更新的 bundle 文件
 draft: false
 tags: [密码学, 网络安全, network, React Native]
@@ -20,7 +18,7 @@ tags: [密码学, 网络安全, network, React Native]
 
 >  郑重声明：若有人按本文思路隐藏热更新数据导致应用拒审或下架，本人概不负责
 
-<!--truncate-->
+<!-- truncate -->
 
 ## 一、商业利益
 

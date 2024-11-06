@@ -1,10 +1,8 @@
 ---
 slug: houyi-caijiqi
 title: 🦀️ 后羿采集器——最良心的爬虫软件
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 2020 年如果让我推荐一款大众向的数据采集软件，那一定是后裔采集器了。和我之前推荐的 web scraper 相比，如果说 web scraper 是小而精的瑞士军刀，那后裔采集器就是大而全的重型武器，基本上可以解决所有的数据爬取问题。
 draft: false
 tags: [爬虫, 'web scraper']
@@ -18,7 +16,7 @@ tags: [爬虫, 'web scraper']
 
 下面我们就来聊聊，这款软件的优秀之处。
 
-<!--truncate-->
+<!-- truncate -->
 
 <br />
 

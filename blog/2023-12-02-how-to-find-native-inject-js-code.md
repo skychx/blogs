@@ -1,10 +1,8 @@
 ---
 slug: find-native-inject-js
 title: 🛠️ [跨端开发] 如何定位 Hybrid Web 页面中 Native 注入的 JS 代码
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 运行在 iOS APP 和 Android APP 内的 Hybrid Web 页面，如何利用调试技巧定位 Native 注入的 JS 代码
 tags: [调试技巧, 跨端开发]
 ---
@@ -13,11 +11,11 @@ import { HeroImage } from '../src/components/heroImage';
 
 <HeroImage name="find_inject_js_hero_image.jpg" w={1920} h={800} />
 
-一个网页除了可以运行在公共的浏览器上，也可以运行在 APP 端内的 WebView 组件上。由于这些 Hybrid Web 网页运行在一个相对封闭的环境里，所以 APP 本身可以向 WebView 中注入一些 JS 代码，对 Web 页面做定向增强（最典型的运用就是 JSBridge，提供了一道 Web <--> Native 通信的桥梁）。
+一个网页除了可以运行在公共的浏览器上，也可以运行在 APP 端内的 WebView 组件上。由于这些 Hybrid Web 网页运行在一个相对封闭的环境里，所以 APP 本身可以向 WebView 中注入一些 JS 代码，对 Web 页面做定向增强（最典型的运用就是 JSBridge，提供了一道 Web \<\-\-\> Native 通信的桥梁）。
 
 英文版本：[How to Locate the JS Code Injected into Hybrid Web Pages by Native](https://supercodepower.com/en/find-native-inject-js)
 
-<!--truncate-->
+<!-- truncate -->
 
 <br />
 

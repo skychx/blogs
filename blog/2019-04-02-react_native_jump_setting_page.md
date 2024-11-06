@@ -1,10 +1,8 @@
 ---
 slug: react_native_jump_setting_page
 title: 📣 React Native 跳转到 APP 推送页面并获取推送状态
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: React Native 跳转到 APP 推送页面并获取推送状态
 draft: false
 tags: [react native, 跨端开发]
@@ -15,7 +13,7 @@ tags: [react native, 跨端开发]
 
 我们的 APP 是基于 React Native 开发的，这些功能 Facebook 官方没有提供，需要我们开发对应的原生模块。
 
-<!--truncate-->
+<!-- truncate -->
 
 因为开发原生模块属于比较深入的内容了，写这篇文章时我就**默认**阅读者已经具有一定的 `Objective-C` 和 `Java` 开发能力，下面就直接贴代码说思路了。
 

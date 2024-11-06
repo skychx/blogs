@@ -1,10 +1,8 @@
 ---
 slug: React-Native-Update-Guide
 title: Vary + CORS，两大云厂商都在上面栽了跟头
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: Vary + CORS，两大云厂商都在上面栽了跟头
 draft: true
 tags: [HTTP, network, '网络安全']
@@ -30,7 +28,7 @@ React Native 作为一款跨端框架，有一个最让人头疼的问题，那�
 
 觉得文章对你有用的话一定要记得**点赞**哦 🌟，谢谢你，这对我来说真的很重要！
 
-<!--truncate-->
+<!-- truncate -->
 
 <br />
 

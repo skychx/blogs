@@ -20,7 +20,7 @@ import { HeroImage } from '../../../src/components/heroImage';
 Due to the open nature of the Web, web front-end engineers often have to struggle with CORS (Cross-Origin Resource Sharing), such as a [“SVG Image Font Failure Issue”](https://supercodepower.com/en/svg-img-use-font) I encountered before, which was caused by CORS.
 
 
-<!--truncate-->
+<!-- truncate -->
 
 :::info Tip
 For those who are not very familiar with CORS, you can read this article I translated before [✋🏼🔥 CS Visualized: CORS](https://dev.to/lydiahallie/cs-visualized-cors-5b8h). It is rich in pictures and texts, and you can basically have a general understanding of CORS.

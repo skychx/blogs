@@ -11,7 +11,7 @@ tags: [Web, SVG]
 
 The solution to fixing "**Font missing in SVG image**" is simple. If you just want to see the answer, you can skip to the end. If you want to see my troubleshooting process and specific reasons, you can read from the beginning.
 
-<!--truncate-->
+<!-- truncate -->
 
 ## Cause or reason
 

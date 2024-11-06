@@ -3,8 +3,9 @@
 
 const remarkMath = require("remark-math");
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const {themes} = require('prism-react-renderer');
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -37,7 +38,7 @@ const config = {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
       // https://prismjs.com/#supported-languages
-      additionalLanguages: ["java", "rust", "kotlin", "swift"],
+      additionalLanguages: ['bash', 'diff', 'json', "java"],
     },
     algolia: {
       appId: "HX6GJ4R9GS",

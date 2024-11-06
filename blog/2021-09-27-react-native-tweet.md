@@ -1,10 +1,8 @@
 ---
 slug: react-native-tweet
 title: 🤯 没 2 年 React Native 开发经验，你都遇不到这些坑
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 没 2 年 React Native 开发经验，你都遇不到这些坑
 draft: false
 tags: [react native, 跨端开发]
@@ -15,7 +13,7 @@ React Native 开发时，如果只是写些简单的页面，基本上按着[官
 本文总结了我个人开发 React Native 中遇到的问题和一些冷门的 API，如果有有缘人看到这篇文章并解决了实际问题，那就最好不过了。
 
 
-<!--truncate-->
+<!-- truncate -->
 
 <br />
 

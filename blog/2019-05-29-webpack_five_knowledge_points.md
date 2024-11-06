@@ -1,10 +1,8 @@
 ---
 slug: webpack_five_knowledge_points
 title: 📦 webpack 中那些最易混淆的 5 个知识点
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: webpack 中，module，chunk 和 bundle 的区别是什么？filename 和 chunkFilename 的区别是什么？webpackPrefetch、webpackPreload 和 webpackChunkName 到底是干什么的？hash、chunkhash、contenthash 有什么不同？sourse-map 中 eval、cheap、inline 和 module 各是什么意思？
 draft: false
 tags: [webpack, '前端工程化']
@@ -14,7 +12,7 @@ tags: [webpack, '前端工程化']
 
 今天我主要分享的是一些 webpack 中的**易混淆知识点，也是面试的常见内容**。我把这些分散在文档和教程里的内容总结起来，目前看是**全网独一份**，大家可以**加个收藏**，方便以后检索和学习。
 
-<!--truncate-->
+<!-- truncate -->
 
 前两天为了优化公司的代码打包项目，恶补了很多 webpack4 的知识。要是放在几年前让我学习 webpack 我肯定是拒绝的，之前看过 webpack 的旧文档，比我们内部项目的文档还要简陋。
 

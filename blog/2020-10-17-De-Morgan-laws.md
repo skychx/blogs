@@ -1,10 +1,8 @@
 ---
 slug: De-Morgan-laws
 title: 🔢【程序中的数学】利用德摩根定律简化布尔运算
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 今天说说德摩根定律在编程中的实践，题目看的很吓人，其实只要有一点点的高中数学知识就能看懂，而且这部分知识掌握后可以很快的运用到项目中，投资收益比非常高
 draft: false
 tags: [程序中的数学, 离散数学, 算法]
@@ -14,7 +12,7 @@ tags: [程序中的数学, 离散数学, 算法]
 
 今天说说德摩根定律在编程中的实践，题目看的很吓人，其实只要有一点点的高中数学知识就能看懂，而且这部分知识掌握后可以很快的运用到项目中，投资收益比非常高。
 
-<!--truncate-->
+<!-- truncate -->
 
 如果你觉得我的文章对你有帮助，在**收藏**的过程中，一定要记得**点赞**和**点在看**哦，谢谢你，这对我真的很重要🌟！
 

@@ -1,10 +1,8 @@
 ---
 slug: NASA-parachute-binary
 title: 🪂 理科生的浪漫：NASA 毅力号降落伞上的二进制信息
-author: 卤代烃
-author_title: 微信公众号@卤代烃实验室
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
+
 description: 2021 年 2 月 18 号，NASA 「毅力号」火星车顺利着陆火星，随后 NASA 发布了「毅力号」降落过程中的高清视频
 draft: false
 tags: []
@@ -14,7 +12,7 @@ tags: []
 
 
 
-<!--truncate-->
+<!-- truncate -->
 
 
 
