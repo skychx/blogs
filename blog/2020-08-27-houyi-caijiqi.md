@@ -16,7 +16,7 @@ tags: [爬虫, 'web scraper']
 
 下面我们就来聊聊，这款软件的优秀之处。
 
-{/* comments */}
+{/* truncate */}
 
 <br />
 

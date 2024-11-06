@@ -15,7 +15,7 @@ import { HeroImage } from '../../../src/components/heroImage';
 
 A webpage can not only run on public browsers, but also on the WebView component within the APP. Since these Hybrid Web pages run in a relatively closed environment, the APP itself can inject some JS code into WebView, making targeted enhancements to the Web page (the most typical application is JSBridge, which provides a bridge for Web <--> Native communication).
 
-{/* comments */}
+{/* truncate */}
 
 <br />
 

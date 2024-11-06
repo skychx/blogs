@@ -15,7 +15,7 @@ import { HeroImage } from '../src/components/heroImage';
 
 英文版本：[How to Locate the JS Code Injected into Hybrid Web Pages by Native](https://supercodepower.com/en/find-native-inject-js)
 
-{/* comments */}
+{/* truncate */}
 
 <br />
 

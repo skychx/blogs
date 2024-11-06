@@ -10,7 +10,7 @@ tags: [react native, 跨端开发, 性能优化]
 
 [上一篇文章](https://supercodepower.com/react-native-performance-native)主要从 Native 的角度分析了 React Native 的初始化流程，并从源码出发，总结了几个 React Native 容器初始化的优化点。本文主要从 JavaScript 入手，总结了一些 JS 侧的优化要点。
 
-{/* comments */}
+{/* truncate */}
 
 ## 1.JSEngine
 

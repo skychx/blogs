@@ -18,7 +18,7 @@ import { HeroImage } from '../src/components/heroImage';
 
 <br />
 
-{/* comments */}
+{/* truncate */}
 
 正式讲之前先列个时间线，这样的话对以下内容的理解会有个更直观的认识：
 

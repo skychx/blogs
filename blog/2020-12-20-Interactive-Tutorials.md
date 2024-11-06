@@ -14,7 +14,7 @@ tags: [可视化, 交互]
 
 2020 年 12 月 17 日，回形针工作室上新了一款新产品——[「一个人工智能的诞生」互动教学视频](https://www.bilibili.com/video/BV1XV411h7Ro)，因为从高中开始就接触了 MOOC，对在线教育这块儿一直很感兴趣，所以第一时间就跟进体验了了一下他们的体验课——[「识别数字」](https://jibencaozuo.com/product/1/episode/0)。
 
-{/* comments */}
+{/* truncate */}
 
 
 

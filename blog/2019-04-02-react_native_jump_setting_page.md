@@ -13,7 +13,7 @@ tags: [react native, 跨端开发]
 
 我们的 APP 是基于 React Native 开发的，这些功能 Facebook 官方没有提供，需要我们开发对应的原生模块。
 
-{/* comments */}
+{/* truncate */}
 
 因为开发原生模块属于比较深入的内容了，写这篇文章时我就**默认**阅读者已经具有一定的 `Objective-C` 和 `Java` 开发能力，下面就直接贴代码说思路了。
 
