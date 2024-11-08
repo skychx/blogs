@@ -100,22 +100,6 @@ header h2.blogPostTitle_node_modules-\@docusaurus-theme-classic-lib-next-theme-B
   font-size: 2.5rem;
 }
 
-header h2.title_mRBW {
-  font-size: 2.5rem !important;
-}
-
-header h2.title_N5xb {
-  font-size: 2.5rem !important;
-}
-
-header h2.title_d79o {
-  font-size: 2.5rem !important;
-}
-
-header h2.title_d79o {
-  font-size: 2.5rem !important;
-}
-
 @media (max-width: 576px) {
   header h2.title_d79o {
     font-size: 1.7rem !important;
@@ -123,6 +107,10 @@ header h2.title_d79o {
   .title_d79o {
     font-size: 1.7rem !important;
   }
+}
+
+.title_g_Al {
+  font-size: 2.5rem !important;
 }
 
 /* 重写 blog 标题样式 */
