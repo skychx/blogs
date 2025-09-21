@@ -1,10 +1,14 @@
 ---
 slug: get-base64-image-meta-info
-title: ⚡️ [性能优化] 如何高效的获取 base64Image meta 信息
+title: ⚡️ [性能优化] 如何高效的获取 base64Image 的 meta 信息
 authors: skychx
-description: 如何高效的获取 base64Image meta 信息
+description: 如何高效的获取 base64Image 的 meta 信息
 tags: [Web Performance, image]
 ---
+
+import { HeroImage } from '../src/components/heroImage';
+
+<HeroImage name="get-base64-image-meta-info-hero-image.jpg" w={1920} h={773} />
 
 大家好啊，blog 一年多不更新了，估计权重都掉完了，也不知道最后有多少人能看到。
 
@@ -13,6 +17,8 @@ tags: [Web Performance, image]
 时间过去了一年，但对于编程领域却是天翻地覆。随着 Cursor/Claude Code 等工具的推出，大家基本都脱离了古法编程的束缚（先别说生成的代码对不对，你就说快不快吧）；不少的部门也不满足于外部编程工具的提效，也开始搞自己内部的 Agent，试图在业务和工程上双重提效。由于最近的工作会和大模型团队合作比较多，我对此的体感反而感受更深一些，这里面的感触以后有机会可以和大家慢慢说。
 
 <br />
+
+{/* truncate */}
 
 除去上面的寒暄，今天的技术话题就聊些简单的。
 
@@ -48,18 +54,23 @@ console.log(metadata.format, metadata.width, metadata.height)
 - 引用 jimp 等通用 image lib 会增大包体积，但只用了很少的功能，有些大炮打蚊子
 - 全量转换为 binary，会带来内存的不必要增加，比如说一个 4MB 的 base64 image，转为 binary 后内存会增加 3MB，如果 lib 内部解码为 BMP 等通用的 bitmap 格式，内存会根据 宽/高/位深 有 十几到几十MB 的占用涨落
 
+<br />
+
 
 ## 性能优化
 
 根据之前的经验，对于原始的 base64 image，我们获取的主要 meta 信息就是 mime, width 和 height。而所有的图片格式为了能在全平台流转和编解码，都有非常严谨的 RFC 定义。并且我们要获取的 meta 信息，都记录在图片二进制格式的 **header chunk** 里，所以我们只要找到相关信息的位置并读取就可以拿到想要的数据了。
+
+<br />
 
 
 ### 基本原理
 
 这样说比较抽象，我们拿经典的 PNG 图片为例看一下它的二进制构成。
 
-
-
+<p>
+<img src="https://image-1255652541.file.myqcloud.com/uPic/corkami-pics-png.png" alt="corkami-pics-png" width="80%" />
+</p>
 
 从上图我们可以看出，一个 png 图片主要是 4 部分组成：
 
@@ -76,8 +87,9 @@ console.log(metadata.format, metadata.width, metadata.height)
 - 我们只需要读前 8 bytes 的内容就可以快速判断出 base64 image 的 mime 类型
 - 直接读取 10+4 和 14+4 bytes 的内容，就可以确定 PNG 图片的宽高
 
-
 也就是说，对于**任意大小的 PNG 图片，我们只需要读取前 23 bytes 的内容就拿到 mime & width & height**，其它图片格式同理。
+
+<br />
 
 其它的图片二进制格式如下：
 
@@ -90,12 +102,19 @@ console.log(metadata.format, metadata.width, metadata.height)
 | BMP  | https://github.com/corkami/pics/blob/master/binary/bmp3.png |
 | WEBP | https://datatracker.ietf.org/doc/rfc9649/                   |
 
+<br />
 
 ### 获取类型
 
 就如前文，我们只需要通过 image 的 **Magic Number** 就能判断 mime。
 
 这里需要注意的是，有很多的 base64 image 会在前面加个 DataURI 的前缀（例如 `data:image/png;base64,iVBOR...`），这个前缀的 mimeType 是不一定准确的，比如说下面这个图片，前缀说它是 png，但它实际上是 webp（最后还是浏览器兜底按 Magic Number 显示出来了）：
+
+<p>
+<img src="https://image-1255652541.file.myqcloud.com/uPic/webp-fake-png.png" alt="webp-fake-png" width="100%" />
+</p>
+
+<br />
 
 Maigc Number 转为 base64 字符串后，因为 Magic Number 是确定的，所以转换后的 string 也是确定的。一般来说，我们只需要匹配前 8 个字符（也就是前 6 个 byte）就可以快速判断出图片类型：
 
@@ -123,13 +142,17 @@ for (const [signature, type] of IMAGE_TYPE_MAP) {
 
 获取宽高会稍微麻烦一些，因为不像 Magic Number 都放在最开始的地方，各个图片规范都不太一样，但最后的方案都大差不差，一般都在前 32 bytes 里有描述。我们可以只取 base64 的前 n 个字符，然后转换为 binary 读取相关位置的数据。这样做要比图片全量转换内存增量要小的多。
 
-
 就拿 PNG 图片为例，从 [PNG RFC](https://datatracker.ietf.org/doc/html/rfc2083) 可知，PNG 是按**大端序**存储的（也就是高位字节在前），宽度和高度都占用 **4 个字节**。就拿 PNG 的 width 来说，它占据的是 `bytes[16]`, `bytes[17]`, `bytes[18]`, `bytes[19]`。
+
+<p>
+<img src="https://image-1255652541.file.myqcloud.com/uPic/corkami-pics-png-header-chunk.png" alt="corkami-pics-png-header-chunk" width="100%" />
+</p>
 
 > All integers that require more than one byte must be in **network byte order**
 > 
 > Width and height give the image dimensions in pixels. They are **4-byte integers**. Zero is an invalid value. The maximum for each is **(2^31)-1** in order to accommodate languages that have difficulty with unsigned 4-byte values.
 
+<br />
 
 假设 width 的值是 `1920`（十进制），十六进制为 `0x00000780`，32 位二进制表示就是 `00000000 00000000 00000111 10000000`，那么在 PNG 里的存储关系就是：
 
@@ -143,12 +166,12 @@ for (const [signature, type] of IMAGE_TYPE_MAP) {
 那么把离散的 `bytes[16]`, `bytes[17]`, `bytes[18]`, `bytes[19]` 按大端序组合为一个 32 位整数，那么首先要做左移运算，统一为 32 位：
 
 
-| 位数       | 原始（8 位）  | 操作（左移）   | 移动后（32 位）                       |
-| --------- | ------------ | ------------ | ----------------------------------- |
-| bytes[16] | 00000000     | << 24        | 00000000 00000000 00000000 00000000 |
-| bytes[17] | 00000000     | << 16        | 00000000 00000000 00000000 00000000 |
-| bytes[18] | 00000111     | << 8         | 00000000 00000000 00000111 00000000 |
-| bytes[19] | 10000000     | 不移动        | 00000000 00000000 00000000 10000000 |
+| 位数       | 原始（8 位）  | 操作（左移）     | 移动后（32 位）                       |
+| --------- | ------------ | -------------- | ----------------------------------- |
+| bytes[16] | 00000000     | \<\< 24        | 00000000 00000000 00000000 00000000 |
+| bytes[17] | 00000000     | \<\< 16        | 00000000 00000000 00000000 00000000 |
+| bytes[18] | 00000111     | \<\< 8         | 00000000 00000000 00000111 00000000 |
+| bytes[19] | 10000000     | 不移动          | 00000000 00000000 00000000 10000000 |
 
 <br />
 
