@@ -1,10 +1,7 @@
 ---
 slug: cross-origin-and-performance
 title: ⚡️ [Performance] Performance issues brought by browser cross-domain
-author: skychx
-author_title: skychx blogs
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
 description: Some performance issues brought by browser cross-domain
 tags: [Web Performance]
 ---

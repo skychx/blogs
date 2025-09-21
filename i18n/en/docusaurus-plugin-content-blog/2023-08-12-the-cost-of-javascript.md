@@ -2,7 +2,6 @@
 slug: the-cost-of-javascript
 title: ⚡️ The Cost Of JavaScript (2017 - 2023)
 authors: skychx
-
 description: The Cost Of JavaScript (2017 - 2023) | JavaScript 性能优化之旅
 tags: [Web Performance]
 ---

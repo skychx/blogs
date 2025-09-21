@@ -2,7 +2,6 @@
 slug: svg-img-use-font
 title: 🖼️ 如何解决 SVG 图片中字体失效的问题
 authors: skychx
-
 description: 如何解决 SVG image 中字体失效的问题
 tags: [Web, SVG]
 ---

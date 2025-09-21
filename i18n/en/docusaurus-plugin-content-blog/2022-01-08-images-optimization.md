@@ -2,7 +2,6 @@
 slug: images-optimization
 title: ⚡️ 我是如何把个人网站的图片服务资费降低 90% 的
 authors: skychx
-
 description: ⚡️ 我是如何把个人网站的图片服务资费降低 90% 的（优化效果这么明显是因为我从来没有优化过）
 draft: false
 tags: [Web Performance]

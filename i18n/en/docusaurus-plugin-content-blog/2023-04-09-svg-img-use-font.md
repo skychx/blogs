@@ -2,9 +2,6 @@
 slug: svg-img-use-font
 title: 🖼️ How to solve the problem of missing fonts in SVG images
 author: skychx
-author_title: github.com/skychx
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
 description: How to solve the problem of missing fonts in SVG images
 tags: [Web, SVG]
 ---
@@ -103,7 +100,7 @@ It provided the reason and solution: for browser security, browsers do not allow
 This answer only provides a solution, but does not give a first-hand source of information to explain "why". After some further searching, I found the relevant explanation from W3C: [SVG Security - W3C Wiki](https://www.w3.org/wiki/SVG_Security), which clearly states:
 
 
-> Markup languages like HTML (and SVG itself) can reference SVG as an image with the <img\> tag (HTML namespace) or <image\> tag (HTML or SVG namespace).
+> Markup languages like HTML (and SVG itself) can reference SVG as an image with the `<img>` tag (HTML namespace) or `<image>` tag (HTML or SVG namespace).
 >
 > If an SVG file is fetched as image, then certain requirements apply to this document:
 >
@@ -174,6 +171,6 @@ As seen above, after solving the issue of embedding fonts, SVG still has great a
 
 ## Conclusion
 
-The reason for the issue of "**font invalidation in SVG images**" is that, for [security reasons](https://www.w3.org/wiki/SVG_Security) in web browsers, when an SVG is referenced by the HTML <img\> tag, external fonts referenced within the SVG are not downloaded and not used (except for fonts built into the browser itself), resulting in the issue of personalized fonts not working.
+The reason for the issue of "**font invalidation in SVG images**" is that, for [security reasons](https://www.w3.org/wiki/SVG_Security) in web browsers, when an SVG is referenced by the HTML `<img>` tag, external fonts referenced within the SVG are not downloaded and not used (except for fonts built into the browser itself), resulting in the issue of personalized fonts not working.
 
 Currently, the best solution is to use a tool like [nano](https://vecta.io/nano) to handle font embedding, ensuring normal display of the image while also maintaining a small file size.

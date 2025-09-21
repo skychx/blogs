@@ -2,7 +2,6 @@
 slug: http-prioritization
 title: 🪢 [网络协议] 浅谈 HTTP 优先级算法的演进
 authors: skychx
-
 description: 浅谈 HTTP 优先级算法的演变：HTTP/1.1 没有，HTTP/2 过于复杂，HTTP/3 返璞归真
 draft: false
 tags: [Web Performance, network]

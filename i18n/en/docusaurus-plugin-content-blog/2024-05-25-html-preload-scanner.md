@@ -1,10 +1,7 @@
 ---
 slug: html-preload-scanner
 title: ⚡️ [Performance] How the browser optimizes resource downloads with HTML Preload Scanner
-author: skychx
-author_title: skychx blog
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
 description: How the browser optimizes resource downloads with HTML Preload Scanner
 tags: [Web Performance, network]
 ---

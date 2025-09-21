@@ -1,10 +1,7 @@
 ---
 slug: observe-browser-network
 title: ⚡️ [Performance] Three ways to observe network performance data in the browser.
-author: skychx
-author_title: skychx blog
-author_url: https://github.com/skychx
-author_image_url: https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg
+authors: skychx
 description: 「Chrome Devtools Network Timing Panel」VS「Chrome Devtools Performance Panel Network」VS「performance.getEntriesByType('resource')」
 tags: [Web Performance, network]
 ---
