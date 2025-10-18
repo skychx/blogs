@@ -1,8 +1,8 @@
 ---
 slug: get-base64-image-meta-info
-title: ⚡️ [性能优化] 如何高效的获取 base64Image 的 meta 信息
+title: ⚡️ [Performance Optimization] How to Efficiently Get Meta Information from Base64 Images
 authors: skychx
-description: 如何高效的获取 base64Image 的 meta 信息
+description: How to efficiently get meta information from base64 images
 tags: [Web Performance, image]
 ---
 
@@ -10,32 +10,32 @@ import { HeroImage } from '../../../src/components/heroImage';
 
 <HeroImage name="get-base64-image-meta-info-hero-image.jpg" w={1920} h={773} />
 
-大家好啊，blog 一年多不更新了，估计权重都掉完了，也不知道最后有多少人能看到。
+Hello everyone, it's been over a year since my blog was last updated. I guess the SEO ranking has dropped completely, and I don't know how many people will see this in the end.
 
-从去年五月份开始，工作上因组织架构变动，我从原来做的性能优化领域转向了 AI，具体内容因为保密协议的问题也不能多说，所以就长时间不更新了。今年的话工作方向又有了一些变动，主要是在做一些 GUI Agent 的事情。
+Starting from May last year, due to organizational structure changes at work, I shifted from the performance optimization field to AI. Due to confidentiality agreements, I can't say much about the specific content, so I haven't updated for a long time. This year, my work direction has changed again, mainly focusing on GUI Agent work.
 
-时间过去了一年，但对于编程领域却是天翻地覆。随着 Cursor/Claude Code 等工具的推出，大家基本都脱离了古法编程的束缚（先别说生成的代码对不对，你就说快不快吧）；不少的部门也不满足于外部编程工具的提效，也开始搞自己内部的 Agent，试图在业务和工程上双重提效。由于最近的工作会和大模型团队合作比较多，我对此的体感反而感受更深一些，这里面的感触以后有机会可以和大家慢慢说。
+A year has passed, but the programming field has undergone earth-shaking changes. With the launch of tools like Cursor/Claude Code, everyone has basically broken free from the constraints of traditional programming methods (let's not worry about whether the generated code is correct, just ask if it's fast or not); many departments are not satisfied with the efficiency gains from external programming tools and have started building their own internal Agents, attempting to double efficiency in both business and engineering. Since my recent work involves more collaboration with large model teams, I feel this more deeply, and I'll have opportunities to share my insights slowly in the future.
 
 <br />
 
 {/* truncate */}
 
-除去上面的寒暄，今天的技术话题就聊些简单的。
+Aside from the above greetings, today's technical topic will be something simple.
 
-自从「多模态大模型」开始发展，向模型传入图片内容就成了各类 Agent 系统绕不开的话题。出于一些安全上的考虑，一些大模型早期还只支持 base64 编码的图片上传，让网络请求的 post body 变得又臭又长。
+Since the development of "multimodal large models," passing image content to models has become an unavoidable topic in various Agent systems. For some security considerations, some large models early on only supported base64-encoded image uploads, making the post body of network requests extremely long and cumbersome.
 
-随着 2024 年 computer use 和 browser use 等概念的提出，这些相关的 Agent 会涉及到大量的截图，然后把截图发给大模型以供决策并提供下一次 loop 的 action。而这些截图大部分都是以 base64 的格式存在的，相关的 GUI Agent 需要从这些 base64 image 中读取「格式/长宽」等 meta 信息，然后做一系列的逻辑处理。
+With the introduction of concepts like computer use and browser use in 2024, these related Agents will involve a large number of screenshots, then send these screenshots to large models for decision-making and to provide actions for the next loop. Most of these screenshots exist in base64 format, and related GUI Agents need to read meta information like "format/width/height" from these base64 images, then perform a series of logical processing.
 
 
-## 常规做法
+## Conventional Approach
 
-如果 Agent 的技术栈是 JS/TS，那么常规的处理流程是把 base64 image 先全量转为 binary image，然后再借助 [jimp](https://jimp-dev.github.io/jimp/)/[sharp](https://sharp.pixelplumbing.com/) 等图片处理 lib，从中获取相关的 meta 信息（直接向 Claude Code 提需求其实也是类似的处理方法）。
+If the Agent's tech stack is JS/TS, the conventional processing flow is to first convert the base64 image entirely to a binary image, then use image processing libraries like [jimp](https://jimp-dev.github.io/jimp/)/[sharp](https://sharp.pixelplumbing.com/) to extract relevant meta information (directly requesting tasks from Claude Code actually follows a similar processing method).
 
 ```typescript
 // Jimp
 import { Jimp } from "jimp";
 
-const buffer = Buffer.from(base64Data, 'base64');  
+const buffer = Buffer.from(base64Data, 'base64');
 const image = await Jimp.fromBuffer(buffer);
 
 console.log(image.mime, image.width, image.height)
@@ -49,66 +49,66 @@ const metadata = await sharp(imageBuffer).metadata();
 console.log(metadata.format, metadata.width, metadata.height)
 ```
 
-这种方式从**最终结果**上看没什么问题，但是在**性能和效率**上有以下的不足：
+This approach has no problem in terms of **final results**, but it has the following shortcomings in **performance and efficiency**:
 
-- 引用 jimp 等通用 image lib 会增大包体积，但只用了很少的功能，有些大炮打蚊子
-- 全量转换为 binary，会带来内存的不必要增加，比如说一个 4MB 的 base64 image，转为 binary 后内存会增加 3MB，如果 lib 内部解码为 BMP 等通用的 bitmap 格式，内存会根据 宽/高/位深 有 十几到几十MB 的占用涨落
-
-<br />
-
-
-## 性能优化
-
-根据之前的经验，对于原始的 base64 image，我们获取的主要 meta 信息就是 mime, width 和 height。而所有的图片格式为了能在全平台流转和编解码，都有非常严谨的 RFC 定义。并且我们要获取的 meta 信息，都记录在图片二进制格式的 **header chunk** 里，所以我们只要找到相关信息的位置并读取就可以拿到想要的数据了。
+- Including general image libraries like jimp increases bundle size, but only uses very few features - it's like using a cannon to shoot a mosquito
+- Full conversion to binary brings unnecessary memory increases. For example, a 4MB base64 image will increase memory by 3MB after conversion to binary. If the library internally decodes to common bitmap formats like BMP, memory will fluctuate by ten to几十MB depending on width/height/bit depth
 
 <br />
 
 
-### 基本原理
+## Performance Optimization
 
-这样说比较抽象，我们拿经典的 PNG 图片为例看一下它的二进制构成。
+Based on previous experience, for original base64 images, the main meta information we need to obtain is mime, width, and height. All image formats have very rigorous RFC definitions to ensure they can flow and be encoded/decoded across all platforms. And the meta information we need to obtain is recorded in the **header chunk** of the image's binary format, so we just need to find the relevant position and read it to get the data we want.
+
+<br />
+
+
+### Basic Principles
+
+This is rather abstract, so let's take the classic PNG image as an example to look at its binary composition.
 
 <p>
 <img src="https://image-1255652541.file.myqcloud.com/uPic/corkami-pics-png.png" alt="corkami-pics-png" width="80%" />
 </p>
 
-从上图我们可以看出，一个 png 图片主要是 4 部分组成：
+From the above image, we can see that a PNG image mainly consists of 4 parts:
 
-- **signature**: 也就是 png 图片的 magic number，固定为 `\x89PNG\r\n^Z\n`，这样解码器可以通过头 8 个字节就能快速判断出数据类型
-- **IHDR**: image header chunk，里面标注了各种 meta 信息，比如说 width/height/bit depth 等
-- **IDAT**: image data chunk，png data 数据，因为不是本文重点暂时忽略
-- **IEND**: image trailer chunk，标记 png 图片的结束。其实 png 结束后还可以附加其余信息（相关玩法可见 [热更新-隐写术](https://supercodepower.com/how-to-hide-bundle#11-%E9%9A%90%E5%86%99%E6%9C%AF%E5%BD%93%E4%BB%A3%E7%89%B9%E6%B4%9B%E4%BC%8A%E6%9C%A8%E9%A9%AC)）
+- **signature**: The magic number of PNG images, fixed as `\x89PNG\r\n^Z\n`, so decoders can quickly determine the data type through the first 8 bytes
+- **IHDR**: image header chunk, which marks various meta information like width/height/bit depth, etc.
+- **IDAT**: image data chunk, PNG data content, ignored here as it's not the focus of this article
+- **IEND**: image trailer chunk, marking the end of the PNG image. Actually, additional information can be appended after PNG ends (for related techniques, see [Hot Update-Steganography](https://supercodepower.com/how-to-hide-bundle#11-%E9%9A%90%E5%86%99%E6%9C%AF%E5%BD%93%E4%BB%A3%E7%89%B9%E6%B4%9B%E4%BC%8A%E6%98%A8%E9%A9%AC))
 
 
 <br />
 
-从上面内容我们可以看出，对于 png 图片：
+From the above content, we can see that for PNG images:
 
-- 我们只需要读前 8 bytes 的内容就可以快速判断出 base64 image 的 mime 类型
-- 直接读取 10+4 和 14+4 bytes 的内容，就可以确定 PNG 图片的宽高
+- We only need to read the first 8 bytes to quickly determine the mime type of the base64 image
+- Directly reading the content at bytes 10+4 and 14+4 can determine the width and height of the PNG image
 
-也就是说，对于**任意大小的 PNG 图片，我们只需要读取前 23 bytes 的内容就拿到 mime & width & height**，其它图片格式同理。
-
-<br />
-
-其它的图片二进制格式如下：
-
-
-| 格式 | 二进制格式解析                                              |
-| ---- | ----------------------------------------------------------- |
-| PNG  | https://github.com/corkami/pics/blob/master/binary/PNG.png  |
-| JPEG | https://github.com/corkami/pics/blob/master/binary/JPG.png  |
-| GIF  | https://github.com/corkami/pics/blob/master/binary/GIF.png  |
-| BMP  | https://github.com/corkami/pics/blob/master/binary/bmp3.png |
-| WEBP | https://datatracker.ietf.org/doc/rfc9649/                   |
+In other words, for **PNG images of any size, we only need to read the first 23 bytes to get mime & width & height**. The same applies to other image formats.
 
 <br />
 
-### 获取类型
+The binary formats of other images are as follows:
 
-就如前文，我们只需要通过 image 的 **Magic Number** 就能判断 mime。
+| Format | Binary Format Analysis                                        |
+| ------ | ------------------------------------------------------------ |
+| PNG    | https://github.com/corkami/pics/blob/master/binary/PNG.png  |
+| JPEG   | https://github.com/corkami/pics/blob/master/binary/JPG.png  |
+| GIF    | https://github.com/corkami/pics/blob/master/binary/GIF.png  |
+| BMP    | https://github.com/corkami/pics/blob/master/binary/bmp3.png |
+| WEBP   | https://datatracker.ietf.org/doc/rfc9649/                   |
 
-这里需要注意的是，有很多的 base64 image 会在前面加个 DataURI 的前缀（例如 `data:image/png;base64,iVBOR...`），这个前缀的 mimeType 是不一定准确的，比如说下面这个图片，前缀说它是 png，但它实际上是 webp（最后还是浏览器兜底按 Magic Number 显示出来了）：
+<br />
+
+
+### Getting the Type
+
+As mentioned earlier, we can determine the mime type through the image's **Magic Number**.
+
+It's worth noting that many base64 images will have a DataURI prefix added (like `data:image/png;base64,iVBOR...`), and the mimeType in this prefix is not necessarily accurate. For example, the image below claims it's PNG in the prefix, but it's actually WebP (the browser still displays it correctly based on the Magic Number):
 
 <p>
 <img src="https://image-1255652541.file.myqcloud.com/uPic/webp-fake-png.png" alt="webp-fake-png" width="100%" />
@@ -116,7 +116,7 @@ console.log(metadata.format, metadata.width, metadata.height)
 
 <br />
 
-Maigc Number 转为 base64 字符串后，因为 Magic Number 是确定的，所以转换后的 string 也是确定的。一般来说，我们只需要匹配前 8 个字符（也就是前 6 个 byte）就可以快速判断出图片类型：
+After converting Magic Number to base64 strings, because Magic Number is fixed, the converted string is also fixed. Generally, we only need to match the first 8 characters (which is the first 6 bytes) to quickly determine the image type:
 
 ```typescript
 const IMAGE_TYPE_MAP = new Map<string, ImageType>([
@@ -138,44 +138,44 @@ for (const [signature, type] of IMAGE_TYPE_MAP) {
 
 <br />
 
-### 获取宽高
 
-获取宽高会稍微麻烦一些，因为不像 Magic Number 都放在最开始的地方，各个图片规范都不太一样，但最后的方案都大差不差，一般都在前 32 bytes 里有描述。我们可以只取 base64 的前 n 个字符，然后转换为 binary 读取相关位置的数据。这样做要比图片全量转换内存增量要小的多。
+### Getting Width and Height
 
-就拿 PNG 图片为例，从 [PNG RFC](https://datatracker.ietf.org/doc/html/rfc2083) 可知，PNG 是按**大端序**存储的（也就是高位字节在前），宽度和高度都占用 **4 个字节**。就拿 PNG 的 width 来说，它占据的是 `bytes[16]`, `bytes[17]`, `bytes[18]`, `bytes[19]`。
+Getting width and height is slightly more troublesome because, unlike Magic Number which is always at the very beginning, each image specification is somewhat different, but the final solutions are all similar, generally described within the first 32 bytes. We can take only the first n characters of base64, then convert to binary and read the data at relevant positions. This approach has much smaller memory increments than full image conversion.
+
+Let's take PNG images as an example. From the [PNG RFC](https://datatracker.ietf.org/doc/html/rfc2083), we know that PNG stores data in **big-endian order** (high-order bytes first), and width and height each occupy **4 bytes**. Taking PNG's width as an example, it occupies `bytes[16]`, `bytes[17]`, `bytes[18]`, `bytes[19]`.
 
 <p>
 <img src="https://image-1255652541.file.myqcloud.com/uPic/corkami-pics-png-header-chunk.png" alt="corkami-pics-png-header-chunk" width="100%" />
 </p>
 
 > All integers that require more than one byte must be in **network byte order**
-> 
+>
 > Width and height give the image dimensions in pixels. They are **4-byte integers**. Zero is an invalid value. The maximum for each is **(2^31)-1** in order to accommodate languages that have difficulty with unsigned 4-byte values.
 
 <br />
 
-假设 width 的值是 `1920`（十进制），十六进制为 `0x00000780`，32 位二进制表示就是 `00000000 00000000 00000111 10000000`，那么在 PNG 里的存储关系就是：
+Assuming the width value is `1920` (decimal), which is `0x00000780` in hexadecimal, and the 32-bit binary representation is `00000000 00000000 00000111 10000000`, then the storage relationship in PNG would be:
 
-- `bytes[16]` = `0x00` (二进制 `00000000`)
-- `bytes[17]` = `0x00` (二进制 `00000000`)
-- `bytes[18]` = `0x07` (二进制 `00000111`)
-- `bytes[19]` = `0x80` (二进制 `10000000`)
-
-<br />
-
-那么把离散的 `bytes[16]`, `bytes[17]`, `bytes[18]`, `bytes[19]` 按大端序组合为一个 32 位整数，那么首先要做左移运算，统一为 32 位：
-
-
-| 位数       | 原始（8 位）  | 操作（左移）     | 移动后（32 位）                       |
-| --------- | ------------ | -------------- | ----------------------------------- |
-| bytes[16] | 00000000     | \<\< 24        | 00000000 00000000 00000000 00000000 |
-| bytes[17] | 00000000     | \<\< 16        | 00000000 00000000 00000000 00000000 |
-| bytes[18] | 00000111     | \<\< 8         | 00000000 00000000 00000111 00000000 |
-| bytes[19] | 10000000     | 不移动          | 00000000 00000000 00000000 10000000 |
+- `bytes[16]` = `0x00` (binary `00000000`)
+- `bytes[17]` = `0x00` (binary `00000000`)
+- `bytes[18]` = `0x07` (binary `00000111`)
+- `bytes[19]` = `0x80` (binary `10000000`)
 
 <br />
 
-最后以「按位或」合并所有结果：
+So to combine the discrete `bytes[16]`, `bytes[17]`, `bytes[18]`, `bytes[19]` into a 32-bit integer in big-endian order, we first need to do left shift operations to unify them as 32 bits:
+
+| Bits      | Original (8-bit) | Operation (left shift) | After shift (32-bit)                 |
+| --------- | ---------------- | --------------------- | ------------------------------------ |
+| bytes[16] | 00000000         | \<\< 24               | 00000000 00000000 00000000 00000000 |
+| bytes[17] | 00000000         | \<\< 16               | 00000000 00000000 00000000 00000000 |
+| bytes[18] | 00000111         | \<\< 8                | 00000000 00000000 00000111 00000000 |
+| bytes[19] | 10000000         | no shift              | 00000000 00000000 00000000 10000000 |
+
+<br />
+
+Finally, merge all results with bitwise OR:
 
 ```typescript
   00000000 00000000 00000000 00000000  (bytes[16])
@@ -183,12 +183,12 @@ for (const [signature, type] of IMAGE_TYPE_MAP) {
 | 00000000 00000000 00000111 00000000  (bytes[18])
 | 00000000 00000000 00000000 10000000  (bytes[19])
 -----------------------------------------
-= 00000000 00000000 00000111 10000000  (最终结果)
+= 00000000 00000000 00000111 10000000  (final result)
 ```
 
 <br />
 
-写为真实的代码就是这样：
+Written as actual code, it looks like this:
 
 ```typescript
 export function parsePngDimensions(bytes: Uint8Array): ImageDimensions {
@@ -204,12 +204,13 @@ const binaryHeader = new Uint8Array(Buffer.from(header, 'base64'));
 const { width, height } = parsePngDimensions(binaryHeader);
 ```
 
-按同样的思路，只需要注意字节序和 width/height 在实际二进制数据中的位置，就可以一一解析各种图片格式。这种繁琐的工作，只需要把上面的逻辑给 Claude Code/Cursor 再加上对应的 RFC 参考，就能直接生成其他图片格式的解析代码了。
+Following the same logic, just paying attention to byte order and the position of width/height in the actual binary data, you can parse various image formats one by one. For this tedious work, you just need to give the above logic to Claude Code/Cursor plus the corresponding RFC references, and it can directly generate parsing code for other image formats.
 
-当然，生成的代码有可能有错误，这里就需要花费一些时间再做人工 review 并补上单测，这部分其实是在整体工作中最耗时的一块儿，因为 AI 目前还不能背锅。
+Of course, the generated code might have errors, and this requires spending some time on manual review and adding unit tests. This part is actually the most time-consuming in the overall work because AI currently can't take responsibility.
 
 <br />
 
-## 总结
 
-使用这个思路，可以有效把读取 meta 信息时的**内存增量控制在几十个字节内**，优化整体性能。
+## Summary
+
+Using this approach can effectively control the **memory increment to within a few dozen bytes** when reading meta information, optimizing overall performance.
