@@ -3,7 +3,7 @@ slug: cross-platform-tech
 title: 🎯 [Deep Analysis] What Are the Core Technologies of Cross-Platform Frameworks?
 authors: skychx
 
-description: Before formally discussing the concept of "cross-platform development," we can first think about a question: what do front-end developers mainly do? I personally believe that regardless of how the environment changes, front-end basically does three things: fetch data, manage state, and render page
+description: Before formally discussing the concept of "cross-platform development," we can first think about a question what do front-end developers mainly do? I personally believe that regardless of how the environment changes, front-end basically does three things fetch data, manage state, and render page
 draft: false
 tags: [react native, cross-platform development]
 ---

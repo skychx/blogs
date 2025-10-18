@@ -9,7 +9,7 @@ tags: [Web Performance]
 
 I didn't write much in 2021, so I wanted to start 2022 on a good note by writing some simple content first, recording how I reduced my personal site's file storage costs by **90%**.
 
-{/* truncate */
+{/* truncate */}
 
 
 ## Service Selection

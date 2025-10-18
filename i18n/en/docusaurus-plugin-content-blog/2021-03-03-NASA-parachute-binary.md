@@ -1,6 +1,6 @@
 ---
 slug: NASA-parachute-binary
-title: 🪂 The Romance of Science Students: Binary Messages on NASA's Perseverance Parachute
+title: 🪂 The Romance of Science Students Binary Messages on NASA's Perseverance Parachute
 authors: skychx
 
 description: On February 18, 2021, NASA's "Perseverance" rover successfully landed on Mars, and NASA subsequently released high-definition video of the Perseverance landing process
@@ -10,7 +10,7 @@ tags: []
 
 Last week I wrote a long article ["Which Mobile JS Engine is the Strongest? Looking in Silicon Valley..."](https://mp.weixin.qq.com/s/2cxe1L9_vyB8oNg2jr2rkg), which was too energy-consuming. This week I'm writing a relaxed article to transition.
 
-{/* truncate */
+{/* truncate */}
 
 
 

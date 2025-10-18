@@ -2,8 +2,7 @@
 slug: react-native-upgrade-blog
 title: 🧭 React Native Version Upgrade Guide
 authors: skychx
-
-description: React Native as a cross-platform framework has one of the most headache-inducing problems: version updates. Especially when encountering major version updates, the configuration and build files for JavaScript, iOS, and Android all undergo significant changes. Sometimes these configuration files are coupled together, where one change affects everything.
+description: React Native as a cross-platform framework has one of the most headache-inducing problems version updates. Especially when encountering major version updates, the configuration and build files for JavaScript, iOS, and Android all undergo significant changes. Sometimes these configuration files are coupled together, where one change affects everything.
 draft: false
 tags: [react native, cross-platform development, frontend engineering]
 ---

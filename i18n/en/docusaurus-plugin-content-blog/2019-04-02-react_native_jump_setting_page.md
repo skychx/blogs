@@ -1,9 +1,8 @@
 ---
 slug: react_native_jump_setting_page
-title: 📣 React Native: Jump to App Push Settings and Get Push Status
+title: 📣 React Native Jump to App Push Settings and Get Push Status
 authors: skychx
-
-description: React Native: Jump to App Push Settings and Get Push Status
+description: React Native Jump to App Push Settings and Get Push Status
 draft: false
 tags: [react native, cross-platform development]
 ---

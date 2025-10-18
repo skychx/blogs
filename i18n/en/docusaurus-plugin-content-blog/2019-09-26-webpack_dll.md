@@ -12,7 +12,7 @@ If you've read some webpack4 optimization articles, you'll definitely encounter 
 
 **The content and viewpoints in this article are different from most webpack4 optimization articles**. If you have different opinions, welcome to discuss with me in the comments section.
 
-{/* truncate */
+{/* truncate */}
 
 
 

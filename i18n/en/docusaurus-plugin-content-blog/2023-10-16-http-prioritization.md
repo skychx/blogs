@@ -2,7 +2,7 @@
 slug: http-prioritization
 title: 🪢 [Network Protocol] A Brief Discussion on the Evolution of HTTP Priority Algorithms
 authors: skychx
-description: A brief discussion on the evolution of HTTP priority algorithms: HTTP/1.1 had none, HTTP/2 was too complex, HTTP/3 returned to simplicity
+description: A brief discussion on the evolution of HTTP priority algorithms HTTP/1.1 had none, HTTP/2 was too complex, HTTP/3 returned to simplicity
 draft: false
 tags: [Web Performance, network]
 ---

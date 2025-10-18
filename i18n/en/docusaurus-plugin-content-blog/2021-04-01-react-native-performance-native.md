@@ -14,7 +14,7 @@ According to my research, this question has at least **ten years** of history. I
 
 But today we're not talking about Web performance optimization. Just borrowing the analysis approach of that classic question, **from React Native startup to the first page render completion, combining React Native source code and the new 1.0 architecture, explore React Native's startup performance optimization path**.
 
-{/* truncate */
+{/* truncate */}
 
 
 

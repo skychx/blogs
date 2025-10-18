@@ -10,7 +10,7 @@ tags: [web scraping, 'web scraper']
 
 ![image-20200517183119381](https://image-1255652541.file.myqcloud.com/uPic/image-20200517183119381.png)
 
-{/* truncate */)
+{/* truncate */}
 
 In our daily study and work, we more or less encounter some data scraping needs, such as collecting paper lists under related topics when writing papers, collecting user reviews during operational activities, and collecting competitor data during competitive analysis.
 

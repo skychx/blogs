@@ -12,7 +12,7 @@ tags: [visualization, interaction]
 
 On December 17, 2020, PaperClip Studio launched a new product - ["The Birth of an Artificial Intelligence" Interactive Teaching Video](https://www.bilibili.com/video/BV1XV411h7Ro). Because I've been exposed to MOOCs since high school and have always been very interested in online education, I immediately followed up and experienced their trial lesson - ["Recognizing Numbers"](https://jibencaozuo.com/product/1/episode/0).
 
-{/* truncate */)
+{/* truncate */}
 
 
 
