@@ -1,142 +1,139 @@
 ---
 slug: images-optimization
-title: ⚡️ 我是如何把个人网站的图片服务资费降低 90% 的
+title: ⚡️ How I Reduced My Personal Website's Image Service Costs by 90%
 authors: skychx
-description: ⚡️ 我是如何把个人网站的图片服务资费降低 90% 的（优化效果这么明显是因为我从来没有优化过）
+description: ⚡️ How I reduced my personal website's file storage costs by 90% (the optimization effect is so obvious because I never optimized before)
 draft: false
 tags: [Web Performance]
 ---
 
-2021 年一直没有怎么更文，2022 准备开个好头，所以先挑些简单的内容写一写，记录一下我是如何把个人站点的文件存储资费降低 **90%** 的。
+I didn't write much in 2021, so I wanted to start 2022 on a good note by writing some simple content first, recording how I reduced my personal site's file storage costs by **90%**.
 
-{/* truncate */}
-
-
-## 服务选择
-
-我开始写文章大概是三年前，当时有个很现实的问题是**不知道图片上传到哪里**。
-
-之前大多数人会把图片托管到新浪图床上，但是新浪图床当时开启了鉴权操作（通过 referer 限制），非新浪站点不会展示图片，虽然可以通过空 referer 的方式绕过，但是也不是长久之计；另外也有人把图片托管到 GitHub Gitee 上，但是受限于网速和容量也不是最优的选择。
-
-后来经过一番调研，发现其实可以用各大云厂商的文件存储功能实现，资费也不贵。因为看不懂阿里云的文件存储文档，就选择了腾讯云的 COS 文件存储服务。
-
-存储服务搞定后，就是挑一款顺手的客户端了。市面上有很多的图床客户端：
-
-|  名称   | 是否免费  | 是否跨平台  | 应用体积  |
-|  ----  | ----  | ----  | ----  |
-| [iPic](https://toolinbox.net/iPic/)  | 否 | 只支持 Mac | 小 |
-| [uPic](https://blog.svend.cc/upic/)  | 是 | 只支持 Mac | 小 |
-| [PicGo](https://molunerfinn.com/PicGo/)  | 是 | 基于 electron，跨平台 | 非常大 |
+{/* truncate */
 
 
-我这里选择了免费又轻量的 **uPic**，完美满足我的图片上传需求。
+## Service Selection
 
-<br />
+I started writing articles about three years ago, and at that time there was a very practical problem: **I didn't know where to upload images**.
 
-## 问题出现
+Previously, most people would host images on Sina's image hosting service, but Sina had enabled authentication operations (restricted by referer), so images wouldn't display on non-Sina sites. Although this could be bypassed through empty referer, it wasn't a long-term solution. Additionally, some people hosted images on GitHub or Gitee, but due to network speed and capacity limitations, this wasn't the optimal choice either.
 
-配置好个人的图床服务后，差不多两年时间都是无感知的，上个月发现今年的流量费用翻倍，于是想着优化一下图片降低一些费用。
+After some research, I discovered that I could actually use the file storage services from major cloud providers, and the costs weren't expensive. Since I couldn't understand Alibaba Cloud's file storage documentation, I chose Tencent Cloud's COS file storage service.
 
-首先分析了一下我的文章教程，其中流量大头是我写的「[web scraper 教程](https://www.cnblogs.com/web-scraper/)」，全网阅读量预估有 80w，其中 80% 的图片请求都会落到我的 COS 源站上，造成流量费用。
+After settling on the storage service, it was time to pick a suitable client. There are many image hosting clients on the market:
 
+| Name | Is Free | Cross-Platform | App Size |
+| ---- | ---- | ---- | ---- |
+| [iPic](https://toolinbox.net/iPic/) | No | Mac only | Small |
+| [uPic](https://blog.svend.cc/upic/) | Yes | Mac only | Small |
+| [PicGo](https://molunerfinn.com/PicGo/) | Yes | Electron-based, cross-platform | Very large |
 
-经过排查，目前 COS 流量的主要消耗途径为 3 个地方：
-
-- **博客园**：博客园不支持 md 文件里的图片直接转博客园公链，当时图省事直接用的 COS 链接
-- **少数派**：编辑器能力较弱，也不支持自动转公链，也是用的 COS 链接
-- **个人博客**：流量较小可忽略
-
-找到问题后我们就可以逐步优化了。
+I chose the free and lightweight **uPic**, which perfectly meets my image upload needs.
 
 <br />
 
-## 优化一：referrer 鉴权
+## Problem Emergence
 
-这个优化比较早，大概使用 COS 几个月后就做了。因为文章发布一段时间后，我就发现很多原创文章都被站群网站「采集」去优化 SEO 了。
+After configuring my personal image hosting service, it was seamless for about two years. Last month, I noticed that this year's traffic costs had doubled, so I thought about optimizing the images to reduce some costs.
 
-这种事情是无法杜绝的，但是对我来说这些站点都会给我的图片 COS 服务造成带宽和资费压力，在权衡利弊后，我决定学习新浪微博图床的做法，限制访问权限：
+First, I analyzed my articles and tutorials. The main traffic contributor was my "[Web Scraper Tutorial](https://www.cnblogs.com/web-scraper/)", with an estimated 800,000 reads across the entire network. 80% of image requests would hit my COS origin server, causing traffic costs.
 
-- 只允许**白名单**里的域名请求图片
-- 更近一步，**限制空 referrer 请求**，因为很多刷 SEO 站点会在 HTML 里配置 `<meta name="referrer" content="noreferrer">`，通过空 referrer 绕过鉴权
+After investigation, the main consumption channels for COS traffic were three places:
 
-开启 referrer 鉴权后，经过观察流量有一定的下降，也多了非常多的 403 错误码，说明拦截还是有效的。但因为处理时间较为久远，我也忘了具体收益了。
+- **CNBlogs**: CNBlogs doesn't support directly converting images in md files to CNBlogs public links. At that time, for convenience, I directly used COS links
+- **少数派 (sspai)**: The editor capabilities are weak and don't support automatic conversion to public links, so COS links were also used
+- **Personal Blog**: Traffic is small and can be ignored
+
+After finding the problem, we can optimize step by step.
 
 <br />
 
-## 优化二：压缩图片
+## Optimization 1: Referrer Authentication
 
-referer 优化之后，我就很长时间（大概一年半）没有处理图片了，2021 年年底的时候，我发现买的定量流量包每次到月中就用完了。降低流量占用最快速的方法就是**压缩图片**了，于是我做了以下工作：
+This optimization was done relatively early, about a few months after using COS. Because after publishing articles for a while, I found that many original articles were being "scraped" by site groups for SEO optimization.
 
-### 1.tinify 压缩
+This kind of thing cannot be completely stopped, but for me, these sites all create bandwidth and cost pressure on my image COS service. After weighing the pros and cons, I decided to learn from Sina Weibo's image hosting approach and restrict access permissions:
 
-这里我用了 [tinify.cn](https://tinify.cn/) 这个网站，个人认为它的质量最高，而且支持申请[开发者 API](https://tinify.cn/developers)，每个月有 500 张的免费份额，算了一下 COS 上一共 450 张图片，正好在额度内，没什么犹豫的直接开压。
+- Only allow domains on the **whitelist** to request images
+- Further, **restrict empty referrer requests**, because many SEO scraping sites configure `<meta name="referrer" content="noreferrer">` in HTML to bypass authentication through empty referer
 
-最后的压缩成果如下：
+After enabling referrer authentication, I observed that traffic decreased to some extent, and there were many more 403 error codes, indicating that the interception was effective. However, since this was handled a long time ago, I forgot the specific benefits.
 
-| 压缩前 | 压缩后 |
+<br />
+
+## Optimization 2: Compress Images
+
+After the referrer optimization, I didn't handle images for a long time (about a year and a half). At the end of 2021, I found that the fixed traffic package I bought would be used up by the middle of each month. The fastest way to reduce traffic usage is to **compress images**, so I did the following work:
+
+### 1. Tinify Compression
+
+Here I used the [tinify.cn](https://tinify.cn/) website. Personally, I think its quality is the highest, and it supports applying for a [developer API](https://tinify.cn/developers) with 500 free images per month. I calculated that there are 450 images on COS in total, which is within the quota, so I started compressing without hesitation.
+
+The final compression results are as follows:
+
+| Before Compression | After Compression |
 | ----- | ----  |
 | 111MB | 75MB  |
 
+Overall, it only reduced the size by **33%**, but the actual compression ratio is higher, about **60%** savings, because tinify doesn't support GIF compression, and among the 450 images, there are quite a few GIF images, which pulled down the data.
 
-综合看上去只缩减了 **33%** 的体积，实际上压缩比要比这个高，大概能省 **60%** 左右，因为 tinify 不支持 GIF 压缩，而 450 张图里有不少 GIF 图片，所以把数据拉下来了。
-
-为了控制变量，压缩图片后我放量观察了 1 周，看数据效果还是很明显的，在日请求数（7000左右）不变的情况下，流量消耗下降了 **40%** 左右：
+To control variables, after compressing the images, I observed for 1 week. The data effect was still very obvious. With the daily request count (around 7000) unchanged, traffic consumption decreased by about **40%**:
 
 ![2021-12-26_13-18-47_tinify_compress](https://image-1255652541.file.myqcloud.com/uPic/2021-12-26_13-18-47_tinify_compress.jpg)
 
 
-看到相关数据后我还想进一步压缩图片体积，于是又做了以下尝试。
+After seeing the relevant data, I wanted to further reduce image size, so I made the following attempts.
 
-### 2.gzip 压缩
+### 2. Gzip Compression
 
-开启图片的 HTTP Gzip 压缩后，发现效果并不是很好，体积收益几乎为 **0**。
+After enabling HTTP Gzip compression for images, I found the effect was not very good, with almost **0** size benefit.
 
-后来想了一下这也正常，png jpg 其实都是压缩文件了，再对压缩文件压缩，收益一般都不会很明显。因为压缩还会消耗服务器资源，所以就关闭了图片的 Gzip 压缩。
+Later, I thought this was normal. PNG and JPG are actually compressed files, and compressing already compressed files generally doesn't show obvious benefits. Since compression also consumes server resources, I disabled Gzip compression for images.
 
-### 3.转移 gif 图片图源
+### 3. Transfer GIF Image Sources
 
-png jpg 图片可以通过压缩降低流量消耗，gif 图片既然不能压缩，那就“**转移支付**”吧！
+PNG and JPG images can reduce traffic consumption through compression, but since GIF images cannot be compressed, let's "transfer the payment"!
 
-我把博客园上投放的博文 gif 图片都换成了博客园的 CDN，效果也非常明显，请求数降低了 **15%**，流量消耗下降了 **50%**：
+I replaced all GIF images in my CNBlogs articles with CNBlogs' CDN, and the effect was very obvious. Requests decreased by **15%**, and traffic consumption decreased by **50%**:
 
 ![2022-01-08_20-50-39_remove_gif](https://image-1255652541.file.myqcloud.com/uPic/2022-01-08_20-50-39_remove_gif.jpg)
 
-少数派网站因为是文本编辑器模式，操作比较繁琐就暂不替换了。
+For the 少数派 website, since it's in text editor mode, the operation is more cumbersome, so I didn't replace them for now.
 
 
-### 4.webp 在线转换
+### 4. WebP Online Conversion
 
-部分图片我后面迁移到 CDN 后，腾讯配套的 CDN 服务支持智能转换 `webp`。开启了服务后，测试了几张图片，大概又能下降 **30%** 左右的体积，但因为 CDN 放量较小，整体收益还不是很明显。
+Some images I later migrated to CDN, and Tencent's supporting CDN service supports intelligent conversion to `webp`. After enabling the service, I tested several images, and it could reduce size by another **30%** or so, but because the CDN deployment volume is small, the overall benefit is not very obvious yet.
 
 <br />
 
-## 优化三：CDN 加速
+## Optimization 3: CDN Acceleration
 
-COS 其实一直配套着 CDN 服务，但是之前一直没有开。这次优化就顺便开启了，然后我就陷入到无尽的后悔中——**为什么我没有早些开 😭**。
+COS actually has a supporting CDN service, but I never enabled it before. This optimization顺便 enabled it, and then I fell into endless regret—**why didn't I enable it earlier 😭**.
 
-CDN 服务开启后，最大的收益就是加载速度直接**降低一个数量级**。之前的图片都是从 COS 源站请求的，每张图片响应速度大概为 **200ms-300ms**，开启 CDN 后直接降到 **20ms-30ms**，劣化情况下也能保持在 **100ms** 内：
+After enabling CDN service, the biggest benefit was that loading speed directly **decreased by an order of magnitude**. Previously, images were all requested from the COS origin server, with each image response speed around **200ms-300ms**. After enabling CDN, it directly dropped to **20ms-30ms**, and even in degraded cases, it could stay within **100ms**:
 
 ![2022-01-09_12-57-21_CDN](https://image-1255652541.file.myqcloud.com/uPic/2022-01-09_12-57-21_CDN.jpg)
 
 <br />
 
-开启 CDN 加速后，另外一个意外之喜是我博客的 Lighthouse 评分都**逼近满分**了，不得不说 docusaurus 这个文档框架优化的真不错，CDN 真香。
+After enabling CDN acceleration, another unexpected benefit was that my blog's Lighthouse scores all **approached perfect scores**. I have to say that the docusaurus documentation framework is really well-optimized, CDN is really great.
 
 ![2022-01-08_19-54-47_lighthouse](https://image-1255652541.file.myqcloud.com/uPic/2022-01-08_19-54-47_lighthouse.jpg)
 
 <br />
 
-## 总结
+## Summary
 
-到此我的图片优化就告一段落了，综合下来看流量资费下降了 **90%**。总体来看优化的思路并不难，都是显学，收益这么大完全是因为之前从来没有优化过 🌚。
+At this point, my image optimization is complete. Overall, traffic costs have decreased by **90%**. Looking at it overall, the optimization ideas are not difficult—they're all obvious knowledge. The benefit is so large mainly because I never optimized before 🌚.
 
-后期其实也可以继续迭代，比如说把旧文章的图片链接全部换成 CDN 链接，全站 HTTP2 等。但因为优化到这里收益已经很明显了，再优化的边际效应太小了，等遇到下一次的瓶颈再优化也不迟。
+Actually, I could continue iterating later, such as replacing all image links in old articles with CDN links, enabling site-wide HTTP2, etc. But since the benefits are already very obvious at this point, the marginal effect of further optimization is too small. It's not too late to optimize when we encounter the next bottleneck.
 
 <br />
 
 ----
 
-个人微信：**egg_labs**
+Personal WeChat: **egg_labs**
 
 <p>
 <img src="https://image-1255652541.file.myqcloud.com/uPic/Uh1E2O.png" width="40%" />
@@ -150,6 +147,6 @@ CDN 服务开启后，最大的收益就是加载速度直接**降低一个数�
 
 <br />
 
-:::note 一个小尾巴
-欢迎关注公众号：**卤代烃实验室**：专注于前端技术、混合开发、图形学领域，只写有深度的技术文章
+:::note A Little Postscript
+Welcome to follow the official account: **卤代烃实验室 (Halogenated Hydrocarbon Lab)**: Focusing on frontend technology, hybrid development, and graphics, only writing in-depth technical articles
 :::
