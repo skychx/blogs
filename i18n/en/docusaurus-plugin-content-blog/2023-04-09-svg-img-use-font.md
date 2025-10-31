@@ -1,7 +1,7 @@
 ---
 slug: svg-img-use-font
 title: 🖼️ How to solve the problem of missing fonts in SVG images
-author: skychx
+authors: skychx
 description: How to solve the problem of missing fonts in SVG images
 tags: [Web, SVG]
 ---
