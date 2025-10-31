@@ -1,10 +1,14 @@
 ---
 slug: chrome-devtools-mcp
-title: 🕹️ [MCP] Chrome DevTools MCP 原理分析
+title: 🕹️ [AI] Chrome DevTools MCP 原理分析
 authors: skychx
-description: 1
-draft: true
+description: Chrome DevTools MCP 原理分析
+tags: [AI, MCP, AI Agent]
 ---
+
+import { HeroImage } from '../src/components/heroImage';
+
+<HeroImage name="cdm-hero.jpg" w={1919} h={744} />
 
 2025.09.23 Google 官方发布了 [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp)，目前版本号还是 0.9.0，Google 官方对它的定位是协助 AI coding assistants 做调试和性能测试，提高网页编程的 debug 能力，一些使用案例可见官方 blog：[Chrome DevTools (MCP) for your AI agent](https://developer.chrome.com/blog/chrome-devtools-mcp?hl=en)。
 
@@ -23,9 +27,9 @@ draft: true
 
 - **调试能力**：这个其实是 chrome-devtools-mcp 主要定位的地方，提供基础的调试信息透出
   - **Emulation**：目前的功能还是比较弱，主要是弱网模拟，CPU 降速模拟，尺寸模拟，其实对应的是这几个功能:
-![img](https://tosv.byted.org/obj/social-friends-dev/docc/img/O6JgdbuOCo0TNdxxn1Ocfvebnqb/Kz8VbueN3oRKGHxkDZMcrnLbnsd)
+![cdm-perfs](https://image-1255652541.file.myqcloud.com/uPic/cdm-perfs.png)
   - **Performance**：用来收集性能 trace 数据，对标如下的功能：
-![img](https://tosv.byted.org/obj/social-friends-dev/docc/img/O6JgdbuOCo0TNdxxn1Ocfvebnqb/SxHAbNty0oZWvdxi1w3c54oXnWb)
+![cdm-cpu-network](https://image-1255652541.file.myqcloud.com/uPic/cdm-cpu-network.png)
   - **Network**：获取当前 page 的所有网络信息
   - **Debugging**：获取 console 信息，截图，还可以注入一些代码
 
@@ -120,12 +124,12 @@ const assignIds = (node: SerializedAXNode): TextSnapshotNode => {
 };
 ```
 
-|处理前的 snapshot | 处理后的 snapshot|
-|-|-|
-|![img](https://tosv.byted.org/obj/social-friends-dev/docc/img/O6JgdbuOCo0TNdxxn1Ocfvebnqb/AvqKbL9SBodvgtxG9ZdcrrTxnjc)|![img](https://tosv.byted.org/obj/social-friends-dev/docc/img/O6JgdbuOCo0TNdxxn1Ocfvebnqb/K88rbvPBNoKUZfxYLgAckKgQn1d)|
+| 处理前的 snapshot                                                                        | 处理后的 snapshot                                                                       |
+| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| ![](https://image-1255652541.file.myqcloud.com/uPic/cdm-before-snapshot.png) | ![](https://image-1255652541.file.myqcloud.com/uPic/cdm-after-snapshot.png) |
 
 
-3. 最后，执行相关 action 操作，比如说我要 click「新闻」这个按钮，会定位到 `uid=1_1 link "新闻"` 这条数据，然后参数传入 `1_1`，执行如下的代码：
+1. 最后，执行相关 action 操作，比如说我要 click「新闻」这个按钮，会定位到 `uid=1_1 link "新闻"` 这条数据，然后参数传入 `1_1`，执行如下的代码：
 
 ```javascript
 const node = this.#textSnapshot?.idToNode.get(uid); // uid="1_1"
@@ -154,7 +158,7 @@ await handle.asLocator().click({ count: 1 });
 
 目前 MCP 的实现很简单，其实就是通过 pptr 提供的 API，对相关网页做性能测试的 start/stop 两个操作：
 
-![img](https://tosv.byted.org/obj/social-friends-dev/docc/img/O6JgdbuOCo0TNdxxn1Ocfvebnqb/HDAzbNos5ou1fexYSsHcRYyrnyN)
+![](https://image-1255652541.file.myqcloud.com/uPic/cdm-icons.png)
 
 但是它不会把完整的 trace 交给模型分析（完整的 trace 数据量很大，可能是 10～100 MB的 json 数据，交给模型分析也不现实），而是输出为一份**性能报告模板**：
 
@@ -333,7 +337,7 @@ We can break this time down into the 4 phases that combine to make the LCP time:
 
 值得注意的是，上面的模板内容其实都不在 MCP 代码里，而是直接复用的 devtools 里的代码：
 
-![img](https://tosv.byted.org/obj/social-friends-dev/docc/img/O6JgdbuOCo0TNdxxn1Ocfvebnqb/QAD2bPInpoIZysxHQ1qcM4Jtnib)
+![](https://image-1255652541.file.myqcloud.com/uPic/cdm-import.png)
 
 
 <br />
@@ -453,7 +457,7 @@ page.on('pageerror', event => collect(event));
 
 比如说这里我收集到的百度首页信息，从 devtools 控制台和 MCP 的 response 对比，可见内容是一致的：
 
-![img](https://tosv.byted.org/obj/social-friends-dev/docc/img/O6JgdbuOCo0TNdxxn1Ocfvebnqb/LKx7bAq0soJhoAxtwEAcqyUQnHe)
+![](https://image-1255652541.file.myqcloud.com/uPic/cdm-error-log.png)
 
 ```markdown
 # list_console_messages response
@@ -485,6 +489,6 @@ Error> Failed to load resource: the server responded with a status of 500 (Inter
 
 其余的基础调试能力其实都没有涉及，比如说 Element 调试，分析一下各种奇形怪状的 CSS，这个还是做不到的，即使是借助 screenshot，也拿不到真正的细节只能纯瞎蒙。
 
-![img](https://tosv.byted.org/obj/social-friends-dev/docc/img/O6JgdbuOCo0TNdxxn1Ocfvebnqb/D12dbvbwpo5CAdxjTPncaS7en2f)
+![](https://image-1255652541.file.myqcloud.com/uPic/cdm-elements.png)
 
 更高级的调试能力（比如说 Animations，Rendering 等能力）预期后续也很难加入，因为基础能力还没有打磨好，还需要大量的时间去完善和优化。
