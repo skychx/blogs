@@ -7,17 +7,16 @@ description: 学习 CDP（Chrome DevTools Protocol）背后的架构设计，可
 
 **Chrome DevTools Protocol (CDP)** 是 Chromium 浏览器调试工具的核心通信协议：它基于 JSON 格式，可以通过 WebSocket 实现客户端与浏览器内核之间的双向实时交互。
 
-<br />
-
 {/* truncate */}
 
 基于 CDP 的开源产品有许多，其中最有名的应该是 [Chrome Devtools Frontend](https://github.com/ChromeDevTools/devtools-frontend)，[Puppeteer](https://pptr.dev/) 和 [Playwright](https://github.com/microsoft/playwright) 了。
+
 Chrome Devtools Frontend 就是前端开发者天天按 F12 唤起的调试面板，而 Puppeteer 和 Playwright 是非常有名的浏览器自动化操作工具，如今的 agent browser tool（例如 [playwright-mcp](https://github.com/microsoft/playwright-mcp)，[browser-use](https://github.com/browser-use/browser-use) 和 [chrome-devtools-mcp](https://github.com/ChromeDevTools/chrome-devtools-mcp)）也是基于它们构建的。可以说每个开发者都在使用 CDP，但因它的定位比较底层，大家常常又意识不到他的存在。
 
 
 | Chrome Devtools Frontend | Puppeteer |
 | ------------------------ | --------- |
-| ![](https://lf3-static.bytednsdoc.com/obj/eden-cn/eojfrzeh7vhouloj/agent-infra-browser/cdp-chrome-devtools.png) | ![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cdp-pptr.png) |
+| ![](https://lf3-static.bytednsdoc.com/obj/eden-cn/eojfrzeh7vhouloj/agent-infra-browser/cdp-chrome-devtools.png) | ![](https://image-1255652541.file.myqcloud.com/uPic/cdp-pptr.png) |
 
 
 <br />
@@ -44,7 +43,7 @@ CDP 协议的格式基于 [JSON-RPC 2.0](https://www.jsonrpc.org/specification) 
 首先是常规的 JSON RFC Request/Response，细节不用关注，就看整体的格式：
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cdp-target-discover.png" width="50%" alt="Target.setDiscoverTargets" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/cdp-target-discover.png" width="50%" alt="Target.setDiscoverTargets" />
 </p>
 
 ```JavaScript
@@ -71,7 +70,7 @@ CDP 协议的格式基于 [JSON-RPC 2.0](https://www.jsonrpc.org/specification) 
 
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cdp-target-created.png" width="50%" alt="Target.targetCreated" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/cdp-target-created.png" width="50%" alt="Target.targetCreated" />
 </p>
 
 ```JavaScript
@@ -102,7 +101,7 @@ CDP 协议的格式基于 [JSON-RPC 2.0](https://www.jsonrpc.org/specification) 
 
 | CDP Domains                                                                | Chrome Devtools Frontend                                                                    |
 | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| ![](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cdp-doc-domains.png) | ![](https://lf3-static.bytednsdoc.com/obj/eden-cn/eojfrzeh7vhouloj/agent-infra-browser/cdp-chrome-devtools.png) |
+| ![](https://image-1255652541.file.myqcloud.com/uPic/cdp-doc-domains.png) | ![](https://lf3-static.bytednsdoc.com/obj/eden-cn/eojfrzeh7vhouloj/agent-infra-browser/cdp-chrome-devtools.png) |
 
 其实这些 Domain 都可以和 Chrome Devtools 联系起来的。所以我们可以从 Chrome Devtools 的各种功能反推 CDP 中的各种 Domain 作用：
 
@@ -119,7 +118,7 @@ CDP 协议的格式基于 [JSON-RPC 2.0](https://www.jsonrpc.org/specification) 
 - **Browser Protocol**：浏览器相关的协议，之下的 Domain 都是平台相关的，比如说 Page，DOM，CSS，Network，都是和浏览器功能相关
 - **JavaScript Protocol**：JS 引擎相关的协议，主要围绕 JS 引擎功能本身，比如说 Runtime，Debugger，HeapProfiler 等，都是比较纯粹的 JS 语言调试功能
 
-![deepwiki 给出的 CDP Domains 分类](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cdp-category.png)
+![deepwiki 给出的 CDP Domains 分类](https://image-1255652541.file.myqcloud.com/uPic/cdp-category.png)
 
 <br />
 
@@ -136,7 +135,7 @@ CDP 协议的格式基于 [JSON-RPC 2.0](https://www.jsonrpc.org/specification) 
 这里我们拿 Console 面板为例，这个基本上是 Web 开发者日常使用频率最高的功能了。
 
 <p>
-<img src="https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cdp-chrome-devtools-console.png" width="70%" />
+<img src="https://image-1255652541.file.myqcloud.com/uPic/cdp-chrome-devtools-console.png" width="70%" />
 </p>
 
 从 UI 面板上看有很多功能，有筛选，分类，分组等各种高级功能，但绝大部分的功能都是前端上的实现，联系到背后和 Console 相关的 CDP 协议，其实主要就 5 条：
@@ -155,7 +154,7 @@ CDP 协议的格式基于 [JSON-RPC 2.0](https://www.jsonrpc.org/specification) 
 - 发起一个真实的网络请求，失败后会通过 `Runtime.exceptionThrown` 提示 Failed to fetch
 - 最后手动调用 console API，CDP 会发一个 `Runtime.consoleAPICalled` 的调用 log event
 
-![chrome-devtools-log](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cdp-chrome-devtools-log.png)
+![chrome-devtools-log](https://image-1255652541.file.myqcloud.com/uPic/cdp-chrome-devtools-log.png)
 
 把上面的的例子抽象一下，其实**所有的 Domain 的调用流程**基本都是一样的：
 
@@ -299,13 +298,13 @@ CDP 这里的逻辑是，先发个请求，向 Target 发起交互申请，然�
 
 下面的案例我是用 puppeteer 创建了一个 url 为 `about:blank` 的新网页时，底层的 CDP 调用流程。调用的源文件可以访问右边的超链接下载：[create_about_blank_page.har](https://lf3-static.bytednsdoc.com/obj/eden-cn/eojfrzeh7vhouloj/agent-infra-browser/create_about_blank_page.har)，har 文件可用 Chrome Devtools Network 导入查看：
 
-![cdp-chrome-devtools-network](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cdp-chrome-devtools-network.png)
+![cdp-chrome-devtools-network](https://image-1255652541.file.myqcloud.com/uPic/cdp-chrome-devtools-network.png)
 
 <br />
 
 首先是最开始的 Target 创建流程。注意下图红框和红线里的内容：
 
-![cdp-target](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cdp-target.png)
+![cdp-target](https://image-1255652541.file.myqcloud.com/uPic/cdp-target.png)
 
 - 首先调用 `Target.createTarget` 创建一个 page（在调用 `createTarget` 时，会同步生成一个 tab Target，我们可以忽略这个行为，不影响后续理解）
 - page Target 创建好后，在响应 `Target.createTarget` methods 的同时，还会发送一个 `Target.targetCreated` 的 event，里面有这个 page Target 的详细 meta info，例如 targetId，url，title 等
@@ -316,7 +315,7 @@ CDP 这里的逻辑是，先发个请求，向 Target 发起交互申请，然�
 
 Target 创建好后，就要开启这个 page 下的各个 Domain 了：
 
-![cdp-enable](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cdp-enable.png)
+![cdp-enable](https://image-1255652541.file.myqcloud.com/uPic/cdp-enable.png)
 
 - Network.enable：开启 Network Domain 的监听，比如说各种网络请求的 request/response 的细节
 - Page.enable：开启 Page Domain 的监听，比如说 navigation 行为的操纵
@@ -328,7 +327,7 @@ Target 创建好后，就要开启这个 page 下的各个 Domain 了：
 
 开启相关 Domain 后，就可以监听这个 page Target 的相关 event 或者主动触发一些方法，如下图所示：
 
-![cdp-method-event](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/cdp-method-event.png)
+![cdp-method-event](https://image-1255652541.file.myqcloud.com/uPic/cdp-method-event.png)
 
 - 我们主动执行 `Page.getNavigationHistory` methods，获取当前页面的 history 导航记录
 - 我们监听到 `Runtime.consoleAPICalled` event 的触发，拿到了一些 console 信息
