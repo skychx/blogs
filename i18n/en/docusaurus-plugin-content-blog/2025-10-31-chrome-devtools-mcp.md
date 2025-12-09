@@ -1,6 +1,6 @@
 ---
 slug: chrome-devtools-mcp
-title: 🕹️ Chrome DevTools MCP - A Technical Deep Dive
+title: 🦾 [Automation] Chrome DevTools MCP - A Technical Deep Dive
 authors: skychx
 description: Technical analysis of Chrome DevTools MCP implementation and capabilities
 tags: [AI, MCP, AI Agent, Chrome DevTools]

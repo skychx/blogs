@@ -1,6 +1,6 @@
 ---
 slug: chrome-devtools-mcp
-title: 🕹️ [AI] Chrome DevTools MCP 原理分析
+title: 🦾 [浏览器自动化] Chrome DevTools MCP 原理分析
 authors: skychx
 description: Chrome DevTools MCP 原理分析
 tags: [AI, MCP, AI Agent]
