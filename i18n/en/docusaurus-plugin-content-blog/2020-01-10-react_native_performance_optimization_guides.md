@@ -854,15 +854,15 @@ Here I also want to mention a few points to pay attention to when using getItemL
 
 #### 2.Use simple components & Use light components
 
-Using simple components means reducing logic judgment and nesting. Optimization methods can refer to the content of "[2. Reduce rendering pressure](#二减轻渲染压力)".
+Using simple components means reducing logic judgment and nesting. Optimization methods can refer to the content of "[2. Reduce rendering pressure](#2-reduce-rendering-pressure)".
 
 #### 3.Use shouldComponentUpdate
 
-Refer to the content of "[1. Reduce re-render](#一减少-re-render)".
+Refer to the content of "[1. Reduce re-render](#1-reduce-re-render)".
 
 #### 4.Use cached optimized images
 
-Refer to the content of "[3. Image optimization tips](#三图片优化那些事)".
+Refer to the content of "[3. Image optimization tips](#3-image-optimization-tips)".
 
 #### 5.Use keyExtractor or key
 
@@ -870,7 +870,7 @@ Regular optimization point, you can see React's documentation [🔗 Lists & Keys
 
 #### 6.Avoid anonymous function on renderItem
 
-renderItem should avoid using anonymous functions, refer to the content of "[4. Object creation and call separation](#四对象创建调用分离)".
+renderItem should avoid using anonymous functions, refer to the content of "[4. Object creation and call separation](#4-object-creation-and-call-separation)".
 
 <br/>
 
