@@ -316,7 +316,13 @@ However, there are workarounds. We can try using JS code injection to replace ex
 - **Support Level**: Direct Support
 - **pptr API**: [ElementHandle.uploadFile()](https://pptr.dev/api/puppeteer.elementhandle.uploadfile), [FileChooser class](https://pptr.dev/api/puppeteer.filechooser), [DownloadBehavior](https://pptr.dev/api/puppeteer.downloadbehavior)
 
-pptr's file execution logic is quite complete. Combining uploadFile API and FileChooser can provide good file upload support. However, for file downloads, it hasn't provided very good APIs. What users can operate is specify download strategies and download paths through DownloadBehavior.
+**English Translation**
+
+The logic for executing files in pptr is quite robust. Both the `uploadFile` API and `FileChooser` can provide excellent support for file uploads.
+
+For the file download scenario, pptr does not offer a direct API. The only operation available to users is specifying the download strategy and path via `DownloadBehavior`. However, CDP itself exposes four APIs: [Browser.setDownloadBehavior](https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-setDownloadBehavior), [Browser.downloadProgress](https://chromedevtools.github.io/devtools-protocol/tot/Browser/#event-downloadProgress), [Browser.downloadWillBegin](https://chromedevtools.github.io/devtools-protocol/tot/Browser/#event-downloadWillBegin) and [Browser.cancelDownload](https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-cancelDownload). By combining these APIs, file download functionality can also be implemented.
+
+It is worth noting that attention should be paid to the permission settings of the download directory during file downloads. A lack of write permissions will result in download failures.
 
 <br/>
 

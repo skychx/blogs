@@ -317,7 +317,11 @@ HTML 的大部分表单功能都是支持的，但是部分 Input 选择器使�
 - **pptr API：** [ElementHandle.uploadFile()](https://pptr.dev/api/puppeteer.elementhandle.uploadfile), [FileChooser class](https://pptr.dev/api/puppeteer.filechooser), [DownloadBehavior](https://pptr.dev/api/puppeteer.downloadbehavior)
   
 
-pptr 上执行文件的逻辑较为完善，结合 uploadFile API 和 FileChooser 都可以做较好的文件上传支持。但是在文件下载上并没有提供非常好的 API，用户可以操作的就是通过 DownloadBehavior 去指定下载策略和下载路径。
+pptr 上执行文件的逻辑较为完善，结合 `uploadFile` API 和 `FileChooser` 都可以做较好的文件上传支持。
+
+文件下载这个场景，pptr 并没有直接提供 API，用户可以操作的就是通过 `DownloadBehavior` 去指定下载策略和下载路径，但是 CDP 本身暴露了 [Browser.setDownloadBehavior](https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-setDownloadBehavior)，[Browser.downloadProgress](https://chromedevtools.github.io/devtools-protocol/tot/Browser/#event-downloadProgress)，[Browser.downloadWillBegin](https://chromedevtools.github.io/devtools-protocol/tot/Browser/#event-downloadWillBegin) 和 [Browser.cancelDownload](https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-cancelDownload) 这 4 个 API，经过组合也可以实现文件下载的功能。
+
+值得注意的是，文件下载时需要注意下载目录的权限问题，如果没有写权限会导致下载失败。
 
 <br/>
 
