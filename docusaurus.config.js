@@ -23,16 +23,16 @@ const config = {
       type: "text/css",
     },
   ],
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'google-site-verification',
+        content: 'pw0OCxbsZncVZICWQ_zB22wf9f5p9COr3wz8_VepGcE'
+      }
+    },
+  ],
   themeConfig: {
-    head: [
-      {
-        tag: 'meta',
-        attributes: {
-          name: 'google-site-verification',
-          content: 'pw0OCxbsZncVZICWQ_zB22wf9f5p9COr3wz8_VepGcE'
-        }
-      },
-    ],
     colorMode: {
       defaultMode: "light",
       disableSwitch: false,
