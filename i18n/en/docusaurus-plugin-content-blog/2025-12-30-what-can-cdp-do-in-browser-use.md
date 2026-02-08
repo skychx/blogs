@@ -1,6 +1,6 @@
 ---
 slug: what-can-cdp-do-in-browser-use
-title: 🦾 [Browser Automation] Possibilities and Limitations：Browser Control Boundaries from a CDP Perspective
+title: 🦾 [Automation] Possibilities and Limitations：Browser Control Boundaries from a CDP Perspective
 authors: skychx
 description: CDP has capability boundaries. Understanding what it excels at and what it doesn't is crucial for overall architectural design and future evolution.
 tags: [CDP, AI Agent, Chrome DevTools]
