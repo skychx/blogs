@@ -65,13 +65,13 @@ Addy 其实在[《Your AI coding agents need a manager》](https://addyosmani.co
 
 那么破解的方法是什么呢？其实还是几十年来积累的软件工程开发经验：从开发规范，到合码流程，再到最后的测试和交付，都要有严格的工程定义和划分，中间的实施操作可以交给 AI 来做，但是**你得为最终的交付负责**。这一点其实和 1979 年也没什么不一样：
 
-![IBM Slide](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/addy-osmani-ai-blog-ibm.png)
+![IBM Slide](https://image-1255652541.file.myqcloud.com/uPic/addy-osmani-ai-blog-ibm.png)
 
 <br />
 
 当然这套严肃的工程方案用轻佻的 [vibe coding](https://x.com/karpathy/status/1886192184808149383) 描述就不合适了，应该叫 [agentic engineering](https://x.com/karpathy/status/2019137879310836075)（智能体工程）。
 
-![vibe - agentic](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/addy-osmani-ai-blog-agentic.jpg)
+![vibe - agentic](https://image-1255652541.file.myqcloud.com/uPic/addy-osmani-ai-blog-agentic.jpg)
 
 相信大家也或多或少遇到过类似的场景，如果把所有的工作都交给 AI，自己只在输入框里写需求，不做任何工程学上的约束，迭代多轮后熵增爆炸的代码其实 AI 也改不动了，更不用说其它接手维护的人，最后只会透支项目的生命力。只有在工程的约束下，才能持续的保证 AI 编程的速度稳定，而不是到某个节点迭代速度开始断崖式下跌。
 
@@ -83,7 +83,7 @@ Addy 其实在[《Your AI coding agents need a manager》](https://addyosmani.co
 
 首先他画了一个「前 AI 时代」的研发流程图：
 
-![addy-osmani-ai-blog-dx-before-ai](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/addy-osmani-ai-blog-dx-before-ai.svg)
+![addy-osmani-ai-blog-dx-before-ai](https://image-1255652541.file.myqcloud.com/uPic/addy-osmani-ai-blog-dx-before-ai.svg)
 
 如上图所示，在传统的软件开发流程里，其实是多个 Loop 嵌套完成的：
 
@@ -96,7 +96,7 @@ Addy 其实在[《Your AI coding agents need a manager》](https://addyosmani.co
 
 上面的传统流程，在 Coding Agent 介入后，各个流程和节点上都有不同程度的加速，改变如下：
 
-![addy-osmani-ai-blog-dx-after-ai](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/addy-osmani-ai-blog-dx-after-ai.svg)
+![addy-osmani-ai-blog-dx-after-ai](https://image-1255652541.file.myqcloud.com/uPic/addy-osmani-ai-blog-dx-after-ai.svg)
 
 - 首先在 Design Loop 里，Design 环节有一些 ChatBot 的介入，DeepResearch 等功能会加速很多调研的时间投入，Plan 一定程度上也被类似 Claude Code 的 Plan 功能做了替代
 - Inner Loop，基本上已经被 Coding Agent **全方位替代**，市面上太多编程产品做这个了

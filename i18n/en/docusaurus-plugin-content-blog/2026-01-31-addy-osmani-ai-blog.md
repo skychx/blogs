@@ -63,13 +63,13 @@ For example, in his recent article [Agentic Engineering](https://addyosmani.com/
 
 So what's the solution? It's actually the software engineering experience accumulated over decades: from development standards to code review processes, to final testing and delivery - everything needs strict engineering definitions and boundaries. The implementation can be handed off to AI, but **you have to take responsibility for the final delivery**. This isn't really any different from 1979:
 
-![IBM Slide](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/addy-osmani-ai-blog-ibm.png)
+![IBM Slide](https://image-1255652541.file.myqcloud.com/uPic/addy-osmani-ai-blog-ibm.png)
 
 <br />
 
 Of course, describing this serious engineering approach with the flippant term [vibe coding](https://x.com/karpathy/status/1886192184808149383) isn't appropriate - it should be called [agentic engineering](https://x.com/karpathy/status/2019137879310836075).
 
-![vibe - agentic](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/addy-osmani-ai-blog-agentic.jpg)
+![vibe - agentic](https://image-1255652541.file.myqcloud.com/uPic/addy-osmani-ai-blog-agentic.jpg)
 
 I bet most of you have encountered similar scenarios. If you hand all work over to AI and just type requirements in the input box without any engineering constraints, after multiple iterations the code explodes in entropy until even AI can't fix it anymore - not to mention whoever has to maintain it later. This just drains the project's life force. Only with engineering constraints can you maintain consistent AI programming speed, rather than hitting a cliff where iteration speed suddenly drops off.
 
@@ -81,7 +81,7 @@ Beyond the specific details, I think one of his development workflow diagrams is
 
 First, he drew a development workflow diagram from the "pre-AI era":
 
-![addy-osmani-ai-blog-dx-before-ai](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/addy-osmani-ai-blog-dx-before-ai.svg)
+![addy-osmani-ai-blog-dx-before-ai](https://image-1255652541.file.myqcloud.com/uPic/addy-osmani-ai-blog-dx-before-ai.svg)
 
 As shown above, traditional software development workflows actually consist of multiple nested loops:
 
@@ -94,7 +94,7 @@ As shown above, traditional software development workflows actually consist of m
 
 With Coding Agents in the picture, each stage and node in this traditional workflow gets accelerated to varying degrees:
 
-![addy-osmani-ai-blog-dx-after-ai](https://image-1255652541.cos.ap-shanghai.myqcloud.com/uPic/addy-osmani-ai-blog-dx-after-ai.svg)
+![addy-osmani-ai-blog-dx-after-ai](https://image-1255652541.file.myqcloud.com/uPic/addy-osmani-ai-blog-dx-after-ai.svg)
 
 - In the Design Loop, ChatBot involvement and DeepResearch features speed up research time significantly. Planning is also being replaced by features like Claude Code's Plan functionality
 - The Inner Loop has been **completely replaced** by Coding Agents - there are tons of programming products doing this now
