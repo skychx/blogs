@@ -1,8 +1,8 @@
 ---
 slug: addy-osmani-ai-blog
-title: 🤖 [人工智能] 形势比人强，Chrome 大佬也去搞 Gemini 了
+title: ✨ [AI] 形势比人强，Chrome 大佬也去搞 Gemini 了
 authors: skychx
-description: 分析 Addy Osmani 关于 AI 时代下的程序员
+description: 分析 Addy Osmani 关于 Agentic Engineering 的 Blog
 tags: [AI]
 ---
 
@@ -88,7 +88,7 @@ Addy 其实在[《Your AI coding agents need a manager》](https://addyosmani.co
 如上图所示，在传统的软件开发流程里，其实是多个 Loop 嵌套完成的：
 
 - 最左侧的 Design Loop，主要讲正式 Coding 前的一些准备工作，比如说方案调研，架构设计，流程拆解等
-- 中间的 Inner Loop，就是指之前一个单词一个单词的编码环节，这个也是大部分程序做的事情
+- 中间的 Inner Loop，就是指之前一个单词一个单词的编码环节，这个也是大部分程序员做的事情
 - Submit Loop 就是每次提交 MR 的流程，包含 Lint，Code Review 等环节
 - Outer Loop 就是产品纬度的大功能迭代流程，之前的 CICD 主要优化的就是这个环节
 
