@@ -68,7 +68,7 @@ export default function pluginGoogleGtagBody(
           },
         ],
         // Gtag script and initialization go at the end of body
-        bodyTags: [
+        postBodyTags: [
           {
             tagName: 'script',
             attributes: {

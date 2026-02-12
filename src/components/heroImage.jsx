@@ -11,6 +11,7 @@ export const HeroImage = (props) => {
         src={`https://image-1255652541.file.myqcloud.com/uPic/${props.name}`}
         alt={props.name}
         width="100%"
+        loading="lazy"
         style={style(props.w, props.h)}
       />
     </p>

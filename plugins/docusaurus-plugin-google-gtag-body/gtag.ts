@@ -23,11 +23,13 @@ const clientModule: ClientModule = {
       setTimeout(() => {
         // Always refer to the variable on window in case it gets overridden
         // elsewhere.
+        // @ts-ignore
         window.gtag(
           'set',
           'page_path',
           location.pathname + location.search + location.hash,
         );
+        // @ts-ignore
         window.gtag('event', 'page_view');
       });
     }
