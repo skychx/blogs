@@ -1,0 +1,15 @@
+{
+  "name": "docusaurus-plugin-google-gtag-body",
+  "version": "0.0.1",
+  "description": "Custom Docusaurus plugin for Google Gtag with script placement at end of body",
+  "main": "index.ts",
+  "scripts": {},
+  "keywords": [
+    "docusaurus",
+    "plugin",
+    "google-analytics",
+    "gtag"
+  ],
+  "author": "",
+  "license": "MIT"
+}
