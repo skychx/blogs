@@ -200,10 +200,6 @@ const config = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
-        gtag: {
-          trackingID: 'G-7EFDJHTD4T',
-          anonymizeIP: true,
-        },
       },
     ],
   ],
@@ -211,7 +207,16 @@ const config = {
     defaultLocale: "zh-Hans",
     locales: ["zh-Hans", "en"],
   },
-  plugins: [require.resolve("docusaurus-plugin-image-zoom")],
+  plugins: [
+    require.resolve("docusaurus-plugin-image-zoom"),
+    [
+      require.resolve("./plugins/docusaurus-plugin-google-gtag-body"),
+      {
+        trackingID: 'G-7EFDJHTD4T',
+        anonymizeIP: true,
+      },
+    ],
+  ],
   clientModules: [require.resolve("./src/js/index.js")],
 };
 
