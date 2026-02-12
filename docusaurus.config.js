@@ -60,7 +60,7 @@ const config = {
       hideOnScroll: false,
       logo: {
         alt: "My Site Logo",
-        src: "img/logo.jpeg",
+        src: "https://image-1255652541.file.myqcloud.com/uPic/WechatIMG17.jpeg",
         width: 32,
         height: 32,
       },

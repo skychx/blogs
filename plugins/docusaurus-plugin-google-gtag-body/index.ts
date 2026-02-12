@@ -72,12 +72,15 @@ export default function pluginGoogleGtagBody(
           {
             tagName: 'script',
             attributes: {
-              async: true,
+              defer: true,
               src: `https://www.googletagmanager.com/gtag/js?id=${firstTrackingId}`,
             },
           },
           {
             tagName: 'script',
+            attributes: {
+              defer: true,
+            },
             innerHTML: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
