@@ -2,6 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const remarkMath = require("remark-math");
+const rehypeImageSize = require("./plugins/rehype-image-size");
 
 const {themes} = require('prism-react-renderer');
 const lightCodeTheme = themes.github;
@@ -223,7 +224,11 @@ const config = {
 async function createConfig() {
   const rehypeKatex = (await import("rehype-katex")).default;
   // @ts-ignore
+  config.presets[0][1].docs.rehypePlugins.push([rehypeImageSize, {siteDir: __dirname}]);
+  // @ts-ignore
   config.presets[0][1].docs.rehypePlugins.push(rehypeKatex);
+  // @ts-ignore
+  config.presets[0][1].blog.rehypePlugins.push([rehypeImageSize, {siteDir: __dirname}]);
   // @ts-ignore
   config.presets[0][1].blog.rehypePlugins.push(rehypeKatex);
 
