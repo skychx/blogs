@@ -554,8 +554,6 @@ The 0.61 Android upgrade is also relatively simple. It upgraded the Gradle versi
 
 ### 4.Flipper
 
-![Flipper interface](https://github.com/facebook/flipper/raw/master/website/static/img/layout.png)
-
 After 0.62, **Flipper** is added by default in RN projects, making it convenient to view Layout, network, and log information.
 
 When upgrading old projects, **Flipper** is actually optional. Installation has some twists and turns. After trying it out, my experience is as follows (version 0.52.1):

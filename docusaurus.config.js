@@ -179,7 +179,7 @@ const config = {
           // routeBasePath: '/',
           sidebarPath: require.resolve("./sidebars.js"),
           remarkPlugins: [remarkMath],
-          rehypePlugins: [],
+          rehypePlugins: [[rehypeImageSize, {siteDir: __dirname}]],
           // Please change this to your repo.
           // editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',
           showLastUpdateTime: true,
@@ -195,7 +195,7 @@ const config = {
             copyright: `Copyright © ${new Date().getFullYear()} 超级码力`,
           },
           remarkPlugins: [remarkMath],
-          rehypePlugins: [],
+          rehypePlugins: [[rehypeImageSize, {siteDir: __dirname}]],
           onUntruncatedBlogPosts: 'ignore',
         },
         theme: {
@@ -224,11 +224,7 @@ const config = {
 async function createConfig() {
   const rehypeKatex = (await import("rehype-katex")).default;
   // @ts-ignore
-  config.presets[0][1].docs.rehypePlugins.push([rehypeImageSize, {siteDir: __dirname}]);
-  // @ts-ignore
   config.presets[0][1].docs.rehypePlugins.push(rehypeKatex);
-  // @ts-ignore
-  config.presets[0][1].blog.rehypePlugins.push([rehypeImageSize, {siteDir: __dirname}]);
   // @ts-ignore
   config.presets[0][1].blog.rehypePlugins.push(rehypeKatex);
 

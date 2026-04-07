@@ -80,8 +80,6 @@ Cocoapods 在这个版本里也有些改动，除去 Flipper 相关的 pod，改
 
 ## 4.Flipper
 
-![Flipper](https://github.com/facebook/flipper/raw/master/website/static/img/layout.png)
-
 0.62 之后，**Flipper** 在 RN 的项目里是默认添加的，可以方便的查看 Layout、network 和 log 等信息。
 
 旧项目升级时，**Flipper** 其实是可选的，安装有些波折，上手体验了一下感觉如下（版本为 0.52.1）：

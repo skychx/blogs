@@ -13,7 +13,7 @@ React Native as a cross-platform framework has one of the most headache-inducing
 
 This article assumes that the person leading the React Native upgrade is a **frontend** developer who is familiar with JavaScript-based frontend build processes. If conditions permit, it's strongly recommended to involve iOS and Android developers during the upgrade. For some trivial upgrade details, **face-to-face communication is far more efficient than search engines**.
 
-I have written the specific upgrade steps into documentation. You can click on **["RN Upgrade Guide"](../docs/react-native-upgrade/index)** in the blog navbar to view the detailed guide.
+I have written the specific upgrade steps into documentation. You can click on **["RN Upgrade Guide"](/docs/react-native-upgrade/index)** in the blog navbar to view the detailed guide.
 
 <br />
 
