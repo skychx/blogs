@@ -9,7 +9,8 @@ const GitalkComment = () => {
             if (
               window.location.pathname === "/" ||
               window.location.pathname === "/en/" ||
-              window.location.pathname.includes("/tags/")
+              window.location.pathname.includes("/tags/") ||
+              window.location.pathname.includes("/page/")
             ) {
               return;
             }
