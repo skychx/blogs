@@ -58,6 +58,7 @@ module.exports = {
         "toy-renderer/day5-Perspective-projection",
         "toy-renderer/day6-Moving-the-camera",
         "toy-renderer/day7-Shaders",
+        "toy-renderer/day8-Normal-mapping",
       ],
     },
     {

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="950" height="450" viewBox="0 0 950 450">
+<defs><marker id="arrow-axis" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333333"/></marker><marker id="arrow-444444" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#444444"/></marker><marker id="arrow-e5484d" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e5484d"/></marker><marker id="arrow-2f9e44" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2f9e44"/></marker><marker id="arrow-1f6fd1" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6fd1"/></marker><marker id="arrow-f08c00" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f08c00"/></marker><marker id="arrow-888888" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#888888"/></marker></defs>
+<rect width="950" height="450" fill="#eef2f6"/>
+<rect x="50" y="60" width="400" height="360" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="250" y="46" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">三角形（相机坐标系）</text>
+<polygon points="195.56,340.69 359.44,245.63 176.67,173.06" fill="rgba(250, 200, 60, 0.18)" stroke="#444444" stroke-width="2" stroke-linejoin="round"/>
+<line x1="250.19" y1="309" x2="194.21" y2="328.71" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="207.26" y1="333.9" x2="190.83" y2="298.78" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="359.44" y1="245.63" x2="191.51" y2="304.77" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="230.67" y1="320.32" x2="181.39" y2="214.97" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="326.21" y1="232.43" x2="188.81" y2="280.82" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="254.09" y1="306.74" x2="194.94" y2="180.32" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="292.98" y1="219.24" x2="186.11" y2="256.88" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="277.5" y1="293.16" x2="231.5" y2="194.83" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="259.75" y1="206.05" x2="183.41" y2="232.93" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="300.91" y1="279.58" x2="268.06" y2="209.34" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="226.52" y1="192.85" x2="180.71" y2="208.98" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="324.33" y1="266" x2="304.61" y2="223.86" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="193.28" y1="179.66" x2="178.02" y2="185.04" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="347.74" y1="252.42" x2="341.17" y2="238.37" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<circle cx="195.56" cy="340.69" r="5.5" fill="#444444" stroke="#222" stroke-width="1"/>
+<text x="167.56" y="360.69" font-size="16" fill="#444444" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">P0</text>
+<circle cx="359.44" cy="245.63" r="5.5" fill="#444444" stroke="#222" stroke-width="1"/>
+<text x="369.44" y="261.63" font-size="16" fill="#444444" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">P1</text>
+<circle cx="176.67" cy="173.06" r="5.5" fill="#444444" stroke="#222" stroke-width="1"/>
+<text x="166.67" y="161.06" font-size="16" fill="#444444" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">P2</text>
+<line x1="245.22" y1="255.98" x2="326.12" y2="227.49" stroke="#e5484d" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-e5484d)"/>
+<line x1="245.22" y1="255.98" x2="208.53" y2="177.54" stroke="#1f6fd1" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-1f6fd1)"/>
+<line x1="245.22" y1="255.98" x2="270.04" y2="155.46" stroke="#2f9e44" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-2f9e44)"/>
+<text x="339.38" y="238.93" font-size="18" fill="#e5484d" text-anchor="start" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">t</text>
+<text x="187.27" y="172.57" font-size="18" fill="#1f6fd1" text-anchor="start" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">b</text>
+<text x="277.89" y="147.98" font-size="18" fill="#2f9e44" text-anchor="start" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">n</text>
+<rect x="500" y="60" width="400" height="360" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="700" y="46" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">同一个三角形的 uv 坐标</text>
+<line x1="541.03" y1="381.43" x2="877.41" y2="381.43" stroke="#e5484d" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-e5484d)"/>
+<line x1="541.03" y1="381.43" x2="541.03" y2="81.57" stroke="#1f6fd1" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-1f6fd1)"/>
+<text x="872.91" y="403.43" font-size="18" fill="#e5484d" text-anchor="start" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">u</text>
+<text x="551.03" y="82.07" font-size="18" fill="#1f6fd1" text-anchor="start" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">v</text>
+<polygon points="592.31,333.21 831.62,285 660.68,108.21" fill="rgba(250, 200, 60, 0.18)" stroke="#444444" stroke-width="2" stroke-linejoin="round"/>
+<line x1="672.08" y1="317.14" x2="597.19" y2="317.14" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="609.4" y1="329.77" x2="609.4" y2="276.96" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="831.62" y1="285" x2="606.96" y2="285" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="643.59" y1="322.88" x2="643.59" y2="164.46" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="800.54" y1="252.86" x2="616.73" y2="252.86" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="677.78" y1="315.99" x2="677.78" y2="125.89" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="769.46" y1="220.71" x2="626.5" y2="220.71" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="711.97" y1="309.11" x2="711.97" y2="161.25" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="738.38" y1="188.57" x2="636.26" y2="188.57" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="746.15" y1="302.22" x2="746.15" y2="196.61" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="707.3" y1="156.43" x2="646.03" y2="156.43" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="780.34" y1="295.33" x2="780.34" y2="231.96" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="676.22" y1="124.29" x2="655.8" y2="124.29" stroke="rgba(229, 72, 77, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="814.53" y1="288.44" x2="814.53" y2="267.32" stroke="rgba(31, 111, 209, 0.75)" stroke-width="1.4" stroke-linecap="round"/>
+<circle cx="592.31" cy="333.21" r="5.5" fill="#444444" stroke="#222" stroke-width="1"/>
+<text x="564.31" y="353.21" font-size="16" fill="#444444" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">U0</text>
+<circle cx="831.62" cy="285" r="5.5" fill="#444444" stroke="#222" stroke-width="1"/>
+<text x="841.62" y="301.00" font-size="16" fill="#444444" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">U1</text>
+<circle cx="660.68" cy="108.21" r="5.5" fill="#444444" stroke="#222" stroke-width="1"/>
+<text x="650.68" y="96.21" font-size="16" fill="#444444" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">U2</text>
+</svg>
