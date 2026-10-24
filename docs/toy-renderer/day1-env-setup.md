@@ -91,7 +91,7 @@ diff -r days/day04 days/day05
 
 ### 2.3 开发服务器
 
-`server.ts` 是本地开发服务器，一共就二十来行：
+`server.ts` 是本地开发服务器，一共也就三十来行：
 
 ```ts
 import home from './index.html';
@@ -110,14 +110,21 @@ const server = Bun.serve({
   port: 8080,
   routes,
   development: true,
-  // routes 没匹配上的请求都会走到这里：把 obj 目录下的模型和贴图原样返回
+  // routes 没匹配上的请求都会走到这里
   async fetch(req) {
     const path = decodeURIComponent(new URL(req.url).pathname);
+    // obj 目录下的模型和贴图，原样返回
     if (path.startsWith('/obj/')) {
       const file = Bun.file(`.${path}`);
       if (await file.exists()) {
         return new Response(file);
       }
+    }
+    // Web Worker 用的 TS 文件（比如 /extra-webgl/software.ts）：
+    // Bun 打包 html 的时候不会处理 new Worker()，所以在这里现场打包一下再返回
+    if (path.endsWith('.ts') && (await Bun.file(`./days${path}`).exists())) {
+      const { outputs } = await Bun.build({ entrypoints: [`./days${path}`] });
+      return new Response(outputs[0]);
     }
     return new Response('Not Found', { status: 404 });
   },
@@ -126,10 +133,11 @@ const server = Bun.serve({
 console.log(`打开 ${server.url} 看看效果吧`);
 ```
 
-它只做了两件事：
+它做了三件事：
 
 - 把每一天的 `index.html` 挂到 `/day01`、`/day02` 这样的路径上，Bun 会自动编译 html 里引用的 TS 文件，改完代码刷新一下页面就能看到效果
 - 把 `obj` 目录下的模型和贴图文件原样返回，后面我们用 `fetch` 读取模型文件的时候会用到
+- 现场打包 Web Worker 用的 TS 文件。这个只有最后一篇番外会用到，前面可以先不管它
 
 ## 3.准备一块画布
 

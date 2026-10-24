@@ -15,7 +15,7 @@ keywords:
 
 前言里说过，这个系列的目标是实现一个简易版本的 OpenGL，搞清楚 OpenGL 这类图形 API 在底层是怎么工作的。十天下来，光栅化、zbuffer、透视投影、着色器，全都是我们一行一行手写出来的。
 
-那真正的 OpenGL 用起来是什么样的呢？这篇番外我们换成 WebGL，把 day8 的人头（切线空间的法线贴图 + Phong 光照）重新画一遍。模型解析和矩阵运算还是用我们自己写的 `model.ts` 和 `math.ts`，光栅化、插值、深度测试这些活，全部交给显卡。
+那真正的 OpenGL 用起来是什么样的呢？这篇番外我们换成 WebGL，把 day8 的人头（切线空间的法线贴图 + Phong 光照）重新画一遍。模型解析和矩阵运算还是用我们自己写的 `model.ts` 和 `math.ts`，光栅化、插值、深度测试这些活，全部交给显卡。最后，我们再把软渲染器放在旁边一起跑，比一比两边的帧率。
 
 > 本文源码 👉：[toy-renderer-ts/days/extra-webgl](https://github.com/skychx/toy-renderer-ts/tree/main/days/extra-webgl)
 
@@ -213,10 +213,10 @@ GLSL 写错了，TS 的类型检查是发现不了的，只有运行的时候编
 
 day6 写 `lookAt` 的时候，我们把 center 移到了原点，相机在 z 轴上离原点 c 远的地方，day5 的投影矩阵也是按照这个位置来做透视的。
 
-OpenGL 的习惯不一样：**相机放在原点，朝着 -z 方向看**。所以 `lookAt` 只需要改一个地方，平移的时候把 eye 移到原点：
+OpenGL 的习惯不一样：**相机放在原点，朝着 -z 方向看**。所以这一天的 `gl.ts` 里，`lookAt` 只需要改一个地方，平移的时候把 eye 移到原点：
 
 ```ts
-// 平移：OpenGL 的相机放在原点，所以要把 eye 移到原点（gl.ts 里移的是 center）
+// 平移：OpenGL 的相机放在原点，所以要把 eye 移到原点（day6 的版本移的是 center）
 const translation: Mat = [
   [1, 0, 0, -eye[0]],
   [0, 1, 0, -eye[1]],
@@ -229,12 +229,12 @@ const translation: Mat = [
 
 ### 3.2 透视投影
 
-投影矩阵也要换成 OpenGL 的版本：
+投影矩阵也要换成 OpenGL 的版本，`gl.ts` 里原来的 `projection` 换成了下面这个 `perspective`：
 
 ```ts
-// 透视投影矩阵：fovy 是上下方向的视角，aspect 是画面的宽高比，
+// 透视投影矩阵（OpenGL 的版本）：fovy 是上下方向的视角，aspect 是画面的宽高比，
 // near、far 是近平面和远平面到相机的距离，只有这两个平面之间的东西才会被画出来
-function perspective(fovy: number, aspect: number, near: number, far: number): Mat {
+export function perspective(fovy: number, aspect: number, near: number, far: number): Mat {
   const f = 1 / Math.tan(fovy / 2);
   return [
     [f / aspect, 0, 0, 0],
@@ -255,7 +255,7 @@ function perspective(fovy: number, aspect: number, near: number, far: number): M
 
 最后是第三行，它管的是 z：透视除法以后，离相机 near 远的地方，z 会变成 -1，far 远的地方变成 1。x、y、z 不在 $[-1, 1]$ 里的部分，显卡会直接裁掉，这也是「裁剪坐标」这个名字的由来。我们的软渲染器偷了个懒，没有做这一步。
 
-还要注意，OpenGL 里 z 越小离相机越近，和我们 day4 的 zbuffer 正好反过来。不过 WebGL 的深度测试默认就是 z 小的留下来，和这个矩阵是配套的，我们什么都不用改。
+还要注意，OpenGL 里 z 越小离相机越近，和我们 day4 的 zbuffer 正好反过来。不过 WebGL 的深度测试默认就是 z 小的留下来，和这个矩阵是配套的，WebGL 这边什么都不用改；第 6 节让软渲染器也用这个矩阵的时候，就得把我们自己的深度测试反过来了。
 
 带 near、far 的透视投影矩阵是怎么推导出来的，可以看 GAMES101 的第 4 讲：先把视锥体「挤」成一个长方体，再做正交投影。
 
@@ -348,13 +348,27 @@ await loadTexture('/obj/african_head/african_head_spec.png', 2, 'uSpecular');
 
 ## 5.画出来
 
-终于可以画图了：
+终于可以画图了。先把深度测试打开，再设置好视口：
 
 ```ts
 // 深度测试：对应我们自己写的 zbuffer
 gl.enable(gl.DEPTH_TEST);
 // 视口变换：对应我们的 Viewport 矩阵
 gl.viewport(0, 0, canvas.width, canvas.height);
+```
+
+我们手写的 zbuffer，到了 WebGL 里就是一行 `gl.enable(gl.DEPTH_TEST)`。
+
+然后根据相机的位置，把着色器要用的 uniform 算出来。相机的位置用的是球坐标：相机在一个半径为 `distance` 的球面上，`theta` 是绕 y 轴转的角度，`phi` 是抬头的角度，初始值算出来正好是 day8 的相机位置 $(1, 1, 3)$：
+
+```ts
+// 两个渲染器共用的 uniform
+export type Uniforms = {
+  ModelView: Mat;
+  ModelViewIT: Mat; // ModelView 的逆转置矩阵，用来变换法线
+  Projection: Mat;
+  light: Vec3; // 相机坐标系下，指向光源的方向
+};
 
 const light: Vec3 = [1, 1, 1]; // 指向光源的方向
 
@@ -364,19 +378,35 @@ const distance = Math.sqrt(11);
 let theta = Math.atan2(1, 3);
 let phi = Math.asin(1 / distance);
 
-function draw() {
+// 根据相机现在的位置，算出两个渲染器共用的 uniform
+function createUniforms(): Uniforms {
   const eye: Vec3 = [
     distance * Math.cos(phi) * Math.sin(theta),
     distance * Math.sin(phi),
     distance * Math.cos(phi) * Math.cos(theta),
   ];
   const ModelView = lookAt(eye, [0, 0, 0], [0, 1, 0]);
-  setMatrix('uModelView', ModelView);
-  setMatrix('uModelViewIT', transpose(inverse(ModelView)));
-  setMatrix('uProjection', perspective(Math.PI / 4, canvas.width / canvas.height, 0.1, 100));
-  gl.uniform3fv(gl.getUniformLocation(program, 'uLight'), transformDirection(ModelView, light));
+  return {
+    ModelView,
+    ModelViewIT: transpose(inverse(ModelView)),
+    Projection: perspective(Math.PI / 4, canvas.width / canvas.height, 0.1, 100),
+    // 光照方向是一个向量，变换到相机坐标系时 w 取 0
+    light: transformDirection(ModelView, light),
+  };
+}
+```
 
-  // 清空颜色和深度，对应 frame.clear() 和 zbuffer.fill(-Infinity)
+注释里说的「两个渲染器」是怎么回事，第 6 节再讲。最后把 uniform 传给着色器，画出来：
+
+```ts
+// WebGL：把 uniform 传给着色器，然后画出来
+function draw(uniforms: Uniforms) {
+  setMatrix('uModelView', uniforms.ModelView);
+  setMatrix('uModelViewIT', uniforms.ModelViewIT);
+  setMatrix('uProjection', uniforms.Projection);
+  gl.uniform3fv(gl.getUniformLocation(program, 'uLight'), uniforms.light);
+
+  // 清空颜色和深度，对应 frame.clear() 和 zbuffer.fill(Infinity)
   gl.clearColor(0, 0, 0, 1);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   // 每三个顶点画一个三角形
@@ -384,25 +414,121 @@ function draw() {
 }
 ```
 
-我们手写的 zbuffer，到了 WebGL 里就是一行 `gl.enable(gl.DEPTH_TEST)`；对每个三角形调用顶点着色器、光栅化、插值、调用片元着色器，也只是一行 `gl.drawArrays`。
+对每个三角形调用顶点着色器、光栅化、插值、调用片元着色器，这一大堆事情，到了 WebGL 里也只是一行 `gl.drawArrays`。
 
-相机的位置用的是球坐标：相机在一个半径为 `distance` 的球面上，`theta` 是绕 y 轴转的角度，`phi` 是抬头的角度，初始值算出来正好是 day8 的相机位置 $(1, 1, 3)$。按住鼠标拖动的时候改一改 `theta` 和 `phi`，再用 `requestAnimationFrame` 不停地调用 `draw()` 就行，这部分代码比较简单，就不贴了。
-
-左边是 day8 的软渲染器画的，右边是 WebGL 画的：
-
-![左：day8 的软渲染器，右：WebGL](/img/toy-renderer/extra3/compare.jpg)
-
-几乎一模一样！仔细看的话，右边的皮肤要细腻一些，这就是双线性插值和 mipmap 的功劳。
-
-按住鼠标拖动，就能从各个角度看这个人头了，连后脑勺也能看到：
+按住鼠标拖动的时候改一改 `theta` 和 `phi`，重新算一遍 uniform，再用 `requestAnimationFrame` 不停地调用 `draw()` 就行，这部分代码比较简单，就不贴了。拖动鼠标，就能从各个角度看这个人头了，连后脑勺也能看到：
 
 ![按住鼠标拖动，从不同的角度看](/img/toy-renderer/extra3/views.jpg)
 
-## 6.快了多少
+## 6.和软渲染器比一比
 
-页面上会显示每秒画了多少帧。不过这个数字一般就是屏幕的刷新率：60Hz 的屏幕显示 60 FPS，120Hz 的高刷屏显示 120 FPS。这是因为 `requestAnimationFrame` 是跟着屏幕刷新走的，帧数被屏幕限制住了，显卡其实还闲得很。
+WebGL 到底比我们的软渲染器快多少呢？光说不练假把式，我们把软渲染器也放到这个页面上，和 WebGL 画同一个人头，两边一起跑，各自显示每秒画了多少帧。
 
-为了看看显卡到底有多快，我在自己的电脑上单独测了一下：连续画几千帧再取平均，画一帧还不到 1 毫秒。而我们的软渲染器画 day8 这张图，要 120 毫秒左右，一秒钟最多也就画 8 帧，两者差了好几百倍。
+### 6.1 同一份 uniform
+
+为了比得公平，两边画的东西要一模一样。第 5 节 `createUniforms()` 算出来的 uniform，WebGL 和软渲染器用的是同一份；软渲染器的着色器基本就是 day8 的 `TangentShader`，只是高光的视线方向和 WebGL 一样，换成了准确的值。
+
+两边的矩阵也要一样。第 3 节已经把 `gl.ts` 里的 `lookAt` 和 `perspective` 换成了 OpenGL 的版本，剩下的就是深度：OpenGL 的矩阵算出来的 z 是越小越近，所以 `triangle` 里的深度测试要反过来，z 小的留下来：
+
+```ts
+// 深度测试：和 OpenGL 一样，z 越小离相机越近，被挡住的像素直接跳过，连片元着色器都不用调
+const z = pts[0][2] * bc[0] + pts[1][2] * bc[1] + pts[2][2] * bc[2];
+const index = x + y * frame.width;
+if (zbuffer[index] <= z) {
+  continue;
+}
+```
+
+画一帧的代码和前面每一天的差不多，只有两个地方不一样：zbuffer 一开始要填成正无穷，而不是负无穷；视口和 WebGL 一样占满整块画布，人头画多大交给 fovy 来决定：
+
+```ts
+// 画一帧：和前面每一天的 render 一样，只是最后画到了 OffscreenCanvas 上
+function render(canvas: OffscreenCanvas, uniforms: Uniforms) {
+  const { width, height } = canvas;
+  const frame = new Frame(width, height);
+  // OpenGL 里 z 越小离相机越近，所以 zbuffer 一开始要填成无穷远
+  const zbuffer = new Float32Array(width * height).fill(Infinity);
+  const Viewport = viewport(0, 0, width, height);
+  const shader = new PhongShader(uniforms);
+  for (let i = 0; i < model.nfaces(); i++) {
+    const clip: Vec4[] = [shader.vertex(i, 0), shader.vertex(i, 1), shader.vertex(i, 2)];
+    triangle(clip, shader, Viewport, zbuffer, frame);
+  }
+  canvas.getContext('2d')!.putImageData(frame.imageData, 0, 0);
+}
+```
+
+### 6.2 放到 Web Worker 里
+
+还有一个问题：JS 是单线程的。软渲染器画一帧要一百多毫秒，如果和 WebGL 放在同一个线程里，WebGL 每画一帧，都得等软渲染器先把这一百多毫秒算完，两边的帧率就都被拖到了个位数，根本没法比。
+
+所以软渲染器要放到 Web Worker 里，单独用一个线程来跑。canvas 有一个 `transferControlToOffscreen()` 方法，可以把一块画布的控制权交给 worker，worker 拿到的是一个 `OffscreenCanvas`，用法和普通的 canvas 一样：
+
+```ts
+// 软渲染器放在 Web Worker 里跑：把左边那块 canvas 的控制权交给 worker
+const softwareCanvas = document.querySelector<HTMLCanvasElement>('#software')!;
+const offscreen = softwareCanvas.transferControlToOffscreen();
+const worker = new Worker('/extra-webgl/software.ts', { type: 'module' });
+worker.postMessage({ canvas: offscreen }, [offscreen]);
+// worker 每秒会发来一次它的帧率
+worker.onmessage = e => {
+  document.querySelector('#software-fps')!.textContent = `${e.data.fps} FPS`;
+};
+
+// 一开始先算一份 uniform，WebGL 自己用，再发一份给 worker
+let uniforms = createUniforms();
+worker.postMessage({ uniforms });
+```
+
+之后相机每动一下，主线程都会重新算一份 uniform，用 `postMessage` 发给 worker。worker 这边收到消息，把画布和 uniform 记下来：
+
+```ts
+// 主线程发来的消息：一开始是画布，之后相机每动一下，就发来一份新的 uniform
+let canvas: OffscreenCanvas | null = null;
+let uniforms: Uniforms | null = null;
+onmessage = (e: MessageEvent) => {
+  if (e.data.canvas) canvas = e.data.canvas;
+  if (e.data.uniforms) uniforms = e.data.uniforms;
+};
+```
+
+然后画完一帧马上接着画下一帧，每秒算一次帧率，再发回主线程：
+
+```ts
+// 画完一帧马上接着画下一帧，每秒把帧率告诉主线程一次
+let frames = 0;
+let last = performance.now();
+function loop() {
+  if (canvas && uniforms) {
+    render(canvas, uniforms);
+    frames++;
+  }
+  const now = performance.now();
+  if (now - last >= 1000) {
+    postMessage({ fps: Math.round((frames * 1000) / (now - last)) });
+    frames = 0;
+    last = now;
+  }
+  setTimeout(loop);
+}
+loop();
+```
+
+`setTimeout(loop)` 会把下一帧排到消息的后面，所以每画完一帧，worker 都有机会处理主线程发来的新 uniform，拖动鼠标的时候，左边的人头也会跟着转。
+
+> 注：Bun 打包 html 的时候，不会处理 `new Worker()` 里的 TS 文件，所以 `server.ts` 里加了几行：浏览器请求 `days` 目录下的 TS 文件时，用 `Bun.build` 现场打包一下再返回
+
+### 6.3 结果
+
+左边是软渲染器，右边是 WebGL。两边用的是同一份 uniform，人头的位置和大小严丝合缝：
+
+![左：软渲染器，右：WebGL](/img/toy-renderer/extra3/compare.jpg)
+
+画面几乎一模一样，只是右边的皮肤要细腻一些，这是显卡读贴图时做了双线性插值和 mipmap 的功劳。
+
+帧率就差得远了。在我的电脑上，软渲染器每秒只能画 7 帧左右，拖动的时候能明显感觉到一顿一顿的；WebGL 则一直是满帧，60Hz 的屏幕上显示 60 FPS，120Hz 的高刷屏上显示 120 FPS。
+
+不过 WebGL 的这个数字，其实是被屏幕的刷新率限制住了：`requestAnimationFrame` 跟着屏幕刷新走，60Hz 的屏幕一秒钟最多也就回调 60 次，显卡其实还闲得很。为了看看显卡到底有多快，我单独测了一下：连续画几千帧再取平均，画一帧还不到 1 毫秒，比软渲染器快了好几百倍。
 
 差距为什么这么大？我们的软渲染器是在 CPU 上用一个线程，一个像素一个像素地算；而显卡里有成千上万个计算核心，可以同时跑一大批像素的片元着色器，光栅化、插值、深度测试、读贴图这些固定的步骤，还有专门的硬件电路来做。
 
