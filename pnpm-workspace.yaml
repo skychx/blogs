@@ -3,6 +3,9 @@ allowBuilds:
   core-js: false
   sharp: false
 
-# Docusaurus 3.9+ 默认装 DocSearch v4（搜索框换了新 UI），锁在 v3 保持现在的搜索样式
 overrides:
+  # Docusaurus 3.9+ 默认装 DocSearch v4（搜索框换了新 UI），锁在 v3 保持现在的搜索样式
   '@docsearch/react': 3.9.0
+  # KaTeX 0.16.32 起会给公式里的每个字母单独加斜体校正，Viewport 这类多字母变量会显示成「V iewport」；
+  # 0.16.31 是渲染结果和之前（0.16.11）完全一致的最新版本
+  katex: 0.16.31
