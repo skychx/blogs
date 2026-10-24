@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="450" viewBox="0 0 780 450">
+<defs><marker id="arrow-axis" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333333"/></marker><marker id="arrow-444444" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#444444"/></marker><marker id="arrow-e5484d" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e5484d"/></marker><marker id="arrow-2f9e44" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2f9e44"/></marker><marker id="arrow-1f6fd1" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6fd1"/></marker><marker id="arrow-f08c00" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f08c00"/></marker><marker id="arrow-888888" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#888888"/></marker></defs>
+<rect width="780" height="450" fill="#eef2f6"/>
+<rect x="40" y="60" width="700" height="360" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="390" y="46" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">shadow map 是一格一格的，斜面上有一半的点会被误判成在阴影里</text>
+<line x1="64.42" y1="323.41" x2="715.58" y2="112.68" stroke="#444444" stroke-width="3" stroke-linecap="round"/>
+<line x1="64.42" y1="310.24" x2="145.81" y2="310.24" stroke="#1f6fd1" stroke-width="3" stroke-linecap="round"/>
+<line x1="64.42" y1="393.66" x2="64.42" y2="95.12" stroke="#e3e3e3" stroke-width="1" stroke-linecap="round"/>
+<polygon points="64.42,323.41 64.42,310.24 105.12,310.24" fill="rgba(229,72,77,0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<line x1="145.81" y1="283.9" x2="227.21" y2="283.9" stroke="#1f6fd1" stroke-width="3" stroke-linecap="round"/>
+<line x1="145.81" y1="393.66" x2="145.81" y2="95.12" stroke="#e3e3e3" stroke-width="1" stroke-linecap="round"/>
+<polygon points="145.81,297.07 145.81,283.9 186.51,283.9" fill="rgba(229,72,77,0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<line x1="227.21" y1="257.56" x2="308.6" y2="257.56" stroke="#1f6fd1" stroke-width="3" stroke-linecap="round"/>
+<line x1="227.21" y1="393.66" x2="227.21" y2="95.12" stroke="#e3e3e3" stroke-width="1" stroke-linecap="round"/>
+<polygon points="227.21,270.73 227.21,257.56 267.91,257.56" fill="rgba(229,72,77,0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<line x1="308.6" y1="231.22" x2="390" y2="231.22" stroke="#1f6fd1" stroke-width="3" stroke-linecap="round"/>
+<line x1="308.6" y1="393.66" x2="308.6" y2="95.12" stroke="#e3e3e3" stroke-width="1" stroke-linecap="round"/>
+<polygon points="308.6,244.39 308.6,231.22 349.3,231.22" fill="rgba(229,72,77,0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<line x1="390" y1="204.88" x2="471.4" y2="204.88" stroke="#1f6fd1" stroke-width="3" stroke-linecap="round"/>
+<line x1="390" y1="393.66" x2="390" y2="95.12" stroke="#e3e3e3" stroke-width="1" stroke-linecap="round"/>
+<polygon points="390,218.05 390,204.88 430.7,204.88" fill="rgba(229,72,77,0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<line x1="471.4" y1="178.54" x2="552.79" y2="178.54" stroke="#1f6fd1" stroke-width="3" stroke-linecap="round"/>
+<line x1="471.4" y1="393.66" x2="471.4" y2="95.12" stroke="#e3e3e3" stroke-width="1" stroke-linecap="round"/>
+<polygon points="471.4,191.71 471.4,178.54 512.09,178.54" fill="rgba(229,72,77,0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<line x1="552.79" y1="152.2" x2="634.19" y2="152.2" stroke="#1f6fd1" stroke-width="3" stroke-linecap="round"/>
+<line x1="552.79" y1="393.66" x2="552.79" y2="95.12" stroke="#e3e3e3" stroke-width="1" stroke-linecap="round"/>
+<polygon points="552.79,165.37 552.79,152.2 593.49,152.2" fill="rgba(229,72,77,0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<line x1="634.19" y1="125.85" x2="715.58" y2="125.85" stroke="#1f6fd1" stroke-width="3" stroke-linecap="round"/>
+<line x1="634.19" y1="393.66" x2="634.19" y2="95.12" stroke="#e3e3e3" stroke-width="1" stroke-linecap="round"/>
+<polygon points="634.19,139.02 634.19,125.85 674.88,125.85" fill="rgba(229,72,77,0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="72.56" y="95.12" font-size="14" fill="#f08c00" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">光从上往下照</text>
+<line x1="243.49" y1="86.34" x2="243.49" y2="142.30" stroke="#f08c00" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-f08c00)"/>
+<line x1="487.67" y1="86.34" x2="487.67" y2="142.30" stroke="#f08c00" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-f08c00)"/>
+<line x1="80.7" y1="402.44" x2="121.4" y2="402.44" stroke="#444444" stroke-width="3" stroke-linecap="round"/>
+<text x="129.53" y="407.44" font-size="14" fill="#333" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">真实的表面</text>
+<line x1="276.05" y1="402.44" x2="316.74" y2="402.44" stroke="#1f6fd1" stroke-width="3" stroke-linecap="round"/>
+<text x="324.88" y="407.44" font-size="14" fill="#333" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">shadow map 里记录的深度</text>
+<polygon points="585.35,412.98 617.91,412.98 617.91,391.9 585.35,391.9" fill="rgba(229,72,77,0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="626.05" y="407.44" font-size="14" fill="#333" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">被误判成阴影</text>
+</svg>
