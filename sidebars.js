@@ -55,6 +55,7 @@ module.exports = {
         "toy-renderer/day2-draw-line",
         "toy-renderer/day3-draw-triangle",
         "toy-renderer/day4-Z-buffering",
+        "toy-renderer/day5-Perspective-projection",
       ],
     },
     {

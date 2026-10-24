@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="870" height="712" viewBox="0 0 870 712">
+<defs><marker id="arrow-axis" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333333"/></marker><marker id="arrow-444444" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#444444"/></marker><marker id="arrow-e5484d" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e5484d"/></marker><marker id="arrow-2f9e44" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2f9e44"/></marker><marker id="arrow-1f6fd1" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6fd1"/></marker><marker id="arrow-f08c00" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f08c00"/></marker><marker id="arrow-888888" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#888888"/></marker></defs>
+<rect width="870" height="712" fill="#eef2f6"/>
+<rect x="50" y="60" width="360" height="250" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<g stroke="#d9d9d9" stroke-width="1"><line x1="80" y1="60" x2="80" y2="310"/><line x1="130" y1="60" x2="130" y2="310"/><line x1="180" y1="60" x2="180" y2="310"/><line x1="230" y1="60" x2="230" y2="310"/><line x1="280" y1="60" x2="280" y2="310"/><line x1="330" y1="60" x2="330" y2="310"/><line x1="380" y1="60" x2="380" y2="310"/><line x1="50" y1="290" x2="410" y2="290"/><line x1="50" y1="240" x2="410" y2="240"/><line x1="50" y1="190" x2="410" y2="190"/><line x1="50" y1="140" x2="410" y2="140"/><line x1="50" y1="90" x2="410" y2="90"/></g>
+<line x1="50" y1="240" x2="408" y2="240" stroke="#333333" stroke-width="1.4" marker-end="url(#arrow-axis)"/>
+<line x1="180" y1="310" x2="180" y2="62" stroke="#333333" stroke-width="1.4" marker-end="url(#arrow-axis)"/>
+<text x="396" y="260" font-size="16" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">x</text>
+<text x="188" y="76" font-size="16" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">y</text>
+<text x="230" y="46" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">原图（单位矩阵）</text>
+<polygon points="180,240 205,240 205,200 240,200 240,180 205,180 205,160 260,160 260,140 180,140" fill="none" stroke="#888888" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="5 4"/>
+<polygon points="180,240 205,240 205,200 240,200 240,180 205,180 205,160 260,160 260,140 180,140" fill="rgba(240, 120, 120, 0.55)" stroke="#c0392b" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="180" y1="240" x2="272.30" y2="240.00" stroke="#e5484d" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-e5484d)"/>
+<line x1="180" y1="240" x2="180.00" y2="147.70" stroke="#2f9e44" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-2f9e44)"/>
+<rect x="460" y="60" width="360" height="250" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<g stroke="#d9d9d9" stroke-width="1"><line x1="490" y1="60" x2="490" y2="310"/><line x1="540" y1="60" x2="540" y2="310"/><line x1="590" y1="60" x2="590" y2="310"/><line x1="640" y1="60" x2="640" y2="310"/><line x1="690" y1="60" x2="690" y2="310"/><line x1="740" y1="60" x2="740" y2="310"/><line x1="790" y1="60" x2="790" y2="310"/><line x1="460" y1="290" x2="820" y2="290"/><line x1="460" y1="240" x2="820" y2="240"/><line x1="460" y1="190" x2="820" y2="190"/><line x1="460" y1="140" x2="820" y2="140"/><line x1="460" y1="90" x2="820" y2="90"/></g>
+<line x1="460" y1="240" x2="818" y2="240" stroke="#333333" stroke-width="1.4" marker-end="url(#arrow-axis)"/>
+<line x1="590" y1="310" x2="590" y2="62" stroke="#333333" stroke-width="1.4" marker-end="url(#arrow-axis)"/>
+<text x="806" y="260" font-size="16" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">x</text>
+<text x="598" y="76" font-size="16" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">y</text>
+<text x="640" y="46" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">缩放</text>
+<polygon points="590,240 615,240 615,200 650,200 650,180 615,180 615,160 670,160 670,140 590,140" fill="none" stroke="#888888" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="5 4"/>
+<polygon points="590,240 640,240 640,220 710,220 710,210 640,210 640,200 750,200 750,190 590,190" fill="rgba(240, 120, 120, 0.55)" stroke="#c0392b" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="590" y1="240" x2="782.30" y2="240.00" stroke="#e5484d" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-e5484d)"/>
+<line x1="590" y1="240" x2="590.00" y2="197.70" stroke="#2f9e44" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-2f9e44)"/>
+<rect x="50" y="380" width="360" height="250" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<g stroke="#d9d9d9" stroke-width="1"><line x1="80" y1="380" x2="80" y2="630"/><line x1="130" y1="380" x2="130" y2="630"/><line x1="180" y1="380" x2="180" y2="630"/><line x1="230" y1="380" x2="230" y2="630"/><line x1="280" y1="380" x2="280" y2="630"/><line x1="330" y1="380" x2="330" y2="630"/><line x1="380" y1="380" x2="380" y2="630"/><line x1="50" y1="610" x2="410" y2="610"/><line x1="50" y1="560" x2="410" y2="560"/><line x1="50" y1="510" x2="410" y2="510"/><line x1="50" y1="460" x2="410" y2="460"/><line x1="50" y1="410" x2="410" y2="410"/></g>
+<line x1="50" y1="560" x2="408" y2="560" stroke="#333333" stroke-width="1.4" marker-end="url(#arrow-axis)"/>
+<line x1="180" y1="630" x2="180" y2="382" stroke="#333333" stroke-width="1.4" marker-end="url(#arrow-axis)"/>
+<text x="396" y="580" font-size="16" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">x</text>
+<text x="188" y="396" font-size="16" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">y</text>
+<text x="230" y="366" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">错切</text>
+<polygon points="180,560 205,560 205,520 240,520 240,500 205,500 205,480 260,480 260,460 180,460" fill="none" stroke="#888888" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="5 4"/>
+<polygon points="180,560 205,560 245,520 280,520 300,500 265,500 285,480 340,480 360,460 280,460" fill="rgba(240, 120, 120, 0.55)" stroke="#c0392b" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="180" y1="560" x2="272.30" y2="560.00" stroke="#e5484d" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-e5484d)"/>
+<line x1="180" y1="560" x2="274.56" y2="465.44" stroke="#2f9e44" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-2f9e44)"/>
+<rect x="460" y="380" width="360" height="250" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<g stroke="#d9d9d9" stroke-width="1"><line x1="490" y1="380" x2="490" y2="630"/><line x1="540" y1="380" x2="540" y2="630"/><line x1="590" y1="380" x2="590" y2="630"/><line x1="640" y1="380" x2="640" y2="630"/><line x1="690" y1="380" x2="690" y2="630"/><line x1="740" y1="380" x2="740" y2="630"/><line x1="790" y1="380" x2="790" y2="630"/><line x1="460" y1="610" x2="820" y2="610"/><line x1="460" y1="560" x2="820" y2="560"/><line x1="460" y1="510" x2="820" y2="510"/><line x1="460" y1="460" x2="820" y2="460"/><line x1="460" y1="410" x2="820" y2="410"/></g>
+<line x1="460" y1="560" x2="818" y2="560" stroke="#333333" stroke-width="1.4" marker-end="url(#arrow-axis)"/>
+<line x1="590" y1="630" x2="590" y2="382" stroke="#333333" stroke-width="1.4" marker-end="url(#arrow-axis)"/>
+<text x="806" y="580" font-size="16" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">x</text>
+<text x="598" y="396" font-size="16" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">y</text>
+<text x="640" y="366" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">旋转 45°</text>
+<polygon points="590,560 615,560 615,520 650,520 650,500 615,500 615,480 670,480 670,460 590,460" fill="none" stroke="#888888" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="5 4"/>
+<polygon points="590,560 607.68,542.32 579.39,514.04 604.14,489.29 590,475.15 565.25,499.9 551.11,485.75 590,446.86 575.86,432.72 519.29,489.29" fill="rgba(240, 120, 120, 0.55)" stroke="#c0392b" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="590" y1="560" x2="655.27" y2="494.73" stroke="#e5484d" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-e5484d)"/>
+<line x1="590" y1="560" x2="524.73" y2="494.73" stroke="#2f9e44" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-2f9e44)"/>
+<line x1="50" y1="682" x2="86" y2="682" stroke="#e5484d" stroke-width="3.5" marker-end="url(#arrow-e5484d)"/>
+<text x="112" y="687" font-size="15" fill="#333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">(1, 0) 变换后的位置</text>
+<line x1="310" y1="682" x2="346" y2="682" stroke="#2f9e44" stroke-width="3.5" marker-end="url(#arrow-2f9e44)"/>
+<text x="372" y="687" font-size="15" fill="#333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">(0, 1) 变换后的位置</text>
+<line x1="570" y1="682" x2="606" y2="682" stroke="#888888" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="618" y="687" font-size="15" fill="#333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">原图</text>
+</svg>
