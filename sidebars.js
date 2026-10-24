@@ -57,6 +57,7 @@ module.exports = {
         "toy-renderer/day4-Z-buffering",
         "toy-renderer/day5-Perspective-projection",
         "toy-renderer/day6-Moving-the-camera",
+        "toy-renderer/day7-Shaders",
       ],
     },
     {
