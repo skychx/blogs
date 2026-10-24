@@ -59,7 +59,7 @@ bun install
 bun dev
 ```
 
-> 注：`bun install` 只装了 TypeScript 的类型检查工具，渲染器本身不依赖任何第三方库
+> 注：`bun install` 只装了 Bun 的类型声明（`@types/bun`），给编辑器做代码提示用，渲染器本身不依赖任何第三方库
 
 然后用浏览器打开 `http://localhost:8080`，就能看到每一天的渲染结果了。
 
