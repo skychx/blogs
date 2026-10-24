@@ -1,51 +1,9 @@
-const fsSync = require("fs");
 const fs = require("fs/promises");
 const http = require("http");
 const https = require("https");
 const path = require("path");
-const {createRequire} = require("module");
+const {imageSize} = require("image-size");
 const {getPersistentImageSizeCache} = require("./cache");
-
-let imageSizeFn;
-
-function getImageSizeCandidates(siteDir) {
-  const pnpmRoot = path.join(siteDir, "node_modules/.pnpm");
-  const candidates = ["image-size"];
-
-  try {
-    const entries = fsSync.readdirSync(pnpmRoot, {withFileTypes: true});
-    for (const entry of entries) {
-      if (entry.isDirectory() && entry.name.startsWith("image-size@")) {
-        candidates.push(path.join(pnpmRoot, entry.name, "node_modules/image-size"));
-      }
-    }
-  } catch (error) {
-    return candidates;
-  }
-
-  return candidates;
-}
-
-function loadImageSize(siteDir) {
-  if (imageSizeFn) {
-    return imageSizeFn;
-  }
-
-  const requireFromSite = createRequire(path.join(siteDir, "package.json"));
-  for (const candidate of getImageSizeCandidates(siteDir)) {
-    try {
-      const mod = requireFromSite(candidate);
-      imageSizeFn = mod.imageSize || mod.default || mod;
-      return imageSizeFn;
-    } catch (error) {
-      continue;
-    }
-  }
-
-  throw new Error(
-    "Unable to load image-size. Install it as a direct dependency or keep the current pnpm lockfile layout."
-  );
-}
 
 function isRemoteUrl(src) {
   return /^https?:\/\//i.test(src);
@@ -120,7 +78,6 @@ async function fetchRemoteImageBuffer(src, timeout) {
 function createImageDimensionResolver({siteDir, timeout = 8000, cacheFile, onDebug}) {
   const memoryCache = new Map();
   const persistentCache = getPersistentImageSizeCache({siteDir, cacheFile});
-  const imageSize = loadImageSize(siteDir);
 
   async function resolve(src, filePath) {
     if (!src || isDataUrl(src)) {

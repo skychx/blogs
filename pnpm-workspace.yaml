@@ -1,0 +1,8 @@
+# 依赖的安装脚本都不需要执行：core-js 只是打印捐赠信息，sharp 只给没启用的 plugin-ideal-image 用
+allowBuilds:
+  core-js: false
+  sharp: false
+
+# Docusaurus 3.9+ 默认装 DocSearch v4（搜索框换了新 UI），锁在 v3 保持现在的搜索样式
+overrides:
+  '@docsearch/react': 3.9.0

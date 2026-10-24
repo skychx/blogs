@@ -2,6 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const remarkMath = require("remark-math");
+const readingTime = require("reading-time");
 const rehypeImageSize = require("./plugins/rehype-image-size");
 
 const {themes} = require('prism-react-renderer');
@@ -188,6 +189,8 @@ const config = {
           blogSidebarTitle: "近期文章",
           blogSidebarCount: 10,
           showReadingTime: true,
+          // Docusaurus 3.8 起默认用 Intl.Segmenter 统计字数，这里沿用之前 reading-time 的算法，保持文章阅读时长不变
+          readingTime: ({content}) => readingTime(content).minutes,
           path: "./blog",
           routeBasePath: "/",
           feedOptions: {

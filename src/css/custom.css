@@ -95,38 +95,17 @@ html[data-theme='dark'] .header-github-link:before {
     no-repeat;
 }
 
-/* 重写 blog 列表页标题样式 */
-header h2.blogPostTitle_node_modules-\@docusaurus-theme-classic-lib-next-theme-BlogPostItem-styles-module {
-  font-size: 2.5rem;
+/* 重写 blog 列表页（h2）和详情页（h1）标题样式。不用 title_QvRb 这类 CSS Modules 哈希类名，升级 Docusaurus 后哈希会变 */
+article > header > h1,
+article > header > h2 {
+  font-size: 2.5rem !important;
 }
 
 @media (max-width: 576px) {
-  header h2.title_v7G5 {
+  article > header > h1,
+  article > header > h2 {
     font-size: 1.7rem !important;
   }
-  .title_v7G5 {
-    font-size: 1.7rem !important;
-  }
-
-  header h2.title_Q9ud {
-    font-size: 1.7rem !important;
-  }
-
-  .title_Q9ud {
-    font-size: 1.7rem !important;
-  }
-  .title_QvRb {
-    font-size: 1.7rem !important;
-  }
-}
-.title_v7G5 {
-  font-size: 2.5rem !important;
-}
-.title_Q9ud {
-  font-size: 2.5rem !important;
-}
-.title_QvRb {
-  font-size: 2.5rem !important;
 }
 
 /* 重写 blog 标题样式 */

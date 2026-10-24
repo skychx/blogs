@@ -1,0 +1,6 @@
+{
+  "theme.SearchModal.searchBox.placeholderText": {
+    "message": "搜索文档",
+    "description": "The placeholder text for the main search input field"
+  }
+}
