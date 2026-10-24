@@ -18,9 +18,9 @@ keywords:
 
 本文主要（90%）参考 [ssloy](https://github.com/ssloy) 大神的 [tinyrenderer](https://github.com/ssloy/tinyrenderer) 教程，零依赖实现一个软渲染器，通过这个教程可以实现一个简易版本的 `OpenGL2.0`（rendering pipeline 只支持 `Vertex Shader` 和 `Fragment Shader` 两种自定义 Shader 类型），了解 `OpenGL` 这类图形学 API 在底层是如何工作的。
 
-我自己造的轮子是 [**toyRenderer**](https://github.com/skychx/toyRenderer)，在 tinyrenderer 的基础上加入了大量的注释并按自己的理解优化了部分代码（不排除有反向优化），如果大家对 tinyrenderer 感兴趣，可以参考一下我的实现和我现在写的这个教程，**点个 star** 🌟 就更好不过了～
+我自己造的轮子是 [**toy-renderer-ts**](https://github.com/skychx/toy-renderer-ts)。最早我是跟着原教程用 C++ 写的（[toyRenderer](https://github.com/skychx/toyRenderer)），后来整个换成了 TypeScript + canvas，每一天的代码都能直接在浏览器里跑起来，还加入了大量的注释。如果大家对 tinyrenderer 感兴趣，可以参考一下我的实现和我现在写的这个教程，**点个 star** 🌟 就更好不过了～
 
-本专栏的目录结构和 [tinyrenderer](https://github.com/ssloy/tinyrenderer) 保持一致，方便大家对比阅读。
+本专栏的目录结构和 [tinyrenderer](https://github.com/ssloy/tinyrenderer) 保持一致，方便大家对比阅读。另外 tinyrenderer 现在已经出了[第二版](https://haqr.eu/tinyrenderer/)，章节划分和第一版不太一样。本专栏还是按第一版的结构来，不过第二版有些地方讲得更清楚，我也会把它的讲法融进来。
 
 
 <br />
@@ -78,9 +78,9 @@ keywords:
 
 <br />
 
-### 3.C++
+### 3.TypeScript
 
-本渲染器是用 C++ 写的，但用到的都是基础语法，稍微高级点儿的知识就是模版编程和操作符重载。个人认为只要有其他语言基础，看个半小时的 C++ 语法就可以上手实践了。
+原教程是用 C++ 写的，本专栏的代码换成了 TypeScript，用到的都是基础语法，稍微高级点儿的也就是 class 和一点点泛型。只要有一些 JavaScript 基础就可以直接上手；如果你更熟悉 C++，也可以对照着原教程的代码一起看。
 
 <br />
 
