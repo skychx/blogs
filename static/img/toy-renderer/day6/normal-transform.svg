@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="870" height="420" viewBox="0 0 870 420">
+<defs><marker id="arrow-axis" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333333"/></marker><marker id="arrow-444444" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#444444"/></marker><marker id="arrow-e5484d" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e5484d"/></marker><marker id="arrow-2f9e44" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2f9e44"/></marker><marker id="arrow-1f6fd1" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6fd1"/></marker><marker id="arrow-f08c00" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f08c00"/></marker><marker id="arrow-888888" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#888888"/></marker></defs>
+<rect width="870" height="420" fill="#eef2f6"/>
+<rect x="50" y="60" width="360" height="330" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<g stroke="#d9d9d9" stroke-width="1"><line x1="62" y1="60" x2="62" y2="390"/><line x1="122" y1="60" x2="122" y2="390"/><line x1="182" y1="60" x2="182" y2="390"/><line x1="242" y1="60" x2="242" y2="390"/><line x1="302" y1="60" x2="302" y2="390"/><line x1="362" y1="60" x2="362" y2="390"/><line x1="50" y1="346" x2="410" y2="346"/><line x1="50" y1="291" x2="410" y2="291"/><line x1="50" y1="236" x2="410" y2="236"/><line x1="50" y1="181" x2="410" y2="181"/><line x1="50" y1="126" x2="410" y2="126"/><line x1="50" y1="71" x2="410" y2="71"/></g>
+<line x1="50" y1="346" x2="408" y2="346" stroke="#333333" stroke-width="1.4" marker-end="url(#arrow-axis)"/>
+<line x1="122" y1="390" x2="122" y2="62" stroke="#333333" stroke-width="1.4" marker-end="url(#arrow-axis)"/>
+<text x="396" y="366" font-size="16" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">x</text>
+<text x="130" y="76" font-size="16" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">y</text>
+<text x="230" y="46" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">变换前</text>
+<line x1="122" y1="236" x2="242" y2="346" stroke="#444444" stroke-width="3" stroke-linecap="round"/>
+<line x1="182" y1="291" x2="239.96" y2="237.86" stroke="#2f9e44" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-2f9e44)"/>
+<text x="251.64" y="232.66" font-size="18" fill="#2f9e44" text-anchor="start" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">n</text>
+<circle cx="122" cy="236" r="5.5" fill="#1f6fd1" stroke="#222" stroke-width="1"/>
+<text x="130.00" y="228.00" font-size="16" fill="#1f6fd1" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">A</text>
+<circle cx="242" cy="346" r="5.5" fill="#1f6fd1" stroke="#222" stroke-width="1"/>
+<text x="250.00" y="338.00" font-size="16" fill="#1f6fd1" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">B</text>
+<rect x="460" y="60" width="360" height="330" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<g stroke="#d9d9d9" stroke-width="1"><line x1="472" y1="60" x2="472" y2="390"/><line x1="532" y1="60" x2="532" y2="390"/><line x1="592" y1="60" x2="592" y2="390"/><line x1="652" y1="60" x2="652" y2="390"/><line x1="712" y1="60" x2="712" y2="390"/><line x1="772" y1="60" x2="772" y2="390"/><line x1="460" y1="346" x2="820" y2="346"/><line x1="460" y1="291" x2="820" y2="291"/><line x1="460" y1="236" x2="820" y2="236"/><line x1="460" y1="181" x2="820" y2="181"/><line x1="460" y1="126" x2="820" y2="126"/><line x1="460" y1="71" x2="820" y2="71"/></g>
+<line x1="460" y1="346" x2="818" y2="346" stroke="#333333" stroke-width="1.4" marker-end="url(#arrow-axis)"/>
+<line x1="532" y1="390" x2="532" y2="62" stroke="#333333" stroke-width="1.4" marker-end="url(#arrow-axis)"/>
+<text x="806" y="366" font-size="16" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">x</text>
+<text x="540" y="76" font-size="16" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">y</text>
+<text x="640" y="46" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">y 方向拉长 2 倍以后</text>
+<line x1="532" y1="126" x2="652" y2="346" stroke="#444444" stroke-width="3" stroke-linecap="round"/>
+<line x1="592" y1="236" x2="628.56" y2="168.97" stroke="#e5484d" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-e5484d)"/>
+<line x1="592" y1="236" x2="665.50" y2="202.31" stroke="#2f9e44" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-2f9e44)"/>
+<text x="638.25" y="162.21" font-size="15" fill="#e5484d" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">M n（不再垂直）</text>
+<text x="678.50" y="213.10" font-size="15" fill="#2f9e44" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">n'（垂直）</text>
+<line x1="598.98" y1="248.79" x2="612.93" y2="242.4" stroke="#2f9e44" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="612.93" y1="242.4" x2="605.95" y2="229.6" stroke="#2f9e44" stroke-width="1.5" stroke-linecap="round"/>
+<circle cx="532" cy="126" r="5.5" fill="#1f6fd1" stroke="#222" stroke-width="1"/>
+<text x="540.00" y="118.00" font-size="16" fill="#1f6fd1" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">A'</text>
+<circle cx="652" cy="346" r="5.5" fill="#1f6fd1" stroke="#222" stroke-width="1"/>
+<text x="660.00" y="338.00" font-size="16" fill="#1f6fd1" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">B'</text>
+</svg>

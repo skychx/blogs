@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="530" viewBox="0 0 760 530">
+<defs><marker id="arrow-axis" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333333"/></marker><marker id="arrow-444444" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#444444"/></marker><marker id="arrow-e5484d" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e5484d"/></marker><marker id="arrow-2f9e44" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2f9e44"/></marker><marker id="arrow-1f6fd1" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6fd1"/></marker><marker id="arrow-f08c00" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f08c00"/></marker><marker id="arrow-888888" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#888888"/></marker></defs>
+<rect width="760" height="530" fill="#eef2f6"/>
+<rect x="40" y="70" width="680" height="420" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="380" y="56" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">lookAt：用 eye、center、up 确定相机的坐标系</text>
+<line x1="106.52" y1="422.5" x2="198.21" y2="422.50" stroke="#888888" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow-888888)"/>
+<line x1="106.52" y1="422.5" x2="106.52" y2="329.40" stroke="#888888" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow-888888)"/>
+<line x1="106.52" y1="422.5" x2="61.82" y2="460.88" stroke="#888888" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow-888888)"/>
+<text x="206.61" y="440.50" font-size="15" fill="#888888" text-anchor="start" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">x</text>
+<text x="90.52" y="329.00" font-size="15" fill="#888888" text-anchor="start" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">y</text>
+<text x="56.48" y="453.75" font-size="15" fill="#888888" text-anchor="start" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">z</text>
+<text x="130.52" y="408.50" font-size="13" fill="#888888" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">世界坐标系</text>
+<line x1="291.3" y1="310" x2="557.39" y2="190" stroke="#888888" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="6 5"/>
+<circle cx="291.3" cy="310" r="34" fill="rgba(250, 200, 60, 0.35)" stroke="#d4a017" stroke-width="1.5"/>
+<circle cx="291.3" cy="310" r="5.5" fill="#444444" stroke="#222" stroke-width="1"/>
+<text x="267.30" y="362.00" font-size="16" fill="#444444" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">center</text>
+<line x1="557.39" y1="190" x2="644.93" y2="150.53" stroke="#1f6fd1" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-1f6fd1)"/>
+<line x1="557.39" y1="190" x2="518.45" y2="101.10" stroke="#2f9e44" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-2f9e44)"/>
+<line x1="557.39" y1="190" x2="607.78" y2="247.94" stroke="#e5484d" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow-e5484d)"/>
+<text x="657.95" y="151.36" font-size="18" fill="#1f6fd1" text-anchor="start" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">z'</text>
+<text x="495.36" y="94.05" font-size="18" fill="#2f9e44" text-anchor="start" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">y'</text>
+<text x="618.83" y="267.75" font-size="18" fill="#e5484d" text-anchor="start" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">x'</text>
+<line x1="557.39" y1="190" x2="557.39" y2="98.00" stroke="#f08c00" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-f08c00)"/>
+<text x="565.39" y="96.50" font-size="16" fill="#f08c00" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">up</text>
+<circle cx="557.39" cy="190" r="5.5" fill="#444444" stroke="#222" stroke-width="1"/>
+<text x="517.39" y="212.00" font-size="16" fill="#444444" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">eye</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="634" viewBox="0 0 680 634">
+<defs><marker id="arrow-axis" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333333"/></marker><marker id="arrow-444444" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#444444"/></marker><marker id="arrow-e5484d" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e5484d"/></marker><marker id="arrow-2f9e44" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2f9e44"/></marker><marker id="arrow-1f6fd1" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6fd1"/></marker><marker id="arrow-f08c00" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f08c00"/></marker><marker id="arrow-888888" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#888888"/></marker></defs>
+<rect width="680" height="634" fill="#eef2f6"/>
+<rect x="60" y="40" width="260" height="54" rx="10" fill="#ffffff" stroke="#666666"/>
+<text x="190" y="64" font-size="17" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">模型坐标</text>
+<text x="190" y="83" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">object coordinates</text>
+<line x1="190" y1="98" x2="190" y2="130" stroke="#1f6fd1" stroke-width="2.5" marker-end="url(#arrow-1f6fd1)"/>
+<text x="208" y="119" font-size="15" fill="#1f6fd1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">Model 矩阵</text>
+<text x="208" y="137" font-size="13" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">把模型摆到场景里</text>
+<rect x="60" y="140" width="260" height="54" rx="10" fill="#ffffff" stroke="#666666"/>
+<text x="190" y="164" font-size="17" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">世界坐标</text>
+<text x="190" y="183" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">world coordinates</text>
+<line x1="190" y1="198" x2="190" y2="230" stroke="#1f6fd1" stroke-width="2.5" marker-end="url(#arrow-1f6fd1)"/>
+<text x="208" y="219" font-size="15" fill="#1f6fd1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">View 矩阵</text>
+<text x="208" y="237" font-size="13" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">换到相机的视角（lookAt）</text>
+<rect x="60" y="240" width="260" height="54" rx="10" fill="#ffffff" stroke="#666666"/>
+<text x="190" y="264" font-size="17" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">观察坐标</text>
+<text x="190" y="283" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">eye coordinates</text>
+<line x1="190" y1="298" x2="190" y2="330" stroke="#1f6fd1" stroke-width="2.5" marker-end="url(#arrow-1f6fd1)"/>
+<text x="208" y="319" font-size="15" fill="#1f6fd1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">Projection 矩阵</text>
+<text x="208" y="337" font-size="13" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">透视投影</text>
+<rect x="60" y="340" width="260" height="54" rx="10" fill="#ffffff" stroke="#666666"/>
+<text x="190" y="364" font-size="17" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">裁剪坐标</text>
+<text x="190" y="383" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">clip coordinates</text>
+<line x1="190" y1="398" x2="190" y2="430" stroke="#1f6fd1" stroke-width="2.5" marker-end="url(#arrow-1f6fd1)"/>
+<text x="208" y="419" font-size="15" fill="#1f6fd1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">透视除法</text>
+<text x="208" y="437" font-size="13" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">除以 w</text>
+<rect x="60" y="440" width="260" height="54" rx="10" fill="#ffffff" stroke="#666666"/>
+<text x="190" y="464" font-size="17" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">标准化设备坐标</text>
+<text x="190" y="483" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">NDC</text>
+<line x1="190" y1="498" x2="190" y2="530" stroke="#1f6fd1" stroke-width="2.5" marker-end="url(#arrow-1f6fd1)"/>
+<text x="208" y="519" font-size="15" fill="#1f6fd1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">Viewport 矩阵</text>
+<text x="208" y="537" font-size="13" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">视口变换</text>
+<rect x="60" y="540" width="260" height="54" rx="10" fill="#ffffff" stroke="#666666"/>
+<text x="190" y="564" font-size="17" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">屏幕坐标</text>
+<text x="190" y="583" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">screen coordinates</text>
+<path d="M 470 98 q 12 0 12 12 v 76 q 0 12 12 12 q -12 0 -12 12 v 76 q 0 12 -12 12" fill="none" stroke="#f08c00" stroke-width="2"/>
+<text x="502" y="204" font-size="15" fill="#f08c00" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">合起来叫 ModelView</text>
+</svg>
