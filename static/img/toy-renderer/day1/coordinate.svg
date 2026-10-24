@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="984" height="484" viewBox="0 0 984 484">
+<defs><marker id="arrow-axis" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333333"/></marker><marker id="arrow-444444" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#444444"/></marker><marker id="arrow-e5484d" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e5484d"/></marker><marker id="arrow-2f9e44" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2f9e44"/></marker><marker id="arrow-1f6fd1" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6fd1"/></marker><marker id="arrow-f08c00" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f08c00"/></marker><marker id="arrow-888888" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#888888"/></marker></defs>
+<rect width="984" height="484" fill="#eef2f6"/>
+<rect x="30" y="60" width="442" height="359" rx="10" fill="#ffffff" stroke="#666666"/>
+<text x="256" y="38" font-size="20" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">canvas 的坐标系</text>
+<text x="256" y="446" font-size="15" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">原点在左上角，y 轴朝下</text>
+<rect x="168" y="154" width="44" height="44" fill="#e5484d"/>
+<text x="220" y="182" font-size="16" fill="#e5484d" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">(2, 1)</text>
+<g stroke="#bbbbbb" stroke-width="1"><line x1="80" y1="110" x2="80" y2="374"/><line x1="124" y1="110" x2="124" y2="374"/><line x1="168" y1="110" x2="168" y2="374"/><line x1="212" y1="110" x2="212" y2="374"/><line x1="256" y1="110" x2="256" y2="374"/><line x1="300" y1="110" x2="300" y2="374"/><line x1="344" y1="110" x2="344" y2="374"/><line x1="388" y1="110" x2="388" y2="374"/><line x1="432" y1="110" x2="432" y2="374"/><line x1="80" y1="110" x2="432" y2="110"/><line x1="80" y1="154" x2="432" y2="154"/><line x1="80" y1="198" x2="432" y2="198"/><line x1="80" y1="242" x2="432" y2="242"/><line x1="80" y1="286" x2="432" y2="286"/><line x1="80" y1="330" x2="432" y2="330"/><line x1="80" y1="374" x2="432" y2="374"/></g>
+<line x1="80" y1="110" x2="456" y2="110" stroke="#333333" stroke-width="2" marker-end="url(#arrow-axis)"/>
+<line x1="80" y1="110" x2="80" y2="398" stroke="#333333" stroke-width="2" marker-end="url(#arrow-axis)"/>
+<text x="476" y="116" font-size="18" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">x</text>
+<text x="94" y="412" font-size="18" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">y</text>
+<text x="102" y="102" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">0</text>
+<text x="146" y="102" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">1</text>
+<text x="190" y="102" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">2</text>
+<text x="234" y="102" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">3</text>
+<text x="278" y="102" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">4</text>
+<text x="322" y="102" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">5</text>
+<text x="366" y="102" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">6</text>
+<text x="410" y="102" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">7</text>
+<text x="68" y="137" font-size="13" text-anchor="end" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">0</text>
+<text x="68" y="181" font-size="13" text-anchor="end" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">1</text>
+<text x="68" y="225" font-size="13" text-anchor="end" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">2</text>
+<text x="68" y="269" font-size="13" text-anchor="end" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">3</text>
+<text x="68" y="313" font-size="13" text-anchor="end" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">4</text>
+<text x="68" y="357" font-size="13" text-anchor="end" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">5</text>
+<circle cx="80" cy="110" r="5" fill="#1f6fd1" stroke="#222"/>
+<rect x="512" y="60" width="442" height="359" rx="10" fill="#ffffff" stroke="#666666"/>
+<text x="738" y="38" font-size="20" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">我们习惯的坐标系</text>
+<text x="738" y="446" font-size="15" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">原点在左下角，y 轴朝上</text>
+<rect x="650" y="286" width="44" height="44" fill="#e5484d"/>
+<text x="702" y="314" font-size="16" fill="#e5484d" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">(2, 1)</text>
+<g stroke="#bbbbbb" stroke-width="1"><line x1="562" y1="110" x2="562" y2="374"/><line x1="606" y1="110" x2="606" y2="374"/><line x1="650" y1="110" x2="650" y2="374"/><line x1="694" y1="110" x2="694" y2="374"/><line x1="738" y1="110" x2="738" y2="374"/><line x1="782" y1="110" x2="782" y2="374"/><line x1="826" y1="110" x2="826" y2="374"/><line x1="870" y1="110" x2="870" y2="374"/><line x1="914" y1="110" x2="914" y2="374"/><line x1="562" y1="110" x2="914" y2="110"/><line x1="562" y1="154" x2="914" y2="154"/><line x1="562" y1="198" x2="914" y2="198"/><line x1="562" y1="242" x2="914" y2="242"/><line x1="562" y1="286" x2="914" y2="286"/><line x1="562" y1="330" x2="914" y2="330"/><line x1="562" y1="374" x2="914" y2="374"/></g>
+<line x1="562" y1="374" x2="938" y2="374" stroke="#333333" stroke-width="2" marker-end="url(#arrow-axis)"/>
+<line x1="562" y1="374" x2="562" y2="86" stroke="#333333" stroke-width="2" marker-end="url(#arrow-axis)"/>
+<text x="958" y="380" font-size="18" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">x</text>
+<text x="576" y="86" font-size="18" font-style="italic" fill="#333333" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">y</text>
+<text x="584" y="394" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">0</text>
+<text x="628" y="394" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">1</text>
+<text x="672" y="394" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">2</text>
+<text x="716" y="394" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">3</text>
+<text x="760" y="394" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">4</text>
+<text x="804" y="394" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">5</text>
+<text x="848" y="394" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">6</text>
+<text x="892" y="394" font-size="13" text-anchor="middle" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">7</text>
+<text x="550" y="357" font-size="13" text-anchor="end" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">0</text>
+<text x="550" y="313" font-size="13" text-anchor="end" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">1</text>
+<text x="550" y="269" font-size="13" text-anchor="end" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">2</text>
+<text x="550" y="225" font-size="13" text-anchor="end" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">3</text>
+<text x="550" y="181" font-size="13" text-anchor="end" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">4</text>
+<text x="550" y="137" font-size="13" text-anchor="end" fill="#888888" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">5</text>
+<circle cx="562" cy="374" r="5" fill="#1f6fd1" stroke="#222"/>
+</svg>
