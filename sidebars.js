@@ -62,6 +62,7 @@ module.exports = {
         "toy-renderer/day9-Shadow-mapping",
         "toy-renderer/day10-Ambient-occlusion",
         "toy-renderer/extra1-Perspective-correct-interpolation",
+        "toy-renderer/extra2-Toon-shading",
       ],
     },
     {

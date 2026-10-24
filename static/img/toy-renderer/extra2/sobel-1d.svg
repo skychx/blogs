@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="570" viewBox="0 0 800 570">
+<defs><marker id="arrow-axis" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333333"/></marker><marker id="arrow-444444" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#444444"/></marker><marker id="arrow-e5484d" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e5484d"/></marker><marker id="arrow-2f9e44" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2f9e44"/></marker><marker id="arrow-1f6fd1" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6fd1"/></marker><marker id="arrow-f08c00" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f08c00"/></marker><marker id="arrow-888888" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#888888"/></marker></defs>
+<rect width="800" height="570" fill="#eef2f6"/>
+<rect x="60" y="60" width="680" height="200" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="400" y="46" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">一行像素的深度（越高离相机越近）</text>
+<polygon points="66.38,260 96.13,260 96.13,231.43 66.38,231.43" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="108.88,260 138.63,260 138.63,225.71 108.88,225.71" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="151.38,260 181.13,260 181.13,220 151.38,220" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="193.88,260 223.63,260 223.63,214.29 193.88,214.29" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="236.38,260 266.13,260 266.13,208.57 236.38,208.57" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="278.88,260 308.63,260 308.63,202.86 278.88,202.86" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="321.38,260 351.13,260 351.13,197.14 321.38,197.14" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="363.88,260 393.63,260 393.63,191.43 363.88,191.43" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="406.38,260 436.13,260 436.13,100 406.38,100" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="448.88,260 478.63,260 478.63,97.14 448.88,97.14" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="491.38,260 521.13,260 521.13,94.29 491.38,94.29" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="533.88,260 563.63,260 563.63,91.43 533.88,91.43" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="576.38,260 606.13,260 606.13,88.57 576.38,88.57" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="618.88,260 648.63,260 648.63,85.71 618.88,85.71" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="661.38,260 691.13,260 691.13,82.86 661.38,82.86" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="703.88,260 733.63,260 733.63,80 703.88,80" fill="rgba(31,111,209,0.55)" stroke="#1f6fd1" stroke-width="1" stroke-linejoin="round"/>
+<rect x="60" y="330" width="680" height="200" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="400" y="316" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">右边的邻居减左边的邻居（取绝对值）</text>
+<polygon points="66.38,530 96.13,530 96.13,528.86 66.38,528.86" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="108.88,530 138.63,530 138.63,518.57 108.88,518.57" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="151.38,530 181.13,530 181.13,518.57 151.38,518.57" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="193.88,530 223.63,530 223.63,518.57 193.88,518.57" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="236.38,530 266.13,530 266.13,518.57 236.38,518.57" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="278.88,530 308.63,530 308.63,518.57 278.88,518.57" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="321.38,530 351.13,530 351.13,518.57 321.38,518.57" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="363.88,530 393.63,530 393.63,432.86 363.88,432.86" fill="rgba(229,72,77,0.75)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="406.38,530 436.13,530 436.13,435.71 406.38,435.71" fill="rgba(229,72,77,0.75)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="448.88,530 478.63,530 478.63,524.29 448.88,524.29" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="491.38,530 521.13,530 521.13,524.29 491.38,524.29" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="533.88,530 563.63,530 563.63,524.29 533.88,524.29" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="576.38,530 606.13,530 606.13,524.29 576.38,524.29" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="618.88,530 648.63,530 648.63,524.29 618.88,524.29" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="661.38,530 691.13,530 691.13,524.29 661.38,524.29" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="703.88,530 733.63,530 733.63,528.86 703.88,528.86" fill="rgba(150,150,150,0.6)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="418.00" y="427.14" font-size="14" fill="#e5484d" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">深度突变的地方差值很大：这里就是轮廓</text>
+<text x="208.75" y="510.57" font-size="14" fill="#888888" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">平缓的坡：差值很小</text>
+</svg>
