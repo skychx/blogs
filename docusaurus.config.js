@@ -212,6 +212,7 @@ const config = {
     locales: ["zh-Hans", "en"],
   },
   plugins: [
+    require.resolve("./plugins/dev-image-proxy"),
     require.resolve("docusaurus-plugin-image-zoom"),
     [
       require.resolve("./plugins/docusaurus-plugin-google-gtag-body"),
