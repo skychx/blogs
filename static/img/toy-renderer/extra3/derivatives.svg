@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420">
+<defs><marker id="arrow-axis" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333333"/></marker><marker id="arrow-444444" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#444444"/></marker><marker id="arrow-e5484d" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e5484d"/></marker><marker id="arrow-2f9e44" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2f9e44"/></marker><marker id="arrow-1f6fd1" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6fd1"/></marker><marker id="arrow-f08c00" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f08c00"/></marker><marker id="arrow-888888" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#888888"/></marker></defs>
+<rect width="1000" height="420" fill="#eef2f6"/>
+<rect x="40" y="60" width="440" height="330" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="260" y="46" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">屏幕上：片元着色器 2x2 个像素一组地跑</text>
+<polygon points="76.67,353.33 113.33,353.33 113.33,316.67 76.67,316.67" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="113.33,353.33 150,353.33 150,316.67 113.33,316.67" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="150,353.33 186.67,353.33 186.67,316.67 150,316.67" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="186.67,353.33 223.33,353.33 223.33,316.67 186.67,316.67" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="113.33,316.67 150,316.67 150,280 113.33,280" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="150,316.67 186.67,316.67 186.67,280 150,280" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="186.67,316.67 223.33,316.67 223.33,280 186.67,280" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="223.33,316.67 260,316.67 260,280 223.33,280" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="260,316.67 296.67,316.67 296.67,280 260,280" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="296.67,316.67 333.33,316.67 333.33,280 296.67,280" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="333.33,316.67 370,316.67 370,280 333.33,280" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="370,316.67 406.67,316.67 406.67,280 370,280" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="406.67,316.67 443.33,316.67 443.33,280 406.67,280" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="113.33,280 150,280 150,243.33 113.33,243.33" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="150,280 186.67,280 186.67,243.33 150,243.33" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="186.67,280 223.33,280 223.33,243.33 186.67,243.33" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="223.33,280 260,280 260,243.33 223.33,243.33" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="260,280 296.67,280 296.67,243.33 260,243.33" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="296.67,280 333.33,280 333.33,243.33 296.67,243.33" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="333.33,280 370,280 370,243.33 333.33,243.33" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="370,280 406.67,280 406.67,243.33 370,243.33" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="150,243.33 186.67,243.33 186.67,206.67 150,206.67" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="186.67,243.33 223.33,243.33 223.33,206.67 186.67,206.67" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="223.33,243.33 260,243.33 260,206.67 223.33,206.67" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="260,243.33 296.67,243.33 296.67,206.67 260,206.67" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="296.67,243.33 333.33,243.33 333.33,206.67 296.67,206.67" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="333.33,243.33 370,243.33 370,206.67 333.33,206.67" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="150,206.67 186.67,206.67 186.67,170 150,170" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="186.67,206.67 223.33,206.67 223.33,170 186.67,170" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="223.33,206.67 260,206.67 260,170 223.33,170" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="260,206.67 296.67,206.67 296.67,170 260,170" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="296.67,206.67 333.33,206.67 333.33,170 296.67,170" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="186.67,170 223.33,170 223.33,133.33 186.67,133.33" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="223.33,170 260,170 260,133.33 223.33,133.33" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="260,170 296.67,170 296.67,133.33 260,133.33" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="186.67,133.33 223.33,133.33 223.33,96.67 186.67,96.67" fill="rgba(80, 140, 230, 0.35)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="223.33,280 296.67,280 296.67,206.67 223.33,206.67" fill="rgba(250, 200, 60, 0.75)" stroke="none" stroke-width="1.5" stroke-linejoin="round"/>
+<g stroke="#d9d9d9" stroke-width="1"><line x1="76.67" y1="60" x2="76.67" y2="390"/><line x1="113.33" y1="60" x2="113.33" y2="390"/><line x1="150" y1="60" x2="150" y2="390"/><line x1="186.67" y1="60" x2="186.67" y2="390"/><line x1="223.33" y1="60" x2="223.33" y2="390"/><line x1="260" y1="60" x2="260" y2="390"/><line x1="296.67" y1="60" x2="296.67" y2="390"/><line x1="333.33" y1="60" x2="333.33" y2="390"/><line x1="370" y1="60" x2="370" y2="390"/><line x1="406.67" y1="60" x2="406.67" y2="390"/><line x1="443.33" y1="60" x2="443.33" y2="390"/><line x1="40" y1="353.33" x2="480" y2="353.33"/><line x1="40" y1="316.67" x2="480" y2="316.67"/><line x1="40" y1="280" x2="480" y2="280"/><line x1="40" y1="243.33" x2="480" y2="243.33"/><line x1="40" y1="206.67" x2="480" y2="206.67"/><line x1="40" y1="170" x2="480" y2="170"/><line x1="40" y1="133.33" x2="480" y2="133.33"/><line x1="40" y1="96.67" x2="480" y2="96.67"/></g>
+<polygon points="84,357 450.67,294.67 197.67,82" fill="none" stroke="#444444" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="223.33,280 296.67,280 296.67,206.67 223.33,206.67" fill="none" stroke="#f08c00" stroke-width="2.5" stroke-linejoin="round"/>
+<line x1="241.67" y1="261.67" x2="271.73" y2="261.67" stroke="#e5484d" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-e5484d)"/>
+<line x1="241.67" y1="261.67" x2="241.67" y2="231.60" stroke="#1f6fd1" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-1f6fd1)"/>
+<circle cx="241.67" cy="261.67" r="4" fill="#222"/>
+<circle cx="278.33" cy="261.67" r="4" fill="#222"/>
+<circle cx="241.67" cy="225" r="4" fill="#222"/>
+<circle cx="278.33" cy="225" r="4" fill="#222"/>
+<text x="260" y="304" font-size="15" fill="#e5484d" text-anchor="middle" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">dFdx：右边减左边</text>
+<text x="260" y="194.67" font-size="15" fill="#1f6fd1" text-anchor="middle" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">dFdy：上面减下面</text>
+<rect x="520" y="60" width="440" height="330" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="740" y="46" font-size="18" text-anchor="middle" fill="#222" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">相机坐标系里：变成三角形上两个很短的向量</text>
+<polygon points="556.67,316.67 908.67,360.67 798.67,89.33" fill="rgba(80, 140, 230, 0.35)" stroke="#444444" stroke-width="2" stroke-linejoin="round"/>
+<line x1="556.67" y1="316.67" x2="904.30" y2="360.12" stroke="#888888" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow-888888)"/>
+<line x1="556.67" y1="316.67" x2="795.46" y2="92.34" stroke="#888888" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow-888888)"/>
+<text x="732.67" y="360.67" font-size="17" fill="#888888" text-anchor="middle" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">e₁</text>
+<text x="663.67" y="203.00" font-size="17" fill="#888888" text-anchor="end" font-style="italic" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">e₂</text>
+<circle cx="556.67" cy="316.67" r="5.5" fill="#888888" stroke="#222" stroke-width="1"/>
+<text x="530.67" y="322.67" font-size="15" fill="#888888" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">P₀</text>
+<circle cx="908.67" cy="360.67" r="5.5" fill="#888888" stroke="#222" stroke-width="1"/>
+<text x="916.67" y="378.67" font-size="15" fill="#888888" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">P₁</text>
+<circle cx="798.67" cy="89.33" r="5.5" fill="#888888" stroke="#222" stroke-width="1"/>
+<text x="806.67" y="83.33" font-size="15" fill="#888888" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">P₂</text>
+<line x1="743.64" y1="271" x2="769.32" y2="279.25" stroke="#e5484d" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-e5484d)"/>
+<line x1="743.64" y1="271" x2="759.51" y2="242.22" stroke="#1f6fd1" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-1f6fd1)"/>
+<circle cx="743.64" cy="271" r="4" fill="#222"/>
+<text x="783.6" y="295.27" font-size="15" fill="#e5484d" text-anchor="start" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">dFdx(P)</text>
+<text x="756.7" y="228.44" font-size="15" fill="#1f6fd1" text-anchor="end" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">dFdy(P)</text>
+</svg>
