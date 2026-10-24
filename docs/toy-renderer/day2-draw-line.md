@@ -2,7 +2,7 @@
 id: day2-draw-line
 title: day2：画一条线
 sidebar_label: day2：画一条线
-description: 环境搭建
+description: 画一条线
 keywords:
   - OpenGL
   - 软渲染器
@@ -11,11 +11,11 @@ keywords:
   - day2：DDA 直线算法 & Bresenham’s 直线算法
 ---
 
-第一天我们搭建了 `C++` 的运行环境并画了一个点，根据 `点 → 线 → 面` 的顺序，今天我们讲讲如何画一条直线。
+第一天我们搭建了 `TypeScript` 的运行环境并画了一个点，根据 `点 → 线 → 面` 的顺序，今天我们讲讲如何画一条直线。
 
 本文主要讲解直线绘制算法的推导和思路（莫担心，只涉及到一点点的中学数学知识），最后会给出代码实现，大家放心的看下去就好。
 
-> 本文源码 👉：[toyRenderer-day02-line-drawing-algorithm](https://github.com/skychx/toyRenderer/tree/day02-line-drawing-algorithm)
+> 本文源码 👉：[toy-renderer-ts/days/day02](https://github.com/skychx/toy-renderer-ts/tree/main/days/day02)
 
 
 ## 1.DDA 直线算法
@@ -32,7 +32,7 @@ $$
 
 <br />
 
-**斜截式**在数学上是没啥问题的，但是在实际的工程项目中，因为硬件资源是有限的，我们**不可能也没必要**表示一条无限长度的直线，现实往往是已知一条线段的**起点** $(x_1, y_1)$ 和**终点** $(x_2, y_2$)，然后把它画出来。
+**斜截式**在数学上是没啥问题的，但是在实际的工程项目中，因为硬件资源是有限的，我们**不可能也没必要**表示一条无限长度的直线，现实往往是已知一条线段的**起点** $(x_1, y_1)$ 和**终点** $(x_2, y_2)$，然后把它画出来。
 
 这时候用**两点式**表示一根直线是最方便的：
 
@@ -50,21 +50,18 @@ $$
 
 <br />
 
-按照以上的思路，我们可以用代码实现一下。`C++` 的实现也很简单，如下所示（dl 表示 $d \lambda$）：
+按照以上的思路，我们可以用代码实现一下。实现也很简单，如下所示（dl 表示 $d \lambda$）：
 
-```cpp
-void line(
-  int x1, int y1, 
-  int x2, int y2, 
-  TGAImage &image, TGAColor color) { 
-    const float dl = 0.01;
-    int dx = x2 - x1;
-    int dy = y2 - y1;
-    for (float t=0.0; t<1.0; t+=dl) { 
-        int x = x1 + dx * t;
-        int y = y1 + dy * t;
-        image.set(x, y, color);
-    } 
+```ts
+function line(x1: number, y1: number, x2: number, y2: number, frame: Frame, color: Color) {
+  const dl = 0.01;
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  for (let t = 0; t < 1; t += dl) {
+    const x = x1 + dx * t;
+    const y = y1 + dy * t;
+    frame.set(x, y, color);
+  }
 }
 ```
 
@@ -72,10 +69,10 @@ void line(
 
 - 每画一个点，都要运行两次乘法
 - 大量使用浮点运算（众所周知，$v_{float}<v_{fixed}<v_{int}$）
-
 - 如果 `dl` 取的比较小，会导致一个像素点会被绘制多次，重复计算
 - 如果 `dl` 取的比较大，会导致直线断掉
 
+> 注：JS 里的数字统一都是 64 位的浮点数（引擎内部会对整数做一些优化），所以下面这些优化在 JS 里的效果不一定有 C++ 那么明显，不过算法的思路是通用的
 
 
 ### 1.2 优化
@@ -88,26 +85,23 @@ void line(
 
 我们把上面的公式写成代码，就是下面这个样子：
 
-```cpp
-void line(
-  int x1, int y1, 
-  int x2, int y2, 
-  TGAImage &image, TGAColor color) { 
-  float x = x1;
-  float y = y1;
-  float step = std::abs(x2 - x1);
-  float dlx = (x2 - x1) / step;
-  float dly = (y2 - y1) / step;
-  
-  for (int i=1; i<step; i++) { 
-    image.set(x, y, color);
+```ts
+function line(x1: number, y1: number, x2: number, y2: number, frame: Frame, color: Color) {
+  let x = x1;
+  let y = y1;
+  const step = Math.abs(x2 - x1);
+  const dlx = (x2 - x1) / step;
+  const dly = (y2 - y1) / step;
+
+  for (let i = 0; i <= step; i++) {
+    frame.set(Math.round(x), Math.round(y), color);
     x = x + dlx;
-    y = y + dlx;
-  } 
+    y = y + dly;
+  }
 }
 ```
 
-这个算法其实还有一点儿问题，就是绘制斜率大于 1 的直线时，绘制出的直线会**断掉**。比如说从 (0, 0) 点绘制到 (2, 4) 点，按照上面的算法只会绘制两个点，但是我们期望的是右图那样，起码各个像素要连接起来：
+这个算法其实还有一点儿问题，就是绘制斜率大于 1 的直线时，绘制出的直线会**断掉**。比如说从 (0, 0) 点绘制到 (2, 4) 点，按照上面的算法，x 每走一步，y 就要跳两个像素，画出来的点是断开的（左图）。但是我们期望的是右图那样，起码各个像素要连接起来：
 
 ![不连续的线 vs 连续的线](https://image-1255652541.file.myqcloud.com/uPic/toyrenderer_day1_line.jpg)
 
@@ -115,30 +109,22 @@ void line(
 
 最后的直线算法就是这样：
 
-```cpp
-void line(
-  int x1, int y1, 
-  int x2, int y2, 
-  TGAImage &image, TGAColor color) { 
-  float x = x1;
-  float y = y1;
-  int dx = x2 - x1;
-  int dy = y2 - y1;
-  float step;
-  float dlx, dly;
+```ts
+function lineDDA(x1: number, y1: number, x2: number, y2: number, frame: Frame, color: Color) {
+  let x = x1;
+  let y = y1;
+  const dx = x2 - x1;
+  const dy = y2 - y1;
 
   // 根据 dx 和 dy 的长度决定基准
-  if (std::abs(dx) >= std::abs(dy)) {
-    step = std::abs(dx);
-  } else {
-    step = std::abs(dy);
-  }
+  const step = Math.max(Math.abs(dx), Math.abs(dy));
+  const dlx = dx / step;
+  const dly = dy / step;
 
-  dlx = dx / step;
-  dly = dy / step;
-
-  for (int i=1; i<step; i++) {
-    image.set(x, y, color);
+  // 起点和终点都要画上，所以一共画 step + 1 个点
+  for (let i = 0; i <= step; i++) {
+    // x、y 都是小数，取离它最近的像素
+    frame.set(Math.round(x), Math.round(y), color);
     x = x + dlx;
     y = y + dly;
   }
@@ -147,8 +133,7 @@ void line(
 
 然后我们用这个算法测试一下不同起点不同斜率的直线，看效果运行良好：
 
-![](https://image-1255652541.file.myqcloud.com/uPic/Xnip2021-01-18_21-48-36.png)
-
+![DDA 直线算法画出的直线](/img/toy-renderer/day2/dda.png)
 
 
 这个算法就是经典的 [DDA (Digital differential analyzer) 算法](https://www.wikiwand.com/en/Digital_differential_analyzer_(graphics_algorithm))，他比我们一开始的代码要高效的多：
@@ -184,8 +169,8 @@ void line(
 
 - 先把 $x_{new} = x + 1$ 这个值带入直线方程里，算出来 $y_{new}$ 的值
 - 然后比较 $y_{new}$ 和 $y + 0.5$ 的大小
-  -  $y_{new} \leq y + 0.5$，选点 $(x + 1,\ y)$
-  -  $y_{new} > y + 0.5$，选点 $(x + 1,\ y + 1)$
+  -  $y_{new} < y + 0.5$，选点 $(x + 1,\ y)$
+  -  $y_{new} \geq y + 0.5$，选点 $(x + 1,\ y + 1)$
 
 
 
@@ -199,8 +184,8 @@ void line(
 
 实际绘制时，要比较 $y + \epsilon + k$ 和 $y + 0.5$ 的大小：
 
--  $y + \epsilon + k \leq y + 0.5$，选点 $(x + 1,\ y)$
--  $y + \epsilon + k > y + 0.5$，选点 $(x + 1,\ y + 1)$
+-  $y + \epsilon + k < y + 0.5$，选点 $(x + 1,\ y)$
+-  $y + \epsilon + k \geq y + 0.5$，选点 $(x + 1,\ y + 1)$
 
 
 
@@ -250,9 +235,9 @@ $$
 
 同样的，我们在更新 $\epsilon$ 时，把它也替换为 $\epsilon^{\prime}$ ，也就是对于下面两式：
 
-- $\epsilon = \epsilon + m$
+- $\epsilon = \epsilon + k$
 
-- $\epsilon = \epsilon + m - 1$
+- $\epsilon = \epsilon + k - 1$
 
 等号两边同时乘以 $\Delta x$，有：
 
@@ -287,23 +272,20 @@ $
 
 
 
-`C++` 实现如下：
+代码实现如下：
 
-```cpp
-void line(Screen &s,
-  int x1, int y1,
-  int x2, int y2,
-  TGAImage &image, TGAColor color) {
-  int y = y1;
-  int eps = 0;
-  int dx = x2 - x1;
-  int dy = y2 - y1;
+```ts
+function line(x1: number, y1: number, x2: number, y2: number, frame: Frame, color: Color) {
+  let y = y1;
+  let eps = 0;
+  const dx = x2 - x1;
+  const dy = y2 - y1;
 
-  for (int x = x1; x <= x2; x++) {
-    image.set(x, y, color);
+  for (let x = x1; x <= x2; x++) {
+    frame.set(x, y, color);
     eps += dy;
-    // 这里用位运算 <<1 代替 *2
-    if((eps << 1) >= dx)  {
+    // 这里用位运算 << 1 代替 * 2
+    if (eps << 1 >= dx) {
       y++;
       eps -= dx;
     }
@@ -313,7 +295,7 @@ void line(Screen &s,
 
 
 
-这样我们就实现了斜率在 $[0, 1]$ 区间的高效算法。也就是说，现在我们可以绘制 1/8 个象限的直线了。剩下范围的直线，可以通过交换  xy 等方式实现绘制。具体的实现都是些脏活累活，就不摆出来了，感兴趣的可以去 GitHub 上看代码的[完整实现](https://github.com/skychx/toyRenderer/blob/d31afbe91a140b95cef735776d13bca2dd7a5567/tinyrenderer/main.cpp#L20)。
+这样我们就实现了斜率在 $[0, 1]$ 区间的高效算法。也就是说，现在我们可以绘制 1/8 个象限的直线了。剩下范围的直线，可以通过交换 xy 等方式实现绘制。具体的实现都是些脏活累活，就不摆出来了，感兴趣的可以去 GitHub 上看代码的[完整实现](https://github.com/skychx/toy-renderer-ts/blob/main/days/day02/main.ts)。
 
 ![](https://image-1255652541.file.myqcloud.com/uPic/e2ZFEU.gif)
 
@@ -327,41 +309,93 @@ void line(Screen &s,
 
 > OBJ 文件是一种被广泛使用的 3D 模型文件格式（obj 为后缀名），用来描述一个三维模型。模型关键字较为繁琐，限于篇幅本文暂不展开，大家可以自行搜索学习。
 
-这一节的流程也很清楚：从磁盘上加载 `.obj` 文件 → 按行分析 `.obj` 文件 → 构建 model → 循环 model 中的每个三角形 → 连接三角形的三条边 → 渲染出图
+这一节的流程也很清楚：从服务器上加载 `.obj` 文件 → 按行分析 `.obj` 文件 → 构建 model → 循环 model 中的每个三角形 → 连接三角形的三条边 → 渲染出图
 
-上诉流程的前三步已经被原作者封装好了，我们直接把[源码](https://github.com/skychx/toyRenderer/tree/day02-line-drawing-algorithm/tinyrenderer)里的 `model.h` 和  `model.cpp` 拖到主工程里就可以了，感兴趣的人可以看一下源码实现，非常简单，在一个 `while` 循环里一直 `readline` 就可以了，因为和图形学关系不大，我这里就略过了。
+上述流程的前三步，原作者用 C++ 封装了一个 `Model` 类。用 TS 写也很简单，obj 是纯文本格式，一行描述一条数据，我们今天只关心两种：
 
-最后的画三角形的代码如下，关键步骤我已经用注释标注了：
+```bash
+v 0.608654 -0.568839 -0.416318          # 一个顶点的 x、y、z 坐标
+f 1193/1240/1193 1180/1227/1180 ...     # 一个三角形面，每组数字的第一个是顶点的序号
+```
 
-```cpp
-// 实例化模型
-model = new Model("obj/african_head.obj");
+所以按行读取、按空格切开就行，代码如下：
 
-// 循环模型里的所有三角形
-for (int i = 0; i < model->nfaces(); i++) {
-  std::vector<int> face = model->face(i);
+```ts
+export class Model {
+  verts: Vec3[] = []; // 所有的顶点
+  faces: number[][] = []; // 所有的三角形，每个三角形存 3 个顶点的序号
 
-  // 循环三角形三个顶点，每两个顶点连一条线
-  for (int j = 0; j < 3; j++) {
-    Vec3f v0 = model->vert(face[j]);
-    Vec3f v1 = model->vert(face[(j + 1) % 3]);
-    
-    // 因为模型空间取值范围是 [-1, 1]^3，我们要把模型坐标平移到屏幕坐标中
-    // 下面 (point + 1) * width(height) / 2 的操作学名为视口变换（Viewport Transformation）
-    int x0 = (v0.x + 1.) * width / 2.;
-    int y0 = (v0.y + 1.) * height / 2.;
-    int x1 = (v1.x + 1.) * width / 2.;
-    int y1 = (v1.y + 1.) * height / 2.;
-    
-    // 画线
-    line(x0, y0, x1, y1, image, white);
+  constructor(text: string) {
+    for (const line of text.split('\n')) {
+      const [type, ...values] = line.trim().split(/\s+/);
+
+      if (type === 'v') {
+        this.verts.push([Number(values[0]), Number(values[1]), Number(values[2])]);
+      } else if (type === 'f') {
+        // 每组数据的格式是「顶点序号/纹理坐标序号/法线序号」，今天只取第一个
+        // obj 的序号是从 1 开始数的，所以要减 1
+        this.faces.push(values.map(v => Number(v.split('/')[0]) - 1));
+      }
+    }
+  }
+
+  // 三角形的个数
+  nfaces() {
+    return this.faces.length;
+  }
+
+  // 第 i 个三角形，返回 3 个顶点的序号
+  face(i: number) {
+    return this.faces[i];
+  }
+
+  // 第 i 个顶点
+  vert(i: number) {
+    return this.verts[i];
   }
 }
+
+// 用 fetch 读取 obj 文件，然后解析成模型
+export async function loadModel(url: string) {
+  const text = await (await fetch(url)).text();
+  return new Model(text);
+}
+```
+
+最后画模型的代码如下，关键步骤我已经用注释标注了：
+
+```ts
+// 加载模型
+const model = await loadModel('/obj/african_head/african_head.obj');
+const frame = new Frame(width, height);
+
+// 循环模型里的所有三角形
+for (let i = 0; i < model.nfaces(); i++) {
+  const face = model.face(i);
+
+  // 循环三角形三个顶点，每两个顶点连一条线
+  for (let j = 0; j < 3; j++) {
+    const v0 = model.vert(face[j]);
+    const v1 = model.vert(face[(j + 1) % 3]);
+
+    // 因为模型空间取值范围是 [-1, 1]^3，我们要把模型坐标平移到屏幕坐标中
+    // 下面 (point + 1) * width(height) / 2 的操作学名为视口变换（Viewport Transformation）
+    const x0 = Math.floor(((v0[0] + 1) * width) / 2);
+    const y0 = Math.floor(((v0[1] + 1) * height) / 2);
+    const x1 = Math.floor(((v1[0] + 1) * width) / 2);
+    const y1 = Math.floor(((v1[1] + 1) * height) / 2);
+
+    // 画线
+    line(x0, y0, x1, y1, frame, white);
+  }
+}
+
+frame.render(canvas);
 ```
 
 
 
-![toyrenderer_day02_obj](https://image-1255652541.file.myqcloud.com/uPic/toyrenderer_day02_obj.jpg)
+![模型的线框图](/img/toy-renderer/day2/obj.png)
 
 
 
