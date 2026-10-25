@@ -14,6 +14,8 @@ keywords:
   - Bun
 ---
 
+import { RendererDemo } from '../../src/components/rendererDemo';
+
 本教程要做的是一个**零依赖**的**软渲染器**，所以依赖的环境就是 `TypeScript` 的运行环境。
 
 > 注：**零依赖**意味着这个项目不依赖任何第三方库，**软渲染**意味着所有计算都是在 CPU 侧进行的，没有 GPU 参与
@@ -245,7 +247,7 @@ html 里放一个 canvas，再把 main.ts 引进来：
 
 执行 `bun dev`，打开 `http://localhost:8080/day01`，如果能看到下面这个红点，就说明环境配置成功了！
 
-![在 (52, 41) 画的红点](/img/toy-renderer/day1/dot.png)
+<RendererDemo src="day01/dot" title="在 (52, 41) 画的红点" size={400} />
 
 <br />
 

@@ -14,7 +14,7 @@ keywords:
   - 纹理贴图
 ---
 
-
+import { RendererDemo } from '../../src/components/rendererDemo';
 
 在第三天的学习中，我们学会了如何利用**重心坐标**算法画三角形，并运用**三角形绘制算法**把人头模型画了出来。虽然最后的渲染结果能看出来这是个脑袋，但是嘴巴处有很明显的穿帮。这一天我们就学习一下，如何利用 Z-buffering（深度缓冲）来解决层叠问题，最后再给模型贴上纹理。
 
@@ -161,12 +161,12 @@ function world2screen(v: Vec3): Vec3 {
 
 加入 Z-buffering 计算后，我们渲染的模型就完全正常了：
 
-![加入 Z-buffering 后的渲染结果](/img/toy-renderer/day4/zbuffer-model.jpg)
+<RendererDemo src="day04/zbuffer-model" title="加入 Z-buffering 后的渲染结果" />
 
 
 相应的，如果把 Z-buffering 渲染为一张图（离我们越近越白），则是下面这样的：
 
-![把 Z-buffering 画成一张灰度图](/img/toy-renderer/day4/zbuffer-image.jpg)
+<RendererDemo src="day04/zbuffer-image" title="把 Z-buffering 画成一张灰度图" />
 
 <br />
 
@@ -327,7 +327,7 @@ if (intensity > 0) {
 
 贴上纹理以后，人头模型一下子就有了皮肤和头发：
 
-![贴上纹理以后的模型](/img/toy-renderer/day4/texture.jpg)
+<RendererDemo src="day04/texture" title="贴上纹理以后的模型" />
 
 <br />
 

@@ -13,6 +13,8 @@ keywords:
   - Sobel 边缘检测
 ---
 
+import { RendererDemo, RendererDemos } from '../../src/components/rendererDemo';
+
 前十天我们一直在追求「真实」：法线贴图、高光、阴影、环境光遮蔽，都是为了让画面更像真实世界。不过渲染并不总是要追求真实，有时候我们想要的是另一种风格，比如动画片、漫画那样的效果。这类渲染方法叫做**非真实感渲染（Non-Photorealistic Rendering，NPR）**，**卡通渲染（Toon Shading，也叫 Cel Shading）**就是其中最有代表性的一种。
 
 day7 我们其实已经尝过一点卡通渲染的甜头了：把光照强度分成 6 档，人头一下子就有了卡通画的味道。不过真正的卡通渲染还有一个特点：**物体的轮廓会描上黑线**，就像手绘的线稿一样。这篇番外参考原教程第二版的 Bonus 一章，把这两样东西做完整。
@@ -47,7 +49,10 @@ fragment(bar: Vec3): Color | null {
 
 左边是平滑的光照，右边是分成 3 档以后的效果，明暗之间不再有过渡，而是一块一块的色块：
 
-![左：平滑的光照，右：光照分成 3 档](/img/toy-renderer/extra2/bands.jpg)
+<RendererDemos title="左：平滑的光照，右：光照分成 3 档">
+  <RendererDemo src="extra-toon/smooth" title="平滑的光照" />
+  <RendererDemo src="extra-toon/bands" title="光照分成 3 档" />
+</RendererDemos>
 
 ## 2.描边
 
@@ -136,7 +141,7 @@ function drawEdges(frame: Frame, edges: Float32Array) {
 
 只看边缘检测的结果，已经很像一张线稿了：
 
-![Sobel 边缘检测的结果](/img/toy-renderer/extra2/edges.png)
+<RendererDemo src="extra-toon/edges" title="Sobel 边缘检测的结果" />
 
 > 注：阈值 20 是试出来的。一个斜着 45° 的平面，深度每个像素变化 1，Sobel 算出来的强度大概是 8；轮廓那里深度动辄跳几十上百，所以取 20 正好能把两者分开。阈值越小，画出来的线越多
 
@@ -144,13 +149,13 @@ function drawEdges(frame: Frame, edges: Float32Array) {
 
 把轮廓画到色阶的结果上，卡通渲染就完成了：
 
-![卡通渲染：色阶 + 描边](/img/toy-renderer/extra2/toon.jpg)
+<RendererDemo src="extra-toon/toon" title="卡通渲染：色阶 + 描边" />
 
 是不是很有漫画的感觉？要知道，渲染器的代码一行都没改，只换了一个片元着色器，再加了一步后处理。
 
 我们再换成人头试试，像不像一张简单上了色的速写：
 
-![换成人头试试](/img/toy-renderer/extra2/head.jpg)
+<RendererDemo src="extra-toon/head" title="换成人头试试" />
 
 人头后脑勺那一圈的描边特别粗，这是因为那里的表面几乎和视线平行，深度变化非常快，也被当成了轮廓。描边的方法其实还有很多，比如用法线的变化来找轮廓，或者把模型的背面放大一点、涂成黑色再画一遍，各有各的优缺点，感兴趣的同学可以自己动手试一试。
 

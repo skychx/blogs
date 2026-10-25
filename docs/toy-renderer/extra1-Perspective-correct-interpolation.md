@@ -12,6 +12,8 @@ keywords:
   - 重心坐标
 ---
 
+import { RendererDemo, RendererDemos } from '../../src/components/rendererDemo';
+
 day7 的结尾我留了一个小问题：片元着色器插值 varying 的时候，用的是**屏幕上**的重心坐标，加上透视投影以后，这样插值其实是不准确的。
 
 当时我说人头模型上几乎看不出差别，所以先放一放。但到了 day9、day10，场景里多了一块地板，问题就藏不住了：仔细看地板上的棋盘格，在两个三角形交界的那条对角线上，格子是「弯」的。这篇番外我们就来解决它。
@@ -22,7 +24,10 @@ day7 的结尾我留了一个小问题：片元着色器插值 varying 的时候
 
 我们把相机放低一点，贴着地板看过去，问题就更明显了。下面左图是前十天的插值方式，右图是今天要实现的透视校正插值：
 
-![左：屏幕空间插值，右：透视校正插值](/img/toy-renderer/extra1/floor.jpg)
+<RendererDemos title="左：屏幕空间插值，右：透视校正插值">
+  <RendererDemo src="extra-perspective/floor-affine" title="屏幕空间插值" />
+  <RendererDemo src="extra-perspective/floor-correct" title="透视校正插值" />
+</RendererDemos>
 
 左图的棋盘格完全不对：格子被拉成了歪歪扭扭的平行四边形，而且沿着两个三角形的对角线，格子突然拐了个弯。右图才是我们期望的样子：近处的格子大，远处的格子小，所有的线都是直的。
 
@@ -122,7 +127,10 @@ const color = shader.fragment(bar, [x, y, z]);
 
 这里加了一个 `perspectiveCorrect` 参数，只是为了方便对比两种插值方式，实际使用时一直开着就好。我们再用 day9、day10 的相机看一下，左边是原来的结果，右边是透视校正以后的结果，地板上的弯折没有了：
 
-![左：屏幕空间插值，右：透视校正插值](/img/toy-renderer/extra1/scene.jpg)
+<RendererDemos title="左：屏幕空间插值，右：透视校正插值">
+  <RendererDemo src="extra-perspective/scene-affine" title="屏幕空间插值" />
+  <RendererDemo src="extra-perspective/scene-correct" title="透视校正插值" />
+</RendererDemos>
 
 <br />
 

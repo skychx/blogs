@@ -14,6 +14,8 @@ keywords:
   - 环境光遮蔽
 ---
 
+import { RendererDemo, RendererDemos } from '../../src/components/rendererDemo';
+
 终于到最后一天了。昨天我们用 Shadow Mapping 给场景加上了阴影，光源照不到的地方暗了下来。不过 Phong 光照模型里还有一个「偷懒」的地方一直没动：**环境光**。它到现在还是一个常数，模型上不管什么地方，分到的环境光都一样多。
 
 今天我们就来实现**环境光遮蔽（Ambient Occlusion，简称 AO）**，让环境光也有明有暗。会讲两种方法：一种是简单粗暴的暴力法，另一种是游戏里常用的屏幕空间环境光遮蔽（SSAO）。最后再把这十天做的东西都组合起来，拍一张全家福。
@@ -146,7 +148,10 @@ fragment(bar: Vec3, fragCoord: Vec3): Color | null {
 
 下面左边是只有环境光的效果，右边乘上了皮肤的颜色。眼窝、鼻翼、嘴角、耳朵后面、下巴底下，这些凹进去的地方都自然地暗了下去，人头一下子就有了立体感：
 
-![左：只有环境光，右：环境光 × 皮肤的颜色](/img/toy-renderer/day10/brute-force.jpg)
+<RendererDemos title="左：只有环境光，右：环境光 × 皮肤的颜色">
+  <RendererDemo src="day10/ao-head" title="只有环境光" />
+  <RendererDemo src="day10/ao-head-texture" title="环境光 × 皮肤的颜色" />
+</RendererDemos>
 
 ### 2.5 小结
 
@@ -271,7 +276,7 @@ const ambient = 0.5 * ao;
 
 这就是我们十天的成果：
 
-![全家福：法线贴图 + Phong 光照 + 阴影 + SSAO](/img/toy-renderer/day10/final.jpg)
+<RendererDemo src="day10/final" title="全家福：法线贴图 + Phong 光照 + 阴影 + SSAO" />
 
 <br />
 

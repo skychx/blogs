@@ -11,6 +11,8 @@ keywords:
   - day2：DDA 直线算法 & Bresenham’s 直线算法
 ---
 
+import { RendererDemo } from '../../src/components/rendererDemo';
+
 第一天我们搭建了 `TypeScript` 的运行环境并画了一个点，根据 `点 → 线 → 面` 的顺序，今天我们讲讲如何画一条直线。
 
 本文主要讲解直线绘制算法的推导和思路（莫担心，只涉及到一点点的中学数学知识），最后会给出代码实现，大家放心的看下去就好。
@@ -133,7 +135,7 @@ function lineDDA(x1: number, y1: number, x2: number, y2: number, frame: Frame, c
 
 然后我们用这个算法测试一下不同起点不同斜率的直线，看效果运行良好：
 
-![DDA 直线算法画出的直线](/img/toy-renderer/day2/dda.png)
+<RendererDemo src="day02/dda" title="DDA 直线算法画出的直线" />
 
 
 这个算法就是经典的 [DDA (Digital differential analyzer) 算法](https://www.wikiwand.com/en/Digital_differential_analyzer_(graphics_algorithm))，他比我们一开始的代码要高效的多：
@@ -395,7 +397,7 @@ frame.render(canvas);
 
 
 
-![模型的线框图](/img/toy-renderer/day2/obj.png)
+<RendererDemo src="day02/obj" title="模型的线框图" />
 
 
 

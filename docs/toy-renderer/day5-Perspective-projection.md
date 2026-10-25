@@ -14,6 +14,8 @@ keywords:
   - 透视投影矩阵
 ---
 
+import { RendererDemo, RendererDemos } from '../../src/components/rendererDemo';
+
 前面四天，我们从一个点开始，画出了线、画出了三角形，又用 Z-buffering 解决了遮挡问题，最后还给模型贴上了纹理，人头模型总算是有模有样了。但不知道大家有没有发现，这个脑袋看着总有点「平」，不太像我们平时看到的样子。
 
 原因是我们一直在用**正交投影（Orthographic Projection）**：把模型的 z 坐标直接扔掉，x 和 y 原封不动地画到屏幕上，所以不管离得近还是离得远，东西在画面上都一样大。可现实中我们看东西不是这样的，离眼睛越近的东西越大，越远的越小，也就是常说的「近大远小」。今天我们就来实现**透视投影（Perspective Projection）**。
@@ -84,7 +86,10 @@ for (let j = 0; j < 3; j++) {
 
 下图左边是 day4 的正交投影，右边是透视投影。可以看到鼻子和嘴巴离我们最近，被放大了；耳朵和脖子在后面，被缩小了，整个脸一下子就立体了起来：
 
-![正交投影 vs 透视投影](/img/toy-renderer/day5/ortho-vs-persp.jpg)
+<RendererDemos title="正交投影 vs 透视投影">
+  <RendererDemo src="day05/ortho" title="正交投影" />
+  <RendererDemo src="day05/persp" title="透视投影" />
+</RendererDemos>
 
 <br />
 

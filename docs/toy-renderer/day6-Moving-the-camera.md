@@ -16,6 +16,8 @@ keywords:
   - Gouraud 着色
 ---
 
+import { RendererDemo, RendererDemos } from '../../src/components/rendererDemo';
+
 昨天我们实现了透视投影，人头终于有了「近大远小」的立体感。不过相机一直待在 z 轴上，只能从正前方看模型，有点单调。今天我们就让相机动起来，从任意位置、任意角度观察模型。
 
 原作者说过，这一课是他很喜欢、但很多读者觉得枯燥的一部分，因为讲的基本都是坐标系之间的变换。好在推导都不难，最后我们还会用一个更好看的着色方法——Gouraud 着色，犒劳一下自己。这部分内容对应 GAMES101 的第 4 讲和第 8 讲。
@@ -414,11 +416,14 @@ if (shading === 'flat') {
 
 左边是 flat 着色，右边是 Gouraud 着色。几何形状完全一样，三角形的数量也一样，但 Gouraud 着色看上去光滑多了：
 
-![flat 着色 vs Gouraud 着色](/img/toy-renderer/day6/flat-vs-gouraud.jpg)
+<RendererDemos title="flat 着色 vs Gouraud 着色">
+  <RendererDemo src="day06/flat" title="flat 着色" />
+  <RendererDemo src="day06/gouraud" title="Gouraud 着色" />
+</RendererDemos>
 
 再贴上纹理：
 
-![Gouraud 着色 + 纹理](/img/toy-renderer/day6/texture.jpg)
+<RendererDemo src="day06/texture" title="Gouraud 着色 + 纹理" />
 
 <br />
 

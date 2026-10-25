@@ -14,6 +14,8 @@ keywords:
   - shadow acne
 ---
 
+import { RendererDemo, RendererDemos } from '../../src/components/rendererDemo';
+
 昨天结尾留了一个问题：我们目前的光照都是「局部」的，每个像素只管自己的法线和光照方向，完全不知道光有没有被别的东西挡住，所以场景里一点阴影都没有。今天我们就用 **Shadow Mapping** 来给场景加上阴影。
 
 需要先说明一下，今天实现的是**硬阴影**：一个点要么在阴影里，要么不在，阴影的边缘是锐利的。现实中阴影的边缘一般是模糊的（软阴影），那就是另外一个故事了。这部分内容对应 GAMES101 第 12 讲的最后一部分。
@@ -135,7 +137,7 @@ render(
 
 画出来的灰度图是这样的，这就是从光源看过去的样子，离光源越近越亮：
 
-![shadow map](/img/toy-renderer/day9/depth.jpg)
+<RendererDemo src="day09/depth" title="shadow map" />
 
 ## 3.第二遍：判断阴影
 
@@ -239,7 +241,10 @@ fragment(bar: Vec3, fragCoord: Vec3): Color | null {
 
 先把 `bias` 设成 0 渲染一遍看看，结果是下面左图这个样子：地板和身体上全是奇怪的条纹，看起来像摩尔纹。这个问题非常经典，有个专门的名字叫 **shadow acne**（acne 是「粉刺」的意思，形容表面上长了一片麻点）：
 
-![左：不加 bias，右：加上 bias](/img/toy-renderer/day9/acne.jpg)
+<RendererDemos title="左：不加 bias，右：加上 bias">
+  <RendererDemo src="day09/no-bias" title="不加 bias" />
+  <RendererDemo src="day09/shadow" title="加上 bias" />
+</RendererDemos>
 
 这是怎么回事呢？按理说，没被挡住的点，它自己就是离光源最近的点，自己和自己比，深度应该刚好相等才对。
 
@@ -267,7 +272,10 @@ bias 也不是越大越好：取得太大，本来应该在阴影里的点也会
 
 左边是没有阴影的版本，右边是加上阴影的版本。暗黑破坏神的身体和手爪在地板上投下了清晰的影子，身体上背光的地方也暗了下来，整个场景一下子就有了空间感：
 
-![左：没有阴影，右：加上阴影](/img/toy-renderer/day9/shadow-compare.jpg)
+<RendererDemos title="左：没有阴影，右：加上阴影">
+  <RendererDemo src="day09/no-shadow" title="没有阴影" />
+  <RendererDemo src="day09/shadow" title="加上阴影" />
+</RendererDemos>
 
 <br />
 

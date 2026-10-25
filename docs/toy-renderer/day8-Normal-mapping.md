@@ -15,6 +15,8 @@ keywords:
   - 高光贴图
 ---
 
+import { RendererDemo, RendererDemos } from '../../src/components/rendererDemo';
+
 昨天我们把渲染器重构成了着色器的形式，今天就在片元着色器上好好做做文章，让人头看起来更真实一些。主要讲三件事：
 
 - **法线贴图**：用一张贴图给每个像素提供一个法线，让模型的细节一下子丰富起来
@@ -168,7 +170,7 @@ async function loadAsset(name: string): Promise<Asset> {
 
 渲染出来的效果是这样的。和昨天的 Gouraud 着色比一下，脸颊上的伤疤、额头和眼角的皱纹都出来了，可模型的三角形一个都没有多：
 
-![模型空间的法线贴图](/img/toy-renderer/day8/normal-map.jpg)
+<RendererDemo src="day08/normal-map" title="模型空间的法线贴图" />
 
 ## 2.Phong 光照模型
 
@@ -182,7 +184,12 @@ async function loadAsset(name: string): Promise<Asset> {
 
 最终的颜色就是三者按一定权重加起来。下面四张图分别是环境光、漫反射、高光（单独看太暗了，这里放大了 3 倍）以及三者加起来的效果。为了只看光照，这里用一张浅灰色的贴图代替了皮肤的颜色：
 
-![环境光、漫反射、高光，以及三者加起来的效果](/img/toy-renderer/day8/phong-components.jpg)
+<RendererDemos title="环境光、漫反射、高光，以及三者加起来的效果">
+  <RendererDemo src="day08/ambient" title="环境光" />
+  <RendererDemo src="day08/diffuse" title="漫反射" />
+  <RendererDemo src="day08/specular" title="高光（放大 3 倍）" />
+  <RendererDemo src="day08/phong-gray" title="三者加起来" />
+</RendererDemos>
 
 ### 2.2 高光
 
@@ -280,7 +287,7 @@ class PhongShader extends NormalMapShader {
 
 加上高光以后，额头、鼻梁、颧骨和脖子上都有了反光，皮肤一下子就有了质感：
 
-![Phong 光照 + 纹理](/img/toy-renderer/day8/phong.jpg)
+<RendererDemo src="day08/phong" title="Phong 光照 + 纹理" />
 
 ## 3.切线空间的法线贴图
 
@@ -317,7 +324,10 @@ class PhongShader extends NormalMapShader {
 
 $\vec{n}$ 好办，就是插值出来的顶点法线。$\vec{t}$ 和 $\vec{b}$ 呢？我们换一张网格贴图看一下：网格的红线是 v 不变、u 在变化的线，蓝线是 u 不变、v 在变化的线。
 
-![左：切线空间的法线贴图，右：换成网格贴图](/img/toy-renderer/day8/tangent-grid.jpg)
+<RendererDemos title="左：切线空间的法线贴图，右：换成网格贴图">
+  <RendererDemo src="day08/tangent" title="切线空间的法线贴图" />
+  <RendererDemo src="day08/grid" title="换成网格贴图" />
+</RendererDemos>
 
 切线 $\vec{t}$ 就是 **u 增大的方向**，也就是沿着红线的方向；副切线 $\vec{b}$ 是 **v 增大的方向**，也就是沿着蓝线的方向。
 

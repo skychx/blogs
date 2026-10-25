@@ -13,6 +13,8 @@ keywords:
   - 着色器
 ---
 
+import { RendererDemo, RendererDemos } from '../../src/components/rendererDemo';
+
 前言里说过，这个系列的目标是实现一个简易版本的 OpenGL，搞清楚这类图形 API 在底层是怎么工作的。十天下来，光栅化、zbuffer、透视投影、着色器，全都是我们一行一行手写出来的。
 
 那把这些活交给真正的显卡，会是什么样呢？这篇番外我们换成 WebGPU，把 day8 的人头（切线空间的法线贴图 + Phong 光照）重新画一遍。模型解析和矩阵运算还是用我们自己写的 `model.ts` 和 `math.ts`，光栅化、插值、深度测试这些活，全部交给显卡。
@@ -548,7 +550,10 @@ function startSoftware(canvas: HTMLCanvasElement, context: DemoContext) {
 
 左边是软渲染器，右边是 WebGPU：
 
-![左：未优化的软渲染器，右：WebGPU，两边使用相同的模型和相机](/img/toy-renderer/extra3/webgpu-compare.jpg)
+<RendererDemos title="左：未优化的软渲染器，右：WebGPU，两边使用相同的模型和相机">
+  <RendererDemo src="extra-webgpu/software" title="软渲染器（未优化）" />
+  <RendererDemo src="extra-webgpu/webgpu" title="WebGPU" />
+</RendererDemos>
 
 是不是很熟悉！右边的皮肤会细腻一些，主要是双线性插值和 mipmap 的功劳。两边的光栅化、纹理采样也不完全一样，不用指望逐像素对上。
 

@@ -15,6 +15,8 @@ keywords:
   - Gouraud 着色
 ---
 
+import { RendererDemo, RendererDemos } from '../../src/components/rendererDemo';
+
 昨天写完移动相机，`main.ts` 已经将近 200 行了：矩阵、光栅化、光照全都挤在一个文件里。今天我们先来一次重构，把代码拆成两部分：一部分是「我们自己的 OpenGL」，另一部分是我们自己写的**着色器（Shader）**。
 
 从今天开始，这个软渲染器就有了一点儿 OpenGL 的影子了。这部分内容对应 GAMES101 的第 8 讲。
@@ -257,7 +259,7 @@ class ToonShader extends GouraudShader {
 
 这个着色器继承了 `GouraudShader`，顶点着色器完全不变，只重写了片元着色器。效果是这样的，有点卡通画的味道了：
 
-![把光照强度分成 6 档](/img/toy-renderer/day7/toon.jpg)
+<RendererDemo src="day07/toon" title="把光照强度分成 6 档" />
 
 > 注：真正的卡通渲染还会给模型描上黑色的轮廓线，番外篇里我们再来实现一个完整的版本
 
@@ -297,7 +299,11 @@ class TextureShader implements IShader {
 
 三个着色器的效果放在一起对比一下，从左到右分别是 Gouraud 着色、6 档光照和带纹理的 Gouraud 着色：
 
-![三个着色器的效果](/img/toy-renderer/day7/shaders.jpg)
+<RendererDemos title="三个着色器的效果">
+  <RendererDemo src="day07/gouraud" title="Gouraud 着色" />
+  <RendererDemo src="day07/toon" title="6 档光照" />
+  <RendererDemo src="day07/texture" title="带纹理的 Gouraud 着色" />
+</RendererDemos>
 
 <br />
 

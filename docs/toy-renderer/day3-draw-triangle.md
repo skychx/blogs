@@ -14,7 +14,7 @@ keywords:
   - 重心坐标
 ---
 
-
+import { RendererDemo } from '../../src/components/rendererDemo';
 
 前面两天画了点和线，今天我们来画一个最简单也是最强大的面——**三角形**。
 
@@ -161,7 +161,7 @@ function drawCrossProductTriangle(canvas: HTMLCanvasElement) {
 
 看输出图像，我们已经成功绘制了一个三角形：
 
-![用叉乘画的三角形](/img/toy-renderer/day3/cross-product-triangle.png)
+<RendererDemo src="day03/cross-product" title="用叉乘画的三角形" size={400} />
 
 <br />
 
@@ -321,7 +321,7 @@ function barycentric(pts: Vec2[], P: Vec2): Vec3 {
 
 用上面的算法画个三角形验证一下，很完美：
 
-![用重心坐标画的三角形](/img/toy-renderer/day3/barycentric-triangle.png)
+<RendererDemo src="day03/barycentric" title="用重心坐标画的三角形" size={400} />
 
 
 
@@ -385,7 +385,7 @@ function triangle(pts: Vec2[], frame: Frame, color: Color) {
 
 最后我们绘制出的结果就是这样的，看着还是有些酷炫的：
 
-![随机着色](/img/toy-renderer/day3/random-colors.jpg)
+<RendererDemo src="day03/random-colors" title="随机着色" />
 
 
 
@@ -448,7 +448,7 @@ for (let i = 0; i < model.nfaces(); i++) {
 
 最后生成的图片就是这样的：
 
-![简单的光照着色](/img/toy-renderer/day3/light.jpg)
+<RendererDemo src="day03/light" title="简单的光照着色" />
 
 <br />
 
