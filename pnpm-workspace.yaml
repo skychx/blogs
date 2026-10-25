@@ -1,3 +1,6 @@
+packages:
+  - '.'
+
 engineStrict: true
 
 # Wrangler 需要校验原生工具；core-js 的提示和未启用的 ideal-image 安装脚本不需要执行。
