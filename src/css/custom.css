@@ -144,11 +144,25 @@ div.container video {
   border-radius: 4.5px;
 }
 
-/* 表格居中对齐 */
+/* 表格居中对齐；比正文宽时在表格里横向滚动，不把手机页面撑宽 */
+/* relative 让单元格里公式的隐藏 MathML（absolute）也被表格裁剪，不会漏到外面 */
 div.container table {
-  display: table;
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* 公式比正文宽时，同样只在公式里横向滚动 */
+/* 有些笔画会超出公式框 1～2px，padding 留出余量免得被裁掉，负 margin 抵消掉，间距不变 */
+.katex-display > .katex {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+  margin: -4px 0;
 }
 
 /* 行内代码 */
