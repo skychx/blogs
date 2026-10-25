@@ -251,8 +251,10 @@ function applyDimensionsToImage(node, dimensions, generatedLocalImage = false) {
   let nextStyle = style;
 
   if ((!hasWidth || generatedLocalImage) && !hasStyleProperty(style, "width")) {
-    nextStyle = appendStyle(nextStyle, "width: 100%;");
-    declarations.width = "100%";
+    // 编译时已知原图宽度：既适应容器，也避免小图被放大，并在加载前预留正确高度。
+    const width = dimensions ? `min(100%, ${dimensions.width}px)` : "100%";
+    nextStyle = appendStyle(nextStyle, `width: ${width};`);
+    declarations.width = width;
   }
 
   if (dimensions && !hasStyleProperty(style, "aspect-ratio")) {

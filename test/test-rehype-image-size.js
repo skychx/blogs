@@ -34,22 +34,22 @@ async function run(...nodes) {
 test("static 目录下的本地图片", async () => {
   const node = img({src: "/img/logo.jpeg"});
   await run(node);
-  assert.equal(node.properties.style, "width: 100%; aspect-ratio: auto 640 / 640;");
+  assert.equal(node.properties.style, "width: min(100%, 640px); aspect-ratio: auto 640 / 640;");
 });
 
 test("相对 md 文件路径的本地图片", async () => {
   const node = img({src: "../static/img/undraw_docusaurus_tree.svg"});
   await run(node);
-  assert.equal(node.properties.style, "width: 100%; aspect-ratio: auto 1129 / 663;");
+  assert.equal(node.properties.style, "width: min(100%, 1129px); aspect-ratio: auto 1129 / 663;");
 });
 
 test("远程图片命中缓存", async () => {
   const node = img({src: REMOTE_SRC});
   await run(node);
-  assert.equal(node.properties.style, "width: 100%; aspect-ratio: auto 1200 / 800;");
+  assert.equal(node.properties.style, "width: min(100%, 1200px); aspect-ratio: auto 1200 / 800;");
 });
 
-test("保留作者在属性或 style 中写的宽度，未写宽度时默认 100%", async () => {
+test("保留作者在属性或 style 中写的宽度，默认宽度不超过容器和原图", async () => {
   const percentage = img({src: REMOTE_SRC, width: "40%"});
   const pixels = img({src: REMOTE_SRC, width: 200, height: 100});
   const withStyle = img({src: REMOTE_SRC, style: "width: 50%"});
@@ -61,13 +61,13 @@ test("保留作者在属性或 style 中写的宽度，未写宽度时默认 100
   assert.equal(pixels.properties.height, 100);
   assert.equal(pixels.properties.style, "aspect-ratio: auto 1200 / 800;");
   assert.equal(withStyle.properties.style, "width: 50%; aspect-ratio: auto 1200 / 800;");
-  assert.equal(otherStyle.properties.style, "max-width: 400px; border-radius: 8px; width: 100%; aspect-ratio: auto 1200 / 800;");
+  assert.equal(otherStyle.properties.style, "max-width: 400px; border-radius: 8px; width: min(100%, 1200px); aspect-ratio: auto 1200 / 800;");
 });
 
 test("保留作者指定的 aspect-ratio", async () => {
   const withRatio = img({src: REMOTE_SRC, style: "aspect-ratio: 1 / 1"});
   await run(withRatio);
-  assert.equal(withRatio.properties.style, "aspect-ratio: 1 / 1; width: 100%;");
+  assert.equal(withRatio.properties.style, "aspect-ratio: 1 / 1; width: min(100%, 1200px);");
 });
 
 test("md 里手写的 <img> 标签（MDX JSX 节点）", async () => {
@@ -82,7 +82,7 @@ test("md 里手写的 <img> 标签（MDX JSX 节点）", async () => {
   };
   await run(node);
   assert.equal(node.type, "element");
-  assert.deepEqual(node.properties, {src: REMOTE_SRC, alt: "demo", style: "width: 100%; aspect-ratio: auto 1200 / 800;"});
+  assert.deepEqual(node.properties, {src: REMOTE_SRC, alt: "demo", style: "width: min(100%, 1200px); aspect-ratio: auto 1200 / 800;"});
 });
 
 test("拿不到尺寸时仍使用默认宽度，并给出提示", async () => {
@@ -114,19 +114,19 @@ test("实际 MDX 编译和 SSR 保留百分比、像素及 JSX 宽度，动态�
   const html = renderToStaticMarkup(React.createElement(Content));
   const images = html.match(/<img\b[^>]*>/g);
   assert.equal(images.length, 6);
-  assert.match(images[0], /style="width:100%;aspect-ratio:auto 1200 \/ 800"/);
+  assert.match(images[0], /style="width:min\(100%, 1200px\);aspect-ratio:auto 1200 \/ 800"/);
   assert.match(images[1], /width="40%"/);
   assert.match(images[2], /width="200"/);
   assert.match(images[3], /width="400"/);
   for (const image of images.slice(1, 4)) {
     assert.match(image, /style="aspect-ratio:auto 1200 \/ 800"/);
-    assert.doesNotMatch(image, /width:100%/);
+    assert.doesNotMatch(image, /width:(?:100%|min\()/);
   }
   assert.match(images[4], /style="width:25%"/);
   assert.match(images[5], /style="width:30%;aspect-ratio:auto 1200 \/ 800"/);
 });
 
-test("Docusaurus 自动生成的本地图片宽高不影响默认 100% 的显示宽度", async () => {
+test("Docusaurus 本地图片使用原图宽度上限，并保留手写宽度", async () => {
   const docusaurusRequire = createRequire(require.resolve("@docusaurus/core/package.json"));
   const loaderPath = docusaurusRequire.resolve("@docusaurus/mdx-loader/package.json");
   const mdxRequire = createRequire(loaderPath);
@@ -140,8 +140,8 @@ test("Docusaurus 自动生成的本地图片宽高不影响默认 100% 的显示
   const code = String(result);
   assert.match(code, /width: "640"/);
   assert.match(code, /height: "640"/);
-  assert.match(code, /width: "100%"/);
+  assert.match(code, /width: "min\(100%, 640px\)"/);
   assert.match(code, /aspectRatio: "auto 640 \/ 640"/);
   assert.match(code, /width: "200"/);
-  assert.equal(code.match(/width: "100%"/g).length, 1);
+  assert.equal(code.match(/width: "min\(100%, 640px\)"/g).length, 1);
 });
