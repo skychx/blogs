@@ -1,0 +1,10 @@
+/* 重复局部类提高优先级，覆盖主题和全局 h1 默认字号，不依赖 CSS 加载顺序。 */
+.title.title {
+  font-size: 2.5rem;
+}
+
+@media (max-width: 576px) {
+  .title.title {
+    font-size: 1.7rem;
+  }
+}
