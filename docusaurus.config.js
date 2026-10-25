@@ -50,7 +50,7 @@ const config = {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
       // https://prismjs.com/#supported-languages
-      additionalLanguages: ['bash', 'diff', 'json', "java", "glsl"],
+      additionalLanguages: ['bash', 'diff', 'json', "java", "glsl", "wgsl"],
     },
     algolia: {
       appId: "HX6GJ4R9GS",

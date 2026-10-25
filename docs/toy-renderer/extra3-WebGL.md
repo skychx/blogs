@@ -1,211 +1,219 @@
 ---
 id: extra3-WebGL
-title: 番外：用 WebGL 重写一遍
-sidebar_label: 番外：用 WebGL 重写一遍
-description: 用 WebGL 重写一遍
+title: 番外：用 WebGPU 重写一遍
+sidebar_label: 番外：用 WebGPU 重写一遍
+description: 用 WebGPU 和 WGSL 重写 day8 的人头，对照软渲染器理解显卡的渲染管线
 keywords:
   - OpenGL
-  - WebGL
+  - WebGPU
   - 软渲染器
   - 造轮子
   - 从零实现一个软渲染器
-  - GLSL
+  - WGSL
   - 着色器
 ---
 
-前言里说过，这个系列的目标是实现一个简易版本的 OpenGL，搞清楚 OpenGL 这类图形 API 在底层是怎么工作的。十天下来，光栅化、zbuffer、透视投影、着色器，全都是我们一行一行手写出来的。
+前言里说过，这个系列的目标是实现一个简易版本的 OpenGL，搞清楚这类图形 API 在底层是怎么工作的。十天下来，光栅化、zbuffer、透视投影、着色器，全都是我们一行一行手写出来的。
 
-那真正的 OpenGL 用起来是什么样的呢？这篇番外我们换成 WebGL，把 day8 的人头（切线空间的法线贴图 + Phong 光照）重新画一遍。模型解析和矩阵运算还是用我们自己写的 `model.ts` 和 `math.ts`，光栅化、插值、深度测试这些活，全部交给显卡。
+那把这些活交给真正的显卡，会是什么样呢？这篇番外我们换成 WebGPU，把 day8 的人头（切线空间的法线贴图 + Phong 光照）重新画一遍。模型解析和矩阵运算还是用我们自己写的 `model.ts` 和 `math.ts`，光栅化、插值、深度测试这些活，全部交给显卡。
 
-> 本文源码 👉：[toy-renderer-ts/days/extra-webgl](https://github.com/skychx/toy-renderer-ts/tree/main/days/extra-webgl)
+demo 里有两块画布：左边是 CPU 跑的软渲染器，右边是 WebGPU，两边画的都是头部和独立的双眼，分辨率都是 800×800。按住任意一边拖动鼠标，两边的相机一起转，方便我们对照着看。
 
-## 1.WebGL 是什么
+> 本文源码 👉：[toy-renderer-ts/days/extra-webgpu](https://github.com/skychx/toy-renderer-ts/tree/main/days/extra-webgpu)
 
-WebGL 是浏览器提供的一套调用显卡的 API，基本上就是把 OpenGL ES（OpenGL 给手机这类嵌入式设备用的版本）搬到了 JavaScript 里。我们用的是 WebGL2，它对应的是 OpenGL ES 3.0，着色器用 GLSL ES 3.00 来写。
+在项目根目录运行 `bun dev`，打开 [http://localhost:8080/extra-webgpu](http://localhost:8080/extra-webgpu) 就能看到效果。需要使用支持 WebGPU 的浏览器，通过 localhost 或 HTTPS 打开；如果显卡这一边不可用，页面会显示原因，左边的软渲染器仍然可以继续跑。
 
-用 WebGL 画一个模型，流程和我们的软渲染器几乎可以一一对应起来：
+## 1.WebGPU 是什么
 
-| 软渲染器                           | WebGL                                            |
-| ---------------------------------- | ------------------------------------------------ |
-| `IShader` 的 `vertex()`            | 顶点着色器                                       |
-| `IShader` 的 `fragment()`          | 片元着色器                                       |
-| varying 数组和 `interpolate()`     | `out`、`in` 变量，显卡自动插值                   |
-| `triangle()` 里的包围盒、重心坐标  | 显卡自动光栅化                                   |
-| 透视除法和 `Viewport` 矩阵         | 显卡自动做透视除法，视口用 `gl.viewport()` 设置  |
-| zbuffer                            | `gl.enable(gl.DEPTH_TEST)`                       |
-| `Texture` 的 `get()`               | GLSL 里的 `texture()`                            |
-| `Frame` 和 `putImageData()`        | 显卡直接画到 canvas 上                           |
+WebGPU 是浏览器提供的一套调用显卡的 API。前面经常提到的 WebGL，是把 OpenGL ES 搬到浏览器里；WebGPU 则是按现代 GPU API 的思路重新设计的，着色器用 **WGSL（WebGPU Shading Language）** 来写。
 
-着色器还是要我们自己写，只是从 TS 换成了 GLSL；表格里剩下的那些，显卡全包了。
+名字换了，画三角形的基本流程还是我们熟悉的那一套：
 
-下面我们按「着色器 → 矩阵 → 把数据交给显卡 → 画出来」的顺序，一块一块地看。
+| 软渲染器 | WebGPU |
+| --- | --- |
+| `IShader` 的 `vertex()` | `@vertex` 顶点着色器 |
+| `IShader` 的 `fragment()` | `@fragment` 片元着色器 |
+| varying 数组和 `interpolate()` | 着色器之间的 `@location` 变量，显卡自动插值 |
+| `triangle()` 里的包围盒、重心坐标 | 显卡自动光栅化 |
+| 透视除法和 `Viewport` 矩阵 | 显卡自动做透视除法和视口变换 |
+| zbuffer | 深度贴图和管线里的 `depthStencil` |
+| `Texture` 的 `get()` | WGSL 里的 `textureSample()` |
+| `Frame` 和 `putImageData()` | render pass 把结果画到 canvas 对应的贴图上 |
+
+着色器还是要我们自己写，只是从 TS 换成了 WGSL；表格里剩下的那些，显卡全包了。
+
+先和显卡打个招呼：
+
+```ts
+if (!navigator.gpu) throw new Error('当前浏览器无法使用 WebGPU');
+const adapter = await navigator.gpu.requestAdapter();
+if (!adapter) throw new Error('没有找到可用的 WebGPU 设备');
+const device = await adapter.requestDevice();
+const context = canvas.getContext('webgpu')!;
+const format = navigator.gpu.getPreferredCanvasFormat();
+context.configure({ device, format, alphaMode: 'opaque' });
+```
+
+`adapter` 代表浏览器找到的 GPU，`device` 用来创建缓冲、贴图、管线，以及提交绘图命令。canvas 的上下文也从前面的 `'2d'` 换成了 `'webgpu'`，`format` 则是浏览器适合拿来显示的颜色格式。
+
+下面还是按「着色器 → 矩阵 → 把数据交给显卡 → 画出来」的顺序，一块一块地看。
 
 ## 2.着色器
 
-### 2.1 顶点着色器
+### 2.1 输入和输出
 
-GLSL 的语法和 C 语言很像，`vec3`、`mat4` 这些向量和矩阵类型，还有它们的加减乘除，都是语言自带的，用起来比我们的 `math.ts` 还顺手。先看顶点着色器：
+WGSL 的语法和 TS 有一点像：变量名在前，类型在后，函数用 `fn` 声明。不过它是跑在显卡上的，访问不到 JS 里的对象，所有数据都得事先交给显卡。
 
-```glsl
-#version 300 es
-in vec3 aPosition; // 顶点的位置
-in vec3 aNormal;   // 顶点的法线
-in vec2 aUV;       // 顶点的 uv
+先声明两个着色器要用的数据：
 
-uniform mat4 uModelView;
-uniform mat4 uModelViewIT; // ModelView 的逆转置矩阵，用来变换法线
-uniform mat4 uProjection;
+```wgsl
+struct Uniforms {
+  ModelView: mat4x4<f32>,
+  ModelViewIT: mat4x4<f32>, // ModelView 的逆转置矩阵，用来变换法线
+  Projection: mat4x4<f32>,
+  light: vec4<f32>, // 用一个 16 字节的 vec4 存光照方向，w 补 0
+}
 
-// out 变量就是 varying：显卡会把三个顶点的值插值好，再交给片元着色器
-out vec2 vUV;
-out vec3 vNormal;   // 顶点的法线（相机坐标系）
-out vec3 vPosition; // 顶点的位置（相机坐标系）
+// binding 是资源的编号，和下面 createBindGroup() 里的编号一一对应
+@group(0) @binding(0) var<uniform> u: Uniforms;
+@group(0) @binding(1) var textureSampler: sampler;
+@group(0) @binding(2) var diffuseMap: texture_2d<f32>;
+@group(0) @binding(3) var normalMap: texture_2d<f32>;
+@group(0) @binding(4) var specularMap: texture_2d<f32>;
 
-void main() {
-  vUV = aUV;
-  vNormal = (uModelViewIT * vec4(aNormal, 0.0)).xyz;
-  // 先变换到相机坐标系，记下来给片元着色器算切线用，再做投影
-  vec4 p = uModelView * vec4(aPosition, 1.0);
-  vPosition = p.xyz;
-  gl_Position = uProjection * p;
+struct VertexOutput {
+  @builtin(position) clipPosition: vec4<f32>,
+  // location 对应 varying：显卡会做透视校正插值，再把结果交给片元着色器
+  @location(0) uv: vec2<f32>,
+  @location(1) normal: vec3<f32>,
+  @location(2) position: vec3<f32>, // 相机坐标系下的位置
 }
 ```
 
-第一行的 `#version 300 es` 表示这是 GLSL ES 3.00 的代码，必须写在最前面。剩下的部分可以和 day8 的 `vertex()` 对照着看：
+看上去有点多，其实可以拆成三块：
 
-- `in`：顶点着色器的输入，每个顶点都不一样，比如顶点的位置、法线、uv。我们的 `vertex(iface, nthvert)` 是自己去 `Model` 里取数据的，而显卡上的着色器访问不到 JS 里的对象，只能读事先交给显卡的数据，第 4 节再讲怎么交
-- `uniform`：和 day7 讲的一样，对所有顶点、所有像素都一样的数据，比如各种变换矩阵
-- `out`：就是 varying。我们的 varying 是一个存了三个顶点的数组，片元着色器拿到重心坐标以后自己插值；GLSL 的顶点着色器一次只处理一个顶点，给 `out` 变量赋个值就完事了，插值由显卡负责，而且自带透视校正
-- `gl_Position`：顶点的裁剪坐标，也就是 `vertex()` 的返回值，后面的透视除法和视口变换都由显卡来做
+- `Uniforms`：和 day8 一样，装着矩阵和光照方向，所有顶点、所有像素共用。`mat4x4<f32>` 是 4×4 的浮点数矩阵，`vec4<f32>` 是四维向量，向量和矩阵运算都是语言自带的
+- `@group(0) @binding(...)`：显卡资源的编号。第 0 号是 uniform，后面依次是采样器、漫反射贴图、法线贴图和高光贴图。JS 里按相同的编号把资源交过去，着色器就能读到了，第 5 节会讲
+- `VertexOutput`：顶点着色器的输出。`@builtin(position)` 是顶点的裁剪坐标，剩下三个 `@location` 就是 varying，显卡会把它们插值好，再交给片元着色器，而且默认就带透视校正
 
-代码里的 `.xyz` 表示取出向量的前三个分量。GLSL 里可以用 `.xyz`、`.xy`、`.rgb` 这样的写法随意地取向量的分量，写起来非常方便。
+这里有两套编号，别弄混了：`@binding` 编的是缓冲、贴图这些资源；`@location` 编的是顶点属性，以及顶点、片元着色器之间传递的值。
 
-### 2.2 片元着色器
+### 2.2 顶点着色器
+
+先看顶点着色器：
+
+```wgsl
+@vertex
+fn vertexMain(
+  @location(0) position: vec3<f32>,
+  @location(1) normal: vec3<f32>,
+  @location(2) uv: vec2<f32>,
+) -> VertexOutput {
+  var out: VertexOutput;
+  let p = u.ModelView * vec4<f32>(position, 1.0);
+  let clip = u.Projection * p;
+  // 共用的投影矩阵沿用 OpenGL 的深度范围 [-w, w]，WebGPU 要求 [0, w]
+  // z' = (z + w) / 2，两边的相机和投影效果仍然一致
+  out.clipPosition = vec4<f32>(clip.xy, (clip.z + clip.w) * 0.5, clip.w);
+  out.uv = uv;
+  out.normal = (u.ModelViewIT * vec4<f32>(normal, 0.0)).xyz;
+  out.position = p.xyz;
+  return out;
+}
+```
+
+这基本就是 day8 的 `vertex()`：拿到位置、法线和 uv，把位置变换到相机坐标系，再投影；法线用 ModelView 的逆转置矩阵变换。
+
+区别在于，原来的 `vertex(iface, nthvert)` 要自己去 `Model` 里取数据，这里显卡会把当前顶点的数据填进三个参数里。输出的 `uv`、`normal`、`position` 也不用再存成三个顶点的数组了，给当前顶点赋个值就行。
+
+代码里的 `.xyz`、`.xy` 和 `.rgb` 都是在取向量的分量，`let` 声明的值不能重新赋值，要修改的变量用 `var`。`clip.z` 换算的那一行先记下来，第 3 节再讲。
+
+### 2.3 片元着色器
 
 再来看片元着色器：
 
-```glsl
-#version 300 es
-precision highp float;
+```wgsl
+@fragment
+fn fragmentMain(in: VertexOutput) -> @location(0) vec4<f32> {
+  // 图片像素从上往下存，模型的 uv 原点在左下角，所以把 v 翻转一下
+  let uv = vec2<f32>(in.uv.x, 1.0 - in.uv.y);
+  let n = normalize(in.normal);
 
-in vec2 vUV;
-in vec3 vNormal;
-in vec3 vPosition;
+  // textureSample 需要用相邻片元的导数选择 mip 层级，必须放在分支外统一执行
+  let color = textureSample(diffuseMap, textureSampler, uv).rgb;
+  let nm = normalize(textureSample(normalMap, textureSampler, uv).rgb * 2.0 - 1.0);
+  let strength = textureSample(specularMap, textureSampler, uv).r;
 
-uniform sampler2D uDiffuse;   // 漫反射贴图
-uniform sampler2D uNormalMap; // 法线贴图（切线空间）
-uniform sampler2D uSpecular;  // 高光贴图
-uniform vec3 uLight;          // 相机坐标系下，指向光源的方向
-
-out vec4 fragColor; // 这个像素最终的颜色
-
-void main() {
-  // uv 坐标的原点在图片的左下角，而图片的像素是从上往下存的，所以 v 要翻转一下
-  vec2 uv = vec2(vUV.x, 1.0 - vUV.y);
-  // 插值出来的顶点法线，切线空间的 z 轴
-  vec3 n = normalize(vNormal);
-
-  // 用相邻像素之间位置的差和 uv 的差，求出切线 t 和副切线 b
-  mat2x3 E = mat2x3(dFdx(vPosition), dFdy(vPosition));
-  mat2 U = mat2(dFdx(vUV), dFdy(vUV));
-  vec3 perturbed = n;
-  // uv 的差退化成了一条线（行列式为 0）时没法算切线，直接用插值出来的法线
-  if (abs(determinant(U)) > 1e-12) {
-    mat2x3 TB = E * inverse(U);
-    vec3 t = normalize(TB[0]);
-    vec3 b = normalize(TB[1]);
-    // 切线空间里的法线 (x, y, z)，意思是 x 个 t 加 y 个 b 再加 z 个 n
-    vec3 nm = normalize(texture(uNormalMap, uv).rgb * 2.0 - 1.0);
-    perturbed = normalize(t * nm.x + b * nm.y + n * nm.z);
+  // 用相邻像素的位置差和 uv 差解出切线 T、副切线 B
+  let dx = dpdx(in.position);
+  let dy = dpdy(in.position);
+  let uvDx = dpdx(in.uv);
+  let uvDy = dpdy(in.uv);
+  let det = uvDx.x * uvDy.y - uvDy.x * uvDx.y;
+  var perturbed = n;
+  if (abs(det) > 1e-12) {
+    // WGSL 没有通用的 inverse()，这里把 2×2 逆矩阵的公式直接展开
+    let T = normalize((dx * uvDy.y - dy * uvDx.y) / det);
+    let B = normalize((dy * uvDx.x - dx * uvDy.x) / det);
+    perturbed = normalize(T * nm.x + B * nm.y + n * nm.z);
   }
 
-  // Phong 光照模型
-  vec3 l = normalize(uLight);
-  // 反射光的方向：r = 2n(n·l) - l
-  vec3 r = normalize(2.0 * perturbed * dot(perturbed, l) - l);
-  // 相机在原点，从物体指向相机的方向就是 -vPosition，不用再近似成 (0, 0, 1) 了
-  vec3 v = normalize(-vPosition);
-
-  float ambient = 0.3;
-  float diffuse = max(0.0, dot(perturbed, l));
-  float specular = texture(uSpecular, uv).r * pow(max(0.0, dot(r, v)), 20.0);
-
-  // 颜色的取值范围是 [0, 1]，超过 1 的部分，显卡会自动截断
-  vec3 color = texture(uDiffuse, uv).rgb;
-  fragColor = vec4(color * (ambient + diffuse) + specular, 1.0);
+  // 和软渲染器一样的 Phong 光照：环境光 + 漫反射 + 高光
+  let l = normalize(u.light.xyz);
+  let r = normalize(2.0 * perturbed * dot(perturbed, l) - l);
+  let v = normalize(-in.position);
+  let ambient = 0.3;
+  let diffuse = max(0.0, dot(perturbed, l));
+  let specular = strength * pow(max(0.0, dot(r, v)), 20.0);
+  return vec4<f32>(color * (ambient + diffuse) + specular, 1.0);
 }
 ```
 
-先说几个和 TS 版本不一样的地方：
+光照部分基本上是把 day8 的 `phong()` 翻译了一遍，有几个地方要注意：
 
-- `precision highp float` 声明了浮点数的精度。片元着色器里的 float 没有默认精度，必须写上这一句
-- `sampler2D` 就是贴图，用 `texture(贴图, uv)` 读出颜色。读出来的颜色，每个分量的范围是 $[0, 1]$，而不是 $[0, 255]$
-- 又看到了熟悉的 v 翻转：显卡读贴图的时候，v = 0 对应的是图片最上面的一行像素，和 day4 写 `texture.ts` 时遇到的是同一个问题
-- `fragColor` 是片元着色器的输出，相当于 `fragment()` 的返回值。颜色超过 1 的部分显卡会自动截断，不用像 day8 那样写 `Math.min(255, ...)`
-
-光照部分基本上是把 day8 的 `phong()` 翻译了一遍，只改了一处：day8 算高光的时候，把视线的方向近似成了 $(0, 0, 1)$；这里相机就在原点（3.1 节会讲），从物体指向相机的方向就是 `-vPosition`，就顺手换成了准确的值。
+- `textureSample(贴图, 采样器, uv)` 读出颜色，每个分量的范围是 $[0, 1]$，而不是 $[0, 255]$；法线贴图还是照常乘 2 再减 1
+- 模型的 uv 原点在左下角，上传的图片从上往下存，所以读贴图时还是要翻转 v，和 day4 是同一个问题
+- 返回值上的 `@location(0)` 表示写到第 0 个颜色输出。我们只画到一张颜色贴图上，所以这里只有一个输出；当前颜色格式会把超过 1 的分量截断
+- 相机现在放在原点，从物体指向相机的方向就是 `-in.position`，所以高光不用再把视线近似成 $(0, 0, 1)$ 了。左边的软渲染器也做了同样的修改
 
 剩下的就是中间求切线的那一段了，这也是这篇番外最有意思的地方。
 
-### 2.3 看不到三角形的片元着色器
+### 2.4 看不到三角形的片元着色器
 
 回忆一下 day8 是怎么求切线 $\vec{t}$ 和副切线 $\vec{b}$ 的：顶点着色器把三个顶点在相机坐标系里的位置存进 `varyingTri`，片元着色器拿到这三个顶点，算出三角形的两条边 $E$ 和对应的 uv 差 $U$，最后 $[\vec{t}\ \vec{b}] = EU^{-1}$。
 
-可到了显卡上，这招就行不通了：片元着色器拿到的 `vPosition`、`vUV`，都是已经插值好的、当前像素自己的值。它不知道自己在哪个三角形里，更不知道三角形的三个顶点在哪。
+可到了显卡上，这招就行不通了：片元着色器拿到的 `in.position`、`in.uv`，都是已经插值好的、当前像素自己的值。它不知道三角形的三个顶点在哪。
 
-好在 GLSL 提供了 `dFdx` 和 `dFdy` 这两个函数。显卡跑片元着色器的时候，并不是一个像素一个像素地跑，而是 **2x2 个像素一组**，一起跑。既然是一起跑的，同一组里的像素就可以看看邻居的变量是多少：
+好在 WGSL 提供了 `dpdx` 和 `dpdy` 这两个函数。显卡跑片元着色器的时候，会按 **2×2 个片元一组**来计算导数，我们可以把它理解成看看邻居的变量是多少：
 
-- `dFdx(v)`：右边像素的 v 减去左边像素的 v，也就是往右走一个像素，v 变了多少
-- `dFdy(v)`：上面像素的 v 减去下面像素的 v，也就是往上走一个像素，v 变了多少
+- `dpdx(v)`：往右走，v 变了多少，可以理解成右边的值减去左边的值
+- `dpdy(v)`：往下走，v 变了多少，可以理解成下面的值减去上面的值。注意 WebGPU 的窗口坐标 y 轴朝下
 
-![dFdx 和 dFdy](/img/toy-renderer/extra3/derivatives.svg)
+![dpdx 和 dpdy：屏幕上的相邻片元，对应到三角形上的两个短向量](/img/toy-renderer/extra3/derivatives.svg)
 
-把它用在位置上：屏幕上往右走一个像素，对应到三角形上，点在相机坐标系里也会挪一小段，`dFdx(vPosition)` 就是这一小段，它是一个贴在三角形上的很短的向量；`dFdy(vPosition)` 也一样。同时，`dFdx(vUV)` 和 `dFdy(vUV)` 告诉了我们，沿着这两个短向量走，uv 分别变了多少。
+把它用在位置上：屏幕上往右走一个像素，对应到三角形上，点在相机坐标系里也会挪一小段，`dpdx(in.position)` 就是这一小段，它是一个贴在三角形上的很短的向量；`dpdy(in.position)` 也一样。同时，`dpdx(in.uv)` 和 `dpdy(in.uv)` 告诉了我们，沿着这两个短向量走，uv 分别变了多少。
 
 再回头看 day8 的推导，我们其实只用到了「三角形上的两个向量，以及沿着它们走 uv 变了多少」，至于这两个向量是不是三角形的边，根本无所谓。所以把 $E$ 和 $U$ 换成：
 
 $$
-E = \begin{bmatrix}\text{dFdx}(P) & \text{dFdy}(P)\end{bmatrix}, \quad U = \begin{bmatrix}\text{dFdx}(uv) & \text{dFdy}(uv)\end{bmatrix}
+E = \begin{bmatrix}\text{dpdx}(P) & \text{dpdy}(P)\end{bmatrix}, \quad U = \begin{bmatrix}\text{dpdx}(uv) & \text{dpdy}(uv)\end{bmatrix}
 $$
 
-公式 $[\vec{t}\ \vec{b}] = EU^{-1}$ 一个字都不用改。对应到代码里，就是 `mat2x3(dFdx(vPosition), dFdy(vPosition))` 和 `mat2(dFdx(vUV), dFdy(vUV))` 这两行，`E * inverse(U)` 算出来的矩阵，第一列是 $\vec{t}$，第二列是 $\vec{b}$。
+公式 $[\vec{t}\ \vec{b}] = EU^{-1}$ 一个字都不用改。WGSL 没有通用的 `inverse()`，所以代码里直接展开了 2×2 逆矩阵的公式：
 
-这里有个容易踩的坑：GLSL 的矩阵是**按列**存的。`mat2x3(a, b)` 的意思是把 a、b 分别当作第一列和第二列，拼成一个 2 列 3 行的矩阵（注意 GLSL 是先说列数再说行数，和数学里「几行几列」的习惯正好相反），`TB[0]` 取出来的也是第一列。好处是代码和公式长得一模一样，不用像 day8 那样再转置一下（day8 的向量都是按行存的）。
-
-还有一个细节：算 $U$ 用的是没有翻转过的 `vUV`。切线和副切线是按 uv 坐标定义的（u 增大的方向和 v 增大的方向），翻转 v 只是为了读贴图，这一点和 day8 是一样的。
-
-> 注：三角形边缘的 2x2 小组里，有的像素其实在三角形外面。显卡照样会让它们把片元着色器跑一遍，只是不把结果画出来，为的就是让 `dFdx`、`dFdy` 能算出来
-
-> 注：这种在片元着色器里现算切线的方法，来自 Christian Schüler 的文章 [Normal Mapping Without Precomputed Tangents](http://www.thetenthplanet.de/archives/1180)。实际项目里更常见的做法，是在加载模型的时候就把每个顶点的切线算好，和位置、法线一起作为顶点数据传给显卡
-
-### 2.4 编译着色器
-
-着色器的代码只是一段字符串，要等网页跑起来以后，再交给显卡驱动去编译：
-
-```ts
-// 编译一个着色器，有语法错误的话，直接把错误信息抛出来
-function compileShader(type: number, source: string) {
-  const shader = gl.createShader(type)!;
-  gl.shaderSource(shader, source);
-  gl.compileShader(shader);
-  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-    throw new Error(gl.getShaderInfoLog(shader)!);
-  }
-  return shader;
-}
-
-// 把顶点着色器和片元着色器链接成一个程序
-const program = gl.createProgram();
-gl.attachShader(program, compileShader(gl.VERTEX_SHADER, vertexShaderSource));
-gl.attachShader(program, compileShader(gl.FRAGMENT_SHADER, fragmentShaderSource));
-gl.linkProgram(program);
-if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-  throw new Error(gl.getProgramInfoLog(program)!);
-}
-gl.useProgram(program);
+```wgsl
+let det = uvDx.x * uvDy.y - uvDy.x * uvDx.y;
+let T = normalize((dx * uvDy.y - dy * uvDx.y) / det);
+let B = normalize((dy * uvDx.x - dx * uvDy.x) / det);
 ```
 
-GLSL 写错了，TS 的类型检查是发现不了的，只有运行的时候编译失败了，才能通过 `getShaderInfoLog` 看到错误信息。所以写 GLSL 的时候，记得多看看控制台。
+如果 uv 的差退化成了一条线，行列式接近 0，就没法求逆了，这时直接用插值出来的顶点法线。
+
+还有两个细节：算切线用的是没有翻转过的 `in.uv`，翻转 v 只是为了读贴图；另外，`dpdx`、`dpdy` 和三次 `textureSample` 都放在了 `if` 外面。因为采样器也要用相邻片元的导数来选 mip 层级，如果同一组片元各走各的分支，导数就没法可靠地算了，WGSL 默认会检查这种写法。
+
+> 注：三角形边缘的 2×2 小组里，有的片元其实在三角形外面。显卡也会安排辅助片元参与计算，只是不把它们的颜色写出来，为的就是让导数能算出来
+
+> 注：这种在片元着色器里现算切线的思路，可以参考 Christian Schüler 的文章 [Normal Mapping Without Precomputed Tangents](http://www.thetenthplanet.de/archives/1180)。实际项目里也经常在加载模型时就把每个顶点的切线算好，和位置、法线一起传给显卡
 
 ## 3.矩阵
 
@@ -213,10 +221,9 @@ GLSL 写错了，TS 的类型检查是发现不了的，只有运行的时候编
 
 day6 写 `lookAt` 的时候，我们把 center 移到了原点，相机在 z 轴上离原点 c 远的地方，day5 的投影矩阵也是按照这个位置来做透视的。
 
-OpenGL 的习惯不一样：**相机放在原点，朝着 -z 方向看**。所以 `lookAt` 只需要改一个地方，平移的时候把 eye 移到原点：
+这次我们沿用 OpenGL 常见的相机约定：**相机放在原点，朝着 -z 方向看**。这不是 WebGPU 强制要求的，只是这样比较方便。`lookAt` 只需要改一个地方，平移的时候把 eye 移到原点：
 
 ```ts
-// 平移：OpenGL 的相机放在原点，所以要把 eye 移到原点（gl.ts 里移的是 center）
 const translation: Mat = [
   [1, 0, 0, -eye[0]],
   [0, 1, 0, -eye[1]],
@@ -227,13 +234,11 @@ const translation: Mat = [
 
 旋转的部分和 day6 一模一样，就不贴了。
 
-### 3.2 透视投影
+### 3.2 透视投影和深度范围
 
-投影矩阵也要换成 OpenGL 的版本：
+投影矩阵也换成带近平面、远平面的版本。为了让两边共用一份矩阵，CPU 端先沿用 OpenGL 的写法：
 
 ```ts
-// 透视投影矩阵：fovy 是上下方向的视角，aspect 是画面的宽高比，
-// near、far 是近平面和远平面到相机的距离，只有这两个平面之间的东西才会被画出来
 function perspective(fovy: number, aspect: number, near: number, far: number): Mat {
   const f = 1 / Math.tan(fovy / 2);
   return [
@@ -247,174 +252,333 @@ function perspective(fovy: number, aspect: number, near: number, far: number): M
 
 看上去比 day5 的投影矩阵复杂不少，我们一行一行地看。
 
-先看最后一行 $[0, 0, -1, 0]$，它让 $w = -z$。相机在原点、朝着 -z 方向看，相机前面的物体 z 都是负数，$-z$ 正好就是物体到相机的距离，x、y 除以它，就有了近大远小。day5 的投影矩阵让 $w = 1 - z/c$，也就是 $(c - z)/c$，$c - z$ 同样是物体到相机的距离，道理是一样的。
+最后一行 $[0, 0, -1, 0]$ 让 $w = -z$。相机前面的物体 z 都是负数，$-z$ 就是沿相机前方量出来的深度，x、y 除以它，就有了近大远小。
 
-再看前两行。在离相机 $d$ 远的地方，上下视角为 fovy 时，能看到的 y 的范围是 $[-d\tan(fovy/2),\ d\tan(fovy/2)]$。y 乘上 $f = 1/\tan(fovy/2)$，再除以 $w$（也就是 $d$），正好落在 $[-1, 1]$ 里。x 方向还要再除以画面的宽高比 aspect，这样画面才不会被拉伸。
+前两行管的是视角和宽高比。在深度为 $d$ 的地方，上下视角为 fovy 时，能看到的 y 的范围是 $[-d\tan(fovy/2),\ d\tan(fovy/2)]$。y 乘上 $f = 1/\tan(fovy/2)$，再除以 $w$（也就是 $d$），正好落在 $[-1, 1]$ 里；x 还要再除以宽高比 aspect，画面才不会被拉伸。
 
-我们的软渲染器里，人头画多大是由 `Viewport` 决定的（只用了画布中间 3/4 的区域）；OpenGL 里则是由 fovy 决定的：fovy 越大，看到的范围越大，人头就越小。这里取了 45°，人头的大小和 day8 差不多。
+我们的软渲染器里，人头画多大原来是由 `Viewport` 决定的（只用了画布中间 3/4 的区域）；这里则是由 fovy 决定的：fovy 越大，看到的范围越大，人头就越小。demo 取的是 45°。
 
-最后是第三行，它管的是 z：透视除法以后，离相机 near 远的地方，z 会变成 -1，far 远的地方变成 1。x、y、z 不在 $[-1, 1]$ 里的部分，显卡会直接裁掉，这也是「裁剪坐标」这个名字的由来。我们的软渲染器偷了个懒，没有做这一步。
+第三行管的是 z。这个矩阵做完透视除法以后，近平面上的 z 是 -1，远平面上的 z 是 1。不过 **WebGPU 要求的深度范围是 $[0, 1]$**，所以顶点着色器最后多了一步：
 
-还要注意，OpenGL 里 z 越小离相机越近，和我们 day4 的 zbuffer 正好反过来。不过 WebGL 的深度测试默认就是 z 小的留下来，和这个矩阵是配套的，我们什么都不用改。
-
-带 near、far 的透视投影矩阵是怎么推导出来的，可以看 GAMES101 的第 4 讲：先把视锥体「挤」成一个长方体，再做正交投影。
-
-### 3.3 矩阵是按列存的
-
-矩阵最后要通过 uniform 传给着色器：
-
-```ts
-// 把一个矩阵传给着色器：OpenGL 的矩阵是按列存的，我们的矩阵是按行存的，
-// 所以第二个参数要传 true，让 WebGL 帮我们转置一下
-function setMatrix(name: string, m: Mat) {
-  gl.uniformMatrix4fv(gl.getUniformLocation(program, name), true, m.flat());
-}
+```wgsl
+out.clipPosition = vec4<f32>(clip.xy, (clip.z + clip.w) * 0.5, clip.w);
 ```
 
-我们的 `Mat` 是按行存的二维数组，`m[0]` 是第一行；而 2.3 节说过，OpenGL 的矩阵是按列存的，传给它的一维数组，前 4 个数会被当成第一列。所以 `uniformMatrix4fv` 的第二个参数 transpose 要传 `true`，让 WebGL 帮我们转置一下。
+为什么要加 `clip.w` 呢？因为这时还没做透视除法，我们希望除完以后的结果是：
 
-> 注：WebGL1 里这个参数只能传 `false`，得自己先把矩阵转置好再传进去
+$$
+\frac{z'}{w} = \frac{1}{2}\left(\frac{z}{w} + 1\right)
+$$
+
+两边乘上 w，就是 $z' = (z + w)/2$。x、y 和 w 都不动，画面大小也不变，只是把深度从 $[-1, 1]$ 搬到了 $[0, 1]$。
+
+左边的软渲染器仍然用 $[-1, 1]$ 的深度，但两边都是 z 越小离相机越近，所以遮挡顺序一致。注意这和 day4 正好反过来：左边的 zbuffer 要填 `Infinity`，右边的深度贴图清成 1，深度比较用 `'less'`。
+
+显卡还会把超出裁剪范围的部分裁掉，我们的软渲染器没有补上完整的裁剪流程，所以把模型转到极端位置时，两边不一定处处一样。
+
+### 3.3 把 uniform 装进缓冲
+
+前面的 uniform 在 TS 里是一组对象，交给显卡时要排成一段连续的数据：
+
+```ts
+// 三个 mat4 各 16 个 float，再加一个 vec4，共 52 个 float
+const uniformData = new Float32Array(52);
+const uniformBuffer = device.createBuffer({
+  size: uniformData.byteLength, // 52 × 4 = 208 字节
+  usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+});
+
+// 每帧更新相机和光照时，把数据写进去
+uniformData.set(transpose(uniforms.ModelView).flat(), 0);
+uniformData.set(transpose(uniforms.ModelViewIT).flat(), 16);
+uniformData.set(transpose(uniforms.Projection).flat(), 32);
+uniformData.set([...uniforms.light, 0], 48);
+device.queue.writeBuffer(uniformBuffer, 0, uniformData);
+```
+
+有两个容易踩的坑。
+
+第一个是矩阵的存储顺序。我们的 `Mat` 是按行存的二维数组，`m[0]` 是第一行；WGSL 的矩阵按列存，传过去的前 4 个数会被当成第一列，所以要先 `transpose()`，再 `flat()`。
+
+注意这里的转置只是为了排对数据，和法线变换用的「逆转置矩阵」不是一回事。`ModelViewIT` 在数学上已经求过逆、转置了，上传时仍然要按列排好。
+
+第二个是内存对齐。WGSL 的结构体不能随便拼几个 float 就往里塞，要按各个类型的对齐规则来。这里三个 `mat4x4<f32>` 各占 64 字节，光照方向干脆用一个占 16 字节的 `vec4<f32>`，最后一个分量补 0：
+
+| 数据 | 起始字节 | 占用字节 |
+| --- | --- | --- |
+| ModelView | 0 | 64 |
+| ModelViewIT | 64 | 64 |
+| Projection | 128 | 64 |
+| light | 192 | 16 |
+
+这样 TS 写进去的布局，才和 WGSL 里的 `Uniforms` 对得上。
 
 ## 4.把数据交给显卡
 
 ### 4.1 顶点数据
 
-显卡没法调用 `model.vert()` 这样的 JS 函数，所以要先把所有顶点的数据排成一个大数组，一次性传给显卡，存到显存里。
+显卡没法调用 `model.vert()`，所以先把顶点的数据排成一个大数组，一次性传进显存。
 
-这里有个小麻烦：obj 文件里，一个顶点的位置、uv、法线是分开编号的（就是 `f 24/1/24` 里的三个数），而显卡要求同一个顶点的所有数据共用一个编号。最省事的办法是按三角形把数据展开，每个三角形 3 个顶点，被好几个三角形共用的顶点，就重复存几遍：
+obj 文件里，一个顶点的位置、uv、法线是分开编号的（就是 `f 24/1/24` 里的三个数），而我们现在要给显卡的是一整套顶点属性。最省事的办法还是按三角形展开，每个三角形 3 个顶点，共用的顶点就重复存几遍：
 
 ```ts
-// obj 里的顶点、uv、法线各有各的序号，显卡却要求同一个顶点的数据用同一个序号，
-// 所以我们按三角形把每个顶点的数据都展开，三个顶点一组
-const positions: number[] = [];
-const normals: number[] = [];
-const uvs: number[] = [];
+const vertices: number[] = [];
 for (let i = 0; i < model.nfaces(); i++) {
   for (let j = 0; j < 3; j++) {
-    positions.push(...model.vert(i, j));
-    normals.push(...model.normal(i, j));
-    uvs.push(...model.uv(i, j));
+    vertices.push(...model.vert(i, j), ...model.normal(i, j), ...model.uv(i, j));
   }
 }
+const vertexData = new Float32Array(vertices);
+const vertexBuffer = device.createBuffer({
+  size: vertexData.byteLength,
+  usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST,
+});
+device.queue.writeBuffer(vertexBuffer, 0, vertexData);
 ```
 
-然后把这三组数据分别传给显卡，并告诉显卡，它们对应的是顶点着色器里的哪个 `in` 变量：
+每个顶点连续存 8 个 float：位置 3 个，法线 3 个，uv 2 个，一共 32 字节。`VERTEX` 表示这是顶点缓冲，`COPY_DST` 表示允许把数据拷进来。
+
+人头和双眼是两个网格，代码里会遍历 `['african_head', 'african_head_eye_inner']`，分别创建顶点缓冲。双眼本来就在头部的坐标系里，不用额外平移，但它们的 uv 和贴图是独立的。
+
+### 4.2 贴图和采样器
+
+贴图也要先上传。先看加载一张贴图的代码：
 
 ```ts
-// 把一组顶点数据传给显卡，告诉顶点着色器里名叫 name 的 in 变量：从这里读，每个顶点读 size 个数
-function createAttribute(name: string, data: number[], size: number) {
-  const buffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
-  const location = gl.getAttribLocation(program, name);
-  gl.enableVertexAttribArray(location);
-  gl.vertexAttribPointer(location, size, gl.FLOAT, false, 0, 0);
-}
-
-createAttribute('aPosition', positions, 3);
-createAttribute('aNormal', normals, 3);
-createAttribute('aUV', uvs, 2);
-```
-
-`createBuffer` 和 `bufferData` 在显存里开一块空间，把数据拷过去；`getAttribLocation` 找到顶点着色器里对应的 `in` 变量；`vertexAttribPointer` 告诉显卡，每个顶点要从这块数据里读几个 float。之后显卡跑顶点着色器的时候，就会自动把第 i 个顶点的数据填进 `aPosition`、`aNormal`、`aUV` 里。
-
-### 4.2 贴图
-
-贴图也一样，要先传给显卡：
-
-```ts
-// 读取一张贴图，放到显卡的第 unit 号纹理单元上，再告诉片元着色器里名叫 name 的变量去这里读
-async function loadTexture(url: string, unit: number, name: string) {
+async function loadTexture(url: string) {
   const blob = await (await fetch(url)).blob();
-  // 和 texture.ts 一样，不能让浏览器做颜色校正
   const bitmap = await createImageBitmap(blob, { colorSpaceConversion: 'none' });
-  gl.activeTexture(gl.TEXTURE0 + unit);
-  gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, bitmap);
-  // 生成 mipmap，贴图缩小的时候，显卡会在不同大小的贴图之间插值，避免出现摩尔纹
-  gl.generateMipmap(gl.TEXTURE_2D);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-  gl.uniform1i(gl.getUniformLocation(program, name), unit);
+  const mipLevelCount = Math.floor(Math.log2(Math.max(bitmap.width, bitmap.height))) + 1;
+  const texture = device.createTexture({
+    size: [bitmap.width, bitmap.height],
+    mipLevelCount,
+    format: 'rgba8unorm',
+    usage:
+      GPUTextureUsage.TEXTURE_BINDING |
+      GPUTextureUsage.COPY_DST |
+      GPUTextureUsage.RENDER_ATTACHMENT,
+  });
+  for (let level = 0; level < mipLevelCount; level++) {
+    const width = Math.max(1, bitmap.width >> level);
+    const height = Math.max(1, bitmap.height >> level);
+    const image = level === 0 ? bitmap : await createImageBitmap(bitmap, {
+      resizeWidth: width,
+      resizeHeight: height,
+      resizeQuality: 'high',
+      colorSpaceConversion: 'none',
+    });
+    device.queue.copyExternalImageToTexture({ source: image }, { texture, mipLevel: level }, [
+      width, height,
+    ]);
+    if (image !== bitmap) image.close();
+  }
+  bitmap.close();
+  return texture.createView();
 }
-
-await loadTexture('/obj/african_head/african_head_diffuse.png', 0, 'uDiffuse');
-await loadTexture('/obj/african_head/african_head_nm_tangent.png', 1, 'uNormalMap');
-await loadTexture('/obj/african_head/african_head_spec.png', 2, 'uSpecular');
 ```
 
-显卡上有好几个纹理单元（texture unit），我们把三张贴图分别放在 0、1、2 号单元上，再通过 `uniform1i` 告诉片元着色器里的 `uDiffuse`、`uNormalMap`、`uSpecular`，分别去哪个单元读。
+和 `texture.ts` 一样，读取图片时关掉颜色校正；贴图格式用普通的 `'rgba8unorm'`，也不自动做 sRGB 解码，因为法线、高光贴图里存的是数据。
 
-这里还多了一步 `generateMipmap`。我们的 `Texture.get()` 是直接取离 uv 最近的那个像素；显卡的 `texture()` 要讲究得多：它会用周围的 4 个像素做双线性插值；贴图被缩小显示的时候，还会用事先生成好的一系列小尺寸贴图（mipmap）来避免摩尔纹。这些都是显卡在硬件上直接做的，几乎不花时间，原理可以看 GAMES101 的第 9 讲。
+这里还多了一套小尺寸的贴图，叫做 **mipmap**：第 0 层是原图，第 1 层宽高各缩一半，第 2 层再缩一半，一直缩到 1×1。模型离得远时，一个屏幕像素可能覆盖贴图上的一大片区域，直接取原图里的一个像素容易出摩尔纹，换成小尺寸贴图就稳定多了。
+
+WebGPU 没有 WebGL 那样的 `generateMipmap()`，这里借助浏览器的 `createImageBitmap` 缩图，再逐层上传。这个工作只在加载时做一遍。
+
+贴图存什么，和怎么读贴图，是两件事。后者交给**采样器（sampler）**：
+
+```ts
+const sampler = device.createSampler({
+  magFilter: 'linear',
+  minFilter: 'linear',
+  mipmapFilter: 'linear',
+  addressModeU: 'repeat',
+  addressModeV: 'repeat',
+});
+```
+
+`linear` 表示在邻近像素之间做插值，mip 层级之间也插值；`repeat` 表示 uv 超出 $[0, 1]$ 时重复贴图。我们的 `Texture.get()` 则是直接取一个像素，越界时限制在边缘，没有做这些过滤，所以两边的纹理细节会有一些区别。
 
 ## 5.画出来
 
-终于可以画图了：
+### 5.1 渲染管线
+
+顶点缓冲有了，着色器也写好了，还要告诉显卡：顶点数据怎么拆，哪个函数是顶点着色器，哪个是片元着色器，要不要做深度测试。这些设置放在同一个对象里，叫做**渲染管线（pipeline）**：
 
 ```ts
-// 深度测试：对应我们自己写的 zbuffer
-gl.enable(gl.DEPTH_TEST);
-// 视口变换：对应我们的 Viewport 矩阵
-gl.viewport(0, 0, canvas.width, canvas.height);
+const module = device.createShaderModule({ code: shaderSource });
+const pipeline = await device.createRenderPipelineAsync({
+  layout: 'auto',
+  vertex: {
+    module,
+    entryPoint: 'vertexMain',
+    buffers: [{
+      arrayStride: 8 * 4,
+      attributes: [
+        { shaderLocation: 0, offset: 0, format: 'float32x3' },
+        { shaderLocation: 1, offset: 3 * 4, format: 'float32x3' },
+        { shaderLocation: 2, offset: 6 * 4, format: 'float32x2' },
+      ],
+    }],
+  },
+  fragment: { module, entryPoint: 'fragmentMain', targets: [{ format }] },
+  primitive: { topology: 'triangle-list', cullMode: 'none' },
+  depthStencil: { format: 'depth24plus', depthWriteEnabled: true, depthCompare: 'less' },
+});
+```
 
-const light: Vec3 = [1, 1, 1]; // 指向光源的方向
+`shaderSource` 就是第 2 节那几段 WGSL 拼在一起的字符串，同一个模块里放了顶点、片元两个入口。`createShaderModule` 把代码交给 WebGPU，`entryPoint` 指定用哪个函数；代码或配置有问题，创建管线时就可能失败，记得看看控制台的错误信息。
 
-// 相机在一个球面上绕着模型转：theta 是绕 y 轴转的角度，phi 是抬头的角度，
-// 初始值对应的就是 day8 的相机位置 (1, 1, 3)
+`arrayStride` 表示相邻两个顶点隔了多少字节；`offset` 表示从一个顶点的第几个字节开始读。比如法线从第 12 字节开始，读 3 个 float，送到顶点着色器的 `@location(1)`。
+
+`'triangle-list'` 表示每 3 个顶点画一个三角形；`'none'` 表示不剔除背面；`depthStencil` 则对应我们的 zbuffer，深度更小的片元留下来，并更新深度。
+
+### 5.2 绑定资源
+
+还记得着色器开头的 `@group(0) @binding(...)` 吗？现在按编号把资源装进一个 **bind group**：
+
+```ts
+const bindGroup = device.createBindGroup({
+  layout: pipeline.getBindGroupLayout(0),
+  entries: [
+    { binding: 0, resource: { buffer: uniformBuffer } },
+    { binding: 1, resource: sampler },
+    { binding: 2, resource: diffuse },
+    { binding: 3, resource: normal },
+    { binding: 4, resource: specular },
+  ],
+});
+```
+
+这里的 `diffuse`、`normal`、`specular` 就是 `loadTexture()` 返回的三张贴图的 view。view 可以理解成告诉显卡「从这张贴图的哪些层、哪些部分读」，我们用默认值，直接读整张。
+
+头部和双眼各有一个 bind group，分别绑定自己的三张贴图；uniform 缓冲、采样器和渲染管线共用。
+
+### 5.3 记录命令，交给显卡
+
+深度缓冲也要明确创建出来：
+
+```ts
+const depthTexture = device.createTexture({
+  size: [canvas.width, canvas.height],
+  format: 'depth24plus',
+  usage: GPUTextureUsage.RENDER_ATTACHMENT,
+});
+const depthView = depthTexture.createView();
+```
+
+终于可以画图了。每帧先按 3.3 节更新 uniform，再执行：
+
+```ts
+const encoder = device.createCommandEncoder();
+const pass = encoder.beginRenderPass({
+  colorAttachments: [{
+    view: context.getCurrentTexture().createView(),
+    clearValue: [0, 0, 0, 1],
+    loadOp: 'clear',
+    storeOp: 'store',
+  }],
+  depthStencilAttachment: {
+    view: depthView,
+    depthClearValue: 1,
+    depthLoadOp: 'clear',
+    depthStoreOp: 'store',
+  },
+});
+pass.setPipeline(pipeline);
+for (const mesh of meshes) {
+  pass.setBindGroup(0, mesh.bindGroup);
+  pass.setVertexBuffer(0, mesh.vertexBuffer);
+  pass.draw(mesh.vertexCount);
+}
+pass.end();
+device.queue.submit([encoder.finish()]);
+```
+
+`meshes` 存着前面给头部、双眼分别创建的顶点缓冲、顶点数和 bind group。`beginRenderPass` 指定这一轮画到哪里：颜色写进 canvas 当前的贴图，深度写进我们创建的深度贴图。开始时把颜色清成黑色、深度清成最远的 1，最后保留绘制结果。
+
+`setPipeline` 选好管线，然后对每个网格选好材质、顶点缓冲，`draw()` 就会调用顶点着色器、光栅化、插值、调用片元着色器。**头部和双眼在同一个 pass 里画，中间不清深度**，眼睑才能正确挡住眼球，和 day8 共用 zbuffer 是一个道理。
+
+还有一点和我们之前不太一样：这些调用是在**记录命令**，最后 `encoder.finish()` 得到一份命令缓冲，再用 `queue.submit()` 一次性交给显卡执行。
+
+## 6.两边一起转
+
+相机的位置还是用球坐标：在半径为 `distance` 的球面上，`theta` 是绕 y 轴转的角度，`phi` 是抬头的角度：
+
+```ts
+const light: Vec3 = [1, 1, 1];
 const distance = Math.sqrt(11);
 let theta = Math.atan2(1, 3);
 let phi = Math.asin(1 / distance);
 
-function draw() {
+function createUniforms(canvas: HTMLCanvasElement): Uniforms {
   const eye: Vec3 = [
     distance * Math.cos(phi) * Math.sin(theta),
     distance * Math.sin(phi),
     distance * Math.cos(phi) * Math.cos(theta),
   ];
   const ModelView = lookAt(eye, [0, 0, 0], [0, 1, 0]);
-  setMatrix('uModelView', ModelView);
-  setMatrix('uModelViewIT', transpose(inverse(ModelView)));
-  setMatrix('uProjection', perspective(Math.PI / 4, canvas.width / canvas.height, 0.1, 100));
-  gl.uniform3fv(gl.getUniformLocation(program, 'uLight'), transformDirection(ModelView, light));
-
-  // 清空颜色和深度，对应 frame.clear() 和 zbuffer.fill(-Infinity)
-  gl.clearColor(0, 0, 0, 1);
-  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-  // 每三个顶点画一个三角形
-  gl.drawArrays(gl.TRIANGLES, 0, model.nfaces() * 3);
+  return {
+    ModelView,
+    ModelViewIT: transpose(inverse(ModelView)),
+    Projection: perspective(Math.PI / 4, canvas.width / canvas.height, 0.1, 100),
+    light: transformDirection(ModelView, light),
+  };
 }
 ```
 
-我们手写的 zbuffer，到了 WebGL 里就是一行 `gl.enable(gl.DEPTH_TEST)`；对每个三角形调用顶点着色器、光栅化、插值、调用片元着色器，也只是一行 `gl.drawArrays`。
+初始值算出来正好是 day8 的相机位置 $(1, 1, 3)$。按住任意一边拖动，就更新 `theta`、`phi`，重新生成一份 uniform，两边用同一份数据。
 
-相机的位置用的是球坐标：相机在一个半径为 `distance` 的球面上，`theta` 是绕 y 轴转的角度，`phi` 是抬头的角度，初始值算出来正好是 day8 的相机位置 $(1, 1, 3)$。按住鼠标拖动的时候改一改 `theta` 和 `phi`，再用 `requestAnimationFrame` 不停地调用 `draw()` 就行，这部分代码比较简单，就不贴了。
+不过，如果直接在主线程里跑软渲染器，一帧要算很久，鼠标交互和右边的 WebGPU 也会跟着卡。所以左边单独放进 **Web Worker**，用 `OffscreenCanvas` 显示结果：
 
-左边是 day8 的软渲染器画的，右边是 WebGL 画的：
+```ts
+function startSoftware(canvas: HTMLCanvasElement, context: DemoContext) {
+  const offscreen = canvas.transferControlToOffscreen();
+  const worker = new Worker('/extra-webgpu/software.js', { type: 'module' });
+  worker.postMessage({
+    canvas: offscreen,
+    uniforms: createUniforms(canvas),
+    active: context.isActive(),
+  }, [offscreen]);
+  // ...接收帧率、同步相机，以及暂停和清理的代码
+}
+```
 
-![左：day8 的软渲染器，右：WebGL](/img/toy-renderer/extra3/compare.jpg)
+这里的 `context` 是页面传进来的运行状态，`isActive()` 表示画布是否在前台可见。Worker 的源码是 `software.ts`，开发服务器打包成 `software.js` 后再加载。
 
-几乎一模一样！仔细看的话，右边的皮肤要细腻一些，这就是双线性插值和 mipmap 的功劳。
+后面相机每变一次，再发一次 `{ uniforms }` 就行。Worker 里还是老办法：遍历三角形、光栅化、算光照，最后 `putImageData()`；WebGPU 在主线程里用 `requestAnimationFrame` 绘制，两边各跑各的。完整代码还会在画布移出屏幕、页面切到后台时暂停，离开页面时清理 Worker 和显卡资源。
 
-按住鼠标拖动，就能从各个角度看这个人头了，连后脑勺也能看到：
+左边是软渲染器，右边是 WebGPU：
 
-![按住鼠标拖动，从不同的角度看](/img/toy-renderer/extra3/views.jpg)
+![左：未优化的软渲染器，右：WebGPU，两边使用相同的模型和相机](/img/toy-renderer/extra3/webgpu-compare.jpg)
 
-## 6.快了多少
+是不是很熟悉！右边的皮肤会细腻一些，主要是双线性插值和 mipmap 的功劳。两边的光栅化、纹理采样也不完全一样，不用指望逐像素对上。
 
-页面上会显示每秒画了多少帧。不过这个数字一般就是屏幕的刷新率：60Hz 的屏幕显示 60 FPS，120Hz 的高刷屏显示 120 FPS。这是因为 `requestAnimationFrame` 是跟着屏幕刷新走的，帧数被屏幕限制住了，显卡其实还闲得很。
+## 7.快了多少
 
-为了看看显卡到底有多快，我在自己的电脑上单独测了一下：连续画几千帧再取平均，画一帧还不到 1 毫秒。而我们的软渲染器画 day8 这张图，要 120 毫秒左右，一秒钟最多也就画 8 帧，两者差了好几百倍。
+两块画布下面都会显示 FPS。左边的 Worker 在画布可见时，画完一帧就接着画下一帧，累计至少 250 毫秒后更新一次读数；如果单帧已经超过 250 毫秒，就在这一帧画完以后更新。暂停的时间不计入 FPS。
 
-差距为什么这么大？我们的软渲染器是在 CPU 上用一个线程，一个像素一个像素地算；而显卡里有成千上万个计算核心，可以同时跑一大批像素的片元着色器，光栅化、插值、深度测试、读贴图这些固定的步骤，还有专门的硬件电路来做。
+右边统计的是 `requestAnimationFrame` 实际调度了多少次绘制，也大约每 250 毫秒更新一次。它通常会被屏幕刷新率限制住，比如 120Hz 的屏幕上看到 120 FPS，并不意味着显卡最多只能画 120 帧。
+
+还要注意，`queue.submit()` 是把任务交给显卡排队，并不会等显卡全部画完才返回。所以只拿 `performance.now()` 在 `draw()` 两边计时，量到的主要是 CPU 准备、提交命令的时间，不能直接当成 GPU 画完一帧的时间。
+
+这两个读数能直观地告诉我们交互有多流畅，不过要测 GPU 的极限吞吐量，还得另外设计测量方法。这里就不拿它们硬算「显卡快了几百倍」了。
+
+差距为什么这么大？我们的软渲染器是在 CPU 上用一个线程，一个像素一个像素地算；显卡可以并行处理一大批顶点和片元，光栅化、插值、深度测试、读贴图这些固定步骤，还有专门的硬件来做。
+
+不过左边这份代码也有不少重复劳动，比如每个像素都在求同一个三角形的切线。下一篇[软渲染器性能优化](./extra4-Software-optimization.md)，我们继续用 CPU 算，看看把这些重复计算去掉，能快多少。对应的 demo 是 [http://localhost:8080/extra-webgpu-optimized](http://localhost:8080/extra-webgpu-optimized)。
 
 ## 写在最后
 
-回头看一下，WebGL 帮我们做掉的那些事：光栅化、插值、透视校正、深度测试，正好是我们前十天花力气最多的地方；而留给我们自己写的，主要就是着色器。现在再看到 `gl_Position`、varying、`gl.enable(gl.DEPTH_TEST)` 这些东西，我们都知道它们背后发生了什么。
+回头看一下，WebGPU 帮我们做掉的那些事：光栅化、插值、透视校正、深度测试，正好是前十天花力气最多的地方；留给我们自己写的，主要是着色器，以及把数据和绘图命令交给显卡。
 
-平时用的 three.js 这类库，底层调用的也是这些 WebGL API。有了这十天打下的底子，再去看它们的源码，应该也不会觉得那么神秘了。
+刚看到 pipeline、bind group、render pass 这些名字，可能会觉得怎么这么麻烦。但和我们的 `IShader`、`Asset`、zbuffer 对照着看，每一块都有熟悉的影子。有了这十天打下的底子，再去看图形 API，应该也不会觉得那么神秘了。
 
 ## 参考链接
 
-[WebGL2 理论基础](https://webgl2fundamentals.org/webgl/lessons/zh_cn/)
+[WebGPU Fundamentals](https://webgpufundamentals.org/webgpu/lessons/webgpu-fundamentals.html)
+
+[WebGPU 规范](https://www.w3.org/TR/webgpu/)
+
+[WGSL 规范](https://www.w3.org/TR/WGSL/)
 
 [Followup: Normal Mapping Without Precomputed Tangents](http://www.thetenthplanet.de/archives/1180)
 
