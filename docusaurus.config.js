@@ -1,7 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const remarkMath = require("remark-math");
+// Node 24 的 require(ESM) 返回模块命名空间，需要取出默认导出的插件函数。
+const remarkMath = require("remark-math").default;
 const readingTime = require("reading-time");
 const rehypeImageSize = require("./plugins/rehype-image-size");
 

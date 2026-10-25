@@ -2,19 +2,26 @@
   "name": "blogs",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": ">=24.22.1 <25"
+  },
+  "packageManager": "pnpm@12.15.0",
   "scripts": {
     "docusaurus": "docusaurus",
     "dev": "docusaurus start",
     "dev:en": "docusaurus start --locale en",
     "build": "docusaurus build",
     "test:rehype-image-size": "node test/test-rehype-image-size.js",
+    "test:gitalk-axios": "node test/test-gitalk-axios.js",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
+    "deploy:cloudflare": "wrangler deploy",
     "serve": "docusaurus serve",
     "publish": "npm run build && cd build/ && npx tcb hosting deploy ./ -e blog-15bc3a",
     "login": "npx cloudbase login"
   },
   "dependencies": {
+    "@cloudbase/cli": "3.8.9",
     "@docusaurus/core": "3.10.2",
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/plugin-ideal-image": "3.10.2",
@@ -32,8 +39,7 @@
     "react-dom": "19.3.1",
     "reading-time": "1.5.0",
     "rehype-katex": "7.0.1",
-    "remark-math": "6.0.0",
-    "@cloudbase/cli": "3.8.8"
+    "remark-math": "6.0.0"
   },
   "browserslist": {
     "production": [
@@ -47,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "wrangler": "4.152.0"
   }
 }
