@@ -1556,6 +1556,22 @@
     "local:/Users/bytedance/Documents/github/blogs/static/img/undraw_docusaurus_tree.svg:1775120370760": {
       "width": 1129,
       "height": 663
+    },
+    "remote:https://image-1255652541.file.myqcloud.com/uPic/singlefetch.gif": {
+      "width": 608,
+      "height": 286
+    },
+    "remote:https://image-1255652541.file.myqcloud.com/uPic/corsError.png": {
+      "width": 1246,
+      "height": 278
+    },
+    "remote:https://image-1255652541.file.myqcloud.com/uPic/image-20200527210341349.png": {
+      "width": 1142,
+      "height": 850
+    },
+    "remote:https://image-1255652541.file.myqcloud.com/uPic/normal.gif": {
+      "width": 626,
+      "height": 337
     }
   }
 }
