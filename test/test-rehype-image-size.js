@@ -1,4 +1,4 @@
-// plugins/rehype-image-size 的测试：pnpm test:rehype-image-size
+// 图片尺寸插件测试，运行：pnpm test:rehype-image-size
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const os = require("node:os");

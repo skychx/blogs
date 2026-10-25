@@ -7,7 +7,7 @@
     "dev": "docusaurus start",
     "dev:en": "docusaurus start --locale en",
     "build": "docusaurus build",
-    "test:rehype-image-size": "node scripts/test-rehype-image-size.js",
+    "test:rehype-image-size": "node test/test-rehype-image-size.js",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
