@@ -1,11 +1,26 @@
-# 依赖的安装脚本都不需要执行：core-js 只是打印捐赠信息，sharp 只给没启用的 plugin-ideal-image 用
+engineStrict: true
+
+# Wrangler 需要校验原生工具；core-js 的提示和未启用的 ideal-image 安装脚本不需要执行。
 allowBuilds:
   core-js: false
   sharp: false
+  esbuild: true
+  workerd: true
 
 overrides:
   # Docusaurus 3.9+ 默认装 DocSearch v4（搜索框换了新 UI），锁在 v3 保持现在的搜索样式
   '@docsearch/react': 3.9.0
+  # 上游还没有更新这些间接依赖，先锁到包含安全修复的版本（Node 24）。
+  'gitalk>axios': 0.34.0
+  serialize-javascript: 7.1.4
+  tinypool: 2.2.0
+  sharp: 0.35.5
+  'undici@7': 7.30.1
+  'uuid@<11.1.1': 11.1.1
+  'postcss-selector-parser@<7.1.6': 7.1.7
   # KaTeX 0.16.32 起会给公式里的每个字母单独加斜体校正，Viewport 这类多字母变量会显示成「V iewport」；
   # 0.16.31 是渲染结果和之前（0.16.11）完全一致的最新版本
   katex: 0.16.31
+
+patchedDependencies:
+  gitalk@1.8.0: patches/gitalk@1.8.0.patch
