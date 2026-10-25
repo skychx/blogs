@@ -1,0 +1,52 @@
+/* 和正文里的图片保持一致：居中、圆角，暗色模式下调暗一些 */
+.demo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0 auto var(--ifm-paragraph-margin-bottom);
+  border: 0;
+  border-radius: 4.5px;
+  background: #0c0c0c;
+}
+
+html[data-theme='dark'] .demo {
+  filter: brightness(0.7);
+}
+
+.container {
+  container-type: inline-size;
+  margin-bottom: var(--ifm-paragraph-margin-bottom);
+}
+
+/* 不管几张，都在一行里平分正文宽度 */
+.group {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.item {
+  margin: 0;
+}
+
+.item .demo {
+  margin-bottom: 0;
+}
+
+.item figcaption {
+  margin-top: 4px;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* 四张图在窄屏上一行放不下，换成两行两列 */
+@container (max-width: 600px) {
+  .wrap {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
