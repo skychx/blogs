@@ -6,8 +6,8 @@ const DEBUG = process.env.DEBUG_REHYPE_IMAGE_SIZE === "1";
 const pendingWarnings = new Set();
 let summaryHookInstalled = false;
 
-function hasExplicitAspectRatio(style) {
-  return typeof style === "string" && /(?:^|;)\s*aspect-ratio\s*:/i.test(style);
+function hasStyleProperty(style, property) {
+  return typeof style === "string" && new RegExp(`(?:^|;)\\s*${property}\\s*:`, "i").test(style);
 }
 
 function appendStyle(style, rule) {
@@ -105,7 +105,24 @@ function getImageStyle(node) {
   return null;
 }
 
-function setImageStyle(node, style) {
+function getGeneratedLocalImageDimensions(node) {
+  // Docusaurus 把本地 Markdown 图片转换为无源位置的 require() JSX，并自动填入宽高。
+  // 这些宽高用于占位，不是作者指定的显示宽度。
+  if (!isMdxJsxImageNode(node) || node.position) {
+    return null;
+  }
+
+  const src = getMdxJsxAttribute(node, "src")?.value;
+  if (src?.type !== "mdxJsxAttributeValueExpression" || !src.value?.startsWith("require(")) {
+    return null;
+  }
+
+  const width = Number(getMdxJsxAttribute(node, "width")?.value);
+  const height = Number(getMdxJsxAttribute(node, "height")?.value);
+  return width > 0 && height > 0 ? {width, height} : null;
+}
+
+function setImageStyle(node, style, declarations) {
   if (isHtmlImageNode(node)) {
     const properties = node.properties || (node.properties = {});
     properties.style = style;
@@ -113,17 +130,36 @@ function setImageStyle(node, style) {
   }
 
   if (isMdxJsxImageNode(node)) {
-    const styleAttribute = getMdxJsxAttribute(node, "style");
-    if (styleAttribute) {
-      styleAttribute.value = style;
-      return;
-    }
-
+    // 未转换成 HAST 的 JSX（例如 width={400}）需要 React style 对象，不能传 CSS 字符串。
     const attributes = Array.isArray(node.attributes) ? node.attributes : (node.attributes = []);
     attributes.push({
       type: "mdxJsxAttribute",
       name: "style",
-      value: style,
+      value: {
+        type: "mdxJsxAttributeValueExpression",
+        value: JSON.stringify(declarations),
+        data: {
+          estree: {
+            type: "Program",
+            sourceType: "module",
+            body: [{
+              type: "ExpressionStatement",
+              expression: {
+                type: "ObjectExpression",
+                properties: Object.entries(declarations).map(([key, value]) => ({
+                  type: "Property",
+                  key: {type: "Identifier", name: key},
+                  value: {type: "Literal", value},
+                  kind: "init",
+                  method: false,
+                  shorthand: false,
+                  computed: false,
+                })),
+              },
+            }],
+          },
+        },
+      },
     });
   }
 }
@@ -193,15 +229,40 @@ function visit(node, callback) {
   }
 }
 
-function applyDimensionsToImage(node, dimensions) {
+function applyDimensionsToImage(node, dimensions, generatedLocalImage = false) {
   const style = getImageStyle(node);
 
   if (style && typeof style !== "string") {
     return;
   }
 
-  if (!hasExplicitAspectRatio(style)) {
-    setImageStyle(node, appendStyle(style, `aspect-ratio: ${dimensions.width} / ${dimensions.height};`));
+  // 含动态 style 或属性展开的 JSX 无法静态判断宽度，保留作者的设置。
+  if (
+    isMdxJsxImageNode(node) &&
+    (style != null || node.attributes?.some((attribute) => attribute.type === "mdxJsxExpressionAttribute"))
+  ) {
+    return;
+  }
+
+  const hasWidth = isHtmlImageNode(node)
+    ? node.properties?.width != null
+    : getMdxJsxAttribute(node, "width") != null;
+  const declarations = {};
+  let nextStyle = style;
+
+  if ((!hasWidth || generatedLocalImage) && !hasStyleProperty(style, "width")) {
+    nextStyle = appendStyle(nextStyle, "width: 100%;");
+    declarations.width = "100%";
+  }
+
+  if (dimensions && !hasStyleProperty(style, "aspect-ratio")) {
+    const ratio = `auto ${dimensions.width} / ${dimensions.height}`;
+    nextStyle = appendStyle(nextStyle, `aspect-ratio: ${ratio};`);
+    declarations.aspectRatio = ratio;
+  }
+
+  if (nextStyle !== style) {
+    setImageStyle(node, nextStyle, declarations);
   }
 }
 
@@ -228,13 +289,17 @@ function rehypeImageSize(options = {}) {
 
       const src = getImageSrc(normalizedNode);
       if (!src) {
+        const dimensions = getGeneratedLocalImageDimensions(normalizedNode);
+        if (dimensions) {
+          applyDimensionsToImage(normalizedNode, dimensions, true);
+        }
         return;
       }
 
       tasks.push(
         resolver.resolve(src, file.path).then((dimensions) => {
+          applyDimensionsToImage(normalizedNode, dimensions);
           if (dimensions) {
-            applyDimensionsToImage(normalizedNode, dimensions);
             return;
           }
 
