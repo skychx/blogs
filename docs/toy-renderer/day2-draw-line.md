@@ -198,7 +198,7 @@ function lineDDA(x1: number, y1: number, x2: number, y2: number, frame: Frame, c
 
 把上面的思考过程用伪代码表示一下：
 
-$
+$$
 \begin{aligned} 
 & \epsilon \leftarrow 0, \quad y \leftarrow y_{1} \\
 & \pmb{for} \ x \leftarrow x_{1} \ \pmb{to} \ x_{2} \ \pmb{do} \\
@@ -211,7 +211,7 @@ $
 & \quad \pmb{end} \ \pmb{if} \\
 & \pmb{end} \ \pmb{for}
 \end{aligned}
-$
+$$
 
 
 
@@ -255,7 +255,7 @@ $$
 
 这时候我们就可以得到一个去掉浮点数运算的伪代码：
 
-$
+$$
 \begin{aligned} 
 & \epsilon^{\prime} \leftarrow 0, \quad y \leftarrow y_{1} \\
 & \pmb{for} \ x \leftarrow x_{1} \ \pmb{to} \ x_{2} \ \pmb{do} \\
@@ -268,7 +268,7 @@ $
 & \quad \pmb{end} \ \pmb{if} \\
 & \pmb{end} \ \pmb{for}
 \end{aligned}
-$
+$$
 
 
 
