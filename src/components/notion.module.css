@@ -1,0 +1,48 @@
+/* 分栏，栏间距和 Notion 一样 */
+.columns {
+  display: flex;
+  gap: 46px;
+  margin-bottom: var(--ifm-paragraph-margin-bottom);
+}
+
+/* 每栏按比例占位，加上间距后超出的部分也按比例收缩，栏宽之比不变 */
+.column {
+  flex: 0 1 var(--column-width, 100%);
+  min-width: 0;
+}
+
+.column > :last-child {
+  margin-bottom: 0;
+}
+
+/* 手机上并排太挤，改成上下排列 */
+@media (max-width: 576px) {
+  .columns {
+    flex-direction: column;
+    gap: var(--ifm-paragraph-margin-bottom);
+  }
+
+  .column {
+    flex-basis: auto;
+  }
+}
+
+.figure {
+  margin: 0 0 var(--ifm-paragraph-margin-bottom);
+}
+
+.figure figcaption {
+  margin-top: 0.5em;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 85%;
+  text-align: center;
+}
+
+/* 和 Notion 的红色文字同色，暗色模式下提亮一些 */
+.red {
+  color: rgb(207, 81, 72);
+}
+
+html[data-theme='dark'] .red {
+  color: rgb(230, 102, 92);
+}
