@@ -6,7 +6,14 @@ description: 理解 transformer 的推理流程本身，就是清楚 token 在�
 tags: [AI, LLM, Transformer]
 ---
 
+import { HeroImage } from '../src/components/heroImage';
 import { Columns, Column, Figure, Red } from '../src/components/notion';
+
+<HeroImage src="/img/transformer/hero.jpg" alt="雷诺阿《船上的午宴》" w={1600} h={640} />
+
+大模型这几年迭代得飞快，但底子还是 Transformer。本文以 GPT-2 XL 为例，顺着 token 在模型里的流转，从 Embedding、Self Attention、MLP 一直看到最后的 Logits 和 Sampling，把 Transformer 的推理流程完整走一遍。
+
+{/* truncate */}
 
 :::info
 
@@ -23,8 +30,6 @@ import { Columns, Column, Figure, Red } from '../src/components/notion';
 - 把底层的 PyTorch 等依赖替换为自己手写的框架（纯粹是闲的）
 
 :::
-
-{/* truncate */}
 
 <br />
 
@@ -580,14 +585,14 @@ Top-p 就是指按概率从高到低累加，选出累计概率刚好达到 p �
 <Column width="50%">
 
 <p>
-<img src="/img/transformer/22.png" width="6017" loading="lazy" />
+<img src="/img/transformer/22.png" width="1600" loading="lazy" />
 </p>
 
 </Column>
 <Column width="50%">
 
 <p>
-<img src="/img/transformer/23.png" width="6237" loading="lazy" />
+<img src="/img/transformer/23.png" width="1600" loading="lazy" />
 </p>
 
 </Column>
