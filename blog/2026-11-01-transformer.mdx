@@ -1,0 +1,612 @@
+---
+slug: transformer
+title: 🧠 [AI] Transformer
+authors: skychx
+description: 理解 transformer 的推理流程本身，就是清楚 token 在模型内的流转
+tags: [AI, LLM, Transformer]
+---
+
+import { Columns, Column, Figure, Red } from '../src/components/notion';
+
+:::info
+
+本节的 transformer 都是出于<Red>**学习目的**</Red>记录的，在这几年 LLM 的飞速发展中，为了均衡智能效果和推理成本推理速度，transformer 架构已经改的妈都不认识了，这个不是我的工作范围，很看实操，所以就不深入研究了。
+
+<br />
+
+深度学习算法和常规的工程方案不一样的地方在于，推理代码可能就几百行，主要是理解背后的思想和相关的流程，至于智能本身，都蕴藏在那万亿黑箱参数里了。
+
+<br />理解 transformer，可以从 3 条路走：
+
+- 理解 transformer 的推理流程本身，就是清楚 token 在模型内的流转
+- 从 0 写一个 transformer，实现一个会带来更深刻的理解
+- 把底层的 PyTorch 等依赖替换为自己手写的框架（纯粹是闲的）
+
+:::
+
+{/* truncate */}
+
+<br />
+
+## 0.架构图
+
+这里有两个可视化做的比较好的网站：
+
+- [https://bbycroft.net/llm](https://bbycroft.net/llm)：3D 可视化
+  - 中文版：[https://www.mlpod.com/llm-visualization.html](https://www.mlpod.com/llm-visualization.html)
+- [https://poloclub.github.io/transformer-explainer/](https://poloclub.github.io/transformer-explainer/)：细节更丰富的 2D 可视化
+
+<br />
+
+根据这两个可视化图可以很好的理解 transformer 里 token 的流动方向，但是这里又有一个悖论，那就是你必须有相关的知识储备才能看懂架构图。
+
+<Columns>
+<Column width="37.5%">
+
+<p>
+<img src="/img/transformer/01.png" width="332" loading="lazy" />
+</p>
+
+<br />
+
+</Column>
+<Column width="62.5%">
+
+<Figure caption="Top Query Layer 这一套是他们做的模型创新，可忽略">
+<img src="/img/transformer/02.png" width="480" loading="lazy" />
+</Figure>
+
+</Column>
+</Columns>
+
+<br />
+
+### 参数量详解
+
+现在大模型一般是以 B（十亿）为统计单位的，这里其实也很好记忆：因为英文习惯是每 3 位计算一下（千 K，百万 M，十亿 B，万亿 T），和中文的每 4 位计一下有些差别（万 亿）。
+
+<Columns>
+<Column width="50%">
+
+<p>
+<img src="/img/transformer/03.png" width="1340" loading="lazy" />
+</p>
+
+</Column>
+<Column width="50%">
+
+那么比如说对于一个经典的 1.57 B 的 GPT-2(XL) 模型来说，它的层级设计如下：
+
+- **层数 (Layers,** $L$**)**：48 层
+- **隐藏层维度 (**$d_{model}$**)**：1600 维
+- **词表大小 (Vocab Size,** $V$**)**：50,257
+- **最大上下文 (**$n_{ctx}$**)**：1024
+
+</Column>
+</Columns>
+
+它的参数占比如下：
+
+- **Embedding**：占比 <Red>**5%**</Red>，约 0.082 B
+  - **Token**：字典里有 50,257 个词，每个词是一个 1600 维的向量，共 $80.4 \text{ Million}$
+  - **Position**：绝对位置编码，支持 1024 个位置，每个位置 1600 维，共 $1.6 \text{ Million}$
+- **Transformer**：约占 <Red>**95%**</Red>，一共 48 层，共 $1.474 \text{ Million}$
+  - **Self Attention**：单层占比 <Red>**1/3**</Red>，共 $10.24 \text{ Million}$
+    - **QKV 权重矩阵**：输入是 1600 维，输出也是 1600 维，参数量是 $3 \times (1600 \times 1600) = 7.68 \text{ Million}$
+    - **输出融合矩阵 (**$W_O$**)**：把各个头的结果拼接后，再做一次线性映射，参数量 $1600 \times 1600 = 2.56 \text{ Million}$
+  - **MLP**: 单层占比 <Red>**2/3**</Red>，共 $20.48 \text{ Million}$
+    - **升维矩阵**：把 1600 维放大到 6400 维，参数量 $10.24 \text{ Million}$
+    - **降维矩阵**：把 6400 维重新压缩回 1600 维，参数量 $10.24 \text{ Million}$
+
+<br />
+
+然后根据行业研究，QKV 矩阵主要是捕捉上下文关系，MLP 主要是存储知识（即压缩的数据库）
+
+<br />
+
+## 1.Embedding
+
+### 1.1 Token Embedding
+
+<p>
+<img src="/img/transformer/04.png" width="384" loading="lazy" />
+</p>
+
+embedding 是一个很经典的前置流程了，向前追溯的话可能得到 word2vec 技术，即文本向量化。
+
+我们首先需要把输入的整段语句做**文本分词（Tokenization）**，得到**词元化文本（Token）**，然后我们需要把词元再转为**词元 ID（Token ID）**，然后把词元文本转换为**词元向量（Token Embdding）**。
+
+这里的流程可以参考 [https://tiktokenizer.vercel.app/](https://tiktokenizer.vercel.app/)，可视化了文本如何转为 token 的流程：
+
+<Columns>
+<Column width="56.25%">
+
+<p>
+<img src="/img/transformer/05.png" width="624" loading="lazy" />
+</p>
+
+</Column>
+<Column width="43.75%">
+
+<p>
+<img src="/img/transformer/06.png" width="1080" loading="lazy" />
+</p>
+
+</Column>
+</Columns>
+
+<br />
+
+这里还有几个关于词表的概念需要理清一下。
+
+首先是**词表 (Vocabulary)** 本身，它其实就是个大的 HashMap，做 `token ←→ token_id` 的映射：
+
+:::tip
+
+比如说 [GPT-2 的词表](https://tiktokenizer.vercel.app/?model=gpt2)，有 50257 个单词，组成为 256 个基础字节 + 50000 个通过 BPE 算法算出的单词和词根 + 1 个特殊控制符 `<|endoftext|>`，也就是说这个词表矩阵的形状为 `[50257, 1600]`
+
+可以明显看出 50257 这个数字是人为设计出来的，所以这个词表本身是**可以跨模型复用的**。但是也可以看出，50257 对于多语言来说还是太小了，所以为了支持中文日文等语言，很多大模型会自己根据 BPE 等算法生成自己的词表。
+
+:::
+
+接下来是 `token_id ←→ token_embedding` 这个映射关系，每个 embedding 向量 1600 维，这个是和模型绑定的，一开始都是随机数初始化的，然后训练时再通过反向传播修改参数。
+
+而且这个 embedding 矩阵，除了一开始做 token embedding 的时候要用到，在模型末尾的 LM Head 层也会复用。
+
+<br />
+
+### 1.2 Position Embedding
+
+这里引入位置编码主要是后续的 Self Attention 步骤中，**无法感知到词元在序列中的位置和顺序**，但是众所周知，在一段话中，同一个词在不同的位置有不同的含义的：
+
+<p>
+<img src="/img/transformer/07.png" width="432" loading="lazy" />
+</p>
+
+为了补足这个缺陷，我们需要在前置步骤中加入「**位置编码（Position Embedding）**」做补救。
+
+位置编码主要是两种方式：
+
+- **绝对位置（absolute positional embedding）**：可以简单理解为位置 0 就是一个单独的 embedding，100 也是单独的，GPT-2 就是绝对位置嵌入
+- **相对位置（relative positional embedding）**：关注的是词元之间的相对位置，这种方法让模型可以更好的适应不同长度的序列
+
+:::tip
+
+GPT-2 中，共有 1024 个位置（最大上下文长度），采取绝对位置方案，每个向量 1600 维，也就是说矩阵形状为 `[1024, 1600]`
+
+:::
+
+<br />
+
+最后 token embedding 和 position embedding **相加**，完成最终的 input embedding 向量/矩阵。
+
+<br />
+
+## 2.防止梯度爆炸
+
+本小节出现的技术一般都是会同时出现同时使用，核心目的是防止模型在训练的时候出现「过拟合/梯度爆炸」等情况。这些其实都是过往的被证明的有效方法，比较工程。
+
+<br />
+
+### 2.1 Layer Normalization
+
+LayerNorm（归一化层）会出现在很多地方，比如说 self attention 前，MLP 前 和 sampling 前。这个其实也是深度学习中的一个经典操作，目的是提高模型训练时的稳定性，解决以下问题：
+
+- **防止数值爆炸与梯度消失**：经过几层矩阵运算的放大，某些维度的数值可能会变得极其巨大（比如变成 1000），而另一些则变成 0.001。我们需要强行把特征值拉到一个 **均值为 0，方差为 1** 的标准分布里
+- **让模型专注于“方向/语义”而非“绝对大小”**：在高纬向量里，词向量的语义主要是由方向决定的，而不是长度决定的。
+
+<br />
+
+### 2.2 Dropout
+
+在每次前向传播时，随机（比如 10%）把一部分神经元的输出强制置为 0。防止出现**过拟合**。
+
+<br />
+
+### 2.3 Residual Connection
+
+残差链接，防止网络层数太深带来的梯度消失和信息遗忘。常用的符号是「⊕」。
+
+<br />
+
+## 3.Self Attention
+
+<p>
+<img src="/img/transformer/08.png" width="528" loading="lazy" />
+</p>
+
+自注意力机制其实是 Transformer 架构中最核心的部分，这里主要是从概念和工程细节上理解。
+
+<br />
+
+### 原理
+
+首先从概念上理解。这里主要参考 [如何理解attention中的Q,K,V？- 知乎](https://www.zhihu.com/question/298810062/answer/86505956036)：
+
+$$
+Attention = Softmax(\frac{QK^T}{\sqrt{d_k}})V
+$$
+
+这三个本来是数据库的术语，Query就是「我要找什么」，Key-Value 是数据库里面的「键」和「值」。这个就相当于我首先要查找一个东西，然后通过和键的结合，找到了值。
+
+粗看起来是这么回事，但是仔细琢磨总觉得有点不对劲，数据库操作里面是通过 query key 直接得到了 value，既然得到值了，为什么又要和它乘起来？尤其是如果去琢磨训练过程，这三个矩阵的权重矩阵 $W_Q$,$W_K$,$W_V$ 在事前是可以一样的，也就是用同样的随机化的方式来初始化，然后参与训练。三个从事前看完全一样的矩阵，怎么就一个 query，一个 key，一个value 了？
+
+方便起见，我们可以对公式做一点化简。
+
+首先 $\sqrt{d_k}$ 是技术处理，用来平抑方差的项，如果我们不在乎实际效果，可以忽略掉；
+
+而 $softmax$ 这个归一化的函数也可以看做是技术处理去掉。
+
+那就还剩下 $QK^TV = (XW_Q)(XW_K)^T  X W_V =  X(W_Q W^T_K) X^T W_V X$
+
+因为 $W_Q$,$W_K$,$W_V$ 都是 $d\times d$ 正方形，并且都是后天训练出来的，所以我们也去掉它们，注意力就约简成了 $XX^TX$ 。
+
+到这里就比较清晰了。因为矩阵的相乘是有很明确的几何意义的，给定 $X$ 中的每一个 token 都可以按照其 embedding 变化成为高维空间的一个向量，那么 $XX^T$ 就是 $X$ 中每个 embedding 对自己，以及其他 embedding 上的**投影矩阵**。这就是注意力机制的本质（Self Attention），我们希望让机器学习如何<Red>**将输入信息投影到一个能够捕捉到输入之间关系的空间中去**</Red>。
+
+显然，如果两个高维向量越接近，它们的交乘数字就越可能更大，它们彼此之间对对方投入的「注意力」也就越大，<Red>**所以** $XX^T$ **这个投影矩阵就可以看做注意力矩阵**</Red>。加上 $Softmax$ 相当于把它归一化成了「<Red>**注意力分数**</Red>」，其再乘以 $X$，相当于把我们这些「注意力权重」再<Red>**附着**</Red>到「原始变量 $X$」做一次加权平均，于是就获得了「<Red>**把原始的** $X$ **映射到注意力空间**</Red>」的结果，然后我们就得到了注意力张量最最原始的形式。
+
+但是在现实中，Embeddings 作为输入是固定的，所以上面计算的这个 Attention 也是固定的。但是我们希望能够获得**更多的灵活度**，让权重随着训练过程的反向传播而改变，所以就给三个 X 分开的三个矩阵分别进行训练，于是就有了后来的 $Q=XW_Q$, $K = X W_K$  和 $V=XW_V$ 。
+
+所以理论上 Q、K 和 V 的三个权重矩阵都不是必须的，它是**工程上的一种选择**，是为了让我们最后得到的注意力矩阵能够蕴含更多的信息。我们抠掉 $W_Q$, $W_K$, $W_V$ 其中一个或者几个也可以训，并不影响注意力的本质。只是少了这些额外的权重，注意力能够学习到的信息应该会折扣。
+
+<br />
+
+### 工程方案
+
+在概念上理解了，就是要在工程上实现了。
+
+<Columns>
+<Column width="50%">
+
+<p>
+<img src="/img/transformer/09.png" width="432" loading="lazy" />
+</p>
+
+<Figure caption="Q Weight 的长是宽的 3 倍，因为有 3 个多头">
+<img src="/img/transformer/10.png" width="432" loading="lazy" />
+</Figure>
+
+</Column>
+<Column width="50%">
+
+左边的两张图可以对比查看，上图看细节，下图看形状，会对数据流向更清晰：
+
+对于一个单层的 Self Attention 来说：
+
+- Linear 层其实就是 $Q_v = LayerNorm \times Q_W + Q_B$，一个经典的线性变换
+- $Q$ 和 $K^T$ 做矩阵乘法，表示 token 之间的相似度矩阵，然后除以 $\sqrt{d_k}$
+- 这里要再做一下 $Causal Mask$ 处理，不让前面的 token 看到后面的 token，这个流程叫<Red>**因果注意力**</Red>，最后得到的是一个**注意力矩阵（Attention Martix）**
+- 然后就是 $Softmax$ 做归一化得到注意力分数矩阵
+- 最后的这个矩阵和 $V$ 做计算，变成最后的 output
+
+</Column>
+</Columns>
+
+:::info
+
+关于多头注意力中的 Q Weight 的长宽比例，其实是这样理解的（以 Q Weight 为例）：
+
+- 输入向量的形状为 $d_{tokens} \times d_{model}$
+- 对于 Q 的权重矩阵 $W_Q$ 来说，为了能和输入进行矩阵相乘，行数必须也是 $d_{model}$， 形状为 $d_{model} \times d_{head}$，其中 $d_{head} = d_{model} / h$（$h$ 为头数）
+- 这意味着，虽然最后乘出的矩阵高度还是 $d_{tokens}$，但它们的<Red>**宽度变窄**</Red>了。最后的到 Q vectors 变成了 $ d_{tokens} \times d_{head}$
+- 因为宽度变窄，所以需要后续把 $V_{Output}$ 拼在一起，然后用融合矩阵 $W_O$ 融合
+
+:::
+
+<br />
+
+上面是单层的 Attention 处理。现实模型中会有多层，这个就叫<Red>**多头注意力（Multi-head self Attention）**</Red>。
+
+多头注意力机制下，每个 Self Attention 层都是用独立的 QKV Weight 参数（因为一开始就是用不同的随机数填满的），那么就可能注意到原始输入的**不同细节**，比如说有的头捕捉到语句内的语法关系，有的捕捉到句法关系等等（这个很玄学，但却是 work，高维空间的事儿谁懂呢）。
+
+<Columns>
+<Column width="50%">
+
+<p>
+<img src="/img/transformer/11.png" width="336" loading="lazy" />
+</p>
+
+</Column>
+<Column width="50%">
+
+要再把 multi-head 输出的多个 Output **加在一起**得到最终的 Attention Output。
+
+<br />
+
+Attention Output 再做一层线性变换，这里叫 Projection 也好，Linear 也好，其实就是乘个 <Red>**输出融合矩阵 (**$W_O$**)**</Red>，做这个操作是因为上一层是直接把几个矩阵**硬拼接**起来了，我们需要一个融合矩阵把学习到的东西**融合起来**
+
+</Column>
+</Columns>
+
+<br />
+
+当然，最终的 Output 在进入 MLP 层时，其实还会做上面提到的 Dropout，Residual 和 Layer Normalization 环节，让输出更稳定，方便训练和推理。
+
+<br />
+
+:::tip
+
+这里再用 GPT-2 为例，用具体的数字理一下上面的矩阵运算：
+
+1. 原始输入 (X)：`[S, 1600]`
+   - 一句话有 S 个词，每个词是一个 1600 维的长条向量
+2. 融合线性映射生成 QKV：`[S, 1600]` x 权重矩阵 `[1600, 4800]` = `[S, 4800]`
+   - 每个词的 1600 维特征被瞬间膨胀了 3 倍，里面包含了这个词未来的 Query、Key 和 Value
+3. 切分多头 (Reshape)：`[S, 25, 64]`（一共 25 个头，每个头 64 维）
+   - 一维的长条被折叠成了三维结构。现在，第 1 个词的特征不再是一个长长的条，而是 25 个短小的特征块
+4. 维度交换 (Transpose)：从 `[S, 25, 64]` 变成了 `[25, S, 64]`
+   - 我们把数据的视角切换了。原本是“句子为主，头在词里”；现在变成了“25 个平行宇宙（头），每个宇宙里有一句独立的话，每句话的词向量是 64 维”
+5. 计算注意力分数 ($Q \cdot K^T$)：`[25, S, 64]` x `[25, 64, S]` = <code>\[25, **S, S**\]</code>
+   - 在 25 个平行宇宙里，各自算出了一个 $S \times S$ 的方阵。这个方阵代表了这 $S$ 个词相互之间的吸引力
+6. 计算注意力($Attention \cdot V$)：`[25, S, S]` x `[25, S, 64]` = `[25, S, 64]`
+   - 每个宇宙里的词，都根据吸引力吸收了别人的特征，变成了新的 64 维特征
+7. 拼接复原 (Reshape)：`[S, 25, 64]` 拍平变为 `[S, 1600]`
+   - 25 个平行宇宙坍缩融合。对于这 $S$ 个词来说，一切仿佛没有发生过，它依然是一个 `[S, 1600]` 的阵列，但里面的数值已经蕴含了整个句子的上下文
+8. 最终输出映射 ($W_O$)：`[S, 1600]` x `[1600, 1600]` = `[S, 1600]`
+   - 上一步的矩阵乘一个融合矩阵，将多头学习的知识融会贯通
+
+<br />（上面的 3 和 4 都是为了矩阵运算方便做的变形，具体理解还是参考三维图）
+
+:::
+
+<br />
+
+## 4.MLP
+
+<Columns>
+<Column width="37.5%">
+
+<br />
+
+<p>
+<img src="/img/transformer/12.png" width="332" loading="lazy" />
+</p>
+
+</Column>
+<Column width="62.5%">
+
+<p>
+<img src="/img/transformer/13.png" width="710" loading="lazy" />
+</p>
+
+</Column>
+</Columns>
+
+<p>
+<img src="/img/transformer/14.png" width="576" loading="lazy" />
+</p>
+
+**MLP（Multi-Layer Perceptron）**，中文叫「**多层感知机**」。它通过第一个线性层将嵌入维度扩展到了更高的维度。扩展之后，应用非线性 **GELU 激活函数**，然后通过第二个线性变换将维度缩回原始小。这种设计允许模型探索更丰富的表示空间。绝大部分是知识都是压缩在 MLP 中。
+
+<br />
+
+这里的流程相对就是比较容易理解了，整体处理如下：
+
+- 带偏置的线性变换，变为长度为 4 \* C 的向量
+- 逐元素应用 GELU 激活函数
+- 带偏置的线性变换，再变回长度为 C 的向量
+
+<br />
+
+关于激活函数，这里使用的是 GELU，GELU 的平滑特性可以在训练过程中带来更好的优化效果，因为它允许模型参数进行**更细微的调整**。相比之下，ReLU 在零点处有一个尖锐的拐角，有时会使得优化过程更加困难，特别是在深度或复杂的网络结构中。此外，ReLU 对负输入的输出为 0，而 GELU对负输入会输出一个小的非零值。**这意味着在训练过程中，接收到负输入的神经元仍然可以参与学习，只是贡献程度不如正输入大**。
+
+<p>
+<img src="/img/transformer/15.png" width="710" loading="lazy" />
+</p>
+
+<Columns>
+<Column width="62.5%">
+
+$f(x) \approx 0.5x \left(1 + \tanh\left(\sqrt{\frac{2}{\pi}} (x + 0.044715 x^3)\right)\right)$
+
+</Column>
+<Column width="37.5%">
+
+$f(x) = \max(0, x)$
+
+</Column>
+</Columns>
+
+<br />
+
+:::tip
+
+GPT-2 中，一个输入向量在 MLP 层的变化如下：
+
+- **输入 (X)**：`[S, 1600]`
+- **升维 (Up-Projection)**：`[S, 1600]` x `[1600, 6400]` + `[6400]` = `[S, 6400]`
+- **GELU**：`[S, 6400]`
+- **降维 (Down-Projection)**：`[S, 6400]` x `[6400, 1600]` + `[1600]` = `[S, 1600]`
+
+:::
+
+<br />
+
+<br />
+
+上面的 Transformer 模块会叠加多层，深度学习嘛，就是通过叠加参数达成更好的学习效果。
+
+:::tip
+
+GPT-2 叠加了 48 层 Transformer 模块
+
+:::
+
+<br />
+
+## 5.Output
+
+从上面可以看出，经过多轮的 Transformer 模块处理后，这时候算出的向量形状为 `[num_token, vocab_size]`，现在的问题就是如何把这个张量转换为要生成的文本？
+
+<br />
+
+### Logits
+
+<p>
+<img src="/img/transformer/16.png" width="432" loading="lazy" />
+</p>
+
+<br />
+
+首先，输出的 `[num_token, vocab_size]` 要和前面的字典矩阵（Embedding Weight）相乘，这个就会算出一个 Logits，形状为 `[num_token, vocab_num]`。**这个 Logits 每一行都表示基于对前面注意力的计算后对下一个 token 的概率预测**。
+
+那么我们就只需要取最后一行的 logit 就可以得出下一个 token 的概率。
+
+<br />
+
+这里有一个值得注意的点，为什么前面算 QKV 注意力，和 MLP 世界知识做匹配，怎么到了最后一步就变成对下一步 token 的预测了？这个其实是训练本身**规训**的。我们想一下训练本身，它拿到一段文本做自回归训练，**目的本身就是要预测下一个 token**，如果发现有偏离，就要通过 Loss 调整参数，经过多次的训练后，它就变成预测的形状了。
+
+<br />
+
+:::tip
+
+在 GPT-2 中，这个流程可以这样计算：
+
+- **输入 (X)**：`[S, 1600]`
+- **解词投影**：`[S, 1600]` x `[1600, 50257]` = `[S, 50257]`
+- **切片**：提取这个矩阵的**最后一行**，也就是当前句子的最后一个 Token 对应的预测，也就是 `[1, 50257]`
+- **Softmax & Sampling**：就是做采样等后续流程，最终的输出就是一个 Token
+
+:::
+
+<br />
+
+### Sampling
+
+<Columns>
+<Column width="43.75%">
+
+<Figure caption="Top-k">
+<img src="/img/transformer/17.png" width="710" loading="lazy" />
+</Figure>
+
+</Column>
+<Column width="56.25%">
+
+<Figure caption="Top-p">
+<img src="/img/transformer/18.png" width="1474" loading="lazy" />
+</Figure>
+
+</Column>
+</Columns>
+
+采样这里就是指大模型最后的输出阶段，根据 logit 中的概率，选一个更合适的 token 作为输出。
+
+因为 logit 是一个向量，而且它各个元素的和也不总是 1，所以业内的做法一般就是用 **softmax 归一化一下**：
+
+$$
+p_i = \text{softmax}(x_i) = \frac{e^{x_i}}{\sum_{j} e^{x_j}}
+$$
+
+那么这里就有很多可以操作的空间了，而且这部分参数也可以被外部用户控制从而影响输出：
+
+<br />
+
+#### Template - 温度
+
+如果完全按 softmax 后的概率算，其实大部分内容可能都是循规蹈矩的。为了增大那些小概率 token 被选中的概率（也就是所谓的 <code>**创造性**</code>），可以通过一个简单的 template 参数去调整。
+
+方法很简单，就是给 logit 的每个值除以一个常数 T：
+
+$$
+p_i = \frac{e^{x_i / T}}{\sum_{j} e^{x_j / T}}
+$$
+
+<Figure caption="一个没有直接关联的小 Tip：更高的温度会导致概率分布更加混乱，从而使概率较低的 token 也有机会出现">
+<img src="/img/transformer/19.png" width="480" loading="lazy" />
+</Figure>
+
+<br />
+
+- T 如果为 0，推理服务就选择最大可能的 token（贪心解码）
+- T 如果为 1，推理服务就是走默认的原始 softmax 方案
+- 现实中 T 一般为 0.7（0.618 的黄金比例了）
+
+:::tip
+
+那么如果 <Red>**template 设置为 0**</Red>，然后 input prompt 保持一致，是不是 output 就可以保证 100% 一样了？其实不是这样的，有这么几种情况都可以破坏这个一致性：
+
+- GPU 并行计算下的**交换率误差累积**
+  - 首先 GPU 中都是浮点运算，所以天然就有误差，然后就是 0.1 + 0.2 + 0.3 和 0.2 + 0.3 + 0.1，在数学上是等价的，但是在计算机中不一样。GPU 并行计算下，矩阵的计算顺序是不确定的，所以会有这些误差的累积。累积多了结果就可能不一样了
+- 云厂商**内部处理**
+  - 云厂商可能为了并发考虑，会把不同的请求拼在一起，所以使用者看来是一样的输入，但是在模型本身看来却不是的。或者说某个模型内部其实会加入一些用户的个性化数据，这些也会导致模型看来的输入是不一样的
+- **MoE 架构**
+  - 并发比较高的时候，可能内部做一些负载均衡的工作会导致分配不同的专家
+
+:::
+
+<br />
+
+#### Top-p/Top-k
+
+<Columns>
+<Column width="50%">
+
+<p>
+<img src="/img/transformer/20.png" width="108" loading="lazy" />
+</p>
+
+Top-k 就是指选最大的 k 个 token
+
+</Column>
+<Column width="50%">
+
+<p>
+<img src="/img/transformer/21.png" width="144" loading="lazy" />
+</p>
+
+Top-p 就是指选前 n 个概率大于 p 的 token
+
+</Column>
+</Columns>
+
+从理论上讲，top-*p* 采样似乎没有太多优势。然而在实践中，top-*p* 采样已被证明效果良好，因此越来越受欢迎。
+
+<br />
+
+<br />
+
+#### 结构化输出
+
+这里主要是 JSON 格式。
+
+大模型现在除了多轮的会话（ChatBot），现在一个非常重要的的运用是 Agent。Agent 如果想跑多轮，就不能依赖松散的 markdown 格式，这时候 JSON 是最好的交互方式（因为 JSON 本身在过去 20 年里就是非常重要的 API 格式）。但是出于大模型的概率本质，如果只是依赖大模型 prompt 的约束，很难去确保 100% 的 JSON 格式，那就需要上一些工程上的约束手段。
+
+<br />
+
+<strong>约束采样（Constrained Sampling） 或 约束解码（Constrained Decoding）</strong>就是做这个的。在最后一步的 logit 采样时，会根据输入的 json schema 转为 FSM（有限状态机），把不符合预期的 logit 输出都设置为 `-∞`，这样可以保证输出的数据是预期格式的 json。
+
+<Columns>
+<Column width="50%">
+
+<p>
+<img src="/img/transformer/22.png" width="6017" loading="lazy" />
+</p>
+
+</Column>
+<Column width="50%">
+
+<p>
+<img src="/img/transformer/23.png" width="6237" loading="lazy" />
+</p>
+
+</Column>
+</Columns>
+
+<br />
+
+这里的细节很多，优化点也很多，比如说 token 分词并不会 100% 按照 JSON 的标准格式分词（经常会出现 `,{` 这种连在一起的 token）相关的技术方案可以参考：
+
+- [https://gemini.google.com/share/c1c644952e26](https://gemini.google.com/share/c1c644952e26)
+- [https://www.aidancooper.co.uk/constrained-decoding/](https://www.aidancooper.co.uk/constrained-decoding/)
+- [https://www.lmsys.org/blog/2024-02-05-compressed-fsm/](https://www.lmsys.org/blog/2024-02-05-compressed-fsm/)
+
+<br />
+
+<br />
+
+:::tip
+
+各个模型厂商基本都提供了这个功能，格式大致为 `{"type": "json_schema", "json_schema": {...}}`
+
+:::
