@@ -1,6 +1,6 @@
 ---
 slug: transformer
-title: 🧠 [AI] 以 GPT-2 为例，浅谈 Transformer 的推理流程
+title: 🧠 [AI] 浅谈 Transformer 的推理流程
 authors: skychx
 description: 理解 transformer 的推理流程本身，就是清楚 token 在模型内的流转
 tags: [AI, LLM, Transformer]
@@ -11,29 +11,17 @@ import { Columns, Column, Figure, Red } from '../src/components/notion';
 
 <HeroImage src="/img/transformer/hero.jpg" alt="雷诺阿《船上的午宴》" w={1600} h={640} />
 
-大模型这几年迭代得飞快，但底层还是 Transformer 那一套逻辑。本文以 GPT-2 XL 为例，从 Embedding、Self Attention、MLP 一直看到最后的 Logits 和 Sampling，把 Transformer 的推理流程完整走一遍。
+在这几年 LLM 的飞速发展中，为了均衡智能效果、推理成本和推理速度，transformer 架构已经改得妈都不认识了。
+
+因为我的本职工作并不是做 AI Infra 的，学习 LLM 主要还是用来满足好奇心，想知道 Agent 背后的模型中，token 都是如何流转加工的，所以我参考了各种书籍和经典的 GPT-2，梳理了 LLM 的推理流程，专程记录下来，祭奠一下刚逝去不久的手搓代码时代。
 
 {/* truncate */}
-
-:::info
-
-本文的 transformer 都是出于<Red>**学习目的**</Red>记录的，在这几年 LLM 的飞速发展中，为了均衡智能效果、推理成本和推理速度，transformer 架构已经改得妈都不认识了，这个不是我的工作范围，很看实操，所以就不深入研究了。
-
-<br />
-
-深度学习算法和常规的工程方案不一样的地方在于，推理代码可能就几百行，主要是理解背后的思想和相关的流程，至于智能本身，都蕴藏在那万亿黑箱参数里了。
-
-<br />理解 transformer，可以从 3 条路走：
-
-- 理解 transformer 的推理流程本身，就是清楚 token 在模型内的流转
-- 从 0 写一个 transformer，实现一个会带来更深刻的理解
-- 把底层的 PyTorch 等依赖替换为自己手写的框架（纯粹是闲的）
-
-:::
 
 <br />
 
 ## 0.架构图
+
+深度学习算法和常规的工程方案不一样的地方在于，推理代码可能就几百行，主要是理解背后的思想和相关的流程，至于智能本身，都蕴藏在那万亿黑箱参数里了。所以有一个宏观的架构映像就显得尤为重要了。
 
 这里有两个可视化做的比较好的网站：
 
@@ -105,9 +93,8 @@ import { Columns, Column, Figure, Red } from '../src/components/notion';
 
 <br />
 
-然后根据行业研究，QKV 矩阵主要是捕捉上下文关系，MLP 主要是存储知识（即压缩的数据库）
+然后根据行业研究，QKV 矩阵主要是捕捉上下文关系，MLP 主要是存储知识（即压缩的数据库）。
 
-<br />
 
 ## 1.Embedding
 
@@ -146,13 +133,9 @@ embedding 是一个很经典的前置流程了，向前追溯的话可能得到 
 
 首先是**词表 (Vocabulary)** 本身，它其实就是个大的 HashMap，做 `token ←→ token_id` 的映射：
 
-:::tip
-
 比如说 [GPT-2 的词表](https://tiktokenizer.vercel.app/?model=gpt2)，有 50257 个 token，组成为 256 个基础字节 + 50000 个通过 BPE 算法算出的单词和词根 + 1 个特殊控制符 `<|endoftext|>`
 
 可以明显看出 50257 这个数字是人为设计出来的（BPE 合并多少次是人为定的超参数）。词表属于分词器，和模型权重无关，所以本身是**可以跨模型复用的**，比如 GPT-3 就沿用了 GPT-2 的词表；不过模型训练好以后就和词表绑定了，不能再换。另外也可以看出，50257 对于多语言来说还是太小了，所以为了支持中文日文等语言，很多大模型会自己根据 BPE 等算法生成自己的词表。
-
-:::
 
 接下来是 `token_id ←→ token_embedding` 这个映射关系，每个 embedding 向量 1600 维（GPT-2 XL），也就是说词嵌入矩阵的形状为 `[50257, 1600]`，这个是和模型绑定的，一开始都是随机数初始化的，然后训练时再通过反向传播修改参数。
 
@@ -175,10 +158,8 @@ embedding 是一个很经典的前置流程了，向前追溯的话可能得到 
 - **绝对位置（absolute positional embedding）**：可以简单理解为位置 0 就是一个单独的 embedding，100 也是单独的，GPT-2 就是绝对位置嵌入
 - **相对位置（relative positional embedding）**：关注的是词元之间的相对位置，这种方法让模型可以更好的适应不同长度的序列
 
-:::tip
-
+:::info GPT-2 XL 设计
 GPT-2 XL 中，共有 1024 个位置（最大上下文长度），采取绝对位置方案，每个向量 1600 维，也就是说矩阵形状为 `[1024, 1600]`
-
 :::
 
 <br />
@@ -189,7 +170,7 @@ GPT-2 XL 中，共有 1024 个位置（最大上下文长度），采取绝对�
 
 ## 2.训练稳定性
 
-本小节出现的技术一般都是会同时出现同时使用，核心目的是让模型训练得更稳定，防止出现「过拟合/梯度消失/梯度爆炸」等情况。这些其实都是过往的被证明的有效方法，比较工程。
+本小节出现的技术一般都是会同时出现同时使用，核心目的是让模型训练得更稳定，防止出现「**过拟合/梯度消失/梯度爆炸**」等情况。这些其实都是过往的被证明的有效方法，比较工程。
 
 <br />
 
@@ -198,13 +179,13 @@ GPT-2 XL 中，共有 1024 个位置（最大上下文长度），采取绝对�
 LayerNorm（归一化层）会出现在很多地方，比如说 self attention 前，MLP 前，以及最后算 logits 前（GPT-2 里叫 `ln_f`）。这个其实也是深度学习中的一个经典操作，目的是提高模型训练时的稳定性，解决以下问题：
 
 - **防止数值爆炸与梯度消失**：经过几层矩阵运算的放大，某些维度的数值可能会变得极其巨大（比如变成 1000），而另一些则变成 0.001。我们需要对每个 token 的向量单独做归一化，强行把特征值拉到一个 **均值为 0，方差为 1** 的标准分布里，然后再用可学习的缩放和偏移参数（γ、β）调整到模型需要的范围
-- **让模型专注于“方向/语义”而非“绝对大小”**：在高维向量里，词向量的语义主要是由方向决定的，而不是长度决定的。
+- **让模型专注于「方向/语义」而非「绝对大小」**：在高维向量里，词向量的语义主要是由方向决定的，而不是长度决定的。
 
 <br />
 
 ### 2.2 Dropout
 
-在训练时的每次前向传播中，随机（比如 10%）把一部分神经元的输出强制置为 0。防止出现**过拟合**。推理时不做 Dropout。
+在训练时的每次前向传播中，随机（比如 10%）把一部分神经元的输出强制置为 0。防止出现**过拟合**。不过推理时一般不做 Dropout。
 
 <br />
 
@@ -240,9 +221,13 @@ $$
 
 首先 $\sqrt{d_k}$ 是技术处理，用来平抑方差的项，如果我们不在乎实际效果，可以忽略掉；
 
-而 softmax 这个归一化的函数，作用是让权重非负、加起来等于 1，这里为了看清本质也先去掉（真去掉的话就成了线性注意力，性质会不一样）。
+而 softmax 这个归一化的函数，作用是让权重非负、加起来等于 1，这里为了看清本质也先去掉。
 
-那就还剩下 $QK^TV = (XW_Q)(XW_K)^T (XW_V) = X(W_Q W_K^T) X^T X W_V$
+那就还剩下： 
+
+$$
+QK^TV = (XW_Q)(XW_K)^T (XW_V) = X(W_Q W_K^T) X^T X W_V
+$$
 
 因为 $W_Q$,$W_K$,$W_V$ 都是 $d\times d$ 的方阵，并且都是后天训练出来的，所以我们也去掉它们，注意力就约简成了 $XX^TX$ 。
 
@@ -288,14 +273,12 @@ $$
 </Columns>
 
 :::info
-
 关于多头注意力中的 Q Weight 的长宽比例，其实是这样理解的（以 Q Weight 为例）：
 
 - 输入向量的形状为 $d_{tokens} \times d_{model}$
 - 对于 Q 的权重矩阵 $W_Q$ 来说，为了能和输入进行矩阵相乘，行数必须也是 $d_{model}$， 形状为 $d_{model} \times d_{head}$，其中 $d_{head} = d_{model} / h$（$h$ 为头数）
 - 这意味着，虽然最后乘出的矩阵高度还是 $d_{tokens}$，但它们的<Red>**宽度变窄**</Red>了。最后得到的 Q vectors 变成了 $d_{tokens} \times d_{head}$
 - 因为宽度变窄，所以需要后续把 $V_{Output}$ 拼在一起，然后用融合矩阵 $W_O$ 融合
-
 :::
 
 <br />
@@ -325,12 +308,11 @@ Attention Output 再做一层线性变换，这里叫 Projection 也好，Linear
 
 <br />
 
-当然，最终的 Output 在进入 MLP 层时，其实还会做上面提到的 Dropout（只在训练时做）、Residual 和 Layer Normalization 环节，让输出更稳定，方便训练和推理。
+当然，最终的 Output 在进入 MLP 层时，其实还会做上面提到的 Dropout、Residual 和 Layer Normalization 环节，让输出更稳定，方便训练和推理。
 
 <br />
 
-:::tip
-
+:::info GPT-2 XL 设计
 这里再用 GPT-2 XL 为例，用具体的数字理一下上面的矩阵运算：
 
 1. 原始输入 (X)：`[S, 1600]`
@@ -351,7 +333,6 @@ Attention Output 再做一层线性变换，这里叫 Projection 也好，Linear
    - 上一步的矩阵乘一个融合矩阵，将多头学习的知识融会贯通
 
 <br />（上面的 3 和 4 都是为了矩阵运算方便做的变形，具体理解还是参考三维图）
-
 :::
 
 <br />
@@ -414,27 +395,23 @@ $f(x) = \max(0, x)$
 
 <br />
 
-:::tip
-
+:::info GPT-2 XL 设计
 GPT-2 XL 中，一个输入向量在 MLP 层的变化如下：
 
 - **输入 (X)**：`[S, 1600]`
 - **升维 (Up-Projection)**：`[S, 1600]` x `[1600, 6400]` + `[6400]` = `[S, 6400]`
 - **GELU**：`[S, 6400]`
 - **降维 (Down-Projection)**：`[S, 6400]` x `[6400, 1600]` + `[1600]` = `[S, 1600]`
-
 :::
 
 <br />
 
 <br />
 
-上面的 Transformer 模块会叠加多层，深度学习嘛，就是通过叠加参数达成更好的学习效果。
+Transformer 的结构（Self Attention + MLP）到此就比较清晰了。一般来说 Transformer 模块会叠加多层，深度学习嘛，就是通过叠加参数达成更好的学习效果。
 
-:::tip
-
+:::info GPT-2 XL 设计
 GPT-2 XL 叠加了 48 层 Transformer 模块
-
 :::
 
 <br />
@@ -453,7 +430,9 @@ GPT-2 XL 叠加了 48 层 Transformer 模块
 
 <br />
 
-首先，输出的 `[num_token, d_model]` 要先过最后一层 LayerNorm（`ln_f`），再和前面的字典矩阵（Embedding Weight）的转置相乘，这个就会算出一个 Logits，形状为 `[num_token, vocab_size]`。**这个 Logits 每一行都表示基于对前面注意力的计算后对下一个 token 的预测分数**（还不是概率，过了 softmax 才是）。
+首先，输出的 `[num_token, d_model]` 要先过最后一层 LayerNorm（`ln_f`），再和前面的字典矩阵（Embedding Weight）的转置相乘，这个就会算出一个 Logits，形状为 `[num_token, vocab_size]`。
+
+**这个 Logits 每一行都表示基于对前面注意力的计算后对下一个 token 的预测分数**（还不是概率，过了 softmax 才是）。
 
 那么我们就只需要取最后一行的 logit，过一下 softmax 就可以得出下一个 token 的概率。
 
@@ -463,15 +442,13 @@ GPT-2 XL 叠加了 48 层 Transformer 模块
 
 <br />
 
-:::tip
-
+:::info GPT-2 XL 设计
 在 GPT-2 XL 中，这个流程可以这样计算：
 
 - **输入 (X)**：`[S, 1600]`
 - **解词投影**：`[S, 1600]` x `[1600, 50257]` = `[S, 50257]`
 - **切片**：提取这个矩阵的**最后一行**，也就是当前句子的最后一个 Token 对应的预测，也就是 `[1, 50257]`
 - **Softmax & Sampling**：就是做采样等后续流程，最终的输出就是一个 Token
-
 :::
 
 <br />
@@ -527,17 +504,15 @@ $$
 - T 如果为 1，推理服务就是走默认的原始 softmax 方案
 - 现实中 T 常用 0.7 左右，各家的默认值也不一样（比如 OpenAI API 默认是 1）
 
-:::tip
-
+:::info 一个展开思考
 那么如果 <Red>**temperature 设置为 0**</Red>，然后 input prompt 保持一致，是不是 output 就可以保证 100% 一样了？其实不是这样的，有这么几种情况都可以破坏这个一致性：
 
 - 浮点运算**不满足结合律**
-  - 首先 GPU 中都是浮点运算，所以天然就有误差，然后就是 (0.1 + 0.2) + 0.3 和 0.1 + (0.2 + 0.3)，在数学上是等价的，但是在计算机中不一样。只要累加的顺序变了，误差就会不一样，累积多了结果就可能不一样了
+  - 首先 GPU 中都是浮点运算，所以天然就有误差，比如说 (0.1 + 0.2) + 0.3 和 0.1 + (0.2 + 0.3) 这种经典的浮点运算案例，虽然这个交换律在在数学上是成立的，但是在计算机中不一样。只要累加的顺序变了，误差就会不一样，累积多了最终的结果就可能不一样了
 - 云厂商**内部处理**
   - 云厂商为了并发，会把不同用户的请求拼成一个 batch 一起算，batch 大小随负载变化，GPU kernel 的累加顺序也会跟着变，同样的输入就可能算出不同的结果（batch 不变时 GPU 的计算基本是确定的，这才是顺序变化的主要来源，详见 [Defeating Nondeterminism in LLM Inference](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/)）。或者说某个模型内部其实会加入一些用户的个性化数据，这些也会导致模型看来的输入是不一样的
 - **MoE 架构**
   - 并发比较高的时候，可能内部做一些负载均衡的工作会导致分配不同的专家
-
 :::
 
 <br />
@@ -547,27 +522,21 @@ $$
 <Columns>
 <Column width="50%">
 
-<p>
+<Figure caption="Top-k 就是指选最大的 k 个 token">
 <img src="/img/transformer/20.png" width="108" loading="lazy" />
-</p>
-
-Top-k 就是指选最大的 k 个 token
+</Figure>
 
 </Column>
 <Column width="50%">
 
-<p>
+<Figure caption="Top-p 就是指按概率从高到低累加，选出累计概率刚好达到 p 的那些 token">
 <img src="/img/transformer/21.png" width="144" loading="lazy" />
-</p>
-
-Top-p 就是指按概率从高到低累加，选出累计概率刚好达到 p 的那些 token
+</Figure>
 
 </Column>
 </Columns>
 
 和 top-k 相比，top-*p* 的候选数量会随概率分布自适应：分布很集中时只留几个，分布很平时留得多。在实践中，top-*p* 采样已被证明效果良好，因此越来越受欢迎。
-
-<br />
 
 <br />
 
@@ -579,7 +548,7 @@ Top-p 就是指按概率从高到低累加，选出累计概率刚好达到 p �
 
 <br />
 
-<strong>约束采样（Constrained Sampling） 或 约束解码（Constrained Decoding）</strong>就是做这个的。在最后一步的 logit 采样时，会根据输入的 json schema 转为 FSM（有限状态机，带嵌套、递归的 schema 要用下推自动机），把不符合预期的 logit 输出都设置为 `-∞`，这样可以保证输出的数据是预期格式的 json。
+**约束采样（Constrained Sampling） 或 约束解码（Constrained Decoding）** 就是做这个的。在最后一步的 logit 采样时，会根据输入的 json schema 转为 FSM，把不符合预期的 logit 输出都设置为 `-∞`，这样可以保证输出的数据是预期格式的 json。
 
 <Columns>
 <Column width="50%">
@@ -606,12 +575,16 @@ Top-p 就是指按概率从高到低累加，选出累计概率刚好达到 p �
 - [https://www.aidancooper.co.uk/constrained-decoding/](https://www.aidancooper.co.uk/constrained-decoding/)
 - [https://www.lmsys.org/blog/2024-02-05-compressed-fsm/](https://www.lmsys.org/blog/2024-02-05-compressed-fsm/)
 
-<br />
-
-<br />
-
 :::tip
-
 各个模型厂商基本都提供了这个功能，格式大致为 `{"type": "json_schema", "json_schema": {...}}`
-
 :::
+
+<br />
+
+## 参考内容
+
+- [🌏 LLM Visualization](https://bbycroft.net/llm)
+- [🌏 Transformer Explainer: LLM Transformer Model Visually Explained](https://poloclub.github.io/transformer-explainer/)
+- [📚 从零构建大模型](https://book.douban.com/subject/37305124/)
+- [📚 图解大模型：生成式AI原理与实战](https://m.douban.com/book/subject/37339504/)
+- [📚 AI工程](https://book.douban.com/subject/38236657/)
