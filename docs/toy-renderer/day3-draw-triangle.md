@@ -423,9 +423,10 @@ for (let i = 0; i < model.nfaces(); i++) {
   for (let j = 0; j < 3; j++) {
     const v = model.vert(face[j]);
     // 投影为正交投影，而且只做了个简单的视口变换
+    // 屏幕 y 轴朝下，所以模型里 y = 1 的「上方」对应屏幕的第 0 行
     screenCoords.push([
       Math.floor(((v[0] + 1) * width) / 2),
-      Math.floor(((v[1] + 1) * height) / 2),
+      Math.floor(((1 - v[1]) * height) / 2),
     ]);
     worldCoords.push(v);
   }

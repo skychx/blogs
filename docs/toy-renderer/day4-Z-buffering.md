@@ -154,8 +154,9 @@ function triangle(pts: Vec3[], zbuffer: Float32Array, frame: Frame, color: Color
 
 ```ts
 // 把模型坐标变换到屏幕坐标：x、y 做视口变换（四舍五入成整数），z 保持不变
+// 屏幕 y 轴朝下，所以模型里 y = 1 的「上方」对应屏幕的第 0 行
 function world2screen(v: Vec3): Vec3 {
-  return [Math.round(((v[0] + 1) * width) / 2), Math.round(((v[1] + 1) * height) / 2), v[2]];
+  return [Math.round(((v[0] + 1) * width) / 2), Math.round(((1 - v[1]) * height) / 2), v[2]];
 }
 ```
 
@@ -259,7 +260,7 @@ export class Texture {
 }
 ```
 
-又看到了熟悉的 y 轴翻转：uv 坐标的原点在左下角，和我们的坐标系一样，但图片的像素是从上往下存的，所以 v 要换成 `1 - v`。
+又看到了一次 y 轴翻转：OBJ 文件里 uv 坐标的原点约定在图片的左下角，但图片的像素是从上往下存的，所以 v 要换成 `1 - v`。这次翻转的是贴图自己的坐标系，和屏幕坐标系没关系，两边约定凑不上，总得有一边翻一下。
 
 ### 4.4 插值 uv
 

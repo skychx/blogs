@@ -184,21 +184,24 @@ function projection(c: number): Mat {
 const x0 = Math.floor(((v0[0] + 1) * width) / 2);
 ```
 
-它做的事情，是把 $[-1, 1]$ 范围内的坐标，映射到 $[0, width]$ 的屏幕上。这其实就是一次缩放（乘上 $\frac{width}{2}$）加一次平移（加上 $\frac{width}{2}$），有了齐次坐标，它也可以写成一个矩阵：
+它做的事情，是把 $[-1, 1]$ 范围内的坐标，映射到 $[0, width]$ 的屏幕上。这其实就是一次缩放（乘上 $\frac{width}{2}$）加一次平移（加上 $\frac{width}{2}$）。
+
+y 方向有一点点不一样：还记得第一天说过的吗，我们的屏幕坐标系原点在左上角、y 轴朝下。NDC 里 y = 1 表示「上方」，映射到屏幕上应该是 y 小的那一端，所以 y 的缩放系数是 $-\frac{height}{2}$，平移同样是加上 $\frac{height}{2}$。有了齐次坐标，这两步也可以写成一个矩阵：
 
 $$
 Viewport =
-\begin{bmatrix}\frac{w}{2} & 0 & 0 & x + \frac{w}{2} \\ 0 & \frac{h}{2} & 0 & y + \frac{h}{2} \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1\end{bmatrix}
+\begin{bmatrix}\frac{w}{2} & 0 & 0 & x + \frac{w}{2} \\ 0 & -\frac{h}{2} & 0 & y + \frac{h}{2} \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1\end{bmatrix}
 $$
 
-它把 $[-1, 1] \times [-1, 1]$ 映射到屏幕上左下角为 $(x, y)$、宽 $w$ 高 $h$ 的矩形里，z 坐标保持不变，留给 zbuffer 用。这个矩阵在 OpenGL 里叫做视口（Viewport）矩阵：
+它把 $[-1, 1] \times [-1, 1]$ 映射到屏幕上左上角为 $(x, y)$、宽 $w$ 高 $h$ 的矩形里，z 坐标保持不变，留给 zbuffer 用。这个矩阵在 OpenGL 里叫做视口（Viewport）矩阵：
 
 ```ts
-// 视口矩阵：把 [-1, 1] 范围内的 x、y 变换到屏幕上左下角为 (x, y)、宽 w 高 h 的区域里
+// 视口矩阵：把 [-1, 1] 范围内的 x、y 变换到屏幕上左上角为 (x, y)、宽 w 高 h 的区域里
+// 注意屏幕的 y 轴朝下：NDC 里 y = 1 的一端要对应屏幕的上方，所以 y 的系数是 -h/2
 function viewport(x: number, y: number, w: number, h: number): Mat {
   return [
     [w / 2, 0, 0, x + w / 2],
-    [0, h / 2, 0, y + h / 2],
+    [0, -h / 2, 0, y + h / 2],
     [0, 0, 1, 0],
     [0, 0, 0, 1],
   ];

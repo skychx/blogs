@@ -189,7 +189,7 @@ fn fragmentMain(in: VertexOutput) -> @location(0) vec4<f32> {
 好在 WGSL 提供了 `dpdx` 和 `dpdy` 这两个函数。显卡跑片元着色器的时候，会按 **2×2 个片元一组**来计算导数，我们可以把它理解成看看邻居的变量是多少：
 
 - `dpdx(v)`：往右走，v 变了多少，可以理解成右边的值减去左边的值
-- `dpdy(v)`：往下走，v 变了多少，可以理解成下面的值减去上面的值。注意 WebGPU 的窗口坐标 y 轴朝下
+- `dpdy(v)`：往下走，v 变了多少，可以理解成下面的值减去上面的值。注意窗口坐标的 y 轴朝下（和我们的软渲染器是同一个约定）
 
 ![dpdx 和 dpdy：屏幕上的相邻片元，对应到三角形上的两个短向量](/img/toy-renderer/extra3/derivatives.svg)
 
