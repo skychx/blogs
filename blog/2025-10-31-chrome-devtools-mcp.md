@@ -1,9 +1,9 @@
 ---
 slug: chrome-devtools-mcp
-title: 🦾 [浏览器自动化] Chrome DevTools MCP 原理分析
+title: 🦾 [Browser-Use] Chrome DevTools MCP 原理分析
 authors: skychx
 description: Chrome DevTools MCP 原理分析
-tags: [AI, MCP, AI Agent]
+tags: [CDP, Browser-Use, AI Agent, MCP]
 ---
 
 import { HeroImage } from '../src/components/heroImage';

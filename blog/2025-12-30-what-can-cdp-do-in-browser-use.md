@@ -1,9 +1,9 @@
 ---
 slug: what-can-cdp-do-in-browser-use
-title: 🦾 [浏览器自动化] 可为与不可为：CDP 视角下的 Browser 控制边界
+title: 🦾 [Browser-Use] 可为与不可为：CDP 视角下的 Browser 控制边界
 authors: skychx
 description: CDP 是有能力边界的，所以说知道它擅长什么不擅长什么，对于架构的整体设计和未来演化方向有很大的意义。
-tags: [CDP, AI Agent, Chrome DevTools]
+tags: [CDP, Browser-Use, AI Agent, Chrome DevTools]
 ---
 
 import { HeroImage } from '../src/components/heroImage';
